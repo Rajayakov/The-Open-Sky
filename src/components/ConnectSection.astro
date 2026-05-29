@@ -53,10 +53,8 @@ const channels = [
   <div class="frame">
 
     <header class="connect__header reveal">
-      <span class="t-label t-label--gold">Connect</span>
-      <h2 class="connect__headline">
-        Join the<br /><em>ecosystem</em>
-      </h2>
+      <h2 class="connect__title">Connect</h2>
+      <p class="connect__sub">Join the Community</p>
     </header>
 
     <div class="connect__grid">
@@ -125,22 +123,31 @@ const channels = [
 
   .connect__header {
     margin-bottom: clamp(40px, 5vw, 64px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
   }
 
-  .connect__headline {
+  /* Large primary title — "CONNECT" */
+  .connect__title {
     font-family: var(--display);
     font-weight: 400;
-    font-size: clamp(36px, 4.5vw, 64px);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    color: rgba(237, 224, 200, 0.90);
-    margin: var(--s-4) 0 0;
+    font-size: clamp(56px, 8vw, 112px);
+    line-height: 0.88;
+    letter-spacing: -0.025em;
+    color: rgba(237, 224, 200, 0.92);
+    margin: 0;
   }
 
-  .connect__headline em {
-    font-style: italic;
-    color: var(--honey);
-    display: block;
+  /* Smaller subtitle — "Join the Community" */
+  .connect__sub {
+    font-family: var(--mark);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(237, 224, 200, 0.35);
+    margin: 0;
   }
 
   /* Channel card grid */
