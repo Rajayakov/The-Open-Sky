@@ -1,0 +1,64 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'The Open Sky — by Yakov Rajuna',
+  description = 'Retreats in sacred landscapes. Mountain journeys. Online programs. Personal mentorship. An ecosystem of transformational experiences founded by Yakov Rajuna.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter+Tight:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Syne:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Grain: barely visible, purely atmospheric -->
+    <canvas id="grain-canvas" width="200" height="200" style="display:none;" aria-hidden="true"></canvas>
+    <div class="grain" id="grain-layer" aria-hidden="true"></div>
+
+    <slot />
+
+    <script>
+      /* Grain — subtle canvas noise */
+      (function () {
+        const c = document.getElementById('grain-canvas') as HTMLCanvasElement;
+        const l = document.getElementById('grain-layer') as HTMLElement;
+        if (!c || !l) return;
+        const ctx = c.getContext('2d');
+        if (!ctx) return;
+        const img = ctx.createImageData(c.width, c.height);
+        for (let i = 0; i < img.data.length; i += 4) {
+          const v = Math.random() * 255 | 0;
+          img.data[i] = img.data[i+1] = img.data[i+2] = v;
+          img.data[i+3] = (Math.random() * 30 + 5) | 0;
+        }
+        ctx.putImageData(img, 0, 0);
+        l.style.backgroundImage = `url(${c.toDataURL()})`;
+      })();
+
+      /* Scroll reveal */
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        }),
+        { threshold: 0.08 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

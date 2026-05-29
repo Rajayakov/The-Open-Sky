@@ -1,0 +1,287 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTASection from '../components/CTASection.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+
+const programs = [
+  {
+    num: '01',
+    title: 'Inner Cartography',
+    duration: '8 weeks',
+    format: 'Live sessions + async',
+    size: '12 participants',
+    body: 'A structured journey through the terrain of identity, purpose, and direction. Weekly live calls with Yakov, guided practices between sessions, and an intimate cohort of people doing serious inner work.',
+    open: true,
+  },
+  {
+    num: '02',
+    title: 'The Fire Season',
+    duration: '12 weeks',
+    format: 'Cohort-based',
+    size: '8 participants',
+    body: 'A deeper container for people in the middle of a genuine life transition. Combines live sessions, written practice, and one private exchange with Yakov each month. Intensity over comfort.',
+    open: false,
+  },
+  {
+    num: '03',
+    title: 'Roots & Direction',
+    duration: '6 weeks',
+    format: 'Self-paced with live Q&A',
+    size: 'Open enrollment',
+    body: 'An introductory program for those new to this kind of work. Pre-recorded teachings, weekly live Q&A, and a community space for reflection and exchange.',
+    open: true,
+  },
+];
+---
+
+<PageLayout
+  title="Online Programs — The Open Sky"
+  description="Structured online programs for those who cannot travel. Built around the same principles as the in-person work."
+>
+
+  <PageHero
+    label="Online Programs"
+    title="The work,"
+    titleEm="wherever you are."
+    lede="Structured programs for those who cannot travel. Same principles, different container."
+    theme="program"
+  />
+
+  <!-- Intro -->
+  <section class="programs-intro section frame" aria-label="About online programs">
+    <div class="programs-intro__inner">
+      <div class="reveal">
+        <p class="t-lede" style="max-width: 52ch;">
+          These programs are not a substitute for in-person work. They are their own thing — built for people who need structure, companionship, and a real challenge, but cannot leave their lives for a week.
+        </p>
+        <p class="t-body" style="margin-top: var(--s-5); max-width: 50ch;">
+          Each program has a specific shape: a beginning, a middle, and an end. They are not open-ended courses or libraries of content. They are containers with edges, and the edges are part of the work.
+        </p>
+      </div>
+
+      <div class="programs-intro__orb" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- Program list -->
+  <section class="programs-list section" aria-label="Available programs">
+    <div class="frame">
+      <span class="t-label t-label--warm reveal">Current programs</span>
+
+      <div class="programs-list__items">
+        {programs.map((p, i) => (
+          <div class={`programs-item reveal d${(i % 3) + 1}`}>
+            <div class="programs-item__header">
+              <span class="t-label programs-item__num">{p.num}</span>
+              {p.open
+                ? <span class="programs-item__status programs-item__status--open">Open</span>
+                : <span class="programs-item__status programs-item__status--closed">Closed</span>
+              }
+            </div>
+            <h2 class="programs-item__title">{p.title}</h2>
+            <p class="t-body programs-item__body">{p.body}</p>
+            <div class="programs-item__meta">
+              <span class="programs-item__meta-row">
+                <span class="t-label">Duration</span>
+                <span class="programs-item__meta-val">{p.duration}</span>
+              </span>
+              <span class="programs-item__meta-row">
+                <span class="t-label">Format</span>
+                <span class="programs-item__meta-val">{p.format}</span>
+              </span>
+              <span class="programs-item__meta-row">
+                <span class="t-label">Group</span>
+                <span class="programs-item__meta-val">{p.size}</span>
+              </span>
+            </div>
+            {p.open && (
+              <div class="programs-item__cta">
+                <a href="/connect" class="btn btn--warm">Express interest</a>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="programs-list__bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- How it works -->
+  <section class="programs-how section frame" aria-label="How programs work">
+    <span class="t-label t-label--warm reveal">How it works</span>
+    <div class="programs-how__grid">
+      {[
+        { step: '1', title: 'You apply', body: 'Send a short message about where you are and what you are looking for. No forms. Yakov reads each one.' },
+        { step: '2', title: 'A brief conversation', body: 'If the program seems like a fit, Yakov will reach out directly. The decision is mutual.' },
+        { step: '3', title: 'You join the cohort', body: 'You receive dates, structure, and access to the shared space. The program begins on a specific day.' },
+        { step: '4', title: 'You do the work', body: 'Sessions happen live. Practices happen between them. What you put in determines what you get out.' },
+      ].map((s, i) => (
+        <div class={`programs-how__step reveal d${i % 3 + 1}`}>
+          <span class="programs-how__step-num t-label">{s.step}</span>
+          <h3 class="programs-how__step-title">{s.title}</h3>
+          <p class="t-body">{s.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <QuoteBlock
+    quote="The screen is not the obstacle. The willingness to be honest is. That is the same whether you are sitting by a fire or at your desk at home."
+    author="Yakov Rajuna"
+    centered
+  />
+
+  <CTASection
+    label="Interested in a program"
+    title="Send a short message."
+    body="Tell me which program interests you and where you are in your life right now. I will respond personally."
+    primaryHref="/connect"
+    primaryLabel="Express interest"
+    secondaryHref="/retreats"
+    secondaryLabel="See live retreats"
+  />
+
+</PageLayout>
+
+<style>
+  .programs-intro {
+    position: relative;
+    background: var(--pg-prg-bg);
+    overflow: hidden;
+  }
+  .programs-intro__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: var(--s-8);
+    align-items: center;
+  }
+  .programs-intro__orb {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: var(--orb);
+    opacity: 0.18;
+    flex-shrink: 0;
+  }
+
+  .programs-list {
+    position: relative;
+    background: var(--pg-prg-bg-alt);
+    overflow: hidden;
+  }
+  .programs-list__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 90% 10%, rgba(180,155,90,0.09), transparent 60%);
+    pointer-events: none;
+  }
+  .programs-list__items {
+    position: relative; z-index: 1;
+    margin-top: var(--s-7);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+    overflow: hidden;
+  }
+
+  .programs-item {
+    background: var(--pg-prg-bg);
+    padding: var(--s-7) var(--s-7);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+  .programs-item:last-child { border-bottom: none; }
+
+  .programs-item__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+  }
+  .programs-item__num { color: var(--honey); }
+
+  .programs-item__status {
+    font-family: var(--mark);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--r-pill);
+  }
+  .programs-item__status--open {
+    background: rgba(166,124,77,0.12);
+    color: var(--honey);
+  }
+  .programs-item__status--closed {
+    background: rgba(139,130,117,0.12);
+    color: var(--mist);
+  }
+
+  .programs-item__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(26px, 3vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--pg-prg-fg);
+    margin: 0;
+  }
+  .programs-item__body { max-width: 60ch; margin: 0; }
+
+  .programs-item__meta {
+    display: flex;
+    gap: var(--s-7);
+    flex-wrap: wrap;
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--rule-thin);
+  }
+  .programs-item__meta-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+  .programs-item__meta-val {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--fg-soft);
+  }
+  .programs-item__cta { padding-top: var(--s-2); }
+
+  .programs-how { background: var(--pg-prg-bg); }
+  .programs-how__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--s-6);
+    margin-top: var(--s-7);
+  }
+  .programs-how__step-num {
+    color: var(--honey);
+    display: block;
+    margin-bottom: var(--s-3);
+  }
+  .programs-how__step-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 1.8vw, 24px);
+    line-height: 1.2;
+    color: var(--earth);
+    margin: 0 0 var(--s-3);
+  }
+
+  @media (max-width: 900px) {
+    .programs-intro__inner { grid-template-columns: 1fr; }
+    .programs-intro__orb { display: none; }
+    .programs-how__grid { grid-template-columns: 1fr 1fr; }
+    .programs-item { padding: var(--s-6); }
+  }
+  @media (max-width: 560px) {
+    .programs-how__grid { grid-template-columns: 1fr; }
+    .programs-item__meta { gap: var(--s-5); }
+  }
+</style>

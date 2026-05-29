@@ -1,0 +1,150 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import RetreatCard from '../../components/RetreatCard.astro';
+import CTASection from '../../components/CTASection.astro';
+import { retreats } from '../../data/retreats';
+---
+
+<PageLayout
+  title="Retreats — The Open Sky"
+  description="Live retreats in sacred landscapes. Small groups. Real experience."
+>
+
+  <PageHero
+    label="Live Retreats"
+    title="Gather in places"
+    titleEm="that ask something of you."
+    lede="Small groups. Specific landscapes. No shortcuts."
+    theme="retreat"
+  />
+
+  <!-- Filter hint (structure for future filtering) -->
+  <section class="retreats-list section frame" aria-label="Retreats">
+    <div class="retreats-list__controls reveal">
+      <span class="t-label t-label--warm">Upcoming</span>
+      <div class="retreats-list__filter-row">
+        <span class="t-small retreats-list__count">{retreats.length} retreats</span>
+      </div>
+    </div>
+
+    <div class="retreats-list__grid">
+      {retreats.map((retreat, i) => (
+        <div class={`reveal d${(i % 3) + 1}`}>
+          <RetreatCard
+            title={retreat.title}
+            atmosphere={retreat.atmosphere}
+            date={retreat.date}
+            location={retreat.location}
+            duration={retreat.duration}
+            href={`/retreats/${retreat.slug}`}
+            bg={retreat.bg}
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Philosophy block -->
+  <section class="retreats-why section" aria-label="Why these retreats">
+    <div class="frame">
+      <div class="retreats-why__inner">
+        <div class="reveal">
+          <span class="t-label t-label--warm">What to expect</span>
+          <h2 class="retreats-why__title reveal d1">
+            Not a holiday.<br />
+            <em>Not a workshop.</em>
+          </h2>
+        </div>
+
+        <div class="retreats-why__text">
+          <p class="t-lede reveal d1">
+            These retreats are built around the assumption that you are capable of real experience — and that something real is what you are looking for.
+          </p>
+          <p class="t-body reveal d2">
+            They combine physical movement, intentional ceremony, and honest group exchange. Some are harder than others. All of them ask you to be present with what is actually happening — in the landscape, in the group, and in yourself.
+          </p>
+          <p class="t-body reveal d3">
+            The physical settings are chosen deliberately. Mountains, winter houses, fire clearings. Place matters. The difficulty of getting there matters. What you leave behind when you arrive matters.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="retreats-why__bg" aria-hidden="true"></div>
+  </section>
+
+  <CTASection
+    label="Interested?"
+    title="Send a short message."
+    body="Tell me what is happening in your life right now and which retreat interests you. I will respond personally."
+    primaryHref="/connect"
+    primaryLabel="Express interest"
+    secondaryHref="/about"
+    secondaryLabel="About Yakov"
+  />
+
+</PageLayout>
+
+<style>
+  .retreats-list { background: var(--pg-ret-bg); }
+
+  .retreats-list__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--s-6);
+    padding-bottom: var(--s-5);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .retreats-list__filter-row {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+  }
+
+  .retreats-list__count { color: var(--fg-mute); }
+
+  .retreats-list__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+  }
+
+  .retreats-why {
+    position: relative;
+    background: var(--pg-ret-bg-alt);
+    overflow: hidden;
+  }
+  .retreats-why__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 55% 55% at 100% 0%, rgba(255,200,60,0.18), transparent 60%);
+    pointer-events: none;
+  }
+  .retreats-why__inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8vw;
+    align-items: start;
+  }
+  .retreats-why__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--pg-ret-fg);
+    margin: var(--s-4) 0 0;
+  }
+  .retreats-why__title em { font-style: italic; color: var(--ember); display: block; }
+  .retreats-why__text { display: flex; flex-direction: column; gap: var(--s-5); }
+
+  @media (max-width: 900px) {
+    .retreats-list__grid { grid-template-columns: 1fr 1fr; }
+    .retreats-why__inner { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .retreats-list__grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,321 @@
+@import './tokens.css';
+
+/* ── Reset ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; margin: 0; padding: 0; }
+body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; }
+::selection { background: rgba(166,124,77,0.18); color: var(--earth); }
+
+/* ── Film Grain — purely atmospheric, barely there ── */
+.grain {
+  position: fixed; inset: 0; pointer-events: none;
+  z-index: 200;
+  mix-blend-mode: multiply;
+  opacity: 0.09;
+  background-repeat: repeat;
+}
+
+/* ── Layout ─────────────────────────────────────────── */
+.frame {
+  padding-left: var(--frame-x);
+  padding-right: var(--frame-x);
+  max-width: calc(var(--max-w) + var(--frame-x) * 2);
+  margin: 0 auto;
+}
+
+.frame--sm {
+  max-width: calc(var(--max-w-sm) + var(--frame-x) * 2);
+}
+
+/* Chapter sections — generous film pacing */
+.section {
+  padding-block: clamp(96px, 15svh, 200px);
+}
+
+.section--xl {
+  padding-block: clamp(140px, 20svh, 280px);
+}
+
+.section--sm {
+  padding-block: clamp(64px, 10svh, 120px);
+}
+
+/* ── Type Scale — Fraunces display ──────────────────── */
+
+/* Hero display — optical size max */
+.t-hero {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(80px, 16vw, 220px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: var(--earth);
+  font-optical-sizing: auto;
+}
+
+/* Chapter-level display */
+.t-xxl {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(56px, 10vw, 150px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--earth);
+  font-optical-sizing: auto;
+}
+
+.t-xl {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 88px);
+  line-height: 1.0;
+  letter-spacing: -0.025em;
+  color: var(--earth);
+  font-optical-sizing: auto;
+}
+
+.t-l {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(28px, 3.8vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -0.018em;
+  color: var(--earth);
+  font-optical-sizing: auto;
+}
+
+.t-m {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(22px, 2.6vw, 38px);
+  line-height: 1.18;
+  letter-spacing: -0.012em;
+  color: var(--earth);
+}
+
+/* Italic serif used for lede / atmosphere lines */
+.t-lede {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(18px, 1.9vw, 27px);
+  line-height: 1.5;
+  color: var(--fg-soft);
+  letter-spacing: 0.005em;
+  font-optical-sizing: auto;
+}
+
+.t-body {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--fg-soft);
+}
+
+.t-body-l {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--fg-soft);
+}
+
+/* Syne for labels — architectural, tracked, uppercase */
+.t-label {
+  font-family: var(--mark);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+.t-label--warm  { color: var(--honey); }
+.t-label--light { color: rgba(250,247,240,0.45); }
+.t-label--gold  { color: rgba(232,198,138,0.75); }
+
+.t-small {
+  font-family: var(--mark);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+/* ── Dark section text overrides ─────────────────────── */
+.dark .t-xxl,
+.dark .t-xl,
+.dark .t-l,
+.dark .t-m   { color: var(--bone); }
+
+.dark .t-lede  { color: rgba(250,247,240,0.70); }
+.dark .t-body,
+.dark .t-body-l { color: rgba(250,247,240,0.52); }
+
+/* ── Logo wordmark ──────────────────────────────────── */
+.wordmark {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  color: var(--earth);
+  line-height: 1;
+  font-optical-sizing: auto;
+}
+
+/* ── Buttons ────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mark);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  padding: 15px 28px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--earth);
+  background: var(--earth);
+  color: var(--bone);
+  transition: all 400ms var(--ease);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn:hover {
+  background: var(--umber);
+  border-color: var(--umber);
+  transform: translateY(-1px);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--earth);
+}
+.btn--outline:hover { background: var(--earth); color: var(--bone); }
+
+.btn--warm {
+  background: var(--honey);
+  border-color: var(--honey);
+  color: var(--bone);
+}
+.btn--warm:hover { background: var(--ember); border-color: var(--ember); }
+
+.btn--ghost {
+  background: transparent;
+  border-color: rgba(46,42,36,0.25);
+  color: var(--earth);
+}
+.btn--ghost:hover { border-color: var(--earth); }
+
+/* Ghost variant for dark sections */
+.btn--ghost-d {
+  background: transparent;
+  border-color: rgba(250,247,240,0.25);
+  color: rgba(250,247,240,0.85);
+}
+.btn--ghost-d:hover {
+  border-color: rgba(250,247,240,0.6);
+  color: var(--bone);
+}
+
+/* Warm outline for dark sections */
+.btn--warm-outline {
+  background: transparent;
+  border-color: rgba(166,124,77,0.50);
+  color: var(--honey);
+}
+.btn--warm-outline:hover {
+  background: var(--honey);
+  border-color: var(--honey);
+  color: var(--bone);
+}
+
+/* Animated text-link */
+.btn-text {
+  font-family: var(--mark);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--earth);
+  background: none;
+  border: 0; padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  transition: gap 500ms var(--ease), color 300ms;
+  cursor: pointer;
+}
+.btn-text::after {
+  content: "";
+  display: inline-block;
+  width: 36px; height: 1px;
+  background: currentColor;
+  transition: width 500ms var(--ease);
+}
+.btn-text:hover { gap: 22px; color: var(--honey); }
+.btn-text:hover::after { width: 56px; }
+
+.btn-text--d { color: rgba(250,247,240,0.60); }
+.btn-text--d:hover { color: var(--honey); }
+
+/* ── Image placeholder ──────────────────────────────── */
+.img-slot {
+  position: relative;
+  background:
+    linear-gradient(135deg, rgba(216,192,154,0.3), rgba(184,154,107,0.2)),
+    repeating-linear-gradient(135deg,
+      rgba(46,42,36,0.025) 0 1px,
+      transparent 1px 16px);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-2);
+  overflow: hidden;
+}
+.img-slot::after {
+  content: attr(data-label);
+  position: absolute; left: 14px; bottom: 12px;
+  font-family: ui-monospace, monospace;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--umber); opacity: 0.5;
+}
+.img-slot--tall   { aspect-ratio: 3/4; }
+.img-slot--wide   { aspect-ratio: 16/9; }
+.img-slot--square { aspect-ratio: 1; }
+.img-slot--cinema { aspect-ratio: 21/9; }
+
+/* ── Reveal — cinematic fade ─────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 1400ms var(--ease-slow),
+    transform 1400ms var(--ease-slow);
+}
+.reveal.in { opacity: 1; transform: none; }
+.reveal.d1 { transition-delay: 80ms; }
+.reveal.d2 { transition-delay: 180ms; }
+.reveal.d3 { transition-delay: 300ms; }
+.reveal.d4 { transition-delay: 420ms; }
+.reveal.d5 { transition-delay: 560ms; }
+
+/* ── Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--bone); }
+::-webkit-scrollbar-thumb { background: var(--sand); border-radius: 2px; }

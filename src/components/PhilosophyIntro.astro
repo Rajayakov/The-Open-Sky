@@ -1,0 +1,86 @@
+---
+---
+
+<section class="phi" aria-label="Philosophy">
+  <div class="phi__bg" aria-hidden="true"></div>
+
+  <div class="frame">
+    <div class="phi__inner">
+
+      <div class="phi__left reveal">
+        <span class="t-label t-label--warm">The work</span>
+      </div>
+
+      <div class="phi__right">
+        <p class="phi__statement reveal d1">
+          There is a quality of attention that most people have never experienced in their own lives.
+        </p>
+        <p class="phi__body reveal d2">
+          Not insight. Not knowledge. Something that happens in the body, in real time, in the presence
+          of difficulty or beauty or silence. The retreats, the mountain expeditions, the mentorship —
+          they are all attempts to create the conditions for that quality to emerge.
+        </p>
+        <p class="phi__attribution reveal d3">
+          <span class="t-label t-label--warm">Yakov Rajuna</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .phi {
+    position: relative;
+    background: var(--atm-phi);
+    padding-block: clamp(100px, 16svh, 220px);
+    overflow: hidden;
+  }
+
+  .phi__bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 55% 55% at 100% 0%,   rgba(200,155,90,0.20), transparent 60%),
+      radial-gradient(ellipse 40% 40% at 0%   100%, rgba(214,178,112,0.12), transparent 60%);
+    pointer-events: none;
+  }
+
+  .phi__inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(40px, 8vw, 120px);
+    align-items: start;
+  }
+
+  .phi__left { padding-top: 8px; }
+
+  .phi__statement {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(24px, 3.2vw, 44px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--earth);
+    margin: 0 0 var(--s-7);
+    max-width: 22ch;
+    font-optical-sizing: auto;
+  }
+
+  .phi__body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--fg-soft);
+    margin: 0 0 var(--s-6);
+    max-width: 52ch;
+  }
+
+  .phi__attribution { margin: 0; }
+
+  @media (max-width: 760px) {
+    .phi__inner { grid-template-columns: 1fr; gap: var(--s-6); }
+  }
+</style>

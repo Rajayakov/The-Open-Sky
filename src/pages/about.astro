@@ -1,0 +1,209 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTASection from '../components/CTASection.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+---
+
+<PageLayout
+  title="About — The Open Sky"
+  description="Yakov Rajuna is a retreat leader, mountain guide, and mentor working with people at genuine turning points."
+>
+
+  <PageHero
+    label="The Project"
+    title="Yakov"
+    titleEm="Rajuna"
+    lede="Retreat architect, mountain guide, and mentor. Fifteen years working with people at genuine turning points."
+    theme="about"
+  />
+
+  <!-- Biography -->
+  <section class="about-page section frame">
+    <div class="about-page__grid">
+
+      <div class="about-page__image-col">
+        <div
+          class="img-slot img-slot--tall reveal"
+          data-label="Portrait · Yakov Rajuna"
+          style="background: radial-gradient(ellipse 60% 50% at 40% 30%, rgba(255,228,175,0.6), transparent 60%), linear-gradient(175deg, #C19763 0%, #8E6B40 40%, #4A371F 100%);"
+          aria-hidden="true"
+        ></div>
+      </div>
+
+      <div class="about-page__text-col">
+        <span class="t-label t-label--warm reveal">The short version</span>
+
+        <h2 class="about-page__heading reveal d1">
+          Fifteen years.<br />
+          <em>Many mountains.</em>
+        </h2>
+
+        <div class="about-page__body">
+          <p class="t-body-l reveal d2">
+            Yakov Rajuna has been leading groups in difficult terrain since 2010. He started as a trekking guide in the Caucasus, then spent years studying facilitation, ceremony, and group dynamics. The combination became his own — something that doesn't have a precise name, but that people who have experienced it recognise immediately.
+          </p>
+          <p class="t-body reveal d3">
+            He works with people at crossroads. Not people who need motivation, but people who are in the middle of something real: a major transition, a loss, a decision they cannot avoid, a sense that the life they are living is not the one they were meant to be living.
+          </p>
+          <p class="t-body reveal d3">
+            He is based between Tbilisi and Europe. He leads 4–6 retreats per year, takes on a small number of mentorship clients, and performs and records music in the space between.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="about-philosophy section" aria-label="Philosophy">
+    <div class="frame">
+      <div class="about-philosophy__inner">
+        <QuoteBlock
+          quote="I am not interested in helping people feel better. I am interested in helping them become more honest — with themselves and with what their life is asking of them."
+          author="Yakov Rajuna"
+          centered
+        />
+      </div>
+    </div>
+    <div class="about-philosophy__bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- What he does -->
+  <section class="about-work section frame" aria-label="The work">
+    <div class="about-work__header">
+      <span class="t-label t-label--warm reveal">The work</span>
+      <h2 class="about-work__title reveal d1">What this looks like<br /><em>in practice.</em></h2>
+    </div>
+
+    <div class="about-work__items">
+      {[
+        {
+          num: '01',
+          title: 'Retreats in specific places',
+          body: 'Most retreats are held in landscapes that have been chosen for a reason. The Caucasus, Carpathians, the Pontic Alps. The place is part of the work.',
+        },
+        {
+          num: '02',
+          title: 'Mountain expeditions',
+          body: 'Multi-day treks as ceremony. Physical exertion strips away the social self. What remains is usually more honest.',
+        },
+        {
+          num: '03',
+          title: 'One-on-one mentorship',
+          body: 'A small number of clients at a time. Over months. Not coaching. Something harder to describe — accompaniment through something real.',
+        },
+        {
+          num: '04',
+          title: 'Online programs',
+          body: 'For those who cannot travel. Structured, serious, and built around the same principles as the in-person work.',
+        },
+        {
+          num: '05',
+          title: 'Music and creative work',
+          body: 'Original recordings, live performance, and the attempt to do with sound what ceremony does with fire.',
+        },
+      ].map((item, i) => (
+        <div class={`about-work__item reveal d${i % 3 + 1}`}>
+          <span class="t-label about-work__num">{item.num}</span>
+          <h3 class="about-work__item-title">{item.title}</h3>
+          <p class="t-body about-work__item-body">{item.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    label="Ready to go deeper"
+    title="Start a conversation."
+    titleEm=""
+    body="Send a short message about where you are and what you are looking for. No forms, no funnels — just an honest exchange."
+    primaryHref="/connect"
+    primaryLabel="Get in touch"
+    secondaryHref="/retreats"
+    secondaryLabel="See upcoming retreats"
+  />
+
+</PageLayout>
+
+<style>
+  .about-page { background: var(--pg-abt-bg); }
+
+  .about-page__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+
+  .about-page__heading {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(32px, 4vw, 54px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--earth);
+    margin: var(--s-5) 0 var(--s-6);
+  }
+  .about-page__heading em { font-style: italic; color: var(--honey); display: block; }
+
+  .about-page__body { display: flex; flex-direction: column; gap: var(--s-5); }
+
+  .about-philosophy {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-warm);
+  }
+  .about-philosophy__inner {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+  .about-philosophy__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(232,198,138,0.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  .about-work { background: var(--pg-abt-bg); }
+  .about-work__header {
+    margin-bottom: clamp(40px, 6svh, 70px);
+  }
+  .about-work__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 50px);
+    line-height: 1.1;
+    letter-spacing: -0.018em;
+    color: var(--earth);
+    margin: var(--s-4) 0 0;
+  }
+  .about-work__title em { font-style: italic; color: var(--honey); display: block; }
+
+  .about-work__items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-7) var(--s-6);
+  }
+
+  .about-work__num { color: var(--honey); margin-bottom: var(--s-3); display: block; }
+
+  .about-work__item-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 1.8vw, 24px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--earth);
+    margin: 0 0 var(--s-3);
+  }
+  .about-work__item-body { margin: 0; }
+
+  @media (max-width: 900px) {
+    .about-page__grid { grid-template-columns: 1fr; }
+    .about-work__items { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .about-work__items { grid-template-columns: 1fr; }
+  }
+</style>

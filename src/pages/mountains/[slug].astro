@@ -1,0 +1,189 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { journeys, getJourney } from '../../data/mountains';
+
+export function getStaticPaths() {
+  return journeys.map((j) => ({ params: { slug: j.slug } }));
+}
+
+const { slug } = Astro.params;
+const journey = getJourney(slug!);
+if (!journey) return Astro.redirect('/mountains');
+---
+
+<PageLayout
+  title={`${journey.title} — The Open Sky`}
+  description={journey.description}
+>
+
+  <PageHero
+    label="Mountain Journey"
+    title={journey.title}
+    titleEm={journey.terrain}
+    lede={journey.description}
+    theme="mountain"
+  />
+
+  <!-- Overview -->
+  <section class="mj-overview section frame" aria-label="Journey overview">
+    <div class="mj-overview__grid">
+      <div class="mj-overview__text reveal">
+        <p class="t-lede" style="max-width: 52ch;">
+          {journey.description}
+        </p>
+      </div>
+      <div class="mj-overview__meta reveal d2">
+        {[
+          { label: 'Dates',       value: journey.date },
+          { label: 'Location',    value: journey.location },
+          { label: 'Duration',    value: journey.duration },
+          { label: 'Altitude',    value: journey.altitude },
+          { label: 'Group size',  value: journey.groupSize },
+          { label: 'Difficulty',  value: journey.difficulty },
+        ].map(item => (
+          <div class="mj-overview__meta-row">
+            <span class="t-label">{item.label}</span>
+            <span class="mj-overview__meta-val">{item.value}</span>
+          </div>
+        ))}
+        <div class="mj-overview__cta">
+          <a href="/connect" class="btn btn--warm">Express interest</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Structure -->
+  <section class="mj-structure section" aria-label="Journey structure">
+    <div class="frame">
+      <span class="t-label t-label--warm reveal">The journey</span>
+      <div class="mj-structure__phases">
+        {journey.structure.map((s, i) => (
+          <div class={`mj-structure__phase reveal d${(i % 3) + 1}`}>
+            <span class="t-label mj-structure__phase-label">{s.phase}</span>
+            <p class="t-body mj-structure__phase-body">{s.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="mj-structure__bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="mj-whom section frame" aria-label="Who this is for">
+    <span class="t-label t-label--warm reveal">Who this is for</span>
+    <div class="mj-whom__list">
+      {journey.forWhom.map((item, i) => (
+        <div class={`mj-whom__item reveal d${(i % 3) + 1}`}>
+          <span class="mj-whom__mark" aria-hidden="true">—</span>
+          <p class="t-body">{item}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    label="Interested in this journey"
+    title="Write a short message."
+    body="Tell me where you are and what you are looking for. Yakov responds personally to each message."
+    primaryHref="/connect"
+    primaryLabel="Express interest"
+    secondaryHref="/mountains"
+    secondaryLabel="All mountain journeys"
+  />
+
+</PageLayout>
+
+<style>
+  .mj-overview { background: var(--pg-mtn-bg); }
+  .mj-overview__grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: clamp(40px, 7vw, 80px);
+    align-items: start;
+  }
+  .mj-overview__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    border: 1px solid rgba(44,42,38,0.12);
+    border-radius: var(--r-2);
+    padding: var(--s-6);
+    background: rgba(255,255,255,0.40);
+  }
+  .mj-overview__meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s-4);
+    padding-bottom: var(--s-4);
+    border-bottom: 1px solid rgba(44,42,38,0.07);
+  }
+  .mj-overview__meta-row:last-of-type { border-bottom: none; }
+  .mj-overview__meta-val {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--pg-mtn-fg);
+    text-align: right;
+  }
+  .mj-overview__cta { margin-top: var(--s-5); }
+
+  .mj-structure {
+    position: relative;
+    background: var(--pg-mtn-bg-alt);
+    overflow: hidden;
+  }
+  .mj-structure__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 80% 20%, rgba(190,185,165,0.18), transparent 60%);
+    pointer-events: none;
+  }
+  .mj-structure__phases {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0;
+    border: 1px solid rgba(44,42,38,0.10);
+    border-radius: var(--r-2);
+    overflow: hidden;
+    margin-top: var(--s-7);
+  }
+  .mj-structure__phase {
+    padding: var(--s-6);
+    border-right: 1px solid rgba(44,42,38,0.10);
+    background: rgba(255,255,255,0.30);
+  }
+  .mj-structure__phase:last-child { border-right: none; }
+  .mj-structure__phase-label { color: var(--pg-mtn-accent); display: block; margin-bottom: var(--s-3); }
+  .mj-structure__phase-body { margin: 0; color: var(--pg-mtn-mute); }
+
+  .mj-whom { background: var(--pg-mtn-bg); }
+  .mj-whom__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    margin-top: var(--s-7);
+    border-top: 1px solid rgba(44,42,38,0.10);
+  }
+  .mj-whom__item {
+    display: flex;
+    gap: var(--s-5);
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid rgba(44,42,38,0.07);
+    align-items: baseline;
+  }
+  .mj-whom__mark { color: var(--pg-mtn-accent); flex-shrink: 0; }
+  .mj-whom .t-body { color: var(--pg-mtn-mute); margin: 0; }
+
+  @media (max-width: 860px) {
+    .mj-overview__grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .mj-structure__phases { grid-template-columns: 1fr; }
+    .mj-structure__phase { border-right: none; border-bottom: 1px solid rgba(44,42,38,0.10); }
+    .mj-structure__phase:last-child { border-bottom: none; }
+  }
+</style>

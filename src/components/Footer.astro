@@ -1,0 +1,194 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer dark" aria-label="Site footer">
+  <div class="footer__bg" aria-hidden="true">
+    <div class="footer__glow"></div>
+  </div>
+
+  <div class="footer__inner frame">
+
+    <!-- Brand column -->
+    <div class="footer__brand">
+      <a href="/" class="footer__wordmark" aria-label="The Open Sky — home">The Open Sky</a>
+      <p class="footer__tagline">
+        For those who take<br />
+        the inner life seriously.
+      </p>
+      <p class="footer__sub">by Yakov Rajuna</p>
+      <div class="footer__socials">
+        <a href="https://t.me/yakovrajuna"        class="footer__social" aria-label="Telegram">Telegram</a>
+        <a href="https://youtube.com/@yakovrajuna"  class="footer__social" aria-label="YouTube">YouTube</a>
+        <a href="https://instagram.com/yakovrajuna" class="footer__social" aria-label="Instagram">Instagram</a>
+        <a href="mailto:rajunayakov@gmail.com"         class="footer__social" aria-label="Email">Email</a>
+      </div>
+    </div>
+
+    <!-- Nav columns -->
+    <nav class="footer__nav" aria-label="Footer navigation">
+      <div class="footer__col">
+        <span class="footer__col-label t-label t-label--gold">Experiences</span>
+        <a href="/retreats"   class="footer__link">Live Retreats</a>
+        <a href="/mountains"  class="footer__link">Mountains</a>
+        <a href="/programs"   class="footer__link">Online Programs</a>
+        <a href="/mentorship" class="footer__link">Mentorship</a>
+        <a href="/music"      class="footer__link">Music</a>
+      </div>
+      <div class="footer__col">
+        <span class="footer__col-label t-label t-label--gold">Project</span>
+        <a href="/about"   class="footer__link">About</a>
+        <a href="/connect" class="footer__link">Connect</a>
+        <a href="https://t.me/yakovrajuna" class="footer__link">Telegram channel</a>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer__bottom frame">
+    <span class="footer__copy t-label t-label--light">
+      © {year} Yakov Rajuna. All rights reserved.
+    </span>
+    <span class="footer__location t-label t-label--light">
+      Tbilisi &amp; Europe
+    </span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    background: var(--atm-ftr);
+    overflow: hidden;
+  }
+
+  .footer__bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, var(--atm-com) 0%, var(--atm-ftr) 60%),
+      radial-gradient(ellipse 50% 40% at 50% 0%, rgba(166,124,77,0.08), transparent 55%);
+    pointer-events: none;
+  }
+
+  /* Subtle warm top glow */
+  .footer__glow {
+    position: absolute;
+    left: 50%; top: 0;
+    transform: translateX(-50%);
+    width: 60%; height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(166,124,77,0.35) 30%,
+      rgba(232,198,138,0.55) 50%,
+      rgba(166,124,77,0.35) 70%,
+      transparent 100%
+    );
+    box-shadow: 0 0 40px 1px rgba(166,124,77,0.14);
+  }
+
+  .footer__inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: clamp(48px, 8vw, 120px);
+    align-items: start;
+    padding-top: clamp(64px, 10svh, 120px);
+    padding-bottom: clamp(48px, 8svh, 80px);
+  }
+
+  /* Wordmark — DM Serif Display, ceremonial */
+  .footer__wordmark {
+    font-family: var(--display);
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(32px, 4.5vw, 60px);
+    letter-spacing: -0.025em;
+    color: var(--bone);
+    line-height: 1;
+    display: block;
+    margin-bottom: var(--s-6);
+    font-optical-sizing: auto;
+    transition: color 280ms ease;
+  }
+  .footer__wordmark:hover { color: var(--honey); }
+
+  .footer__tagline {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(14px, 1.2vw, 17px);
+    line-height: 1.75;
+    color: rgba(237, 224, 200, 0.38);
+    margin: 0 0 var(--s-4);
+  }
+
+  .footer__sub {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(237, 224, 200, 0.22);
+    margin: 0 0 var(--s-7);
+  }
+
+  .footer__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-4) var(--s-5);
+  }
+
+  .footer__social {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(237, 224, 200, 0.36);
+    transition: color 280ms ease;
+  }
+  .footer__social:hover { color: var(--honey); }
+
+  .footer__nav {
+    display: flex;
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .footer__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .footer__col-label {
+    margin-bottom: var(--s-3);
+    display: block;
+  }
+
+  .footer__link {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    color: rgba(237, 224, 200, 0.38);
+    transition: color 280ms ease;
+    line-height: 1.6;
+  }
+  .footer__link:hover { color: rgba(237, 224, 200, 0.78); }
+
+  .footer__bottom {
+    position: relative; z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: clamp(28px, 5svh, 48px);
+    border-top: 1px solid rgba(250, 247, 240, 0.05);
+    padding-top: var(--s-5);
+    gap: var(--s-5);
+  }
+
+  @media (max-width: 760px) {
+    .footer__inner { grid-template-columns: 1fr; }
+    .footer__bottom { flex-direction: column; align-items: flex-start; }
+  }
+</style>

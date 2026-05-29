@@ -1,0 +1,162 @@
+---
+import TestimonialBlock from './TestimonialBlock.astro';
+---
+
+<section class="ch-m dark" aria-label="Mountains">
+
+  <!-- Full-width atmospheric banner — the dramatic visual shift -->
+  <div class="ch-m__banner" aria-hidden="true">
+    <div class="ch-m__banner-inner"></div>
+    <div class="ch-m__banner-overlay"></div>
+  </div>
+
+  <div class="frame">
+
+    <div class="ch-m__header reveal">
+      <span class="t-label t-label--gold">02</span>
+      <span class="t-label t-label--light" style="margin-left:var(--s-4);">Mountains</span>
+    </div>
+
+    <div class="ch-m__content">
+
+      <h2 class="ch-m__title reveal d1">
+        The mountain<br />
+        <em>as teacher.</em>
+      </h2>
+
+      <div class="ch-m__cols">
+        <p class="ch-m__lede reveal d2">
+          Multi-day expeditions into high terrain. Physical difficulty as a doorway, not a goal.
+        </p>
+        <div class="reveal d3">
+          <p class="ch-m__body">
+            Walking for several hours a day in difficult terrain does something specific. The social
+            self quiets. The performing self tires. What remains tends to be more honest than
+            what you started with.
+          </p>
+          <p class="ch-m__body" style="margin-top:var(--s-5);">
+            The Greater Caucasus. The Carpathians. The Pontic Alps. These are not tourism routes.
+          </p>
+          <div class="ch-m__cta">
+            <a href="/mountains" class="btn-text btn-text--d">Enter the field</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ch-m__testimonial reveal d4">
+        <TestimonialBlock
+          quote="By the third day, I had nothing left to perform. There was no one to perform for. That was the whole point."
+          author="Anton K."
+          detail="Caucasus Expedition 2024"
+          dark
+        />
+      </div>
+
+    </div>
+
+  </div>
+  <div class="ch-m__bg" aria-hidden="true"></div>
+</section>
+
+<style>
+  .ch-m {
+    position: relative;
+    background: var(--atm-mtn);
+    overflow: hidden;
+    padding-bottom: clamp(120px, 18svh, 260px);
+  }
+
+  /* Warm amber glow — ember warmth in the depths */
+  .ch-m__bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 40% at 80% 85%, rgba(166,124,77,0.10), transparent 58%),
+      radial-gradient(ellipse 30% 25% at 8%  8%,  rgba(200,155,90,0.05), transparent 55%);
+    pointer-events: none;
+  }
+
+  /* THE CINEMATIC DESCENT BANNER
+     This IS the LIGHT → GOLD → AMBER → BRONZE → GRAPHITE journey
+     visible in one continuous gradient sweep.                          */
+  .ch-m__banner {
+    position: relative;
+    height: clamp(260px, 42svh, 580px);
+    overflow: hidden;
+  }
+  .ch-m__banner-inner {
+    position: absolute; inset: 0;
+    background: var(--atm-descent);
+  }
+  /* Subtle sun haze at the very top of the banner */
+  .ch-m__banner-inner::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 30% at 50% 0%,  rgba(255,224,140,0.28) 0%, transparent 50%),
+      radial-gradient(ellipse 30% 40% at 15% 20%, rgba(200,155,90,0.14)  0%, transparent 45%);
+  }
+  .ch-m__banner-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 160px;
+    background: linear-gradient(to bottom, transparent 0%, var(--atm-mtn) 100%);
+  }
+
+  .ch-m__header {
+    display: flex;
+    align-items: center;
+    margin-top: var(--s-9);
+    margin-bottom: clamp(48px, 8svh, 96px);
+    position: relative; z-index: 1;
+  }
+
+  .ch-m__content { position: relative; z-index: 1; }
+
+  .ch-m__title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(52px, 9vw, 130px);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: var(--bone);
+    margin: 0 0 clamp(48px, 7svh, 96px);
+    font-optical-sizing: auto;
+  }
+  .ch-m__title em { font-style: italic; color: var(--honey); display: block; }
+
+  .ch-m__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+
+  .ch-m__lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 2vw, 26px);
+    line-height: 1.5;
+    color: rgba(240, 230, 210, 0.65);
+    margin: 0;
+    letter-spacing: 0.005em;
+    font-optical-sizing: auto;
+  }
+
+  .ch-m__body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.85;
+    color: rgba(240, 230, 210, 0.50);
+    margin: 0;
+  }
+
+  .ch-m__cta { margin-top: var(--s-7); }
+
+  .ch-m__testimonial { margin-top: var(--s-10); }
+
+  @media (max-width: 840px) {
+    .ch-m__cols { grid-template-columns: 1fr; }
+    .ch-m__title { font-size: clamp(44px, 12vw, 88px); }
+  }
+</style>

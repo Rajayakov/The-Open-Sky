@@ -1,0 +1,323 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTASection from '../components/CTASection.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+---
+
+<PageLayout
+  title="Mentorship — The Open Sky"
+  description="One-on-one accompaniment for people navigating a genuine turning point. A small number of clients at a time."
+>
+
+  <PageHero
+    label="One-on-one Mentorship"
+    title="Accompanied"
+    titleEm="through something real."
+    lede="A small number of clients at a time. Over months. Not coaching — something harder to describe."
+    theme="mentorship"
+  />
+
+  <!-- Intro -->
+  <section class="mentorship-intro section frame" aria-label="What mentorship is">
+    <div class="mentorship-intro__inner">
+      <div class="mentorship-intro__text reveal">
+        <p class="t-lede" style="max-width: 50ch;">
+          This is not performance coaching. It is not goal-setting, accountability, or weekly check-ins about your productivity. It is something older and more specific.
+        </p>
+        <p class="t-body" style="margin-top: var(--s-5); max-width: 48ch;">
+          The people who work with Yakov one-on-one are usually at a crossroads that cannot be resolved through more information, more planning, or more doing. They need someone who can sit with them in the middle of the uncertainty and help them find what is actually true.
+        </p>
+        <p class="t-body" style="margin-top: var(--s-4); max-width: 48ch;">
+          Engagements run for a minimum of three months. The structure emerges from what is needed. There is no fixed curriculum.
+        </p>
+      </div>
+
+      <div class="mentorship-intro__image reveal d2">
+        <div
+          class="img-slot img-slot--tall"
+          data-label="Mentorship · One-on-one"
+          style="background: radial-gradient(ellipse 60% 50% at 35% 25%, rgba(255,228,175,0.5), transparent 60%), linear-gradient(175deg, #C19763 0%, #8E6B40 40%, #4A371F 100%);"
+          aria-hidden="true"
+        ></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What this is not -->
+  <section class="mentorship-not section" aria-label="What this is not">
+    <div class="frame">
+      <span class="t-label t-label--warm reveal">Clarity first</span>
+      <div class="mentorship-not__grid">
+        <div class="mentorship-not__col reveal d1">
+          <h2 class="mentorship-not__heading">This is not</h2>
+          <ul class="mentorship-not__list mentorship-not__list--no">
+            {[
+              'Life coaching or goal-setting',
+              'Therapy or psychological treatment',
+              'A course with structured content',
+              'A service for people in crisis',
+              'Motivational support',
+            ].map(item => (
+              <li class="mentorship-not__item">
+                <span class="mentorship-not__mark mentorship-not__mark--no" aria-hidden="true">—</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="mentorship-not__col reveal d2">
+          <h2 class="mentorship-not__heading">This is</h2>
+          <ul class="mentorship-not__list mentorship-not__list--yes">
+            {[
+              'Accompaniment through a genuine turning point',
+              'Regular one-on-one sessions with Yakov',
+              'Space for what is actually happening — not what should be happening',
+              'Work that may be uncomfortable',
+              'A relationship that takes time to build',
+            ].map(item => (
+              <li class="mentorship-not__item">
+                <span class="mentorship-not__mark mentorship-not__mark--yes" aria-hidden="true">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mentorship-not__bg" aria-hidden="true"></div>
+  </section>
+
+  <QuoteBlock
+    quote="I work with a small number of people at a time. This is not a scalable product. It is a relationship — and relationships require presence."
+    author="Yakov Rajuna"
+    centered
+  />
+
+  <!-- Who it's for -->
+  <section class="mentorship-whom section frame" aria-label="Who this is for">
+    <span class="t-label t-label--warm reveal">Who this is for</span>
+    <div class="mentorship-whom__grid">
+      {[
+        {
+          title: 'You are at a crossroads',
+          body: 'A decision is coming that you cannot avoid. Or you have been avoiding it for years. Either way, something needs to move.',
+        },
+        {
+          title: 'You have done the inner work',
+          body: 'This is not an introduction. You have read the books, done the therapy, tried the programs. You are looking for something more direct.',
+        },
+        {
+          title: 'You can commit to the time',
+          body: 'Minimum three months. Regular sessions. Consistent engagement between them. The work requires continuity.',
+        },
+        {
+          title: 'You are willing to be uncomfortable',
+          body: 'Honesty is the main method here. That means looking at things clearly — including things that are inconvenient to see.',
+        },
+      ].map((item, i) => (
+        <div class={`mentorship-whom__item reveal d${i % 3 + 1}`}>
+          <h3 class="mentorship-whom__item-title">{item.title}</h3>
+          <p class="t-body">{item.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="mentorship-process section" aria-label="The process">
+    <div class="frame">
+      <div class="mentorship-process__header reveal">
+        <span class="t-label t-label--warm">How it begins</span>
+        <h2 class="mentorship-process__title reveal d1">
+          No intake forms.<br /><em>Just a conversation.</em>
+        </h2>
+      </div>
+
+      <div class="mentorship-process__steps">
+        {[
+          { n: '01', label: 'You write', body: 'A short, honest message about what is happening in your life right now and what you are looking for. No template, no requirements.' },
+          { n: '02', label: 'Yakov responds', body: 'If the situation resonates and the timing seems right, he will reach out for a short introductory call. This is a conversation, not an interview.' },
+          { n: '03', label: 'You decide together', body: 'After the call, both of you decide if this is the right fit. There is no pressure in either direction.' },
+          { n: '04', label: 'The work begins', body: 'An initial period of three months. Sessions are structured around what emerges — not around a fixed agenda.' },
+        ].map((s, i) => (
+          <div class={`mentorship-process__step reveal d${(i % 3) + 1}`}>
+            <div class="mentorship-process__step-inner">
+              <span class="t-label mentorship-process__n">{s.n}</span>
+              <h3 class="mentorship-process__step-label">{s.label}</h3>
+              <p class="t-body">{s.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="mentorship-process__bg" aria-hidden="true"></div>
+  </section>
+
+  <CTASection
+    dark
+    label="Apply for mentorship"
+    title="A small number of places are open."
+    body="Write a short message about where you are and what you are looking for. Yakov reads each one personally and responds directly."
+    primaryHref="/connect"
+    primaryLabel="Write to Yakov"
+    secondaryHref="/about"
+    secondaryLabel="About Yakov"
+  />
+
+</PageLayout>
+
+<style>
+  .mentorship-intro { background: var(--pg-men-bg-alt); }
+  .mentorship-intro__inner {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+  .mentorship-intro .t-lede { color: var(--pg-men-mute); }
+  .mentorship-intro .t-body { color: var(--pg-men-mute); }
+
+  .mentorship-not {
+    position: relative;
+    background: var(--pg-men-bg);
+    overflow: hidden;
+  }
+  .mentorship-not__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 60% at 100% 0%, rgba(180,100,40,0.14), transparent 60%);
+    pointer-events: none;
+  }
+  .mentorship-not__grid {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+    margin-top: var(--s-7);
+    border: 1px solid rgba(237,224,200,0.08);
+    border-radius: var(--r-2);
+    overflow: hidden;
+  }
+  .mentorship-not__col {
+    padding: var(--s-7);
+    background: rgba(255,255,255,0.02);
+  }
+  .mentorship-not__col:first-child {
+    border-right: 1px solid rgba(237,224,200,0.08);
+  }
+  .mentorship-not__heading {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--pg-men-fg);
+    margin: 0 0 var(--s-6);
+  }
+  .mentorship-not__list {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .mentorship-not__item {
+    display: flex;
+    gap: var(--s-4);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--pg-men-mute);
+    padding-bottom: var(--s-4);
+    border-bottom: 1px solid rgba(237,224,200,0.06);
+  }
+  .mentorship-not__item:last-child { border-bottom: none; padding-bottom: 0; }
+  .mentorship-not__mark { flex-shrink: 0; }
+  .mentorship-not__mark--no  { color: rgba(237,224,200,0.25); }
+  .mentorship-not__mark--yes { color: var(--pg-men-accent); }
+
+  .mentorship-whom { background: var(--pg-men-bg-alt); }
+  .mentorship-whom__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-7) var(--s-8);
+    margin-top: var(--s-7);
+  }
+  .mentorship-whom__item-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 2vw, 26px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--pg-men-fg);
+    margin: 0 0 var(--s-3);
+  }
+  .mentorship-whom .t-body { color: var(--pg-men-mute); }
+  .mentorship-whom .t-label--warm { color: rgba(192,136,64,0.80); }
+
+  .mentorship-process {
+    position: relative;
+    background: var(--pg-men-bg);
+    overflow: hidden;
+  }
+  .mentorship-process__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 20% 80%, rgba(180,100,40,0.12), transparent 60%);
+    pointer-events: none;
+  }
+  .mentorship-process__header {
+    position: relative; z-index: 1;
+    margin-bottom: var(--s-8);
+  }
+  .mentorship-process__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 50px);
+    line-height: 1.08;
+    letter-spacing: -0.018em;
+    color: var(--pg-men-fg);
+    margin: var(--s-4) 0 0;
+  }
+  .mentorship-process__title em { font-style: italic; color: var(--pg-men-accent); display: block; }
+  .mentorship-process__steps {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(237,224,200,0.06);
+    border: 1px solid rgba(237,224,200,0.06);
+    border-radius: var(--r-2);
+    overflow: hidden;
+  }
+  .mentorship-process__step { background: rgba(255,255,255,0.02); }
+  .mentorship-process__step-inner {
+    padding: var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    height: 100%;
+  }
+  .mentorship-process__n { color: var(--pg-men-accent); }
+  .mentorship-process__step-label {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(17px, 1.6vw, 22px);
+    line-height: 1.2;
+    color: var(--pg-men-fg);
+    margin: 0;
+  }
+  .mentorship-process .t-body { color: var(--pg-men-mute); }
+  .mentorship-process__header .t-label--warm { color: rgba(192,136,64,0.80); }
+
+  @media (max-width: 900px) {
+    .mentorship-intro__inner { grid-template-columns: 1fr; }
+    .mentorship-not__grid { grid-template-columns: 1fr; margin-top: var(--s-6); }
+    .mentorship-not__col:first-child { border-right: none; border-bottom: 1px solid var(--rule); }
+    .mentorship-whom__grid { grid-template-columns: 1fr; }
+    .mentorship-process__steps { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .mentorship-process__steps { grid-template-columns: 1fr; }
+  }
+</style>

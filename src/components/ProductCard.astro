@@ -1,0 +1,95 @@
+---
+export interface Props {
+  label: string;
+  title: string;
+  body: string;
+  href: string;
+  /** CSS gradient string for the atmospheric background */
+  bg?: string;
+  /** Aspect ratio, e.g. "3/4" */
+  ratio?: string;
+}
+const {
+  label,
+  title,
+  body,
+  href,
+  bg = 'linear-gradient(160deg, #C19763 0%, #6B4F33 70%, #3A2A18 100%)',
+  ratio = '4/5',
+} = Astro.props;
+---
+
+<a href={href} class="product-card" style={`--bg:${bg}; --ratio:${ratio};`} aria-label={label}>
+  <div class="product-card__img" aria-hidden="true"></div>
+
+  <div class="product-card__body">
+    <span class="t-label product-card__label">{label}</span>
+    <h3 class="product-card__title">{title}</h3>
+    <p class="product-card__text">{body}</p>
+    <span class="btn-text product-card__cta">Enter</span>
+  </div>
+</a>
+
+<style>
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+    overflow: hidden;
+    background: var(--bone);
+    transition: transform 500ms var(--ease), box-shadow 500ms var(--ease);
+    cursor: pointer;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-grounded);
+  }
+
+  .product-card__img {
+    aspect-ratio: var(--ratio, 4/5);
+    background: var(--bg);
+    transition: transform 600ms var(--ease);
+    flex-shrink: 0;
+  }
+  .product-card:hover .product-card__img { transform: scale(1.03); }
+
+  .product-card__body {
+    padding: var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    flex: 1;
+  }
+
+  .product-card__label {
+    color: var(--honey);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+  }
+
+  .product-card__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--earth);
+    margin: 0;
+  }
+
+  .product-card__text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--fg-soft);
+    margin: 0;
+    flex: 1;
+  }
+
+  .product-card__cta {
+    margin-top: var(--s-3);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+  }
+</style>

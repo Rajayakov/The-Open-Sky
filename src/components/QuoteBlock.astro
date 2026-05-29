@@ -1,0 +1,72 @@
+---
+export interface Props {
+  quote: string;
+  author?: string;
+  role?: string;
+  centered?: boolean;
+}
+const { quote, author, role, centered = false } = Astro.props;
+---
+
+<figure class={`quote-block reveal ${centered ? 'quote-block--centered' : ''}`} aria-label="Quote">
+  <span class="quote-block__mark" aria-hidden="true">"</span>
+  <blockquote class="quote-block__text">
+    {quote}
+  </blockquote>
+  {author && (
+    <figcaption class="quote-block__attr">
+      <span class="quote-block__author">{author}</span>
+      {role && <span class="t-label">{role}</span>}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .quote-block {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .quote-block--centered {
+    align-items: center;
+    text-align: center;
+  }
+
+  .quote-block__mark {
+    font-family: var(--mark);
+    font-size: 56px;
+    line-height: 0.5;
+    color: var(--honey);
+    opacity: 0.6;
+  }
+
+  .quote-block__text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(20px, 2.2vw, 32px);
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: var(--earth);
+    margin: 0;
+    max-width: 26ch;
+  }
+
+  .quote-block--centered .quote-block__text { max-width: 22ch; }
+
+  .quote-block__attr {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: var(--s-3);
+  }
+
+  .quote-block__author {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--earth);
+  }
+</style>

@@ -1,0 +1,311 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTASection from '../components/CTASection.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+
+const releases = [
+  {
+    title: 'Bone & Fire',
+    year: '2024',
+    type: 'Album',
+    tracks: 9,
+    note: 'Recorded over three days in a stone house in the Caucasus. No overdubs.',
+    bg: 'linear-gradient(160deg, #C19763 0%, #6B4F33 70%, #3A2A18 100%)',
+  },
+  {
+    title: 'Threshold Songs',
+    year: '2023',
+    type: 'EP',
+    tracks: 4,
+    note: 'Four songs written during a winter retreat in the Carpathians.',
+    bg: 'linear-gradient(160deg, #8E6B40 0%, #4A371F 100%)',
+  },
+  {
+    title: 'The Long Way Down',
+    year: '2022',
+    type: 'Single',
+    tracks: 1,
+    note: 'Written on the descent from Kazbegi. The version that stayed.',
+    bg: 'linear-gradient(160deg, #A67C4D 0%, #3A2A18 100%)',
+  },
+];
+---
+
+<PageLayout
+  title="Music — The Open Sky"
+  description="Original recordings and live performance. Attempting to do with sound what ceremony does with fire."
+>
+
+  <PageHero
+    label="Music"
+    title="Sound as"
+    titleEm="ceremony."
+    lede="Original recordings and live performance. The attempt to do with sound what fire does with silence."
+    theme="music"
+  />
+
+  <!-- Intro -->
+  <section class="music-intro section frame" aria-label="About the music">
+    <div class="music-intro__inner">
+      <div class="reveal">
+        <p class="t-lede" style="max-width: 52ch;">
+          The music is not background. It is not ambient texture or atmospheric decoration for a retreat. It is its own practice — made in the same spirit as the in-person work, and intended to do something similar.
+        </p>
+        <p class="t-body" style="margin-top: var(--s-5); max-width: 48ch;">
+          Most of it was recorded in specific places: mountain houses, fire clearings, small rooms after long days. The geography is in the sound. The music carries the conditions it was made in.
+        </p>
+      </div>
+
+      <div class="music-intro__image reveal d1">
+        <div
+          class="img-slot img-slot--wide"
+          data-label="Music · Live performance"
+          style="background: radial-gradient(ellipse 60% 50% at 60% 30%, rgba(255,228,175,0.4), transparent 60%), linear-gradient(170deg, #C19763 0%, #6B4F33 50%, #2E2A24 100%);"
+          aria-hidden="true"
+        ></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Releases -->
+  <section class="music-releases section" aria-label="Releases">
+    <div class="frame">
+      <span class="t-label music-releases__label reveal">Recordings</span>
+
+      <div class="music-releases__grid">
+        {releases.map((r, i) => (
+          <div class={`music-release reveal d${i + 1}`}>
+            <div class="music-release__cover" style={`background: ${r.bg};`} aria-hidden="true">
+              <div class="music-release__cover-overlay"></div>
+              <span class="music-release__cover-label t-label">{r.type} · {r.year}</span>
+            </div>
+            <div class="music-release__info">
+              <h3 class="music-release__title">{r.title}</h3>
+              <p class="t-body music-release__note">{r.note}</p>
+              <div class="music-release__meta">
+                <span class="t-label">{r.tracks} track{r.tracks > 1 ? 's' : ''}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="music-releases__bg" aria-hidden="true"></div>
+  </section>
+
+  <QuoteBlock
+    quote="A song that does not cost the person who made it anything is a song that will not cost the listener anything either."
+    author="Yakov Rajuna"
+    centered
+  />
+
+  <!-- Live -->
+  <section class="music-live section frame" aria-label="Live performance">
+    <div class="music-live__inner">
+      <div class="music-live__text reveal">
+        <span class="t-label t-label--warm">Live</span>
+        <h2 class="music-live__title reveal d1">
+          Performed in<br /><em>specific places.</em>
+        </h2>
+        <p class="t-body reveal d2" style="max-width: 44ch; margin-top: var(--s-5);">
+          Live performances happen rarely and in contexts where the music can land — not stages with bar noise, but gatherings with people who came for a reason.
+        </p>
+        <p class="t-body reveal d3" style="max-width: 44ch; margin-top: var(--s-4);">
+          Upcoming performances are announced in the Telegram channel first.
+        </p>
+        <div class="reveal d3" style="margin-top: var(--s-6);">
+          <a href="https://t.me/yakovrajuna" class="btn btn--warm">Join Telegram</a>
+        </div>
+      </div>
+
+      <div class="music-live__image reveal d2">
+        <div
+          class="img-slot img-slot--square"
+          data-label="Live · Performance"
+          style="background: radial-gradient(ellipse 50% 50% at 50% 30%, rgba(255,228,175,0.35), transparent 55%), linear-gradient(160deg, #A67C4D 0%, #4A371F 100%);"
+          aria-hidden="true"
+        ></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Where to listen -->
+  <section class="music-listen section" aria-label="Where to listen">
+    <div class="frame">
+      <span class="t-label music-listen__label reveal">Where to listen</span>
+      <div class="music-listen__platforms">
+        {[
+          { name: 'Spotify', note: 'Full discography' },
+          { name: 'Apple Music', note: 'Full discography' },
+          { name: 'Bandcamp', note: 'Direct support — name your price' },
+          { name: 'YouTube', note: 'Live sessions and field recordings' },
+        ].map((p, i) => (
+          <div class={`music-platform reveal d${i % 3 + 1}`}>
+            <span class="music-platform__name">{p.name}</span>
+            <span class="t-label music-platform__note">{p.note}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="music-listen__bg" aria-hidden="true"></div>
+  </section>
+
+  <CTASection
+    label="Stay connected"
+    title="Hear new music first."
+    body="Recordings, live dates, and field notes are shared in the Telegram channel before anywhere else."
+    primaryHref="https://t.me/yakovrajuna"
+    primaryLabel="Join Telegram"
+    secondaryHref="/connect"
+    secondaryLabel="Write directly"
+  />
+
+</PageLayout>
+
+<style>
+  .music-intro { background: var(--pg-mus-bg); }
+  .music-intro__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+  .music-intro .t-lede { color: var(--pg-mus-mute); }
+  .music-intro .t-body { color: var(--pg-mus-mute); }
+
+  .music-releases {
+    position: relative;
+    background: var(--pg-mus-bg-alt);
+    overflow: hidden;
+  }
+  .music-releases__label { color: rgba(212,136,42,0.75); }
+
+  .music-releases__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 50% at 50% 0%, rgba(180,90,20,0.12), transparent 60%);
+    pointer-events: none;
+  }
+  .music-releases__grid {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+    margin-top: var(--s-7);
+  }
+
+  .music-release {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    border: 1px solid rgba(224,200,160,0.06);
+    border-radius: var(--r-2);
+    overflow: hidden;
+    background: rgba(255,255,255,0.03);
+  }
+  .music-release__cover {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--s-5);
+  }
+  .music-release__cover-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(30,24,18,0.5) 0%, transparent 50%);
+  }
+  .music-release__cover-label {
+    position: relative; z-index: 1;
+    color: rgba(250,247,240,0.7);
+  }
+  .music-release__info {
+    padding: 0 var(--s-5) var(--s-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .music-release__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(20px, 2.2vw, 28px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--pg-mus-fg);
+    margin: 0;
+  }
+  .music-release__note { margin: 0; color: var(--pg-mus-mute); }
+  .music-release__meta { margin-top: var(--s-2); }
+  .music-release__meta .t-label { color: rgba(224,200,160,0.35); }
+
+  .music-live { background: var(--pg-mus-bg); }
+  .music-live__inner {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+  }
+  .music-live__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 50px);
+    line-height: 1.08;
+    letter-spacing: -0.018em;
+    color: var(--pg-mus-fg);
+    margin: var(--s-4) 0 0;
+  }
+  .music-live__title em { font-style: italic; color: var(--pg-mus-accent); display: block; }
+  .music-live .t-body { color: var(--pg-mus-mute); }
+  .music-live .t-label--warm { color: rgba(212,136,42,0.75); }
+
+  .music-listen {
+    position: relative;
+    background: var(--pg-mus-bg-alt);
+    overflow: hidden;
+  }
+  .music-listen__label { color: rgba(212,136,42,0.75); }
+
+  .music-listen__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 0% 100%, rgba(180,90,20,0.12), transparent 60%);
+    pointer-events: none;
+  }
+  .music-listen__platforms {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(224,200,160,0.06);
+    border: 1px solid rgba(224,200,160,0.06);
+    border-radius: var(--r-2);
+    overflow: hidden;
+    margin-top: var(--s-7);
+  }
+  .music-platform {
+    background: rgba(255,255,255,0.02);
+    padding: var(--s-6) var(--s-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .music-platform__name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(17px, 1.8vw, 22px);
+    line-height: 1.2;
+    color: var(--pg-mus-fg);
+  }
+  .music-platform__note { color: var(--pg-mus-accent); }
+
+  .img-slot--square { aspect-ratio: 1 / 1; }
+
+  @media (max-width: 900px) {
+    .music-intro__inner { grid-template-columns: 1fr; }
+    .music-releases__grid { grid-template-columns: 1fr 1fr; }
+    .music-live__inner { grid-template-columns: 1fr; }
+    .music-listen__platforms { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .music-releases__grid { grid-template-columns: 1fr; }
+    .music-listen__platforms { grid-template-columns: 1fr; }
+  }
+</style>

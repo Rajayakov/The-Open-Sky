@@ -1,0 +1,126 @@
+---
+import TestimonialBlock from './TestimonialBlock.astro';
+---
+
+<section class="ch-r" aria-label="Retreats">
+  <div class="frame">
+
+    <div class="ch-r__header reveal">
+      <span class="t-label t-label--warm">01</span>
+      <span class="t-label" style="margin-left:var(--s-4);">Retreats</span>
+    </div>
+
+    <div class="ch-r__grid">
+
+      <div class="ch-r__text">
+        <h2 class="ch-r__title reveal d1">
+          Gather in<br />
+          places that<br />
+          <em>ask something</em><br />
+          of you.
+        </h2>
+        <p class="t-lede ch-r__lede reveal d2">
+          Small groups. Specific landscapes chosen for a reason.
+          No shortcuts, no comfortable distance from what is real.
+        </p>
+        <p class="t-body reveal d3" style="max-width:44ch; margin-top:var(--s-4);">
+          The Caucasus, the Carpathians, the Pontic Alps. Five to eight days.
+          Ceremony, movement, honest group exchange. The place is part of the work.
+        </p>
+        <div class="ch-r__cta reveal d4">
+          <a href="/retreats" class="btn-text">See all retreats</a>
+        </div>
+        <div class="ch-r__testimonial reveal d5">
+          <TestimonialBlock
+            quote="Five days in the Caucasus changed something I had been trying to change for years. Not because of any method. Because of what the place asked of me."
+            author="Maria T."
+            detail="Mountain Autumn 2025"
+          />
+        </div>
+      </div>
+
+      <div class="ch-r__visual reveal d2">
+        <div
+          class="img-slot img-slot--tall ch-r__img"
+          data-label="Retreats · Landscape"
+          style="background: radial-gradient(ellipse 60% 50% at 45% 25%, rgba(255,228,175,0.55), transparent 65%), linear-gradient(175deg, #C8A472 0%, #8E6B40 40%, #4A371F 80%, #2A1C10 100%);"
+          aria-hidden="true"
+        ></div>
+        <div class="ch-r__img-caption">
+          <span class="t-label">Live retreats · 4–6 per year</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="ch-r__bg" aria-hidden="true"></div>
+</section>
+
+<style>
+  .ch-r {
+    position: relative;
+    background: var(--atm-ret);
+    padding-block: clamp(120px, 18svh, 260px);
+    overflow: hidden;
+  }
+
+  .ch-r__bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 55% 60% at 92% 8%,  rgba(200,155,90,0.22), transparent 58%),
+      radial-gradient(ellipse 40% 40% at 0%  85%, rgba(214,178,112,0.12), transparent 60%),
+      radial-gradient(ellipse 80% 20% at 50% 100%, rgba(200,155,90,0.08), transparent 60%);
+    pointer-events: none;
+  }
+
+  .ch-r__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: clamp(48px, 8svh, 96px);
+  }
+
+  .ch-r__grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: clamp(48px, 7vw, 100px);
+    align-items: start;
+    position: relative; z-index: 1;
+  }
+
+  .ch-r__title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(42px, 6.5vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--earth);
+    margin: 0 0 var(--s-7);
+    font-optical-sizing: auto;
+  }
+  .ch-r__title em { font-style: italic; color: var(--honey); }
+
+  .ch-r__lede { margin-top: 0; }
+
+  .ch-r__cta { margin-top: var(--s-7); }
+
+  .ch-r__testimonial { margin-top: var(--s-9); }
+
+  .ch-r__visual {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    position: sticky;
+    top: 120px;
+  }
+
+  .ch-r__img { border-radius: var(--r-3); }
+
+  .ch-r__img-caption { padding-left: var(--s-3); }
+
+  @media (max-width: 960px) {
+    .ch-r__grid { grid-template-columns: 1fr; }
+    .ch-r__visual { position: static; order: -1; }
+    .ch-r__img { aspect-ratio: 16/9; }
+  }
+</style>

@@ -1,0 +1,125 @@
+---
+---
+
+<section class="about section" id="about" aria-label="About">
+  <div class="frame">
+    <div class="about__inner">
+
+      <!-- Left: label + ornament -->
+      <div class="about__left reveal">
+        <span class="t-label t-label--warm">About</span>
+        <div class="about__left-line" aria-hidden="true"></div>
+      </div>
+
+      <!-- Right: content -->
+      <div class="about__right">
+        <h2 class="about__title reveal d1">
+          He doesn't teach.<br />
+          <em>He accompanies.</em>
+        </h2>
+
+        <div class="about__divider divider reveal d2">
+          <span class="divider__mark">· · ·</span>
+        </div>
+
+        <p class="t-body-l about__body reveal d2">
+          Yakov Rajuna works with people at pivotal moments — when the usual methods have stopped working and something deeper is being asked for. His work combines ceremony, nature, physical challenge, and honest conversation.
+        </p>
+
+        <p class="t-body about__body-secondary reveal d3">
+          Fifteen years of leading groups in mountains, deserts, and forests across Europe and Central Asia. Hundreds of individual sessions. A commitment to depth over performance.
+        </p>
+
+        <div class="about__cta reveal d4">
+          <a href="/about" class="btn-text">Full story</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Background gradient -->
+  <div class="about__bg" aria-hidden="true"></div>
+</section>
+
+<style>
+  .about {
+    position: relative;
+    background: var(--bone);
+    overflow: hidden;
+  }
+
+  .about__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 100% 80%, rgba(216,192,154,0.18), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 0% 20%,  rgba(232,198,138,0.10), transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .about__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+
+  .about__left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 6px;
+  }
+
+  .about__left-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--honey), transparent);
+    opacity: 0.4;
+    margin-top: var(--s-5);
+  }
+
+  .about__right {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about__title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 58px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--earth);
+    margin: 0 0 0;
+    max-width: 18ch;
+  }
+  .about__title em {
+    font-style: italic;
+    color: var(--honey);
+    display: block;
+  }
+
+  .about__divider { margin: var(--s-6) 0; }
+
+  .about__body {
+    margin: 0 0 var(--s-5);
+    max-width: 54ch;
+  }
+
+  .about__body-secondary {
+    color: var(--fg-mute);
+    max-width: 52ch;
+    margin: 0 0 var(--s-7);
+  }
+
+  @media (max-width: 720px) {
+    .about__inner { grid-template-columns: 1fr; gap: var(--s-6); }
+    .about__left { flex-direction: row; align-items: center; gap: var(--s-5); }
+    .about__left-line { width: 40px; height: 1px; margin: 0; }
+  }
+</style>

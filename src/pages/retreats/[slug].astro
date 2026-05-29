@@ -1,0 +1,453 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import CTASection from '../../components/CTASection.astro';
+import QuoteBlock from '../../components/QuoteBlock.astro';
+import { retreats, getRetreat } from '../../data/retreats';
+
+export function getStaticPaths() {
+  return retreats.map((r) => ({ params: { slug: r.slug } }));
+}
+
+const { slug } = Astro.params;
+const retreat = getRetreat(slug);
+
+if (!retreat) return Astro.redirect('/retreats');
+---
+
+<PageLayout
+  title={`${retreat.title} — The Open Sky`}
+  description={retreat.atmosphere}
+>
+
+  <!-- Hero -->
+  <section class="retreat-hero" aria-label="Retreat header">
+    <div class="retreat-hero__bg" style={`background: ${retreat.bg};`} aria-hidden="true">
+      <div class="retreat-hero__overlay"></div>
+    </div>
+
+    <div class="retreat-hero__inner frame">
+      <div class="retreat-hero__top">
+        <a href="/retreats" class="retreat-hero__back t-label">
+          ← All retreats
+        </a>
+        <span class="t-label t-label--warm">{retreat.date} · {retreat.location}</span>
+      </div>
+
+      <h1 class="retreat-hero__title reveal">
+        {retreat.title.split(' ').slice(0, -2).join(' ')}<br />
+        <em>{retreat.title.split(' ').slice(-2).join(' ')}</em>
+      </h1>
+
+      <p class="retreat-hero__atmosphere reveal d1">{retreat.atmosphere}</p>
+
+      <div class="retreat-hero__meta reveal d2">
+        <span class="retreat-hero__meta-item">
+          <span class="t-label">Duration</span>
+          <span>{retreat.duration}</span>
+        </span>
+        <span class="retreat-hero__meta-item">
+          <span class="t-label">Group</span>
+          <span>{retreat.groupSize}</span>
+        </span>
+        <span class="retreat-hero__meta-item">
+          <span class="t-label">Format</span>
+          <span>{retreat.format}</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Description -->
+  <section class="retreat-description section frame" aria-label="About this retreat">
+    <div class="retreat-description__inner">
+      <div class="reveal">
+        <span class="t-label t-label--warm">What this is</span>
+        <p class="t-lede retreat-description__lede reveal d1">{retreat.description}</p>
+      </div>
+
+      <div class="retreat-description__image reveal d1">
+        <div
+          class="img-slot img-slot--wide"
+          data-label="Retreat · Location"
+          style={`background: ${retreat.bg};`}
+          aria-hidden="true"
+        ></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journey structure -->
+  <section class="retreat-structure section" aria-label="Journey structure">
+    <div class="frame">
+      <div class="retreat-structure__header reveal">
+        <span class="t-label t-label--warm">Day by day</span>
+        <h2 class="retreat-structure__title reveal d1">
+          How it<br /><em>unfolds.</em>
+        </h2>
+      </div>
+
+      <div class="retreat-structure__days">
+        {retreat.structure.map((day, i) => (
+          <div class={`retreat-structure__day reveal d${(i % 4) + 1}`}>
+            <div class="retreat-structure__day-label t-label">{day.day}</div>
+            <p class="retreat-structure__day-text">{day.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="retreat-structure__bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- For whom -->
+  <section class="retreat-whom section frame" aria-label="Who this is for">
+    <div class="retreat-whom__inner">
+      <div class="retreat-whom__left reveal">
+        <span class="t-label t-label--warm">Who this is for</span>
+        <h2 class="retreat-whom__title reveal d1">
+          The right<br /><em>kind of person.</em>
+        </h2>
+      </div>
+      <ul class="retreat-whom__list">
+        {retreat.forWhom.map((item, i) => (
+          <li class={`retreat-whom__item reveal d${(i % 3) + 1}`}>
+            <span class="retreat-whom__dot" aria-hidden="true">—</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- What's included -->
+  <section class="retreat-included section" aria-label="What is included">
+    <div class="frame">
+      <span class="t-label t-label--warm reveal">Included</span>
+      <div class="retreat-included__grid">
+        {retreat.included.map((item, i) => (
+          <div class={`retreat-included__item reveal d${(i % 4) + 1}`}>
+            <span class="retreat-included__check" aria-hidden="true">✓</span>
+            <span class="t-body">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="retreat-included__bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- Testimonial placeholder -->
+  <section class="retreat-testimonials section frame" aria-label="Testimonials">
+    <span class="t-label t-label--warm reveal">What participants say</span>
+    <div class="retreat-testimonials__grid">
+      {[1, 2].map((_, i) => (
+        <div class={`reveal d${i + 1}`}>
+          <QuoteBlock
+            quote="Placeholder testimonial — real quotes from participants will be added here."
+            author="Participant name"
+            role={`${retreat.title} · 2025`}
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="retreat-faq section" aria-label="FAQ">
+    <div class="frame">
+      <span class="t-label t-label--warm reveal">Questions</span>
+      <div class="retreat-faq__list">
+        {retreat.faq.map((item, i) => (
+          <details class={`retreat-faq__item reveal d${(i % 3) + 1}`}>
+            <summary class="retreat-faq__q">{item.question}</summary>
+            <p class="retreat-faq__a t-body">{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+    <div class="retreat-faq__bg" aria-hidden="true"></div>
+  </section>
+
+  <CTASection
+    dark
+    label="Reserve your place"
+    title="This retreat fills quickly."
+    body="Send a short message to express interest. Yakov reviews each application personally."
+    primaryHref="/connect"
+    primaryLabel="Express interest"
+    secondaryHref="/retreats"
+    secondaryLabel="See all retreats"
+  />
+
+</PageLayout>
+
+<style>
+  /* Hero */
+  .retreat-hero {
+    position: relative;
+    min-height: 70svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .retreat-hero__bg {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  .retreat-hero__overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(46,42,36,0.7) 0%, rgba(46,42,36,0.2) 60%, transparent 100%);
+  }
+  .retreat-hero__inner {
+    position: relative; z-index: 1;
+    padding-top: 100px;
+    padding-bottom: var(--s-9);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+  .retreat-hero__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--s-4);
+  }
+  .retreat-hero__back {
+    color: rgba(250,247,240,0.7);
+    transition: color 300ms ease;
+  }
+  .retreat-hero__back:hover { color: var(--bone); }
+  .retreat-hero__title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(44px, 8vw, 120px);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+    color: var(--bone);
+    margin: 0;
+    max-width: 14ch;
+  }
+  .retreat-hero__title em { font-style: italic; color: #E8C68A; display: block; }
+  .retreat-hero__atmosphere {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.6vw, 22px);
+    color: rgba(250,247,240,0.75);
+    margin: 0;
+  }
+  .retreat-hero__meta {
+    display: flex;
+    gap: var(--s-6);
+    flex-wrap: wrap;
+    padding-top: var(--s-5);
+    border-top: 1px solid rgba(250,247,240,0.15);
+  }
+  .retreat-hero__meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(250,247,240,0.85);
+  }
+  .retreat-hero__meta-item .t-label { color: rgba(232,198,138,0.7); }
+
+  /* Description */
+  .retreat-description { background: var(--bone); }
+  .retreat-description__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8vw;
+    align-items: start;
+  }
+  .retreat-description__lede { margin-top: var(--s-5); max-width: 44ch; }
+
+  /* Structure */
+  .retreat-structure {
+    position: relative;
+    background: var(--bg-warm);
+    overflow: hidden;
+  }
+  .retreat-structure__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(232,198,138,0.12), transparent 60%);
+    pointer-events: none;
+  }
+  .retreat-structure__header {
+    position: relative; z-index: 1;
+    margin-bottom: var(--s-8);
+  }
+  .retreat-structure__title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 50px);
+    line-height: 1.08;
+    letter-spacing: -0.018em;
+    color: var(--earth);
+    margin: var(--s-4) 0 0;
+  }
+  .retreat-structure__title em { font-style: italic; color: var(--honey); display: block; }
+  .retreat-structure__days {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+    overflow: hidden;
+  }
+  .retreat-structure__day {
+    background: var(--paper);
+    padding: var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .retreat-structure__day-label { color: var(--honey); }
+  .retreat-structure__day-text {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--earth);
+    margin: 0;
+  }
+
+  /* For whom */
+  .retreat-whom { background: var(--bone); }
+  .retreat-whom__inner {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 8vw;
+    align-items: start;
+  }
+  .retreat-whom__title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(24px, 3vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--earth);
+    margin: var(--s-4) 0 0;
+  }
+  .retreat-whom__title em { font-style: italic; color: var(--honey); display: block; }
+  .retreat-whom__list {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .retreat-whom__item {
+    display: flex;
+    gap: var(--s-4);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--fg-soft);
+    border-bottom: 1px solid var(--rule-thin);
+    padding-bottom: var(--s-4);
+  }
+  .retreat-whom__dot { color: var(--honey); flex-shrink: 0; }
+
+  /* Included */
+  .retreat-included {
+    position: relative;
+    background: var(--bg-deep);
+    overflow: hidden;
+  }
+  .retreat-included__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 50% at 0% 100%, rgba(232,198,138,0.12), transparent 60%);
+    pointer-events: none;
+  }
+  .retreat-included__grid {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--s-5);
+    margin-top: var(--s-6);
+  }
+  .retreat-included__item {
+    display: flex;
+    gap: var(--s-4);
+    align-items: baseline;
+    padding: var(--s-5);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+    background: rgba(250,247,240,0.4);
+  }
+  .retreat-included__check {
+    font-family: var(--serif);
+    color: var(--honey);
+    flex-shrink: 0;
+  }
+
+  /* Testimonials */
+  .retreat-testimonials { background: var(--bone); }
+  .retreat-testimonials__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+    margin-top: var(--s-7);
+  }
+
+  /* FAQ */
+  .retreat-faq {
+    position: relative;
+    background: var(--bg-warm);
+    overflow: hidden;
+  }
+  .retreat-faq__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 50% at 80% 80%, rgba(232,198,138,0.08), transparent 60%);
+    pointer-events: none;
+  }
+  .retreat-faq__list {
+    position: relative; z-index: 1;
+    margin-top: var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .retreat-faq__item {
+    border-top: 1px solid var(--rule);
+    padding: var(--s-5) 0;
+  }
+  .retreat-faq__item:last-child { border-bottom: 1px solid var(--rule); }
+  .retreat-faq__q {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.3;
+    color: var(--earth);
+    cursor: pointer;
+    list-style: none;
+    letter-spacing: -0.01em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-4);
+  }
+  .retreat-faq__q::after {
+    content: "+";
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--honey);
+    flex-shrink: 0;
+    transition: transform 300ms ease;
+  }
+  .retreat-faq__item[open] .retreat-faq__q::after { transform: rotate(45deg); }
+  .retreat-faq__a { margin: var(--s-4) 0 0; max-width: 64ch; }
+
+  @media (max-width: 860px) {
+    .retreat-description__inner { grid-template-columns: 1fr; }
+    .retreat-whom__inner { grid-template-columns: 1fr; }
+    .retreat-testimonials__grid { grid-template-columns: 1fr; }
+  }
+</style>

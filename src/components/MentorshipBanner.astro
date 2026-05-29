@@ -1,0 +1,135 @@
+---
+---
+
+<section class="mentor" aria-label="Mentorship">
+  <div class="mentor__bg" aria-hidden="true">
+    <div class="mentor__glow"></div>
+  </div>
+
+  <div class="frame">
+    <div class="mentor__inner reveal">
+
+      <div class="mentor__portrait" aria-label="Mentor portrait placeholder">
+        <div class="mentor__portrait-glow" aria-hidden="true"></div>
+      </div>
+
+      <div class="mentor__content">
+        <span class="t-label t-label--gold mentor__label">Mentorship</span>
+        <h2 class="mentor__title">
+          One to One.<br />
+          <em>Private work.</em>
+        </h2>
+        <p class="mentor__body">
+          Private ongoing work for people at genuine turning points.
+          Not coaching — accompaniment.
+          Yakov reads each inquiry personally.
+          Limited places. Applied for, not purchased.
+        </p>
+        <div class="mentor__ctas">
+          <a href="/mentorship" class="btn btn--warm-outline">Learn more</a>
+          <a href="/connect" class="mentor__apply">Apply directly <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .mentor {
+    position: relative;
+    padding-block: clamp(80px, 13svh, 160px);
+    background: rgba(28, 16, 6, 0.62);
+    overflow: hidden;
+  }
+
+  .mentor__bg {
+    position: absolute; inset: 0;
+    background: rgba(22, 12, 4, 0.45);
+    z-index: 0;
+  }
+
+  .mentor__glow {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 50%;
+    background: radial-gradient(ellipse 80% 70% at 0% 50%, rgba(140,80,20,0.18), transparent 65%);
+  }
+
+  .mentor__inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: clamp(48px, 7vw, 96px);
+    align-items: center;
+  }
+
+  /* Portrait placeholder — tall, warm dark gradient */
+  .mentor__portrait {
+    aspect-ratio: 3 / 4;
+    border-radius: var(--r-2);
+    background: linear-gradient(165deg, #5A3818 0%, #3A2010 45%, #22120A 100%);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(166,124,77,0.12);
+  }
+
+  .mentor__portrait-glow {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 38% 25%, rgba(180,110,40,0.22), transparent 55%),
+      linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.30) 100%);
+  }
+
+  /* Content */
+  .mentor__label { display: block; margin-bottom: var(--s-5); }
+
+  .mentor__title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(40px, 5.5vw, 76px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: rgba(237, 224, 200, 0.92);
+    margin: 0 0 var(--s-7);
+  }
+
+  .mentor__title em {
+    font-style: italic;
+    color: var(--honey);
+    display: block;
+  }
+
+  .mentor__body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(14px, 1.3vw, 17px);
+    line-height: 1.85;
+    color: rgba(237, 224, 200, 0.48);
+    margin: 0 0 var(--s-8);
+    max-width: 46ch;
+  }
+
+  .mentor__ctas {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    flex-wrap: wrap;
+  }
+
+  .mentor__apply {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(237, 224, 200, 0.42);
+    transition: color 260ms ease;
+  }
+  .mentor__apply:hover { color: var(--honey); }
+
+  @media (max-width: 860px) {
+    .mentor__inner { grid-template-columns: 1fr; gap: var(--s-8); }
+    .mentor__portrait { max-width: 220px; }
+  }
+</style>

@@ -1,0 +1,163 @@
+---
+import TestimonialBlock from './TestimonialBlock.astro';
+
+const programs = [
+  { name: 'Inner Cartography', dur: '8 weeks', format: 'Live cohort' },
+  { name: 'The Fire Season',   dur: '12 weeks', format: 'Intensive' },
+  { name: 'Roots & Direction', dur: '6 weeks',  format: 'Self-paced' },
+];
+---
+
+<section class="ch-p dark" aria-label="Programs">
+  <div class="frame">
+
+    <div class="ch-p__header reveal">
+      <span class="t-label t-label--gold">03</span>
+      <span class="t-label t-label--light" style="margin-left:var(--s-4);">Programs</span>
+    </div>
+
+    <div class="ch-p__grid">
+
+      <div class="ch-p__text">
+        <h2 class="ch-p__title reveal d1">
+          Structured<br />
+          <em>online work.</em>
+        </h2>
+        <p class="ch-p__lede reveal d2">
+          For those who cannot travel. The same principles, a different container.
+          Precision, not mysticism. Edges, not open-ended exploration.
+        </p>
+        <div class="ch-p__cta reveal d3">
+          <a href="/programs" class="btn-text btn-text--d">See all programs</a>
+        </div>
+      </div>
+
+      <div class="ch-p__list reveal d2">
+        {programs.map((p, i) => (
+          <div class={`ch-p__row reveal d${i + 1}`}>
+            <div class="ch-p__row-left">
+              <h3 class="ch-p__row-name">{p.name}</h3>
+            </div>
+            <div class="ch-p__row-right">
+              <span class="t-label t-label--gold">{p.dur}</span>
+              <span class="t-label t-label--light">{p.format}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+    <div class="ch-p__testimonial reveal d4">
+      <TestimonialBlock
+        quote="I came skeptical. Eight weeks later I understood that the skepticism was part of what needed examining."
+        author="Rachel M."
+        detail="Inner Cartography 2025"
+        dark
+      />
+    </div>
+
+  </div>
+  <div class="ch-p__bg" aria-hidden="true"></div>
+</section>
+
+<style>
+  .ch-p {
+    position: relative;
+    background: var(--atm-prg);
+    padding-block: clamp(120px, 18svh, 260px);
+    overflow: hidden;
+  }
+
+  .ch-p__bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 45% 40% at 100% 0%, rgba(166,124,77,0.10), transparent 55%),
+      radial-gradient(ellipse 60% 20% at 50%  100%, rgba(142,90,44,0.06), transparent 60%);
+    pointer-events: none;
+  }
+
+  .ch-p__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: clamp(48px, 8svh, 96px);
+  }
+
+  .ch-p__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 7vw, 100px);
+    align-items: start;
+    position: relative; z-index: 1;
+  }
+
+  .ch-p__title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    color: var(--bone);
+    margin: 0 0 var(--s-7);
+    font-optical-sizing: auto;
+  }
+  .ch-p__title em { font-style: italic; color: var(--honey); display: block; }
+
+  .ch-p__lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.6vw, 22px);
+    line-height: 1.55;
+    color: rgba(240, 228, 208, 0.60);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .ch-p__cta { margin-top: var(--s-7); }
+
+  /* Program list — structured, precise */
+  .ch-p__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule-d);
+    margin-top: 8px;
+  }
+
+  .ch-p__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-5);
+    padding: var(--s-6) 0;
+    border-bottom: 1px solid var(--rule-d);
+  }
+
+  .ch-p__row-name {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(18px, 2vw, 26px);
+    line-height: 1.2;
+    color: rgba(240, 228, 208, 0.80);
+    margin: 0;
+    letter-spacing: -0.01em;
+    font-optical-sizing: auto;
+  }
+
+  .ch-p__row-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--s-2);
+    flex-shrink: 0;
+  }
+
+  .ch-p__testimonial {
+    margin-top: var(--s-10);
+    position: relative; z-index: 1;
+  }
+
+  @media (max-width: 840px) {
+    .ch-p__grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,231 @@
+---
+import { getFeaturedRetreat } from '../data/retreats';
+import { getNextJourney } from '../data/mountains';
+import { getNextOpenProgram } from '../data/programs';
+
+const retreat = getFeaturedRetreat();
+const journey = getNextJourney();
+const program = getNextOpenProgram();
+---
+
+<section class="portals" aria-label="Experience worlds">
+
+  <!-- Live Retreats -->
+  <article class="portal reveal" data-portal="retreats">
+    <div class="frame">
+      <div class="portal__meta">
+        <span class="portal__num t-label">01</span>
+        <span class="t-label t-label--warm">Live Retreats</span>
+      </div>
+      <h2 class="portal__title">
+        Sacred<em>Landscapes</em>
+      </h2>
+      <div class="portal__floor">
+        <p class="portal__lede">
+          Ceremony, movement, and honest group work
+          in remote sacred terrain. Small groups, real conditions.
+        </p>
+        <div class="portal__aside">
+          <div class="portal__event">
+            <span class="portal__event-name">
+              {retreat ? retreat.title : 'Next retreat forming'}
+            </span>
+            <span class="portal__event-date">
+              {retreat ? `${retreat.date} · ${retreat.location}` : 'View upcoming dates'}
+            </span>
+          </div>
+          <a href="/retreats" class="portal__cta">Enter <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Mountains — flipped composition -->
+  <article class="portal portal--flip reveal d2" data-portal="mountains">
+    <div class="frame">
+      <div class="portal__meta">
+        <span class="t-label t-label--warm">Mountains</span>
+        <span class="portal__num t-label">02</span>
+      </div>
+      <h2 class="portal__title">
+        High<em>Terrain</em>
+      </h2>
+      <div class="portal__floor">
+        <div class="portal__aside">
+          <div class="portal__event">
+            <span class="portal__event-name">
+              {journey ? journey.title : 'Dates announced soon'}
+            </span>
+            <span class="portal__event-date">
+              {journey ? `${journey.dateShort} · ${journey.location}` : 'Join the list'}
+            </span>
+          </div>
+          <a href="/mountains" class="portal__cta">Enter <span aria-hidden="true">→</span></a>
+        </div>
+        <p class="portal__lede">
+          Multi-day expeditions through demanding mountain routes.
+          Physical exertion as the doorway to interior work.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <!-- Online Programs -->
+  <article class="portal reveal d3" data-portal="programs">
+    <div class="frame">
+      <div class="portal__meta">
+        <span class="portal__num t-label">03</span>
+        <span class="t-label t-label--warm">Online Programs</span>
+      </div>
+      <h2 class="portal__title">
+        Inner<em>Work</em>
+      </h2>
+      <div class="portal__floor">
+        <p class="portal__lede">
+          Structured cohorts for serious inner work.
+          Live sessions with Yakov, guided practice, small intimate groups.
+        </p>
+        <div class="portal__aside">
+          <div class="portal__event">
+            <span class="portal__event-name">
+              {program ? `${program.title} — ${program.subtitle}` : 'Next cohort forming'}
+            </span>
+            <span class="portal__event-date">
+              {program ? `${program.dateShort} · ${program.duration}` : 'Rolling enrollment available'}
+            </span>
+          </div>
+          <a href="/programs" class="portal__cta">Enter <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<style>
+  .portals {
+    padding-top: var(--s-3);
+  }
+
+  /* Full-width portal panel — no box */
+  .portal {
+    padding-block: clamp(72px, 10vw, 120px);
+    border-bottom: 1px solid rgba(166, 124, 77, 0.10);
+    background: rgba(252, 248, 238, 0.18);
+    position: relative;
+  }
+  .portal:last-child { border-bottom: none; }
+
+  /* Meta row */
+  .portal__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    margin-bottom: clamp(28px, 3.5vw, 48px);
+  }
+
+  .portal__num {
+    color: rgba(166, 124, 77, 0.38);
+    letter-spacing: 0.20em;
+    font-size: 10px;
+  }
+
+  /* Massive architectural title — DM Serif Display */
+  .portal__title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(72px, 10.5vw, 148px);
+    line-height: 0.87;
+    letter-spacing: -0.02em;
+    color: var(--earth);
+    margin: 0 0 clamp(40px, 5.5vw, 72px);
+  }
+
+  .portal__title em {
+    font-style: italic;
+    color: var(--honey);
+    display: block;
+  }
+
+  /* Floor — lede + event aside, rule above */
+  .portal__floor {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: clamp(32px, 6vw, 80px);
+    padding-top: clamp(28px, 3.5vw, 44px);
+    border-top: 1px solid rgba(166, 124, 77, 0.10);
+  }
+
+  .portal__lede {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(13px, 1.2vw, 16px);
+    line-height: 1.85;
+    color: var(--fg-mute);
+    margin: 0;
+    max-width: 42ch;
+  }
+
+  /* Event + CTA aside */
+  .portal__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    align-items: flex-end;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .portal__event {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+
+  .portal__event-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--earth);
+    line-height: 1.25;
+    display: block;
+    font-optical-sizing: auto;
+  }
+
+  .portal__event-date {
+    font-family: var(--mark);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--honey);
+    opacity: 0.72;
+    display: block;
+  }
+
+  .portal__cta {
+    font-family: var(--mark);
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-mute);
+    opacity: 0.60;
+    transition: opacity 260ms ease, color 260ms ease;
+    margin-top: var(--s-2);
+  }
+  .portal__cta:hover { opacity: 1; color: var(--earth); }
+
+  @media (max-width: 760px) {
+    .portal__floor { flex-direction: column; gap: var(--s-7); }
+    .portal__aside { align-items: flex-start; text-align: left; }
+    .portal--flip .portal__floor { flex-direction: column-reverse; }
+  }
+
+  @media (max-width: 480px) {
+    .portal__title { font-size: clamp(56px, 14vw, 96px); }
+  }
+</style>

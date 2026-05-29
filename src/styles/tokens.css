@@ -1,0 +1,203 @@
+/* ═══════════════════════════════════════════════════════
+   RAJUNA — Design Tokens
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Raw Palette — warm atmospheric ──────────────── */
+  --bone:   #F7F2E8;  /* warm ivory — sunlight through linen    */
+  --paper:  #F2EAD6;  /* warm cream parchment                    */
+  --linen:  #EDE0C4;  /* warm parchment, slight gold             */
+  --sand:   #D6B27A;  /* pale gold                               */
+  --wheat:  #C89B5A;  /* warm gold                               */
+  --honey:  #A67C4D;  /* amber honey                             */
+  --ember:  #8E5A2C;  /* deep amber                              */
+  --umber:  #6B4F33;  /* bronze                                  */
+  --earth:  #2E2A24;  /* warm dark earth                         */
+  --void:   #1A140F;  /* warm void                               */
+  --mist:   #8B8275;  /* warm mist                               */
+
+  /* ── Semantic Roles ───────────────────────────────── */
+  --bg:        var(--bone);
+  --fg:        var(--earth);
+  --fg-soft:   #4A4239;
+  --fg-mute:   var(--mist);
+  --accent:    var(--honey);
+  --rule:      rgba(46, 42, 36, 0.10);
+  --rule-thin: rgba(46, 42, 36, 0.06);
+  --rule-d:    rgba(250, 247, 240, 0.10);
+
+  /* ── Typography ───────────────────────────────────── */
+  /* DM Serif Display — strong architectural display, timeless editorial presence */
+  --display: "DM Serif Display", "Georgia", serif;
+  /* Fraunces — optical variable serif, cinematic italic accents */
+  --serif: "Fraunces", "Georgia", serif;
+  /* Inter Tight — architectural body sans, crisp and precise */
+  --sans:  "Inter Tight", "Inter", -apple-system, "Helvetica Neue", sans-serif;
+  /* Syne — architectural label + navigation */
+  --mark:  "Syne", -apple-system, sans-serif;
+
+  /* ── Spacing ──────────────────────────────────────── */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  24px;
+  --s-6:  32px;
+  --s-7:  48px;
+  --s-8:  64px;
+  --s-9:  96px;
+  --s-10: 128px;
+  --s-11: 192px;
+
+  /* ── Border Radius ────────────────────────────────── */
+  --r-1:    2px;
+  --r-2:    6px;
+  --r-3:    12px;
+  --r-pill: 999px;
+
+  /* ── Shadows ──────────────────────────────────────── */
+  --shadow-soft:     0 2px 6px -2px rgba(46,42,36,0.06);
+  --shadow-rest:     0 12px 28px -16px rgba(46,42,36,0.14);
+  --shadow-grounded: 0 24px 48px -28px rgba(46,42,36,0.18);
+
+  /* ── Orb / Sun ────────────────────────────────────── */
+  --orb: radial-gradient(
+    circle at 40% 36%,
+    #FBEFD0 0%,
+    #F1D89C 20%,
+    #C99C5C 45%,
+    #8E5A2C 72%,
+    rgba(74,55,31,0) 84%
+  );
+
+  /* Orb variant for dark sections */
+  --orb-d: radial-gradient(
+    circle at 40% 36%,
+    rgba(251,239,208,0.70) 0%,
+    rgba(241,216,156,0.45) 20%,
+    rgba(201,156,92,0.20) 45%,
+    transparent 70%
+  );
+
+  --glyph-gradient: radial-gradient(
+    circle at 35% 35%,
+    #E8C68A 0%,
+    #B89A6B 55%,
+    #6B4F33 100%
+  );
+
+  /* ── Atmospheric section depth scale ─────────────── */
+  /* LIGHT → GOLD → AMBER → BRONZE → GRAPHITE          */
+  --atm-hero: #F7F2E8;   /* warm ivory — morning sunlight   */
+  --atm-phi:  #F2EAD6;   /* warm cream parchment            */
+  --atm-ret:  #EDE0C4;   /* warm parchment, faint gold      */
+  --atm-mtn:  #2A211B;   /* warm graphite — threshold       */
+  --atm-prg:  #201913;   /* deep warm earth                 */
+  --atm-men:  #1A140F;   /* deeper warm brown               */
+  --atm-mus:  #13100C;   /* near-void warm                  */
+  --atm-com:  #1A1510;   /* dark with ember warmth          */
+  --atm-ftr:  #100D09;   /* absolute depth                  */
+
+  /* The cinematic descent — used in Mountains banner   */
+  /* Encodes the full LIGHT → DEPTH color journey       */
+  --atm-descent: linear-gradient(180deg,
+    #EDE0C4 0%,
+    #D6B27A 12%,
+    #C89B5A 24%,
+    #B88952 36%,
+    #9C6A3D 50%,
+    #7E5637 64%,
+    #5B4336 76%,
+    #3A2A1C 88%,
+    #2A211B 100%
+  );
+
+  /* Legacy aliases — used by inner pages */
+  --ch-3: var(--atm-ret);
+  --ch-4: var(--atm-mtn);
+  --ch-5: var(--atm-prg);
+  --ch-6: var(--atm-men);
+  --ch-7: var(--atm-mus);
+  --ch-8: var(--atm-com);
+
+  /* ── Inner page section backgrounds ──────────────── */
+  --bg-warm:
+    radial-gradient(ellipse 70% 60% at 80% 50%, rgba(232,198,138,0.18), transparent 70%),
+    linear-gradient(180deg, #F2EDE3 0%, #E6DCC4 100%);
+
+  --bg-deep:
+    radial-gradient(ellipse 60% 50% at 20% 100%, rgba(216,192,154,0.22), transparent 70%),
+    linear-gradient(180deg, #EBE2CD 0%, #DEC9A2 100%);
+
+  --bg-dark:   linear-gradient(180deg, #29241D 0%, #1E1B16 100%);
+
+  --bg-closing:
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(166,124,77,0.22), transparent 60%),
+    linear-gradient(180deg, #1E1B16 0%, #110F0B 100%);
+
+  /* ── Hero Background — morning sunlight through linen */
+  --bg-hero:
+    radial-gradient(ellipse 75% 70% at 84% -10%, rgba(255,224,120,0.72) 0%, transparent 56%),
+    radial-gradient(ellipse 55% 50% at 94% 22%,  rgba(220,175,90,0.42)  0%, transparent 52%),
+    radial-gradient(ellipse 40% 60% at 0%  0%,   rgba(214,178,112,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 30% at 50% 100%, rgba(237,224,196,0.30) 0%, transparent 70%),
+    var(--atm-hero);
+
+  /* ── Easing ───────────────────────────────────────── */
+  --ease:      cubic-bezier(0.16, 0.7, 0.2, 1);
+  --ease-slow: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* ── Layout ───────────────────────────────────────── */
+  --frame-x:  max(40px, 5vw);
+  --max-w:    1280px;
+  --max-w-sm: 860px;
+
+  /* ── Per-page identity palettes ──────────────────── */
+
+  /* RETREATS: warm amber / sunlight / ceremonial gold  */
+  --pg-ret-bg:     #EDD49A;
+  --pg-ret-bg-alt: #E4C880;
+  --pg-ret-fg:     #2A1C10;
+  --pg-ret-mute:   rgba(42,28,16,0.55);
+
+  /* MOUNTAINS: stone / air / mist / mineral cold       */
+  --pg-mtn-bg:     #EDEAE2;
+  --pg-mtn-bg-alt: #DDD9D0;
+  --pg-mtn-fg:     #2C2A26;
+  --pg-mtn-mute:   rgba(44,42,38,0.52);
+  --pg-mtn-accent: #8A8378;
+
+  /* PROGRAMS: clean ivory / warm graphite / precision  */
+  --pg-prg-bg:     #F4F0E8;
+  --pg-prg-bg-alt: #EDE8DF;
+  --pg-prg-fg:     #1C1A16;
+  --pg-prg-mute:   rgba(28,26,22,0.55);
+
+  /* MENTORSHIP: deep bronze / dark parchment / intimate */
+  --pg-men-bg:     #1C140C;
+  --pg-men-bg-alt: #281C10;
+  --pg-men-fg:     #EDE0C4;
+  --pg-men-accent: #C08840;
+  --pg-men-mute:   rgba(237,224,196,0.48);
+
+  /* MUSIC: cinematic noir / amber glow / analog warmth */
+  --pg-mus-bg:     #0E0C0A;
+  --pg-mus-bg-alt: #1A1410;
+  --pg-mus-fg:     #E0C8A0;
+  --pg-mus-accent: #D4882A;
+  --pg-mus-mute:   rgba(224,200,160,0.42);
+
+  /* ABOUT: neutral warm editorial                       */
+  --pg-abt-bg:     #F5F0E8;
+  --pg-abt-fg:     #1E1812;
+  --pg-abt-mute:   rgba(30,24,18,0.55);
+
+  /* CONNECT: minimal warm monochrome                    */
+  --pg-con-bg:     #F8F4EE;
+  --pg-con-fg:     #1A1510;
+  --pg-con-mute:   rgba(26,21,16,0.48);
+}
+
+@media (max-width: 720px) {
+  :root { --frame-x: 24px; }
+}

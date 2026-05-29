@@ -1,0 +1,237 @@
+---
+import { getFeaturedRetreat } from '../data/retreats';
+import { getNextJourney } from '../data/mountains';
+import { getNextOpenProgram } from '../data/programs';
+
+const retreat = getFeaturedRetreat();
+const journey = getNextJourney();
+const program = getNextOpenProgram();
+---
+
+<section class="upcoming" aria-label="Upcoming experiences">
+  <div class="frame">
+
+    <header class="upcoming__header reveal">
+      <span class="t-label t-label--warm">Join now</span>
+      <h2 class="upcoming__headline">Upcoming experiences</h2>
+    </header>
+
+    <div class="upcoming__grid">
+
+      <!-- Featured retreat — dominant card -->
+      {retreat && (
+        <a href={`/retreats/${retreat.slug}`} class="upcard upcard--hero reveal d1">
+          <div class="upcard__bg" style={`background: ${retreat.bg}`}></div>
+          <div class="upcard__overlay" aria-hidden="true"></div>
+          <div class="upcard__inner">
+            <div class="upcard__tags">
+              <span class="upcard__tag">{retreat.location}</span>
+              <span class="upcard__tag">{retreat.date}</span>
+            </div>
+            <div class="upcard__foot">
+              <span class="upcard__cat">Live Retreat</span>
+              <h3 class="upcard__title">{retreat.title}</h3>
+              <span class="upcard__cta">View retreat <span aria-hidden="true">→</span></span>
+            </div>
+          </div>
+        </a>
+      )}
+
+      <div class="upcoming__side">
+
+        <!-- Mountain journey -->
+        {journey && (
+          <a href={`/mountains/${journey.slug}`} class="upcard upcard--side reveal d2">
+            <div class="upcard__bg" style={`background: ${journey.bg}`}></div>
+            <div class="upcard__overlay" aria-hidden="true"></div>
+            <div class="upcard__inner">
+              <div class="upcard__tags">
+                <span class="upcard__tag">{journey.location}</span>
+                <span class="upcard__tag">{journey.dateShort}</span>
+              </div>
+              <div class="upcard__foot">
+                <span class="upcard__cat">Mountain Journey</span>
+                <h3 class="upcard__title">{journey.title}</h3>
+                <span class="upcard__cta">View journey <span aria-hidden="true">→</span></span>
+              </div>
+            </div>
+          </a>
+        )}
+
+        <!-- Online program -->
+        {program && (
+          <a href={`/programs/${program.slug}`} class="upcard upcard--side reveal d3">
+            <div class="upcard__bg" style={{ background: 'linear-gradient(135deg, #C8A878 0%, #8A6438 50%, #4A2C12 100%)' }}></div>
+            <div class="upcard__overlay" aria-hidden="true"></div>
+            <div class="upcard__inner">
+              <div class="upcard__tags">
+                <span class="upcard__tag">Online</span>
+                <span class="upcard__tag">{program.dateShort}</span>
+              </div>
+              <div class="upcard__foot">
+                <span class="upcard__cat">Online Program</span>
+                <h3 class="upcard__title">{program.title}</h3>
+                <span class="upcard__cta">View program <span aria-hidden="true">→</span></span>
+              </div>
+            </div>
+          </a>
+        )}
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .upcoming {
+    padding-block: clamp(80px, 12svh, 160px);
+    background: transparent;
+  }
+
+  .upcoming__header {
+    margin-bottom: clamp(32px, 4vw, 52px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .upcoming__headline {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(28px, 3.5vw, 48px);
+    letter-spacing: -0.018em;
+    color: var(--earth);
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  /* Asymmetric grid: dominant left, stacked right */
+  .upcoming__grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: clamp(10px, 1.2vw, 16px);
+    align-items: stretch;
+  }
+
+  .upcoming__side {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 1.2vw, 16px);
+  }
+
+  /* ─── Card base ──────────────────────────────── */
+
+  .upcard {
+    position: relative;
+    border-radius: var(--r-2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .upcard--hero { min-height: clamp(380px, 50vw, 560px); }
+  .upcard--side { flex: 1; min-height: clamp(160px, 20vw, 240px); }
+
+  .upcard__bg {
+    position: absolute; inset: 0; z-index: 0;
+    transition: transform 700ms var(--ease);
+  }
+  .upcard:hover .upcard__bg { transform: scale(1.04); }
+
+  /* Gradient overlay for text legibility */
+  .upcard__overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      linear-gradient(to top, rgba(20,10,4,0.72) 0%, rgba(20,10,4,0.24) 50%, transparent 80%),
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(0,0,0,0.10), transparent);
+  }
+
+  .upcard__inner {
+    position: relative; z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(20px, 3vw, 32px);
+  }
+
+  /* Location + date tags */
+  .upcard__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    align-self: flex-start;
+  }
+
+  .upcard__tag {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245, 230, 195, 0.85);
+    background: rgba(10, 6, 2, 0.32);
+    padding: 5px 10px;
+    border-radius: var(--r-pill);
+    border: 1px solid rgba(245, 230, 195, 0.16);
+    backdrop-filter: blur(8px);
+  }
+
+  /* Bottom content */
+  .upcard__foot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+
+  .upcard__cat {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(220, 186, 128, 0.72);
+    display: block;
+  }
+
+  .upcard__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(18px, 2.2vw, 30px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: rgba(248, 238, 215, 0.96);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .upcard--side .upcard__title { font-size: clamp(15px, 1.8vw, 22px); }
+
+  .upcard__cta {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(220, 186, 128, 0.65);
+    display: block;
+    margin-top: var(--s-2);
+    transition: color 280ms ease;
+  }
+  .upcard:hover .upcard__cta { color: rgba(220, 186, 128, 1); }
+
+  @media (max-width: 760px) {
+    .upcoming__grid { grid-template-columns: 1fr; }
+    .upcard--hero { min-height: 340px; }
+    .upcard--side { min-height: 200px; }
+  }
+
+  @media (max-width: 480px) {
+    .upcoming__grid { gap: var(--s-3); }
+    .upcoming__side { gap: var(--s-3); }
+  }
+</style>

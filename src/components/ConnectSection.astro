@@ -1,0 +1,260 @@
+---
+const channels = [
+  {
+    href: 'https://t.me/yakovrajuna',
+    icon: 'telegram',
+    title: 'Telegram',
+    desc: 'Retreat announcements, new programs, field notes. First access to everything.',
+    meta: '340+ members',
+    bg: 'linear-gradient(140deg, #7A5020 0%, #4A2C0C 55%, #2A1608 100%)',
+    accent: 'rgba(210,170,90,0.70)',
+  },
+  {
+    href: 'https://youtube.com/@yakovrajuna',
+    icon: 'youtube',
+    title: 'YouTube',
+    desc: 'Music releases, ceremony recordings, mountain dispatches, video journals.',
+    meta: 'Subscribe',
+    bg: 'linear-gradient(140deg, #8A4820 0%, #4E2410 55%, #2A1208 100%)',
+    accent: 'rgba(210,150,80,0.70)',
+  },
+  {
+    href: 'https://instagram.com/yakovrajuna',
+    icon: 'instagram',
+    title: 'Instagram',
+    desc: 'Daily observations, mountain photography, behind the work and the journeys.',
+    meta: 'Follow',
+    bg: 'linear-gradient(140deg, #6A4830 0%, #3A2410 55%, #221008 100%)',
+    accent: 'rgba(200,160,100,0.70)',
+  },
+  {
+    href: 'https://vk.com/yakovrajuna',
+    icon: 'vk',
+    title: 'VK',
+    desc: 'Russian-language community. Long-form writing, announcements, dialogue.',
+    meta: 'Subscribe',
+    bg: 'linear-gradient(140deg, #5A3C28 0%, #32200E 55%, #1E1008 100%)',
+    accent: 'rgba(190,150,90,0.70)',
+  },
+  {
+    href: '/connect',
+    icon: 'mail',
+    title: 'Write directly',
+    desc: 'For inquiries about retreats, programs, or mentorship. Yakov reads each message.',
+    meta: 'Contact form',
+    bg: 'linear-gradient(140deg, #3A2818 0%, #221510 55%, #160E08 100%)',
+    accent: 'rgba(180,140,80,0.70)',
+    internal: true,
+  },
+];
+---
+
+<section class="connect dark" aria-label="Connect">
+  <div class="frame">
+
+    <header class="connect__header reveal">
+      <span class="t-label t-label--gold">Connect</span>
+      <h2 class="connect__headline">
+        Join the<br /><em>ecosystem</em>
+      </h2>
+    </header>
+
+    <div class="connect__grid">
+      {channels.map((ch, i) => (
+        <a
+          href={ch.href}
+          class={`ccard reveal d${(i % 3) + 1}`}
+          target={ch.internal ? undefined : '_blank'}
+          rel={ch.internal ? undefined : 'noopener'}
+          style={`--card-bg: ${ch.bg}; --card-accent: ${ch.accent};`}
+        >
+          <div class="ccard__bg" aria-hidden="true"></div>
+          <div class="ccard__inner">
+            <div class="ccard__top">
+              <div class="ccard__icon" aria-hidden="true">
+                {ch.icon === 'telegram' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215L3.29 9.865c-1.392.54-1.386 1.295-.253 1.629l4.47 1.395 10.35-6.528c.488-.298.937-.14.569.186L9.568 15.366l-.32 4.576c.471 0 .68-.217.938-.467l2.253-2.189 4.68 3.455c.862.476 1.482.23 1.696-.8l3.07-14.43c.313-1.253-.476-1.821-1.687-1.078z" fill="currentColor"/>
+                  </svg>
+                )}
+                {ch.icon === 'youtube' && (
+                  <svg width="22" height="17" viewBox="0 0 22 16" fill="none">
+                    <rect x="0.8" y="0.8" width="20.4" height="14.4" rx="3.8" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M9 4.5l6 3.5-6 3.5V4.5z" fill="currentColor"/>
+                  </svg>
+                )}
+                {ch.icon === 'instagram' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="currentColor" stroke-width="1.6"/>
+                    <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/>
+                    <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/>
+                  </svg>
+                )}
+                {ch.icon === 'vk' && (
+                  <svg width="20" height="14" viewBox="0 0 20 12" fill="none">
+                    <path d="M10.8 11.5H12.2C12.2 11.5 12.6 11.46 12.8 11.24C13 11.03 12.99 10.63 12.99 10.63C12.99 10.63 12.97 8.93 13.77 8.69C14.56 8.45 15.56 10.34 16.6 11.05C17.4 11.6 18 11.48 18 11.48L21.1 11.44C21.1 11.44 22.65 11.35 21.91 10.13C21.85 10.03 21.47 9.22 19.55 7.47C17.54 5.63 17.79 5.91 19.96 3.04C21.32 1.23 21.86 0.11 21.67 -0.37C21.48 -0.83 20.4 -0.7 20.4 -0.7L16.88 -0.68C16.88 -0.68 16.62 -0.71 16.44 -0.60C16.27 -0.49 16.16 -0.24 16.16 -0.24C16.16 -0.24 15.62 1.18 14.9 2.40C13.36 4.97 12.76 5.10 12.51 4.94C11.92 4.57 12.06 3.40 12.06 2.59C12.06 0.08 12.43 -0.95 11.33 -1.22C10.96 -1.31 10.7 -1.37 9.78 -1.38C8.58 -1.39 7.57 -1.37 7.00 -1.10C6.61 -0.92 6.32 -0.51 6.49 -0.49C6.69 -0.46 7.16 -0.37 7.40 0.00C7.72 0.49 7.71 1.55 7.71 1.55C7.71 1.55 7.90 4.83 7.21 5.19C6.74 5.44 6.10 4.91 4.73 2.51C4.01 1.31 3.48 -0.06 3.48 -0.06C3.48 -0.06 3.38 -0.30 3.20 -0.43C2.99 -0.59 2.70 -0.63 2.70 -0.63L-0.70 -0.61C-0.70 -0.61 -1.18 -0.60 -1.36 -0.38C-1.52 -0.18 -1.37 0.17 -1.37 0.17C-1.37 0.17 1.23 6.53 4.18 9.66C6.89 12.54 9.97 11.56 9.97 11.56L10.8 11.5Z" fill="currentColor" transform="translate(1, 1) scale(0.78)"/>
+                  </svg>
+                )}
+                {ch.icon === 'mail' && (
+                  <svg width="20" height="16" viewBox="0 0 20 16" fill="none">
+                    <rect x="0.75" y="0.75" width="18.5" height="14.5" rx="2.5" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M1 2l9 7 9-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                )}
+              </div>
+              <span class="ccard__meta">{ch.meta}</span>
+            </div>
+            <div class="ccard__foot">
+              <h3 class="ccard__title">{ch.title}</h3>
+              <p class="ccard__desc">{ch.desc}</p>
+            </div>
+          </div>
+          <div class="ccard__hover" aria-hidden="true"></div>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .connect {
+    padding-block: clamp(80px, 12svh, 160px);
+    background: transparent;
+  }
+
+  .connect__header {
+    margin-bottom: clamp(40px, 5vw, 64px);
+  }
+
+  .connect__headline {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(36px, 4.5vw, 64px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: rgba(237, 224, 200, 0.90);
+    margin: var(--s-4) 0 0;
+  }
+
+  .connect__headline em {
+    font-style: italic;
+    color: var(--honey);
+    display: block;
+  }
+
+  /* Channel card grid */
+  .connect__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(10px, 1.2vw, 14px);
+  }
+
+  /* Last row: 2 cards centered */
+  .ccard:nth-child(4) { grid-column: 1; }
+  .ccard:nth-child(5) { grid-column: 2; }
+
+  /* ─── Card ────────────────────────────────────── */
+
+  .ccard {
+    position: relative;
+    border-radius: var(--r-2);
+    overflow: hidden;
+    padding: clamp(24px, 3vw, 36px);
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    border: 1px solid rgba(200,160,90,0.10);
+    transition: border-color 320ms ease, transform 320ms ease;
+  }
+
+  .ccard:hover {
+    border-color: rgba(200,160,90,0.24);
+    transform: translateY(-2px);
+  }
+
+  .ccard__bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: var(--card-bg);
+    transition: transform 500ms var(--ease);
+  }
+  .ccard:hover .ccard__bg { transform: scale(1.02); }
+
+  /* Hover glow */
+  .ccard__hover {
+    position: absolute; inset: 0; z-index: 1;
+    background: radial-gradient(ellipse 60% 50% at 30% 40%, rgba(180,120,40,0.12), transparent 65%);
+    opacity: 0;
+    transition: opacity 400ms ease;
+  }
+  .ccard:hover .ccard__hover { opacity: 1; }
+
+  .ccard__inner {
+    position: relative; z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--s-5);
+  }
+
+  /* Top: icon + meta */
+  .ccard__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .ccard__icon {
+    color: var(--card-accent);
+    display: flex;
+    align-items: center;
+  }
+
+  .ccard__meta {
+    font-family: var(--mark);
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(237, 224, 200, 0.28);
+  }
+
+  /* Bottom: title + desc */
+  .ccard__foot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+
+  .ccard__title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(18px, 2vw, 26px);
+    letter-spacing: -0.01em;
+    color: rgba(237, 224, 200, 0.88);
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .ccard__desc {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.70;
+    color: rgba(237, 224, 200, 0.40);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .connect__grid { grid-template-columns: repeat(2, 1fr); }
+    .ccard:nth-child(4) { grid-column: auto; }
+    .ccard:nth-child(5) { grid-column: auto; }
+  }
+
+  @media (max-width: 560px) {
+    .connect__grid { grid-template-columns: 1fr; }
+    .ccard { min-height: 180px; }
+  }
+</style>

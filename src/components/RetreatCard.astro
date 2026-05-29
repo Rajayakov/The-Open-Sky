@@ -1,0 +1,122 @@
+---
+export interface Props {
+  title: string;
+  atmosphere: string;
+  date?: string;
+  location?: string;
+  duration?: string;
+  href: string;
+  bg?: string;
+}
+const {
+  title,
+  atmosphere,
+  date,
+  location,
+  duration,
+  href,
+  bg = 'linear-gradient(160deg, #C19763 0%, #6B4F33 80%)',
+} = Astro.props;
+---
+
+<a href={href} class="retreat-card" aria-label={title}>
+  <!-- Image area -->
+  <div class="retreat-card__img" style={`background:${bg}`} aria-hidden="true">
+    <div class="retreat-card__img-overlay"></div>
+    {(date || location) && (
+      <div class="retreat-card__img-meta">
+        {date && <span class="t-label" style="color: rgba(250,247,240,0.75);">{date}</span>}
+        {location && <span class="t-label" style="color: rgba(232,198,138,0.8);">{location}</span>}
+      </div>
+    )}
+  </div>
+
+  <!-- Content -->
+  <div class="retreat-card__body">
+    <h3 class="retreat-card__title">{title}</h3>
+    <p class="retreat-card__atm">{atmosphere}</p>
+
+    <div class="retreat-card__foot">
+      {duration && <span class="t-label">{duration}</span>}
+      <span class="btn-text retreat-card__cta">Learn more</span>
+    </div>
+  </div>
+</a>
+
+<style>
+  .retreat-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+    overflow: hidden;
+    background: var(--bone);
+    transition: transform 500ms var(--ease), box-shadow 500ms var(--ease);
+  }
+  .retreat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-grounded);
+  }
+
+  .retreat-card__img {
+    aspect-ratio: 16/10;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: transform 700ms var(--ease);
+  }
+  .retreat-card:hover .retreat-card__img { transform: scale(1.04); }
+
+  .retreat-card__img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(30,22,14,0.5) 0%, transparent 50%);
+  }
+
+  .retreat-card__img-meta {
+    position: absolute;
+    bottom: 16px; left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .retreat-card__body {
+    padding: var(--s-5) var(--s-5) var(--s-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    flex: 1;
+  }
+
+  .retreat-card__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--earth);
+    margin: 0;
+  }
+
+  .retreat-card__atm {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--fg-soft);
+    margin: 0;
+  }
+
+  .retreat-card__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--s-4);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--rule-thin);
+  }
+
+  .retreat-card__cta { font-size: 10px; }
+</style>

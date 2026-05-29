@@ -1,0 +1,192 @@
+---
+export interface Props {
+  label?: string;
+  title: string;
+  titleEm?: string;
+  lede?: string;
+  slim?: boolean;
+  theme?: 'default' | 'retreat' | 'mountain' | 'program' | 'mentorship' | 'music' | 'about' | 'connect';
+}
+const { label, title, titleEm, lede, slim = false, theme = 'default' } = Astro.props;
+const dark = theme === 'mentorship' || theme === 'music';
+---
+
+<section
+  class={`page-hero page-hero--${theme} ${slim ? 'page-hero--slim' : ''} ${dark ? 'dark' : ''}`}
+  aria-label="Page header"
+>
+  <div class="page-hero__bg" aria-hidden="true"></div>
+  <div class="page-hero__inner frame">
+    {label && (
+      <span class={`t-label reveal ${dark ? 't-label--gold' : 't-label--warm'}`}>{label}</span>
+    )}
+    <h1 class="page-hero__title reveal d1">
+      {title}{titleEm && <em>{titleEm}</em>}
+    </h1>
+    {lede && <p class="page-hero__lede reveal d2">{lede}</p>}
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    padding-block: clamp(100px, 18svh, 220px) clamp(64px, 10svh, 140px);
+    overflow: hidden;
+  }
+
+  .page-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  /* Sun orb — upper right, default */
+  .page-hero__bg::after {
+    content: "";
+    position: absolute;
+    right: -15vw; top: -20vw;
+    width: 60vw; height: 60vw;
+    max-width: 700px; max-height: 700px;
+    border-radius: 50%;
+    background: var(--orb);
+    opacity: 0.38;
+    filter: blur(4px);
+  }
+
+  .page-hero__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+
+  .t-label { margin-bottom: var(--s-2); }
+
+  .page-hero__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(48px, 8vw, 120px);
+    line-height: 0.93;
+    letter-spacing: -0.03em;
+    color: var(--earth);
+    margin: 0;
+    max-width: 14ch;
+    font-optical-sizing: auto;
+  }
+  .page-hero__title em {
+    font-style: italic;
+    color: var(--honey);
+    display: block;
+  }
+
+  .page-hero__lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.6vw, 22px);
+    line-height: 1.55;
+    color: var(--fg-soft);
+    max-width: 52ch;
+    margin-top: var(--s-4);
+    font-optical-sizing: auto;
+  }
+
+  .page-hero--slim {
+    padding-block: clamp(80px, 12svh, 140px) clamp(48px, 8svh, 100px);
+  }
+  .page-hero--slim .page-hero__title {
+    font-size: clamp(36px, 5vw, 72px);
+  }
+
+  /* ── DEFAULT: warm ivory morning light ──────────── */
+  .page-hero--default .page-hero__bg,
+  .page-hero--about .page-hero__bg {
+    background:
+      radial-gradient(ellipse 75% 70% at 84% -10%, rgba(255,224,120,0.70) 0%, transparent 56%),
+      radial-gradient(ellipse 55% 50% at 94% 22%,  rgba(220,175,90,0.42)  0%, transparent 52%),
+      radial-gradient(ellipse 40% 60% at 0%  0%,   rgba(214,178,112,0.22) 0%, transparent 60%),
+      var(--atm-hero);
+  }
+
+  /* ── RETREAT: warm amber / ceremonial gold ──────── */
+  .page-hero--retreat .page-hero__bg {
+    background:
+      radial-gradient(ellipse 70% 65% at 88% -8%,  rgba(255,204,80,0.72) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 45% at 96% 28%,  rgba(220,160,60,0.45) 0%, transparent 50%),
+      radial-gradient(ellipse 45% 60% at 0%  0%,   rgba(210,165,85,0.28) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 25% at 50% 100%, rgba(230,188,100,0.22) 0%, transparent 65%),
+      linear-gradient(175deg, #EDD8A0 0%, #E8CC84 50%, #EDD898 100%);
+  }
+  .page-hero--retreat .page-hero__bg::after {
+    background: radial-gradient(circle at 40% 36%,
+      #FBEEC8 0%, #F0D070 22%, #C89040 48%, #8A5A20 72%, transparent 86%);
+    opacity: 0.38;
+  }
+
+  /* ── MOUNTAIN: stone / mineral / cold sunlight ───── */
+  .page-hero--mountain .page-hero__bg {
+    background:
+      radial-gradient(ellipse 60% 40% at 82% -5%,  rgba(255,235,160,0.38) 0%, transparent 52%),
+      radial-gradient(ellipse 40% 50% at 0%  55%,  rgba(170,165,155,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 20% at 50% 100%, rgba(185,180,170,0.15) 0%, transparent 65%),
+      linear-gradient(178deg, #EEEBE4 0%, #E2DED6 55%, #D4D0C8 100%);
+  }
+  .page-hero--mountain .page-hero__bg::after {
+    background: radial-gradient(circle at 40% 36%,
+      rgba(255,240,180,0.75) 0%, rgba(220,200,120,0.40) 28%, rgba(170,155,90,0.15) 55%, transparent 72%);
+    opacity: 0.32;
+  }
+  .page-hero--mountain .page-hero__title { color: #2C2A26; }
+  .page-hero--mountain .page-hero__lede  { color: rgba(44,42,38,0.58); }
+
+  /* ── PROGRAM: clean ivory / precision ─────────── */
+  .page-hero--program .page-hero__bg {
+    background:
+      radial-gradient(ellipse 50% 40% at 90% 0%,   rgba(220,178,95,0.28)  0%, transparent 55%),
+      radial-gradient(ellipse 35% 50% at 0%  20%,  rgba(200,160,80,0.12)  0%, transparent 55%),
+      var(--pg-prg-bg);
+  }
+  .page-hero--program .page-hero__bg::after { opacity: 0.22; }
+  .page-hero--program .page-hero__title { color: var(--pg-prg-fg); }
+  .page-hero--program .page-hero__lede  { color: var(--pg-prg-mute); }
+
+  /* ── MENTORSHIP: deep bronze / dark parchment ─── */
+  .page-hero--mentorship .page-hero__bg {
+    background:
+      radial-gradient(ellipse 60% 55% at 88% 20%,  rgba(180,100,40,0.28) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 35% at 5%  80%,  rgba(140,75,25,0.18)  0%, transparent 50%),
+      linear-gradient(172deg, #2C1C10 0%, #1E140C 55%, #16100A 100%);
+  }
+  .page-hero--mentorship .page-hero__bg::after {
+    background: var(--orb-d);
+    opacity: 0.22;
+  }
+  .page-hero--mentorship .page-hero__title { color: var(--bone); }
+  .page-hero--mentorship .page-hero__lede  { color: rgba(237,224,200,0.62); }
+
+  /* ── MUSIC: cinematic noir / amber glow ─────── */
+  .page-hero--music .page-hero__bg {
+    background:
+      radial-gradient(ellipse 55% 60% at 82% 12%,  rgba(200,110,30,0.32) 0%, transparent 55%),
+      radial-gradient(ellipse 35% 42% at 5%  72%,  rgba(170,82,18,0.20)  0%, transparent 52%),
+      linear-gradient(172deg, #1C1408 0%, #120E08 55%, #0E0C0A 100%);
+  }
+  .page-hero--music .page-hero__bg::after {
+    background: radial-gradient(circle at 40% 36%,
+      rgba(220,120,30,0.65) 0%, rgba(150,72,15,0.32) 32%, transparent 68%);
+    opacity: 0.38;
+  }
+  .page-hero--music .page-hero__title { color: var(--bone); }
+  .page-hero--music .page-hero__lede  { color: rgba(237,224,200,0.58); }
+
+  /* ── CONNECT: minimal warm monochrome ─────── */
+  .page-hero--connect .page-hero__bg {
+    background:
+      radial-gradient(ellipse 45% 35% at 92% 0%,  rgba(210,170,80,0.20)  0%, transparent 50%),
+      var(--pg-con-bg);
+  }
+  .page-hero--connect .page-hero__bg::after { opacity: 0.12; }
+  .page-hero--connect .page-hero__title { color: var(--pg-con-fg); }
+  .page-hero--connect .page-hero__lede  { color: var(--pg-con-mute); }
+</style>

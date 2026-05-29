@@ -1,0 +1,255 @@
+---
+---
+
+<section class="music" aria-label="Music">
+  <div class="music__bg" aria-hidden="true"></div>
+
+  <div class="frame">
+
+    <header class="music__header reveal">
+      <span class="t-label t-label--warm">Music</span>
+      <h2 class="music__title">
+        Sound as<br /><em>ceremony</em>
+      </h2>
+    </header>
+
+    <div class="music__grid">
+
+      <!-- Album / main release -->
+      <div class="music__release reveal d1">
+        <div class="music__album-art" aria-hidden="true">
+          <div class="music__album-glow"></div>
+          <span class="music__album-initial">B</span>
+        </div>
+        <div class="music__album-info">
+          <p class="music__desc">
+            Original compositions for ceremonies,<br />
+            mountain silences, and interior work.<br />
+            Made to be heard at dawn or by fire.
+          </p>
+          <div class="music__links">
+            <a href="/music" class="music__link">Explore music</a>
+            <span class="music__sep" aria-hidden="true">·</span>
+            <a href="https://youtube.com/@yakovrajuna" class="music__link" target="_blank" rel="noopener">YouTube</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video/content cards -->
+      <div class="music__cards">
+        <div class="music__card music__card--1 reveal d2">
+          <div class="music__card-overlay" aria-hidden="true">
+            <svg class="music__play" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <circle cx="14" cy="14" r="13.5" stroke="rgba(245,230,195,0.50)" stroke-width="1"/>
+              <path d="M11 9l9 5-9 5V9z" fill="rgba(245,230,195,0.80)"/>
+            </svg>
+          </div>
+          <span class="music__card-label">Bone &amp; Fire · 2024</span>
+        </div>
+        <div class="music__card music__card--2 reveal d3">
+          <div class="music__card-overlay" aria-hidden="true">
+            <svg class="music__play" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <circle cx="14" cy="14" r="13.5" stroke="rgba(245,230,195,0.50)" stroke-width="1"/>
+              <path d="M11 9l9 5-9 5V9z" fill="rgba(245,230,195,0.80)"/>
+            </svg>
+          </div>
+          <span class="music__card-label">Fire Ceremony · Live</span>
+        </div>
+        <div class="music__card music__card--3 reveal d4">
+          <div class="music__card-overlay" aria-hidden="true">
+            <svg class="music__play" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+              <circle cx="14" cy="14" r="13.5" stroke="rgba(245,230,195,0.50)" stroke-width="1"/>
+              <path d="M11 9l9 5-9 5V9z" fill="rgba(245,230,195,0.80)"/>
+            </svg>
+          </div>
+          <span class="music__card-label">Mountain Sessions</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .music {
+    position: relative;
+    padding-block: clamp(80px, 12svh, 160px);
+    background: rgba(248, 241, 222, 0.45);
+    overflow: hidden;
+  }
+
+  .music__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 55% 55% at 85% 50%, rgba(190,140,50,0.10), transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .music__header {
+    margin-bottom: clamp(40px, 5vw, 64px);
+    position: relative; z-index: 1;
+  }
+
+  .music__title {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(40px, 5.5vw, 76px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--earth);
+    margin: var(--s-4) 0 0;
+  }
+  .music__title em {
+    font-style: italic;
+    color: var(--honey);
+    display: block;
+  }
+
+  .music__grid {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 7vw, 88px);
+    align-items: start;
+  }
+
+  /* Left: album + text */
+  .music__release {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .music__album-art {
+    width: clamp(100px, 14vw, 180px);
+    aspect-ratio: 1;
+    border-radius: var(--r-2);
+    background: linear-gradient(140deg, #C8A060 0%, #7A5020 55%, #401E08 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .music__album-glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 35% 28%, rgba(255,220,130,0.32), transparent 55%);
+  }
+
+  .music__album-initial {
+    font-family: var(--serif);
+    font-size: clamp(48px, 7vw, 80px);
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(255, 238, 195, 0.65);
+    position: relative; z-index: 1;
+    line-height: 1;
+    font-optical-sizing: auto;
+  }
+
+  .music__album-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+
+  .music__desc {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(13px, 1.2vw, 16px);
+    line-height: 1.85;
+    color: var(--fg-mute);
+    margin: 0;
+  }
+
+  .music__links {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+  }
+
+  .music__link {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--fg-mute);
+    transition: color 260ms ease;
+  }
+  .music__link:hover { color: var(--honey); }
+
+  .music__sep {
+    color: rgba(166,124,77,0.30);
+    font-size: 13px;
+    user-select: none;
+  }
+
+  /* Right: video/content card grid */
+  .music__cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: clamp(8px, 1vw, 12px);
+  }
+
+  .music__card {
+    aspect-ratio: 16 / 10;
+    border-radius: var(--r-2);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--s-4);
+    cursor: pointer;
+  }
+
+  /* First card spans full width */
+  .music__card--1 { grid-column: 1 / -1; aspect-ratio: 16 / 7; }
+
+  /* Individual backgrounds */
+  .music__card--1 { background: linear-gradient(155deg, #A07030 0%, #5A3010 55%, #2A1408 100%); }
+  .music__card--2 { background: linear-gradient(155deg, #8A5A28 0%, #4A2810 100%); }
+  .music__card--3 { background: linear-gradient(155deg, #6A4820 0%, #381808 100%); }
+
+  .music__card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.40) 0%, transparent 55%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+    transition: opacity 300ms ease;
+  }
+  .music__card:hover .music__card-overlay { opacity: 1; }
+
+  .music__play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 300ms ease;
+  }
+  .music__card:hover .music__play { transform: translate(-50%, -50%) scale(1.10); }
+
+  .music__card-label {
+    position: relative; z-index: 1;
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245,228,188,0.60);
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    .music__grid { grid-template-columns: 1fr; gap: var(--s-9); }
+  }
+
+  @media (max-width: 480px) {
+    .music__cards { grid-template-columns: 1fr; }
+    .music__card--1 { aspect-ratio: 16 / 9; }
+  }
+</style>

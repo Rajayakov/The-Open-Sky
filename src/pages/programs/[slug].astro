@@ -1,0 +1,211 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CTASection from '../../components/CTASection.astro';
+import { programs, getProgram } from '../../data/programs';
+
+export function getStaticPaths() {
+  return programs.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const program = getProgram(slug!);
+if (!program) return Astro.redirect('/programs');
+
+const statusLabel = {
+  open: 'Open for applications',
+  closed: 'Closed — next cohort TBA',
+  waitlist: 'Join waitlist',
+}[program.status];
+---
+
+<PageLayout
+  title={`${program.title} — The Open Sky`}
+  description={program.description}
+>
+
+  <PageHero
+    label="Online Program"
+    title={program.title}
+    titleEm={program.subtitle}
+    lede={program.description}
+    theme="program"
+  />
+
+  <!-- Overview -->
+  <section class="pg-overview section frame" aria-label="Program overview">
+    <div class="pg-overview__grid">
+      <div class="pg-overview__text reveal">
+        <p class="t-lede" style="max-width: 52ch;">{program.body}</p>
+      </div>
+      <div class="pg-overview__meta reveal d2">
+        <div class={`pg-overview__status pg-overview__status--${program.status}`}>
+          {statusLabel}
+        </div>
+        {[
+          { label: 'Start date', value: program.date },
+          { label: 'Duration',   value: program.duration },
+          { label: 'Format',     value: program.format },
+          { label: 'Group size', value: program.groupSize },
+        ].map(item => (
+          <div class="pg-overview__meta-row">
+            <span class="t-label">{item.label}</span>
+            <span class="pg-overview__meta-val">{item.value}</span>
+          </div>
+        ))}
+        {program.status !== 'closed' && (
+          <div class="pg-overview__cta">
+            <a href="/connect" class="btn btn--warm">
+              {program.status === 'waitlist' ? 'Join waitlist' : 'Apply now'}
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Structure -->
+  <section class="pg-structure section" aria-label="Program structure">
+    <div class="frame">
+      <span class="t-label t-label--warm reveal">How it unfolds</span>
+      <div class="pg-structure__phases">
+        {program.structure.map((s, i) => (
+          <div class={`pg-structure__phase reveal d${(i % 3) + 1}`}>
+            <span class="t-label pg-structure__phase-label">{s.phase}</span>
+            <p class="t-body">{s.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="pg-structure__bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="pg-whom section frame" aria-label="Who this is for">
+    <span class="t-label t-label--warm reveal">Who this is for</span>
+    <div class="pg-whom__list">
+      {program.forWhom.map((item, i) => (
+        <div class={`pg-whom__item reveal d${(i % 3) + 1}`}>
+          <span class="pg-whom__mark" aria-hidden="true">—</span>
+          <p class="t-body">{item}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CTASection
+    label={program.status !== 'closed' ? 'Ready to apply' : 'Stay informed'}
+    title={program.status !== 'closed' ? 'Write a short message.' : 'Be the first to know.'}
+    body={program.status !== 'closed'
+      ? 'Tell me which program interests you and where you are in your life right now. Yakov reads each message personally.'
+      : 'Join the Telegram channel to hear about the next cohort before applications open.'}
+    primaryHref={program.status !== 'closed' ? '/connect' : 'https://t.me/yakovrajuna'}
+    primaryLabel={program.status !== 'closed' ? 'Apply now' : 'Join Telegram'}
+    secondaryHref="/programs"
+    secondaryLabel="All programs"
+  />
+
+</PageLayout>
+
+<style>
+  .pg-overview { background: var(--pg-prg-bg); }
+  .pg-overview__grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: clamp(40px, 7vw, 80px);
+    align-items: start;
+  }
+  .pg-overview__status {
+    font-family: var(--mark);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: var(--r-pill);
+    margin-bottom: var(--s-5);
+    display: inline-block;
+  }
+  .pg-overview__status--open    { background: rgba(166,124,77,0.12); color: var(--honey); }
+  .pg-overview__status--closed  { background: rgba(139,130,117,0.12); color: var(--mist); }
+  .pg-overview__status--waitlist { background: rgba(166,124,77,0.08); color: var(--honey); }
+
+  .pg-overview__meta {
+    border: 1px solid rgba(28,26,22,0.10);
+    border-radius: var(--r-2);
+    padding: var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    background: var(--pg-prg-bg);
+  }
+  .pg-overview__meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s-4);
+    padding-bottom: var(--s-4);
+    border-bottom: 1px solid rgba(28,26,22,0.07);
+  }
+  .pg-overview__meta-row:last-of-type { border-bottom: none; }
+  .pg-overview__meta-val {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--pg-prg-fg);
+    text-align: right;
+  }
+  .pg-overview__cta { margin-top: var(--s-5); }
+
+  .pg-structure {
+    position: relative;
+    background: var(--pg-prg-bg-alt);
+    overflow: hidden;
+  }
+  .pg-structure__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 85% 10%, rgba(180,155,90,0.09), transparent 60%);
+    pointer-events: none;
+  }
+  .pg-structure__phases {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    border: 1px solid rgba(28,26,22,0.10);
+    border-radius: var(--r-2);
+    overflow: hidden;
+    margin-top: var(--s-7);
+  }
+  .pg-structure__phase {
+    padding: var(--s-6);
+    border-right: 1px solid rgba(28,26,22,0.10);
+    background: var(--pg-prg-bg);
+  }
+  .pg-structure__phase:last-child { border-right: none; }
+  .pg-structure__phase-label { color: var(--honey); display: block; margin-bottom: var(--s-3); }
+
+  .pg-whom { background: var(--pg-prg-bg); }
+  .pg-whom__list {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--s-7);
+    border-top: 1px solid rgba(28,26,22,0.10);
+  }
+  .pg-whom__item {
+    display: flex;
+    gap: var(--s-5);
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid rgba(28,26,22,0.07);
+    align-items: baseline;
+  }
+  .pg-whom__mark { color: var(--honey); flex-shrink: 0; }
+  .pg-whom .t-body { margin: 0; }
+
+  @media (max-width: 860px) {
+    .pg-overview__grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .pg-structure__phases { grid-template-columns: 1fr; }
+    .pg-structure__phase { border-right: none; border-bottom: 1px solid rgba(28,26,22,0.10); }
+  }
+</style>

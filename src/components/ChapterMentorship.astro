@@ -1,0 +1,168 @@
+---
+import TestimonialBlock from './TestimonialBlock.astro';
+---
+
+<section class="ch-men dark" aria-label="Mentorship">
+  <div class="frame">
+
+    <div class="ch-men__inner">
+
+      <div class="ch-men__header reveal">
+        <span class="t-label t-label--gold">04</span>
+        <span class="t-label t-label--light" style="margin-left:var(--s-4);">Mentorship</span>
+      </div>
+
+      <!-- Centered, most spacious chapter -->
+      <h2 class="ch-men__title reveal d1">
+        Accompanied<br />
+        through something<br />
+        <em>real.</em>
+      </h2>
+
+      <div class="ch-men__body-grid">
+        <p class="ch-men__lede reveal d2">
+          A small number of clients at a time.
+          Over months. This is not coaching.
+          It is something older and more specific.
+        </p>
+        <div class="ch-men__detail reveal d3">
+          <p class="ch-men__text">
+            The people who work with Yakov one-on-one are usually at a crossroads that
+            cannot be resolved through more information, more planning, or more doing.
+            They need someone who can sit with them in the uncertainty and help them
+            find what is actually true.
+          </p>
+          <div class="ch-men__meta">
+            <div class="ch-men__meta-item">
+              <span class="t-label t-label--gold">Format</span>
+              <span class="ch-men__meta-val">Private · Ongoing</span>
+            </div>
+            <div class="ch-men__meta-item">
+              <span class="t-label t-label--gold">Minimum</span>
+              <span class="ch-men__meta-val">Three months</span>
+            </div>
+            <div class="ch-men__meta-item">
+              <span class="t-label t-label--gold">Entry</span>
+              <span class="ch-men__meta-val">Application only</span>
+            </div>
+          </div>
+          <div class="ch-men__cta">
+            <a href="/mentorship" class="btn-text btn-text--d">Learn more</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ch-men__testimonial reveal d4">
+        <TestimonialBlock
+          quote="He doesn't tell you what to do. He sits with you until you remember that you already know."
+          author="Daniel W."
+          detail="Mentorship Client 2024"
+          dark
+        />
+      </div>
+
+    </div>
+  </div>
+  <div class="ch-men__bg" aria-hidden="true"></div>
+</section>
+
+<style>
+  .ch-men {
+    position: relative;
+    background: var(--atm-men);
+    padding-block: clamp(140px, 20svh, 300px);
+    overflow: hidden;
+  }
+
+  .ch-men__bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(142,90,44,0.08), transparent 58%),
+      radial-gradient(ellipse 30% 30% at 88%  8%,  rgba(200,155,90,0.05), transparent 55%);
+    pointer-events: none;
+  }
+
+  .ch-men__inner { position: relative; z-index: 1; }
+
+  .ch-men__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: clamp(48px, 8svh, 100px);
+  }
+
+  /* Large display — most spacious of all chapters */
+  .ch-men__title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(48px, 8.5vw, 120px);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: var(--bone);
+    margin: 0 0 clamp(64px, 10svh, 120px);
+    font-optical-sizing: auto;
+  }
+  .ch-men__title em { font-style: italic; color: var(--honey); display: block; }
+
+  .ch-men__body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 7vw, 100px);
+    align-items: start;
+  }
+
+  .ch-men__lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 2vw, 26px);
+    line-height: 1.5;
+    color: rgba(237, 224, 200, 0.58);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .ch-men__text {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.85;
+    color: rgba(237, 224, 200, 0.48);
+    margin: 0 0 var(--s-8);
+  }
+
+  .ch-men__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    padding: var(--s-6) 0;
+    border-top: 1px solid var(--rule-d);
+    border-bottom: 1px solid var(--rule-d);
+    margin-bottom: var(--s-7);
+  }
+
+  .ch-men__meta-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-5);
+  }
+
+  .ch-men__meta-val {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(237, 224, 200, 0.65);
+    font-optical-sizing: auto;
+  }
+
+  .ch-men__testimonial {
+    margin-top: var(--s-10);
+    border-top: 1px solid var(--rule-d);
+    padding-top: var(--s-8);
+  }
+
+  @media (max-width: 840px) {
+    .ch-men__body-grid { grid-template-columns: 1fr; }
+    .ch-men__title { font-size: clamp(42px, 12vw, 88px); }
+  }
+</style>

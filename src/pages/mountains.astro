@@ -1,0 +1,163 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CTASection from '../components/CTASection.astro';
+import QuoteBlock from '../components/QuoteBlock.astro';
+---
+
+<PageLayout
+  title="Mountain Journeys — The Open Sky"
+  description="Multi-day expeditions into high terrain. Physical challenge as initiation."
+>
+
+  <PageHero
+    label="Mountain Journeys"
+    title="The mountain"
+    titleEm="as teacher."
+    lede="Multi-day expeditions into high terrain. Physical difficulty as a doorway, not a goal."
+    theme="mountain"
+  />
+
+  <!-- Intro -->
+  <section class="mountains-intro section frame" aria-label="About mountain journeys">
+    <div class="mountains-intro__inner">
+      <div class="reveal">
+        <p class="t-lede" style="max-width: 54ch;">
+          Walking for several hours a day in difficult terrain does something specific to a person. The social self quiets. The performing self tires. What remains tends to be more honest than what you started with.
+        </p>
+        <p class="t-body" style="margin-top: var(--s-5); max-width: 52ch;">
+          These journeys are not about achieving summits. The mountain is a context, not a destination. The inner journey and the outer one happen simultaneously, and one informs the other.
+        </p>
+      </div>
+
+      <div class="mountains-intro__image reveal d1">
+        <div
+          class="img-slot img-slot--wide"
+          data-label="Mountain · Caucasus"
+          style="background: radial-gradient(ellipse 60% 50% at 70% 20%, rgba(255,228,175,0.5), transparent 70%), linear-gradient(180deg, #8E6B40 0%, #4A371F 100%);"
+          aria-hidden="true"
+        ></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What happens -->
+  <section class="mountains-what section" aria-label="What happens">
+    <div class="frame">
+      <span class="t-label t-label--warm reveal">What happens</span>
+      <div class="mountains-what__grid">
+        {[
+          { title: 'You walk', body: '4–7 hours per day on real terrain. Not a manicured trail. Uneven ground, altitude, weather. The body is involved.' },
+          { title: 'You stop', body: 'Rest is structured into the journey. Silence at specific places. Fire. Meals eaten slowly. The mountain teaches pace.' },
+          { title: 'You talk', body: 'Group exchanges happen in the evenings. Conversations that only open after physical tiredness has stripped the performance layer.' },
+          { title: 'You carry something back', body: 'Not metaphor. Literally: the physical experience of the journey stays in the body. Mountains are hard to forget.' },
+        ].map((item, i) => (
+          <div class={`mountains-what__item reveal d${i % 3 + 1}`}>
+            <h3 class="mountains-what__title">{item.title}</h3>
+            <p class="t-body">{item.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="mountains-what__bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- Locations -->
+  <section class="mountains-places section frame" aria-label="Locations">
+    <span class="t-label t-label--warm reveal">Where we go</span>
+    <div class="mountains-places__grid">
+      {[
+        { name: 'Greater Caucasus', note: 'Georgia & Armenia', bg: 'linear-gradient(160deg, #C19763 0%, #6B4F33 70%, #3A2A18 100%)' },
+        { name: 'Carpathians', note: 'Ukraine & Romania', bg: 'linear-gradient(160deg, #8E6B40 0%, #4A371F 100%)' },
+        { name: 'Pontic Alps', note: 'Eastern Turkey', bg: 'linear-gradient(160deg, #A67C4D 0%, #3A2A18 100%)' },
+      ].map((place, i) => (
+        <div class={`mountains-place reveal d${i + 1}`}>
+          <div class="img-slot img-slot--wide" style={`background: ${place.bg};`} aria-hidden="true"></div>
+          <div class="mountains-place__info">
+            <h3 class="mountains-place__name">{place.name}</h3>
+            <span class="t-label">{place.note}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <QuoteBlock
+    quote="Altitude clarifies. Not because the air is thinner. Because there is nothing else to be."
+    author="Yakov Rajuna"
+    centered
+  />
+
+  <CTASection
+    label="Interested in mountain work"
+    title="These journeys are announced to the community first."
+    body="Join the Telegram channel to hear about upcoming expeditions, or write directly with questions."
+    primaryHref="https://t.me/yakovrajuna"
+    primaryLabel="Join Telegram"
+    secondaryHref="/connect"
+    secondaryLabel="Write directly"
+  />
+
+</PageLayout>
+
+<style>
+  .mountains-intro { background: var(--pg-mtn-bg); }
+  .mountains-intro__inner { display: flex; flex-direction: column; gap: var(--s-8); }
+  .mountains-intro .t-lede { color: var(--pg-mtn-mute); }
+  .mountains-intro .t-body { color: var(--pg-mtn-mute); }
+
+  .mountains-what {
+    position: relative;
+    background: var(--pg-mtn-bg-alt);
+    overflow: hidden;
+  }
+  .mountains-what__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 80% 20%, rgba(200,190,165,0.20), transparent 60%);
+    pointer-events: none;
+  }
+  .mountains-what__grid {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-7) var(--s-8);
+    margin-top: var(--s-7);
+  }
+  .mountains-what__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--pg-mtn-fg);
+    margin: 0 0 var(--s-4);
+  }
+  .mountains-what .t-body { color: var(--pg-mtn-mute); }
+
+  .mountains-places { background: var(--pg-mtn-bg); }
+  .mountains-places__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+    margin-top: var(--s-6);
+  }
+  .mountains-place { display: flex; flex-direction: column; gap: var(--s-4); }
+  .mountains-place__info { display: flex; flex-direction: column; gap: var(--s-2); }
+  .mountains-place__name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 1.8vw, 24px);
+    line-height: 1.2;
+    color: var(--pg-mtn-fg);
+    margin: 0;
+  }
+  .mountains-places .t-label { color: var(--pg-mtn-accent); }
+
+  @media (max-width: 860px) {
+    .mountains-what__grid { grid-template-columns: 1fr; }
+    .mountains-places__grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .mountains-places__grid { grid-template-columns: 1fr; }
+  }
+</style>

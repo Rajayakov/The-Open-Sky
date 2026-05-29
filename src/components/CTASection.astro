@@ -1,0 +1,120 @@
+---
+export interface Props {
+  label?: string;
+  title: string;
+  titleEm?: string;
+  body?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  dark?: boolean;
+}
+const {
+  label,
+  title,
+  titleEm,
+  body,
+  primaryHref = '/connect',
+  primaryLabel = 'Get in touch',
+  secondaryHref,
+  secondaryLabel,
+  dark = false,
+} = Astro.props;
+---
+
+<section class={`cta-section section ${dark ? 'cta-section--dark' : ''}`} aria-label="Call to action">
+  <div class="frame">
+    <div class="cta-section__inner">
+      {label && <span class="t-label cta-section__label reveal">{label}</span>}
+
+      <h2 class="cta-section__title reveal d1">
+        {title}{titleEm && <em>{titleEm}</em>}
+      </h2>
+
+      {body && <p class="t-lede cta-section__body reveal d2">{body}</p>}
+
+      <div class="cta-section__actions reveal d3">
+        <a href={primaryHref} class={`btn ${dark ? '' : 'btn--warm'}`}>{primaryLabel}</a>
+        {secondaryHref && secondaryLabel && (
+          <a href={secondaryHref} class="btn-text">{secondaryLabel}</a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    background: var(--bg-inquiry);
+    text-align: center;
+  }
+
+  .cta-section--dark {
+    background: var(--bg-closing);
+    color: var(--bone);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section--dark::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw; height: 50vw;
+    max-width: 600px; max-height: 600px;
+    border-radius: 50%;
+    background: var(--orb);
+    opacity: 0.5;
+    filter: blur(4px);
+    pointer-events: none;
+  }
+
+  .cta-section__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-5);
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .cta-section__label {
+    color: var(--honey);
+  }
+
+  .cta-section__title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(32px, 4.5vw, 62px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--earth);
+    margin: 0;
+  }
+  .cta-section--dark .cta-section__title { color: var(--bone); }
+
+  .cta-section__title em {
+    font-style: italic;
+    color: var(--honey);
+    display: block;
+  }
+
+  .cta-section__body {
+    max-width: 46ch;
+    text-align: center;
+  }
+  .cta-section--dark .cta-section__body { color: rgba(250,247,240,0.65); }
+
+  .cta-section__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--s-4);
+  }
+</style>

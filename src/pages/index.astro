@@ -1,17 +1,50 @@
 ---
-
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import UpcomingSection from '../components/UpcomingSection.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import MentorshipBanner from '../components/MentorshipBanner.astro';
+import MusicSection from '../components/MusicSection.astro';
+import ConnectSection from '../components/ConnectSection.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+  title="The Open Sky — by Yakov Rajuna"
+  description="Retreats in sacred landscapes. Mountain journeys. Online programs. Personal mentorship. An ecosystem of transformational experiences founded by Yakov Rajuna."
+>
+  <Nav />
+  <main>
+    <div class="home-gradient">
+      <Hero />
+      <UpcomingSection />
+      <ProductGrid />
+      <MentorshipBanner />
+      <MusicSection />
+      <ConnectSection />
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  /* Continuous atmospheric gradient — dawn through golden hour to dusk */
+  .home-gradient {
+    background: linear-gradient(
+      180deg,
+      #F7F2E8  0%,
+      #F4EDD8  8%,
+      #EDDABB 20%,
+      #E8D3A0 33%,
+      #DDBC7A 46%,
+      #D0A658 58%,
+      #B88438 68%,
+      #8E6020 78%,
+      #5E3C10 88%,
+      #3A2210 95%,
+      #261408 100%
+    );
+  }
+</style>

@@ -1,0 +1,208 @@
+---
+import TestimonialBlock from './TestimonialBlock.astro';
+---
+
+<section class="ch-mu dark" aria-label="Music">
+
+  <div class="frame">
+
+    <div class="ch-mu__header reveal">
+      <span class="t-label t-label--gold">05</span>
+      <span class="t-label t-label--light" style="margin-left:var(--s-4);">Music</span>
+    </div>
+
+    <div class="ch-mu__grid">
+
+      <div class="ch-mu__text">
+        <h2 class="ch-mu__title reveal d1">
+          Sound as<br />
+          <em>ceremony.</em>
+        </h2>
+        <p class="ch-mu__lede reveal d2">
+          Original recordings and live performance. The attempt to do with sound
+          what fire does with silence.
+        </p>
+        <p class="ch-mu__body reveal d3">
+          Most of it was recorded in specific places — mountain houses, fire clearings,
+          small rooms after long days. The geography is in the sound.
+        </p>
+        <div class="ch-mu__links reveal d4">
+          <a href="/music"                   class="btn-text btn-text--d">Explore the music</a>
+        </div>
+        <div class="ch-mu__testimonial reveal d5">
+          <TestimonialBlock
+            quote="I listened to Bone & Fire every morning for months. The retreat continued at home in a different form."
+            author="Sofia L."
+            detail="Community Member 2025"
+            dark
+          />
+        </div>
+      </div>
+
+      <!-- Abstract sound/rhythm visual -->
+      <div class="ch-mu__visual reveal d2" aria-hidden="true">
+        <div class="ch-mu__waveform">
+          {Array.from({ length: 28 }).map((_, i) => (
+            <div
+              class="ch-mu__bar"
+              style={`height: ${30 + Math.sin(i * 0.7) * 40 + Math.cos(i * 1.3) * 25}%; animation-delay: ${i * 60}ms;`}
+            ></div>
+          ))}
+        </div>
+        <div class="ch-mu__record">
+          <div class="ch-mu__record-inner"></div>
+        </div>
+        <div class="ch-mu__releases">
+          <span class="t-label t-label--gold">Latest release</span>
+          <p class="ch-mu__release-name">Bone &amp; Fire</p>
+          <span class="t-label t-label--light">2024 · 9 tracks</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="ch-mu__bg" aria-hidden="true"></div>
+</section>
+
+<style>
+  .ch-mu {
+    position: relative;
+    background: var(--atm-mus);
+    padding-block: clamp(140px, 20svh, 300px);
+    overflow: hidden;
+  }
+
+  .ch-mu__bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 50% 60% at 100% 50%, rgba(142,90,44,0.09), transparent 55%),
+      radial-gradient(ellipse 40% 30% at 0%   20%, rgba(184,137,82,0.04), transparent 50%);
+    pointer-events: none;
+  }
+
+  .ch-mu__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: clamp(48px, 8svh, 96px);
+  }
+
+  .ch-mu__grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: clamp(48px, 7vw, 100px);
+    align-items: start;
+    position: relative; z-index: 1;
+  }
+
+  .ch-mu__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(48px, 8vw, 110px);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: var(--bone);
+    margin: 0 0 var(--s-7);
+    font-optical-sizing: auto;
+  }
+  .ch-mu__title em { font-style: italic; color: var(--honey); display: block; }
+
+  .ch-mu__lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.6vw, 22px);
+    line-height: 1.55;
+    color: rgba(237, 224, 200, 0.60);
+    margin: 0 0 var(--s-5);
+    font-optical-sizing: auto;
+  }
+
+  .ch-mu__body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.85;
+    color: rgba(237, 224, 200, 0.45);
+    margin: 0;
+  }
+
+  .ch-mu__links { margin-top: var(--s-7); }
+  .ch-mu__testimonial { margin-top: var(--s-9); }
+
+  /* Abstract waveform visual */
+  .ch-mu__waveform {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 120px;
+    margin-bottom: var(--s-6);
+  }
+
+  .ch-mu__bar {
+    flex: 1;
+    background: linear-gradient(180deg,
+      rgba(166,124,77,0.60) 0%,
+      rgba(142,90,44,0.30) 50%,
+      rgba(107,79,51,0.15) 100%
+    );
+    border-radius: 2px;
+    min-height: 8px;
+    animation: barBreath 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes barBreath {
+    from { opacity: 0.4; }
+    to   { opacity: 0.85; }
+  }
+
+  /* Record / disc visual */
+  .ch-mu__record {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at center, var(--ch-7) 28%, transparent 28%),
+      conic-gradient(
+        rgba(166,124,77,0.20) 0deg,
+        rgba(107,79,51,0.10) 90deg,
+        rgba(166,124,77,0.18) 180deg,
+        rgba(107,79,51,0.10) 270deg,
+        rgba(166,124,77,0.20) 360deg
+      );
+    border: 1px solid rgba(166,124,77,0.20);
+    margin-bottom: var(--s-5);
+    animation: recordSpin 20s linear infinite;
+  }
+  .ch-mu__record-inner {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: rgba(166,124,77,0.40);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .ch-mu__visual { position: relative; }
+
+  @keyframes recordSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .ch-mu__releases { display: flex; flex-direction: column; gap: var(--s-2); }
+  .ch-mu__release-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 26px;
+    color: rgba(237, 224, 200, 0.75);
+    margin: 0;
+    letter-spacing: -0.01em;
+    font-optical-sizing: auto;
+  }
+
+  @media (max-width: 960px) {
+    .ch-mu__grid { grid-template-columns: 1fr; }
+    .ch-mu__visual { display: none; }
+  }
+</style>

@@ -1,0 +1,306 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<PageLayout
+  title="Connect — The Open Sky"
+  description="Write to Yakov directly. No forms, no funnels — just an honest message."
+>
+
+  <PageHero
+    label="Connect"
+    title="Start a"
+    titleEm="conversation."
+    lede="Write directly. No forms, no funnels. Just tell me where you are and what you are looking for."
+    slim
+    theme="connect"
+  />
+
+  <!-- Main contact section -->
+  <section class="connect-main section frame" aria-label="How to reach Yakov">
+    <div class="connect-main__inner">
+
+      <!-- Primary: email -->
+      <div class="connect-primary reveal">
+        <span class="t-label t-label--warm">The most direct way</span>
+        <h2 class="connect-primary__heading reveal d1">
+          Write an email.
+        </h2>
+        <p class="t-body reveal d2" style="max-width: 44ch; margin-top: var(--s-3);">
+          A short, honest message is all that's needed. Tell me what is happening in your life right now. What you are looking for. Which of the programs or retreats interests you, if any.
+        </p>
+        <p class="t-body reveal d2" style="max-width: 44ch; margin-top: var(--s-3);">
+          I read everything personally and respond to most things within a few days.
+        </p>
+        <div class="connect-primary__action reveal d3">
+          <a href="mailto:yakov@rajuna.com" class="btn btn--warm">yakov@rajuna.com</a>
+        </div>
+      </div>
+
+      <!-- Secondary options -->
+      <div class="connect-secondary reveal d2">
+        <div class="connect-channel">
+          <div class="connect-channel__header">
+            <span class="connect-channel__icon" aria-hidden="true">✈</span>
+            <h3 class="connect-channel__name">Telegram</h3>
+          </div>
+          <p class="t-body connect-channel__body">
+            The community channel — where upcoming retreats, programs, live events, and new music are announced first. Over 340 people.
+          </p>
+          <a href="https://t.me/yakovrajuna" class="btn btn--outline connect-channel__btn">Join the channel</a>
+        </div>
+
+        <div class="connect-channel">
+          <div class="connect-channel__header">
+            <span class="connect-channel__icon" aria-hidden="true">▷</span>
+            <h3 class="connect-channel__name">YouTube</h3>
+          </div>
+          <p class="t-body connect-channel__body">
+            Live sessions, field recordings, and conversations from retreats. Updated occasionally.
+          </p>
+          <a href="https://youtube.com/@yakovrajuna" class="btn btn--outline connect-channel__btn">Watch</a>
+        </div>
+
+        <div class="connect-channel">
+          <div class="connect-channel__header">
+            <span class="connect-channel__icon" aria-hidden="true">◎</span>
+            <h3 class="connect-channel__name">Instagram</h3>
+          </div>
+          <p class="t-body connect-channel__body">
+            Images from the field — mountains, retreats, the spaces between. Minimal posting.
+          </p>
+          <a href="https://instagram.com/yakovrajuna" class="btn btn--outline connect-channel__btn">Follow</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- What to write -->
+  <section class="connect-guide section" aria-label="What to write">
+    <div class="frame">
+      <span class="t-label t-label--warm reveal">If you are not sure what to write</span>
+      <div class="connect-guide__inner">
+        <div class="connect-guide__text reveal d1">
+          <p class="t-lede" style="max-width: 48ch;">
+            The best messages are short and honest. They do not need to be polished or structured.
+          </p>
+        </div>
+        <div class="connect-guide__prompts reveal d2">
+          {[
+            'What is happening in my life right now.',
+            'What I have tried before that did not work.',
+            'What I am actually looking for — even if I can only describe it approximately.',
+            'Which retreat or program interests me, if any.',
+            'Any questions I have.',
+          ].map((prompt, i) => (
+            <div class="connect-guide__prompt">
+              <span class="connect-guide__prompt-num t-label">{String(i + 1).padStart(2, '0')}</span>
+              <span class="t-body">{prompt}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div class="connect-guide__bg" aria-hidden="true"></div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="connect-faq section frame" aria-label="Common questions">
+    <span class="t-label t-label--warm reveal">Common questions</span>
+    <div class="connect-faq__list">
+      {[
+        {
+          q: 'How quickly will you respond?',
+          a: 'Usually within 2–4 days. Sometimes longer if I am on a retreat or expedition. I will always respond.',
+        },
+        {
+          q: 'Do I need to have experience with this kind of work?',
+          a: 'Not necessarily. Different offerings suit different levels of prior experience. Mention where you are and I can point you in the right direction.',
+        },
+        {
+          q: 'I am not sure which offering is right for me. Can you help?',
+          a: 'Yes. A short description of where you are is enough. I will suggest what makes sense from here.',
+        },
+        {
+          q: 'Is there a waiting list for mentorship?',
+          a: 'There is sometimes a short wait. If you are interested, write now — the sooner I know, the sooner I can let you know when a place opens.',
+        },
+      ].map((item, i) => (
+        <details class={`connect-faq__item reveal d${(i % 3) + 1}`}>
+          <summary class="connect-faq__q">{item.q}</summary>
+          <p class="connect-faq__a t-body">{item.a}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Bottom: location / availability note -->
+  <section class="connect-note section frame" aria-label="Availability note">
+    <div class="connect-note__inner reveal">
+      <div class="connect-note__orb" aria-hidden="true"></div>
+      <div class="connect-note__text">
+        <span class="t-label t-label--warm">A note</span>
+        <p class="t-body" style="max-width: 52ch; margin-top: var(--s-4);">
+          Yakov is based between Tbilisi and Europe. He leads 4–6 retreats per year and takes on a small number of mentorship clients. He is not always available immediately, but he does respond to every message.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  .connect-main { background: var(--pg-con-bg); }
+  .connect-main__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 8vw, 100px);
+    align-items: start;
+  }
+
+  .connect-primary__heading {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+    color: var(--earth);
+    margin: var(--s-5) 0 0;
+  }
+  .connect-primary__action { margin-top: var(--s-7); }
+
+  .connect-secondary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+  .connect-channel {
+    padding: var(--s-6);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+  .connect-channel__header {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+  }
+  .connect-channel__icon {
+    font-size: 18px;
+    color: var(--honey);
+    line-height: 1;
+  }
+  .connect-channel__name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(17px, 1.8vw, 22px);
+    line-height: 1;
+    color: var(--earth);
+    margin: 0;
+  }
+  .connect-channel__body { margin: 0; }
+  .connect-channel__btn { align-self: flex-start; }
+
+  .connect-guide {
+    position: relative;
+    background: var(--pg-con-bg);
+    overflow: hidden;
+  }
+  .connect-guide__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 90% 50%, rgba(232,198,138,0.10), transparent 60%);
+    pointer-events: none;
+  }
+  .connect-guide__inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-8);
+    margin-top: var(--s-7);
+    align-items: start;
+  }
+  .connect-guide__prompts {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .connect-guide__prompt {
+    display: flex;
+    gap: var(--s-5);
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .connect-guide__prompt:first-child { border-top: 1px solid var(--rule); }
+  .connect-guide__prompt-num { color: var(--honey); flex-shrink: 0; min-width: 24px; }
+
+  .connect-faq { background: var(--pg-con-bg); }
+  .connect-faq__list {
+    margin-top: var(--s-6);
+    display: flex;
+    flex-direction: column;
+  }
+  .connect-faq__item {
+    border-top: 1px solid var(--rule);
+    padding: var(--s-5) 0;
+  }
+  .connect-faq__item:last-child { border-bottom: 1px solid var(--rule); }
+  .connect-faq__q {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(17px, 1.9vw, 24px);
+    line-height: 1.3;
+    color: var(--earth);
+    cursor: pointer;
+    list-style: none;
+    letter-spacing: -0.01em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-4);
+  }
+  .connect-faq__q::after {
+    content: "+";
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--honey);
+    flex-shrink: 0;
+    transition: transform 300ms ease;
+  }
+  .connect-faq__item[open] .connect-faq__q::after { transform: rotate(45deg); }
+  .connect-faq__a { margin: var(--s-4) 0 0; max-width: 60ch; }
+
+  .connect-note { background: var(--pg-con-bg); }
+  .connect-note__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--s-8);
+    padding: var(--s-8);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+    background: var(--paper);
+    overflow: hidden;
+  }
+  .connect-note__orb {
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: var(--orb);
+    opacity: 0.10;
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 860px) {
+    .connect-main__inner { grid-template-columns: 1fr; }
+    .connect-guide__inner { grid-template-columns: 1fr; }
+  }
+</style>

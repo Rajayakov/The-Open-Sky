@@ -1,0 +1,145 @@
+---
+import ProductCard from './ProductCard.astro';
+
+const categories = [
+  {
+    label: 'Live Retreats',
+    title: 'Gather in sacred places',
+    body: 'Small groups, specific landscapes, precise timing. Each retreat is built around a particular kind of experience — fire, water, stone, silence.',
+    href: '/retreats',
+    bg: 'radial-gradient(ellipse 70% 60% at 35% 35%, rgba(255,228,175,0.65), transparent 60%), linear-gradient(160deg, #C19763 0%, #6B4F33 70%, #3A2A18 100%)',
+    ratio: '4/5',
+  },
+  {
+    label: 'Mountain Journeys',
+    title: 'The mountain as teacher',
+    body: 'Multi-day expeditions into high terrain. Physical challenge as ceremony. The body remembers what the mind forgets.',
+    href: '/mountains',
+    bg: 'radial-gradient(ellipse 60% 50% at 70% 20%, rgba(255,228,175,0.5), transparent 70%), linear-gradient(180deg, #8E6B40 0%, #4A371F 100%)',
+    ratio: '4/5',
+  },
+  {
+    label: 'Online Programs',
+    title: 'Depth without distance',
+    body: 'Structured online pathways for those who cannot travel yet. Built for people who take their inner life seriously.',
+    href: '/programs',
+    bg: 'radial-gradient(ellipse 50% 80% at 50% 10%, rgba(232,198,138,0.55), transparent 65%), linear-gradient(180deg, #B89A6B 0%, #6B4F33 100%)',
+    ratio: '4/5',
+  },
+  {
+    label: 'Mentorship',
+    title: 'One-on-one, unhurried',
+    body: 'Private accompaniment over months. For people navigating real transitions — not life optimization.',
+    href: '/mentorship',
+    bg: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(232,198,138,0.45), transparent 65%), linear-gradient(170deg, #4A371F 0%, #2E2A24 100%)',
+    ratio: '4/5',
+  },
+  {
+    label: 'Music & Творчество',
+    title: 'Creative work and sound',
+    body: 'Original music, soundscapes, and creative projects. Sound as a medium for the kind of depth that words reach for but rarely find.',
+    href: '/music',
+    bg: 'radial-gradient(ellipse 60% 80% at 30% 40%, rgba(255,228,175,0.4), transparent 65%), linear-gradient(150deg, #A67C4D 0%, #3A2A18 100%)',
+    ratio: '4/5',
+  },
+];
+---
+
+<section class="categories section--lg" id="work" aria-label="Work and offerings">
+  <div class="frame">
+
+    <header class="categories__header">
+      <div class="reveal">
+        <span class="t-label t-label--warm">The work</span>
+        <h2 class="categories__title reveal d1">
+          Five ways in.
+          <em>One direction.</em>
+        </h2>
+      </div>
+      <p class="t-lede categories__lede reveal d2">
+        Each path is different. All of them ask the same thing of you.
+      </p>
+    </header>
+
+    <div class="categories__grid">
+      {categories.map((cat, i) => (
+        <div class={`categories__item reveal d${Math.min(i + 1, 5)}`}>
+          <ProductCard {...cat} />
+        </div>
+      ))}
+    </div>
+
+  </div>
+
+  <div class="categories__bg" aria-hidden="true"></div>
+</section>
+
+<style>
+  .categories {
+    position: relative;
+    background: var(--bg-warm);
+    overflow: hidden;
+  }
+
+  .categories__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,198,138,0.12), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .categories__header {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6vw;
+    align-items: end;
+    margin-bottom: clamp(40px, 8svh, 80px);
+  }
+
+  .categories__title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--earth);
+    margin: var(--s-4) 0 0;
+    max-width: 14ch;
+  }
+  .categories__title em {
+    font-style: italic;
+    color: var(--honey);
+    display: block;
+  }
+
+  .categories__lede { max-width: 40ch; }
+
+  .categories__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--s-4);
+  }
+
+  @media (max-width: 1100px) {
+    .categories__grid { grid-template-columns: repeat(3, 1fr); }
+    .categories__item:nth-child(4),
+    .categories__item:nth-child(5) {
+      /* let them reflow naturally */
+    }
+  }
+
+  @media (max-width: 720px) {
+    .categories__header { grid-template-columns: 1fr; gap: var(--s-5); }
+    .categories__grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .categories__grid { grid-template-columns: 1fr; }
+  }
+</style>
