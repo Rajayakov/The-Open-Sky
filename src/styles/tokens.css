@@ -27,8 +27,8 @@
   --rule-d:    rgba(250, 247, 240, 0.10);
 
   /* ── Typography ───────────────────────────────────── */
-  /* DM Serif Display — strong architectural display, timeless editorial presence */
-  --display: "DM Serif Display", "Georgia", serif;
+  /* Source Serif 4 — variable editorial serif, strong weight range, timeless and architectural */
+  --display: "Source Serif 4", "Georgia", serif;
   /* Fraunces — optical variable serif, cinematic italic accents */
   --serif: "Fraunces", "Georgia", serif;
   /* Inter Tight — architectural body sans, crisp and precise */
