@@ -30,33 +30,89 @@ import '../styles/global.css';
 </Base>
 
 <style>
-  /* Continuous atmospheric gradient — open sky through sunrise to dusk */
+  /* Navigation over hero photo — warm champagne white, only when not scrolled */
+  /* Wordmark suppressed: the hero bottom carries the brand mark instead */
+  :global(.nav:not(.nav--scrolled) .nav__wordmark) {
+    color: rgba(255, 250, 238, 0.32);
+    text-shadow: none;
+    pointer-events: none;
+  }
+  :global(.nav:not(.nav--scrolled) .nav__link) {
+    color: rgba(250, 244, 230, 0.92);
+    text-shadow:
+      0 0 20px rgba(0, 0, 0, 0.20),
+      0 1px 10px rgba(0, 0, 0, 0.38);
+  }
+  :global(.nav:not(.nav--scrolled) .nav__link:hover) { color: rgba(255, 252, 244, 1); }
+  :global(.nav:not(.nav--scrolled) .nav__link--connect) {
+    color: rgba(250, 244, 230, 0.94);
+    border-color: rgba(250, 244, 230, 0.30);
+  }
+  :global(.nav:not(.nav--scrolled) .nav__social)   {
+    color: rgba(248, 242, 228, 0.60);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.32);
+  }
+  :global(.nav:not(.nav--scrolled) .nav__social:hover) { color: rgba(255, 252, 244, 0.96); opacity: 1; }
+  :global(.nav:not(.nav--scrolled) .nav__burger span) { background: rgba(250, 244, 230, 0.88); }
+
+  /*
+   * Light moving through mountain atmosphere.
+   * Not a gradient — a painted scene.
+   * Each layer is a light source, not a color zone.
+   */
   .home-gradient {
-    background: linear-gradient(
-      180deg,
-      #E8F2F8  0%,    /* pale morning sky */
-      #EAF0F2  1.2%,  /* sky settling */
-      #EEEbE3  2.8%,  /* sky into warm neutral */
-      #F1EBD9  4.5%,  /* warm entering */
-      #F4EDD8  7%,    /* warm ivory */
-      #F2E9CE 11%,
-      #EDDABB 18%,
-      #EAD2A8 24%,
-      #E8D3A0 30%,
-      #E4CA8E 36%,
-      #DDBC7A 43%,
-      #D8B46A 49%,
-      #D0A658 55%,
-      #C89444 61%,
-      #B88438 66%,
-      #A87230 71%,
-      #8E6020 76%,
-      #785018 81%,
-      #5E3C10 86%,
-      #4A2E10 90%,
-      #3A2210 94%,
-      #2E1A0C 97%,
-      #261408 100%
-    );
+    position: relative;
+    isolation: isolate;
+    background:
+      /* Sky glow — cool diffuse light pooling in the upper left */
+      radial-gradient(ellipse 92% 48% at 8% 0%,
+        rgba(172, 205, 238, 0.52) 0%,
+        transparent 62%
+      ),
+      /* Sun — the warm source, upper center-right */
+      radial-gradient(ellipse 96% 50% at 60% 4%,
+        rgba(250, 220, 138, 0.56) 0%,
+        rgba(230, 182, 88, 0.18) 44%,
+        transparent 70%
+      ),
+      /* Golden haze — atmospheric warmth suspended in the middle */
+      radial-gradient(ellipse 88% 36% at 40% 38%,
+        rgba(220, 170, 62, 0.26) 0%,
+        transparent 58%
+      ),
+      /* Ember — the last warmth, lower right */
+      radial-gradient(ellipse 62% 28% at 80% 56%,
+        rgba(185, 105, 28, 0.20) 0%,
+        transparent 52%
+      ),
+      /* Earth shadow — deep dark rising from the ground */
+      radial-gradient(ellipse 130% 52% at 50% 98%,
+        rgba(10, 5, 1, 0.94) 0%,
+        rgba(10, 5, 1, 0.56) 26%,
+        transparent 50%
+      ),
+      /* Atmospheric canvas — the minimal vertical arc */
+      linear-gradient(180deg,
+        #C6DAF0  0%,
+        #DCCFB0 22%,
+        #E6C485 42%,
+        #BC7C34 62%,
+        #602E12 80%,
+        #1A0E06 100%
+      );
+  }
+
+  /* Atmospheric grain — baked into the light, not applied on top */
+  .home-gradient::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.40'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.055;
+    pointer-events: none;
+    z-index: -1;
   }
 </style>

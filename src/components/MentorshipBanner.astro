@@ -39,13 +39,19 @@
   .mentor {
     position: relative;
     padding-block: clamp(80px, 13svh, 160px);
-    background: rgba(28, 16, 6, 0.62);
+    /* Fades in from transparent — no hard section boundary */
+    background: linear-gradient(
+      180deg,
+      transparent           0%,
+      rgba(12, 6, 2, 0.50) 10%,
+      rgba(10, 5, 2, 0.62) 88%,
+      transparent          100%
+    );
     overflow: hidden;
   }
 
   .mentor__bg {
     position: absolute; inset: 0;
-    background: rgba(22, 12, 4, 0.45);
     z-index: 0;
   }
 

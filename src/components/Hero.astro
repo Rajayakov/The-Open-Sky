@@ -4,67 +4,14 @@
 <section class="hero" aria-label="Hero">
 
   <div class="hero__bg" aria-hidden="true">
-    <div class="hero__glow"></div>
+    <img class="hero__img" src="/images/hero-bg.jpg" alt="" />
+    <div class="hero__overlay"></div>
   </div>
 
-  <div class="hero__inner frame">
-
-    <!-- Brand -->
-    <div class="hero__brand reveal">
-      <h1 class="hero__title">The Open Sky</h1>
-      <p class="hero__byline">by Yakov Rajuna</p>
-    </div>
-
-    <!-- Profile — photo + bio -->
-    <div class="hero__profile reveal d1">
-      <div class="hero__portrait" aria-label="Portrait placeholder">
-        <div class="hero__portrait-glow" aria-hidden="true"></div>
-      </div>
-      <p class="hero__bio">
-        Retreat architect. Mountain guide. Musician.<br />
-        Fifteen years of working with groups in difficult terrain —<br />
-        high altitude, ceremony, genuine threshold moments.<br />
-        A quiet practice of helping people navigate real change.
-      </p>
-    </div>
-
-    <!-- Social channels — premium pills -->
-    <div class="hero__channels reveal d2">
-      <a href="https://t.me/yakovrajuna" class="hero__pill" target="_blank" rel="noopener">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215L3.29 9.865c-1.392.54-1.386 1.295-.253 1.629l4.47 1.395 10.35-6.528c.488-.298.937-.14.569.186L9.568 15.366l-.32 4.576c.471 0 .68-.217.938-.467l2.253-2.189 4.68 3.455c.862.476 1.482.23 1.696-.8l3.07-14.43c.313-1.253-.476-1.821-1.687-1.078z" fill="currentColor"/>
-        </svg>
-        <span>Telegram</span>
-      </a>
-      <a href="https://instagram.com/yakovrajuna" class="hero__pill" target="_blank" rel="noopener">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="currentColor" stroke-width="1.6"/>
-          <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/>
-          <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/>
-        </svg>
-        <span>Instagram</span>
-      </a>
-      <a href="https://youtube.com/@yakovrajuna" class="hero__pill" target="_blank" rel="noopener">
-        <svg width="17" height="13" viewBox="0 0 22 16" fill="none" aria-hidden="true">
-          <rect x="0.8" y="0.8" width="20.4" height="14.4" rx="3.8" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M9 4.5l6 3.5-6 3.5V4.5z" fill="currentColor"/>
-        </svg>
-        <span>YouTube</span>
-      </a>
-      <a href="https://vk.com/yakovrajuna" class="hero__pill" target="_blank" rel="noopener">
-        <svg width="17" height="11" viewBox="0 0 24 15" fill="none" aria-hidden="true">
-          <path d="M13.162 14.09H14.9C14.9 14.09 15.42 14.03 15.685 13.745C15.93 13.482 15.922 12.987 15.922 12.987C15.922 12.987 15.888 10.915 16.863 10.607C17.823 10.305 19.062 12.607 20.377 13.49C21.368 14.153 22.12 14.004 22.12 14.004L25.658 13.955C25.658 13.955 27.509 13.843 26.627 12.406C26.553 12.283 26.108 11.306 23.946 9.316C21.68 7.23 21.978 7.563 24.702 3.863C26.366 1.61 27.023 0.243 26.801 -0.336C26.59 -0.892 25.346 -0.748 25.346 -0.748L21.368 -0.724C21.368 -0.724 21.076 -0.763 20.859 -0.633C20.648 -0.504 20.513 -0.207 20.513 -0.207C20.513 -0.207 19.875 1.505 19.024 2.96C17.228 6.026 16.525 6.185 16.238 6.001C15.567 5.57 15.733 4.212 15.733 3.249C15.733 0.26 16.176 -0.975 14.875 -1.296C14.448 -1.4 14.133 -1.468 13.06 -1.478C11.685 -1.493 10.52 -1.474 9.862 -1.162C9.43 -0.958 9.099 -0.503 9.295 -0.478C9.537 -0.447 10.08 -0.336 10.368 0.094C10.74 0.649 10.727 1.89 10.727 1.89C10.727 1.89 10.957 5.597 10.17 6.019C9.63 6.305 8.888 5.718 7.291 2.923C6.468 1.494 5.85 -0.077 5.85 -0.077C5.85 -0.077 5.731 -0.365 5.523 -0.52C5.272 -0.705 4.921 -0.764 4.921 -0.764L1.13 -0.739C1.13 -0.739 0.564 -0.723 0.352 -0.485C0.164 -0.274 0.338 0.138 0.338 0.138C0.338 0.138 3.337 7.089 6.73 10.599C9.838 13.82 13.162 13.59 13.162 13.59V14.09Z" fill="currentColor" transform="translate(0,1) scale(0.88)"/>
-        </svg>
-        <span>VK</span>
-      </a>
-      <a href="/about" class="hero__pill hero__pill--ghost">
-        <span>About me</span>
-      </a>
-      <a href="/connect" class="hero__pill hero__pill--ghost">
-        <span>Contact</span>
-      </a>
-    </div>
-
+  <!-- Brand mark — anchored in the dark zone at the bottom of the landscape -->
+  <div class="hero__mark reveal">
+    <p class="hero__name">The Open Sky</p>
+    <p class="hero__sub">by Yakov Rajuna &nbsp;·&nbsp; The Living Field of Transformation</p>
   </div>
 
 </section>
@@ -73,156 +20,85 @@
   .hero {
     position: relative;
     min-height: 95svh;
-    display: flex;
-    flex-direction: column;
-    background: transparent;
     overflow: hidden;
   }
+
+  /* ─── Background ──────────────────────────────── */
 
   .hero__bg {
     position: absolute; inset: 0; z-index: 0;
   }
 
-  .hero__glow {
-    position: absolute;
-    right: -8vw; top: -10vw;
-    width: 72vw; height: 72vw;
-    max-width: 960px; max-height: 960px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(220,186,112,0.22) 0%, rgba(234,204,144,0.10) 45%, transparent 70%);
-    filter: blur(12px);
+  .hero__img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 32%;
+    display: block;
   }
 
-  .hero__inner {
-    position: relative; z-index: 1;
-    flex: 1;
+  /* Overlay: top-edge shadow for nav legibility, dark bottom for brand */
+  .hero__overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      linear-gradient(to bottom, rgba(5, 2, 1, 0.16) 0%, transparent 14%),
+      linear-gradient(to top, rgba(5, 2, 1, 0.88) 0%, rgba(5, 2, 1, 0.52) 28%, rgba(5, 2, 1, 0.08) 58%, transparent 74%);
+  }
+
+  /* ─── Brand Mark — bottom-left, integrated into landscape ── */
+
+  .hero__mark {
+    position: absolute;
+    top: clamp(200px, 34vh, 300px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding-top: 140px;
-    padding-bottom: clamp(56px, 8vw, 88px);
-    gap: clamp(40px, 5vw, 60px);
-  }
-
-  /* ─── Brand ──────────────────────────────────── */
-
-  .hero__title {
-    font-family: var(--display);
-    font-weight: 600;
-    font-style: normal;
-    font-size: clamp(68px, 11.5vw, 164px);
-    line-height: 0.90;
-    letter-spacing: -0.01em;
-    color: var(--earth);
-    margin: 0;
-    font-optical-sizing: auto;
-  }
-
-  .hero__byline {
-    font-family: var(--mark);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--fg-mute);
-    margin: var(--s-3) 0 0;
-  }
-
-  /* ─── Profile ─────────────────────────────────── */
-
-  .hero__profile {
-    display: flex;
-    align-items: flex-start;
-    gap: clamp(24px, 4vw, 48px);
-    padding-top: clamp(32px, 4vw, 44px);
-    border-top: 1px solid rgba(46, 42, 36, 0.10);
-    max-width: 700px;
-  }
-
-  .hero__portrait {
-    width: clamp(96px, 11vw, 148px);
-    aspect-ratio: 3 / 4;
-    border-radius: var(--r-2);
-    background: linear-gradient(155deg, #D8B880 0%, #A07840 40%, #6A4820 75%, #402810 100%);
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero__portrait-glow {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(circle at 38% 22%, rgba(255,226,150,0.28), transparent 55%),
-      linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.22) 100%);
-  }
-
-  .hero__bio {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: clamp(14px, 1.3vw, 17px);
-    line-height: 1.85;
-    color: var(--fg-mute);
-    margin: 0;
-    padding-top: var(--s-2);
-  }
-
-  /* ─── Social pills ─────────────────────────────── */
-
-  .hero__channels {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--s-3);
-  }
-
-  .hero__pill {
-    display: inline-flex;
+    gap: 12px;
     align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    border-radius: var(--r-pill);
-    border: 1px solid rgba(166, 124, 77, 0.22);
-    background: rgba(255, 252, 244, 0.60);
+    text-align: center;
+    width: max-content;
+  }
+
+  /* Primary brand — large, luminous, reads like a campaign title */
+  .hero__name {
     font-family: var(--mark);
-    font-size: 10.5px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
+    font-size: clamp(28px, 3.6vw, 52px);
+    font-weight: 600;
+    letter-spacing: 0.20em;
     text-transform: uppercase;
-    color: var(--fg-soft);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: border-color 300ms ease, background 300ms ease, color 300ms ease, transform 300ms ease;
-    white-space: nowrap;
+    color: rgba(255, 250, 238, 0.96);
+    margin: 0;
+    line-height: 1;
+    text-shadow:
+      0 0 60px rgba(238, 196, 110, 0.20),
+      0 1px 20px rgba(0, 0, 0, 0.60),
+      0 2px 40px rgba(0, 0, 0, 0.36);
   }
 
-  .hero__pill svg {
-    color: var(--honey);
-    flex-shrink: 0;
+  /* Secondary line — condensed, elegant, single-line */
+  .hero__sub {
+    font-family: var(--mark);
+    font-size: clamp(9px, 0.78vw, 11px);
+    font-weight: 400;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: rgba(245, 232, 210, 0.58);
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.44);
   }
 
-  .hero__pill:hover {
-    border-color: rgba(166, 124, 77, 0.50);
-    background: rgba(255, 252, 244, 0.88);
-    color: var(--earth);
-    transform: translateY(-1px);
-  }
-
-  .hero__pill--ghost {
-    border-color: rgba(46, 42, 36, 0.15);
-    background: transparent;
-  }
-  .hero__pill--ghost:hover {
-    border-color: rgba(46, 42, 36, 0.35);
-    background: rgba(255, 252, 244, 0.50);
-  }
+  /* ─── Mobile ──────────────────────────────────── */
 
   @media (max-width: 768px) {
-    .hero__title  { font-size: clamp(56px, 15vw, 96px); }
-    .hero__inner  { gap: var(--s-7); padding-top: 110px; }
-    .hero__profile { max-width: 100%; }
-  }
-
-  @media (max-width: 480px) {
-    .hero__portrait { width: 80px; }
-    .hero__bio { font-size: 14px; }
+    .hero__mark {
+      top: clamp(160px, 28vh, 240px);
+      left: 50%;
+      transform: translateX(-50%);
+      gap: 10px;
+    }
+    .hero__name { font-size: clamp(24px, 8vw, 36px); }
   }
 </style>

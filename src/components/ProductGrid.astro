@@ -107,11 +107,11 @@ const program = getNextOpenProgram();
     padding-top: var(--s-3);
   }
 
-  /* Full-width portal panel — no box */
+  /* Full-width portal panel — transparent, sits on the atmospheric gradient */
   .portal {
     padding-block: clamp(72px, 10vw, 120px);
-    border-bottom: 1px solid rgba(166, 124, 77, 0.10);
-    background: rgba(252, 248, 238, 0.18);
+    border-bottom: 1px solid rgba(166, 124, 77, 0.08);
+    background: transparent;
     position: relative;
   }
   .portal:last-child { border-bottom: none; }
@@ -187,10 +187,10 @@ const program = getNextOpenProgram();
   }
 
   .portal__event-name {
-    font-family: var(--serif);
-    font-style: italic;
+    font-family: var(--display);
+    font-style: normal;
     font-size: 17px;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--earth);
     line-height: 1.25;
     display: block;

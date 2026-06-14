@@ -74,7 +74,7 @@
   .music {
     position: relative;
     padding-block: clamp(80px, 12svh, 160px);
-    background: rgba(248, 241, 222, 0.45);
+    background: transparent;
     overflow: hidden;
   }
 
@@ -96,15 +96,15 @@
     font-size: clamp(40px, 5.5vw, 76px);
     line-height: 0.92;
     letter-spacing: -0.015em;
-    color: var(--earth);
+    color: rgba(240, 228, 208, 0.88);
     margin: var(--s-4) 0 0;
     font-optical-sizing: auto;
   }
   .music__title em {
     font-style: normal;
-    color: var(--honey);
+    color: rgba(200, 158, 82, 0.85);
     display: block;
-    opacity: 0.82;
+    opacity: 1;
   }
 
   .music__grid {
@@ -161,7 +161,7 @@
     font-weight: 300;
     font-size: clamp(13px, 1.2vw, 16px);
     line-height: 1.85;
-    color: var(--fg-mute);
+    color: rgba(237, 224, 200, 0.42);
     margin: 0;
   }
 
@@ -177,13 +177,13 @@
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--fg-mute);
+    color: rgba(237, 224, 200, 0.45);
     transition: color 260ms ease;
   }
   .music__link:hover { color: var(--honey); }
 
   .music__sep {
-    color: rgba(166,124,77,0.30);
+    color: rgba(200, 158, 82, 0.28);
     font-size: 13px;
     user-select: none;
   }
