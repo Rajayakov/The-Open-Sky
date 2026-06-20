@@ -1,8 +1,9 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import PageHero from '../../components/PageHero.astro';
-import CTASection from '../../components/CTASection.astro';
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
 import { journeys, getJourney } from '../../data/mountains';
+import '../../styles/global.css';
 
 export function getStaticPaths() {
   return journeys.map((j) => ({ params: { slug: j.slug } }));
@@ -11,179 +12,877 @@ export function getStaticPaths() {
 const { slug } = Astro.params;
 const journey = getJourney(slug!);
 if (!journey) return Astro.redirect('/mountains');
+
+const isUpcoming = journey.status === 'upcoming';
+const isSoon     = journey.status === 'soon';
 ---
 
-<PageLayout
-  title={`${journey.title} — The Open Sky`}
+<Base
+  title={`${journey.title} — Mountains — The Open Sky`}
   description={journey.description}
 >
+  <Nav />
+  <main>
 
-  <PageHero
-    label="Mountain Journey"
-    title={journey.title}
-    titleEm={journey.terrain}
-    lede={journey.description}
-    theme="mountain"
-  />
+    <!-- ══════════════════════════════════════════
+         1. HERO
+         ══════════════════════════════════════════ -->
 
-  <!-- Overview -->
-  <section class="mj-overview section frame" aria-label="Journey overview">
-    <div class="mj-overview__grid">
-      <div class="mj-overview__text reveal">
-        <p class="t-lede" style="max-width: 52ch;">
-          {journey.description}
-        </p>
+    <section class="ej-hero" aria-label={journey.title}>
+      <div class="ej-hero__bg" aria-hidden="true"></div>
+      <div class="ej-hero__img" aria-hidden="true">
+        <!-- Photo placeholder — replace with expedition image -->
+        <div class="ej-hero__img-slot" style={`background: ${journey.bg};`}></div>
       </div>
-      <div class="mj-overview__meta reveal d2">
+      <div class="ej-hero__inner frame">
+        <nav class="ej-breadcrumb reveal" aria-label="Breadcrumb">
+          <a href="/mountains" class="ej-breadcrumb__link">Mountains</a>
+          <span class="ej-breadcrumb__sep" aria-hidden="true">→</span>
+          <span class="ej-breadcrumb__current">{journey.title}</span>
+        </nav>
+        <div class="ej-hero__meta reveal d1">
+          <span class="t-label ej-hero__terrain">{journey.terrain}</span>
+          {journey.dateShort && journey.dateShort !== 'TBA' && (
+            <span class="t-label ej-hero__date-label">{journey.dateShort}</span>
+          )}
+        </div>
+        <h1 class="ej-hero__title reveal d2">{journey.title}</h1>
+        {isUpcoming && (
+          <a href="#apply" class="btn btn--ghost-d ej-hero__cta reveal d3">Apply for this expedition</a>
+        )}
+        {isSoon && (
+          <span class="ej-hero__soon reveal d3">Dates to be announced</span>
+        )}
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         2. ABOUT THE JOURNEY
+         ══════════════════════════════════════════ -->
+
+    <section class="ej-about section frame" aria-label="About the journey">
+      <div class="ej-about__grid">
+
+        <div class="ej-about__text reveal">
+          <span class="t-label t-label--warm">About This Journey</span>
+          <h2 class="ej-section-heading">{journey.description}</h2>
+          <p class="t-body ej-about__body">
+            [Detailed description of the expedition — the landscape, the physical experience, the inner dimension. To be written.]
+          </p>
+          <p class="t-body ej-about__body">
+            [What makes this mountain significant. What participants can expect to encounter — physically, emotionally, and in terms of the group process.]
+          </p>
+        </div>
+
+        <div class="ej-about__sidebar reveal d2">
+          <div class="ej-meta-panel">
+            <h3 class="ej-meta-panel__title">Expedition Details</h3>
+            <div class="ej-meta-panel__rows">
+              {[
+                { label: 'Dates',       value: journey.date },
+                { label: 'Location',    value: journey.location },
+                { label: 'Duration',    value: journey.duration },
+                ...(journey.altitude  ? [{ label: 'Altitude',   value: journey.altitude  }] : []),
+                ...(journey.groupSize ? [{ label: 'Group size', value: journey.groupSize }] : []),
+                ...(journey.difficulty ? [{ label: 'Difficulty', value: journey.difficulty }] : []),
+              ].map(row => (
+                <div class="ej-meta-panel__row">
+                  <span class="t-label ej-meta-panel__row-label">{row.label}</span>
+                  <span class="ej-meta-panel__row-val">{row.value}</span>
+                </div>
+              ))}
+            </div>
+            {isUpcoming && (
+              <a href="#apply" class="btn btn--warm ej-meta-panel__cta">Express Interest</a>
+            )}
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         3. ROUTE
+         ══════════════════════════════════════════ -->
+
+    <section class="ej-route section" aria-label="Route">
+      <div class="frame">
+        <span class="t-label t-label--warm reveal">The Route</span>
+        <h2 class="ej-section-heading reveal d1">Day by day.</h2>
+
+        {(journey.structure ?? []).length > 0 ? (
+          <div class="ej-route__phases">
+            {(journey.structure ?? []).map((phase, i) => (
+              <div class={`ej-route__phase reveal d${(i % 3) + 1}`}>
+                <span class="t-label ej-route__phase-label">{phase.phase}</span>
+                <p class="t-body ej-route__phase-body">{phase.description}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class="ej-placeholder reveal d1">
+            <p class="ej-placeholder__text">Route details to be announced.</p>
+          </div>
+        )}
+      </div>
+      <div class="ej-route__bg" aria-hidden="true"></div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         4. HIGHLIGHTS
+         ══════════════════════════════════════════ -->
+
+    <section class="ej-highlights section frame" aria-label="Highlights">
+      <span class="t-label t-label--warm reveal">Highlights</span>
+      <h2 class="ej-section-heading reveal d1">What this journey offers.</h2>
+
+      <div class="ej-highlights__grid">
         {[
-          { label: 'Dates',       value: journey.date },
-          { label: 'Location',    value: journey.location },
-          { label: 'Duration',    value: journey.duration },
-          { label: 'Altitude',    value: journey.altitude },
-          { label: 'Group size',  value: journey.groupSize },
-          { label: 'Difficulty',  value: journey.difficulty },
-        ].map(item => (
-          <div class="mj-overview__meta-row">
-            <span class="t-label">{item.label}</span>
-            <span class="mj-overview__meta-val">{item.value}</span>
-          </div>
-        ))}
-        <div class="mj-overview__cta">
-          <a href="/connect" class="btn btn--warm">Express interest</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Structure -->
-  <section class="mj-structure section" aria-label="Journey structure">
-    <div class="frame">
-      <span class="t-label t-label--warm reveal">The journey</span>
-      <div class="mj-structure__phases">
-        {journey.structure.map((s, i) => (
-          <div class={`mj-structure__phase reveal d${(i % 3) + 1}`}>
-            <span class="t-label mj-structure__phase-label">{s.phase}</span>
-            <p class="t-body mj-structure__phase-body">{s.description}</p>
+          { title: 'The Landscape', body: '[Description of the specific landscape and what it demands and offers.]' },
+          { title: 'The Group',     body: '[Small group dynamic — who comes, how the group works together, the intimacy that forms.]' },
+          { title: 'The Inner Work', body: '[The ceremonies, the silences, the conversations. What happens beyond the physical walking.]' },
+          { title: 'The Return',    body: '[What participants typically carry back. The integration that happens in the weeks that follow.]' },
+        ].map((item, i) => (
+          <div class={`ej-highlight reveal d${(i % 3) + 1}`}>
+            <h3 class="ej-highlight__title">{item.title}</h3>
+            <p class="t-body ej-highlight__body">{item.body}</p>
           </div>
         ))}
       </div>
-    </div>
-    <div class="mj-structure__bg" aria-hidden="true"></div>
-  </section>
+    </section>
 
-  <!-- Who it's for -->
-  <section class="mj-whom section frame" aria-label="Who this is for">
-    <span class="t-label t-label--warm reveal">Who this is for</span>
-    <div class="mj-whom__list">
-      {journey.forWhom.map((item, i) => (
-        <div class={`mj-whom__item reveal d${(i % 3) + 1}`}>
-          <span class="mj-whom__mark" aria-hidden="true">—</span>
-          <p class="t-body">{item}</p>
+    <!-- ══════════════════════════════════════════
+         5. GALLERY
+         ══════════════════════════════════════════ -->
+
+    <section class="ej-gallery section frame" aria-label="Gallery">
+      <span class="t-label t-label--warm reveal">Gallery</span>
+      <h2 class="ej-section-heading reveal d1">In the field.</h2>
+
+      <div class="ej-gallery__grid">
+        {[
+          { ratio: 'landscape', label: 'Gallery · 01' },
+          { ratio: 'portrait',  label: 'Gallery · 02' },
+          { ratio: 'portrait',  label: 'Gallery · 03' },
+          { ratio: 'landscape', label: 'Gallery · 04' },
+          { ratio: 'landscape', label: 'Gallery · 05' },
+          { ratio: 'landscape', label: 'Gallery · 06' },
+        ].map((slot, i) => (
+          <div
+            class={`ej-gallery__slot ej-gallery__slot--${slot.ratio} reveal d${(i % 3) + 1}`}
+            style={`background: ${journey.bg}; opacity: ${0.6 + i * 0.05};`}
+            aria-hidden="true"
+            data-label={slot.label}
+          ></div>
+        ))}
+      </div>
+
+      <p class="ej-gallery__note reveal">Photos and video from this expedition will be published here.</p>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         6. TESTIMONIALS
+         ══════════════════════════════════════════ -->
+
+    <section class="ej-testimonials section" aria-label="Testimonials">
+      <div class="frame">
+        <span class="t-label t-label--warm reveal">From Participants</span>
+        <h2 class="ej-section-heading ej-section-heading--light reveal d1">What people say.</h2>
+
+        <div class="ej-testimonials__grid">
+          {[1, 2, 3].map((n, i) => (
+            <div class={`ej-testimonial reveal d${i + 1}`}>
+              <blockquote class="ej-testimonial__quote">
+                [Testimonial {n} — to be added after the expedition.]
+              </blockquote>
+              <cite class="ej-testimonial__author">
+                <span class="ej-testimonial__name">Name Surname</span>
+                <span class="ej-testimonial__detail">Country · Year</span>
+              </cite>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  </section>
+      </div>
+      <div class="ej-testimonials__bg" aria-hidden="true"></div>
+    </section>
 
-  <CTASection
-    label="Interested in this journey"
-    title="Write a short message."
-    body="Tell me where you are and what you are looking for. Yakov responds personally to each message."
-    primaryHref="/connect"
-    primaryLabel="Express interest"
-    secondaryHref="/mountains"
-    secondaryLabel="All mountain journeys"
-  />
+    <!-- ══════════════════════════════════════════
+         7. PRACTICAL INFORMATION
+         ══════════════════════════════════════════ -->
 
-</PageLayout>
+    <section class="ej-practical section frame" aria-label="Practical information">
+      <span class="t-label t-label--warm reveal">Practical Information</span>
+      <h2 class="ej-section-heading reveal d1">What's included.</h2>
+
+      <div class="ej-practical__grid">
+
+        <div class="ej-practical__col reveal">
+          <h3 class="ej-practical__col-title">Included</h3>
+          <ul class="ej-practical__list">
+            {(journey.included ?? [
+              'All accommodation on route',
+              'All meals',
+              'Guided group work',
+              'Local transport',
+              'Emergency equipment',
+            ]).map(item => (
+              <li class="ej-practical__item">
+                <span class="ej-practical__mark" aria-hidden="true">—</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="ej-practical__col reveal d2">
+          <h3 class="ej-practical__col-title">Not Included</h3>
+          <ul class="ej-practical__list">
+            {[
+              'International flights',
+              'Travel insurance (required)',
+              'Personal gear and equipment',
+              'Optional extensions',
+            ].map(item => (
+              <li class="ej-practical__item">
+                <span class="ej-practical__mark" aria-hidden="true">—</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="ej-practical__col reveal d3">
+          <h3 class="ej-practical__col-title">Who This Is For</h3>
+          <ul class="ej-practical__list">
+            {(journey.forWhom?.length
+              ? journey.forWhom
+              : ['People who are physically prepared for the terrain',
+                 'Those drawn to the inner dimension of pilgrimage',
+                 'People comfortable with uncertainty and remoteness']
+            ).map(item => (
+              <li class="ej-practical__item">
+                <span class="ej-practical__mark" aria-hidden="true">—</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         8. APPLICATION CTA
+         ══════════════════════════════════════════ -->
+
+    <section class="ej-apply section" id="apply" aria-label="Apply">
+      <div class="frame">
+        <div class="ej-apply__inner reveal">
+          <span class="t-label ej-apply__label">
+            {isUpcoming ? 'Applications Open' : 'Stay Informed'}
+          </span>
+          <h2 class="ej-apply__heading">
+            {isUpcoming
+              ? 'Write a short message.'
+              : 'This expedition will be announced soon.'}
+          </h2>
+          <p class="ej-apply__body">
+            {isUpcoming
+              ? `Tell me where you are and what you are looking for. Yakov responds personally to each message.`
+              : `Join the Telegram channel to be notified when applications open for ${journey.title}.`
+            }
+          </p>
+          <div class="ej-apply__actions">
+            {isUpcoming ? (
+              <>
+                <a href="/connect" class="btn">Express interest</a>
+                <a href="https://t.me/yakovrajuna" class="btn btn--ghost-d">Join Telegram</a>
+              </>
+            ) : (
+              <>
+                <a href="https://t.me/yakovrajuna" class="btn">Join Telegram</a>
+                <a href="/mountains" class="btn btn--ghost-d">All expeditions</a>
+              </>
+            )}
+          </div>
+          <p class="ej-apply__note">
+            <a href="/mountains" class="ej-apply__back">← All mountain expeditions</a>
+          </p>
+        </div>
+      </div>
+      <div class="ej-apply__bg" aria-hidden="true"></div>
+    </section>
+
+  </main>
+  <Footer />
+</Base>
 
 <style>
-  .mj-overview { background: var(--pg-mtn-bg); }
-  .mj-overview__grid {
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: clamp(40px, 7vw, 80px);
-    align-items: start;
+
+  /* ── Nav override — white over dark mountain hero ── */
+  :global(.nav:not(.nav--scrolled) .nav__wordmark) {
+    color: rgba(240, 248, 255, 0.30);
+    text-shadow: none;
+    pointer-events: none;
   }
-  .mj-overview__meta {
+  :global(.nav:not(.nav--scrolled) .nav__link) {
+    color: rgba(220, 235, 248, 0.90);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.40);
+  }
+  :global(.nav:not(.nav--scrolled) .nav__link:hover) { color: #fff; }
+  :global(.nav:not(.nav--scrolled) .nav__link--connect) {
+    color: rgba(220, 235, 248, 0.92);
+    border-color: rgba(220, 235, 248, 0.28);
+  }
+  :global(.nav:not(.nav--scrolled) .nav__social) {
+    color: rgba(200, 220, 240, 0.55);
+  }
+  :global(.nav:not(.nav--scrolled) .nav__burger span) { background: rgba(220, 235, 248, 0.88); }
+
+  /* ── Shared section heading ─────────────────────── */
+  .ej-section-heading {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(28px, 3.5vw, 52px);
+    letter-spacing: -0.025em;
+    color: #1E1C18;
+    margin: var(--s-4) 0 var(--s-8);
+    font-optical-sizing: auto;
+    line-height: 1.1;
+  }
+  .ej-section-heading--light { color: rgba(225, 240, 255, 0.94); }
+
+  /* ──────────────────────────────────────────────────
+     1. HERO
+     ────────────────────────────────────────────────── */
+
+  .ej-hero {
+    position: relative;
+    min-height: 88svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .ej-hero__bg {
+    position: absolute; inset: 0; z-index: 1;
+    background:
+      linear-gradient(to bottom,
+        rgba(8, 14, 24, 0.50) 0%,
+        rgba(8, 14, 24, 0.08) 25%,
+        transparent 48%,
+        rgba(6, 10, 18, 0.60) 78%,
+        rgba(4, 8, 14, 0.92) 100%
+      );
+    pointer-events: none;
+  }
+
+  .ej-hero__img {
+    position: absolute; inset: 0; z-index: 0;
+  }
+
+  .ej-hero__img-slot {
+    width: 100%; height: 100%;
+    /* Replace with: <img ... object-fit="cover" /> */
+  }
+
+  .ej-hero__inner {
+    position: relative;
+    z-index: 2;
+    padding-bottom: clamp(64px, 10svh, 120px);
     display: flex;
     flex-direction: column;
     gap: var(--s-4);
-    border: 1px solid rgba(44,42,38,0.12);
-    border-radius: var(--r-2);
-    padding: var(--s-6);
-    background: rgba(255,255,255,0.40);
   }
-  .mj-overview__meta-row {
+
+  .ej-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    margin-bottom: var(--s-3);
+  }
+
+  .ej-breadcrumb__link {
+    font-family: var(--mark);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(160, 200, 240, 0.60);
+    transition: color 280ms;
+  }
+  .ej-breadcrumb__link:hover { color: rgba(200, 230, 255, 0.90); }
+
+  .ej-breadcrumb__sep {
+    font-size: 10px;
+    color: rgba(120, 165, 210, 0.35);
+  }
+
+  .ej-breadcrumb__current {
+    font-family: var(--mark);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(180, 215, 248, 0.80);
+  }
+
+  .ej-hero__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+  }
+
+  .ej-hero__terrain {
+    color: rgba(140, 185, 230, 0.65);
+    letter-spacing: 0.22em;
+  }
+
+  .ej-hero__date-label {
+    color: rgba(120, 170, 220, 0.50);
+    letter-spacing: 0.18em;
+  }
+
+  .ej-hero__title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(60px, 11vw, 160px);
+    line-height: 0.90;
+    letter-spacing: -0.04em;
+    color: rgba(240, 248, 255, 0.96);
+    margin: 0;
+    font-optical-sizing: auto;
+    max-width: 10ch;
+  }
+
+  .ej-hero__soon {
+    font-family: var(--mark);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(140, 185, 230, 0.55);
+  }
+
+  /* ──────────────────────────────────────────────────
+     2. ABOUT
+     ────────────────────────────────────────────────── */
+
+  .ej-about { background: #EDEAE2; }
+
+  .ej-about__grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: clamp(48px, 7vw, 88px);
+    align-items: start;
+  }
+
+  .ej-about__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+
+  .ej-about__body {
+    max-width: 52ch;
+    color: rgba(44, 42, 38, 0.58);
+    margin: 0;
+  }
+
+  /* Meta panel */
+  .ej-meta-panel {
+    border: 1px solid rgba(44, 42, 38, 0.12);
+    border-radius: var(--r-3);
+    padding: var(--s-6);
+    background: rgba(255, 255, 255, 0.55);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+
+  .ej-meta-panel__title {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(44, 42, 38, 0.38);
+    margin: 0;
+    padding-bottom: var(--s-4);
+    border-bottom: 1px solid rgba(44, 42, 38, 0.08);
+  }
+
+  .ej-meta-panel__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ej-meta-panel__row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: var(--s-4);
-    padding-bottom: var(--s-4);
-    border-bottom: 1px solid rgba(44,42,38,0.07);
+    padding: var(--s-3) 0;
+    border-bottom: 1px solid rgba(44, 42, 38, 0.06);
   }
-  .mj-overview__meta-row:last-of-type { border-bottom: none; }
-  .mj-overview__meta-val {
+  .ej-meta-panel__row:last-child { border-bottom: none; }
+
+  .ej-meta-panel__row-label { color: rgba(44, 42, 38, 0.45); }
+
+  .ej-meta-panel__row-val {
     font-family: var(--serif);
     font-style: italic;
-    font-size: 15px;
-    color: var(--pg-mtn-fg);
+    font-size: 14px;
+    color: #2C2A26;
     text-align: right;
   }
-  .mj-overview__cta { margin-top: var(--s-5); }
 
-  .mj-structure {
+  .ej-meta-panel__cta { margin-top: var(--s-3); align-self: stretch; justify-content: center; }
+
+  /* ──────────────────────────────────────────────────
+     3. ROUTE
+     ────────────────────────────────────────────────── */
+
+  .ej-route {
     position: relative;
-    background: var(--pg-mtn-bg-alt);
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(190, 185, 170, 0.18), transparent 60%),
+      linear-gradient(180deg, #DDD9D0 0%, #D4D0C8 100%);
     overflow: hidden;
   }
-  .mj-structure__bg {
+
+  .ej-route__bg {
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 50% at 80% 20%, rgba(190,185,165,0.18), transparent 60%);
+    background: radial-gradient(ellipse 70% 40% at 10% 80%, rgba(160, 155, 140, 0.12), transparent 60%);
     pointer-events: none;
   }
-  .mj-structure__phases {
+
+  .ej-route__phases {
     position: relative; z-index: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 0;
-    border: 1px solid rgba(44,42,38,0.10);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    border: 1px solid rgba(44, 42, 38, 0.10);
+    border-radius: var(--r-3);
+    overflow: hidden;
+    margin-top: var(--s-6);
+  }
+
+  .ej-route__phase {
+    padding: var(--s-6);
+    border-right: 1px solid rgba(44, 42, 38, 0.10);
+    background: rgba(255, 255, 255, 0.35);
+  }
+  .ej-route__phase:last-child { border-right: none; }
+
+  .ej-route__phase-label {
+    color: rgba(100, 90, 78, 0.65);
+    display: block;
+    margin-bottom: var(--s-3);
+  }
+
+  .ej-route__phase-body {
+    color: rgba(44, 42, 38, 0.62);
+    margin: 0;
+  }
+
+  .ej-placeholder {
+    margin-top: var(--s-6);
+    padding: var(--s-6);
+    border: 1px dashed rgba(44, 42, 38, 0.18);
+    border-radius: var(--r-2);
+  }
+
+  .ej-placeholder__text {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: rgba(44, 42, 38, 0.40);
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* ──────────────────────────────────────────────────
+     4. HIGHLIGHTS
+     ────────────────────────────────────────────────── */
+
+  .ej-highlights { background: #EDEAE2; }
+
+  .ej-highlights__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-6) var(--s-8);
+  }
+
+  .ej-highlight__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(20px, 2vw, 28px);
+    letter-spacing: -0.01em;
+    color: #2C2A26;
+    margin: 0 0 var(--s-3);
+    font-optical-sizing: auto;
+  }
+
+  .ej-highlight__body {
+    color: rgba(44, 42, 38, 0.55);
+    margin: 0;
+    font-style: italic;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* ──────────────────────────────────────────────────
+     5. GALLERY
+     ────────────────────────────────────────────────── */
+
+  .ej-gallery { background: #EDEAE2; }
+
+  .ej-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 240px;
+    gap: var(--s-3);
+  }
+
+  .ej-gallery__slot {
     border-radius: var(--r-2);
     overflow: hidden;
-    margin-top: var(--s-7);
+    position: relative;
   }
-  .mj-structure__phase {
-    padding: var(--s-6);
-    border-right: 1px solid rgba(44,42,38,0.10);
-    background: rgba(255,255,255,0.30);
-  }
-  .mj-structure__phase:last-child { border-right: none; }
-  .mj-structure__phase-label { color: var(--pg-mtn-accent); display: block; margin-bottom: var(--s-3); }
-  .mj-structure__phase-body { margin: 0; color: var(--pg-mtn-mute); }
 
-  .mj-whom { background: var(--pg-mtn-bg); }
-  .mj-whom__list {
+  .ej-gallery__slot::after {
+    content: attr(data-label);
+    position: absolute; left: 10px; bottom: 8px;
+    font-family: ui-monospace, monospace;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(200, 225, 248, 0.45);
+  }
+
+  .ej-gallery__slot--landscape {
+    grid-column: span 2;
+  }
+
+  .ej-gallery__note {
+    font-family: var(--mark);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(44, 42, 38, 0.30);
+    text-align: center;
+    margin: var(--s-6) 0 0;
+  }
+
+  /* ──────────────────────────────────────────────────
+     6. TESTIMONIALS
+     ────────────────────────────────────────────────── */
+
+  .ej-testimonials {
+    position: relative;
+    background:
+      radial-gradient(ellipse 60% 50% at 30% 20%, rgba(50, 90, 140, 0.28), transparent 60%),
+      linear-gradient(180deg, #0E1A28 0%, #080F18 100%);
+    overflow: hidden;
+  }
+
+  .ej-testimonials__bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 40% at 70% 80%, rgba(30, 60, 100, 0.22), transparent 55%);
+    pointer-events: none;
+  }
+
+  .ej-testimonials__grid {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-6);
+    margin-top: var(--s-6);
+  }
+
+  .ej-testimonial {
     display: flex;
     flex-direction: column;
     gap: var(--s-4);
-    margin-top: var(--s-7);
-    border-top: 1px solid rgba(44,42,38,0.10);
+    padding: var(--s-6);
+    border: 1px solid rgba(100, 150, 210, 0.12);
+    border-radius: var(--r-3);
+    background: rgba(255, 255, 255, 0.04);
   }
-  .mj-whom__item {
-    display: flex;
-    gap: var(--s-5);
-    padding: var(--s-5) 0;
-    border-bottom: 1px solid rgba(44,42,38,0.07);
-    align-items: baseline;
-  }
-  .mj-whom__mark { color: var(--pg-mtn-accent); flex-shrink: 0; }
-  .mj-whom .t-body { color: var(--pg-mtn-mute); margin: 0; }
 
-  @media (max-width: 860px) {
-    .mj-overview__grid { grid-template-columns: 1fr; }
+  .ej-testimonial__quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(15px, 1.4vw, 18px);
+    line-height: 1.7;
+    color: rgba(200, 225, 248, 0.65);
+    margin: 0;
+    font-optical-sizing: auto;
   }
-  @media (max-width: 600px) {
-    .mj-structure__phases { grid-template-columns: 1fr; }
-    .mj-structure__phase { border-right: none; border-bottom: 1px solid rgba(44,42,38,0.10); }
-    .mj-structure__phase:last-child { border-bottom: none; }
+
+  .ej-testimonial__author {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-1);
+    font-style: normal;
   }
+
+  .ej-testimonial__name {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(160, 200, 240, 0.70);
+  }
+
+  .ej-testimonial__detail {
+    font-family: var(--mark);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(100, 150, 210, 0.40);
+  }
+
+  /* ──────────────────────────────────────────────────
+     7. PRACTICAL INFORMATION
+     ────────────────────────────────────────────────── */
+
+  .ej-practical { background: #EDEAE2; }
+
+  .ej-practical__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-6) var(--s-8);
+  }
+
+  .ej-practical__col-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 1.8vw, 24px);
+    letter-spacing: -0.01em;
+    color: #2C2A26;
+    margin: 0 0 var(--s-5);
+    font-optical-sizing: auto;
+  }
+
+  .ej-practical__list {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    border-top: 1px solid rgba(44, 42, 38, 0.10);
+    padding-top: var(--s-4);
+  }
+
+  .ej-practical__item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-3);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(44, 42, 38, 0.60);
+    padding-bottom: var(--s-3);
+    border-bottom: 1px solid rgba(44, 42, 38, 0.06);
+  }
+
+  .ej-practical__mark {
+    color: rgba(166, 124, 77, 0.60);
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+
+  /* ──────────────────────────────────────────────────
+     8. APPLICATION CTA
+     ────────────────────────────────────────────────── */
+
+  .ej-apply {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ej-apply__bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 50%, rgba(40, 72, 128, 0.32), transparent 65%),
+      linear-gradient(180deg, #0A1420 0%, #060C16 100%);
+  }
+
+  .ej-apply__inner {
+    position: relative; z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--s-5);
+  }
+
+  .ej-apply__label {
+    color: rgba(140, 185, 230, 0.55);
+  }
+
+  .ej-apply__heading {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(28px, 3.5vw, 52px);
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    color: rgba(225, 240, 255, 0.95);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .ej-apply__body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(160, 200, 240, 0.55);
+    margin: 0;
+  }
+
+  .ej-apply__actions {
+    display: flex;
+    gap: var(--s-4);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--s-3);
+  }
+
+  .ej-apply__note {
+    margin: var(--s-4) 0 0;
+  }
+
+  .ej-apply__back {
+    font-family: var(--mark);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(120, 165, 210, 0.45);
+    transition: color 280ms;
+  }
+  .ej-apply__back:hover { color: rgba(160, 200, 240, 0.75); }
+
+  /* ──────────────────────────────────────────────────
+     RESPONSIVE
+     ────────────────────────────────────────────────── */
+
+  @media (max-width: 960px) {
+    .ej-about__grid     { grid-template-columns: 1fr; }
+    .ej-highlights__grid { grid-template-columns: 1fr; }
+    .ej-testimonials__grid { grid-template-columns: 1fr; }
+    .ej-practical__grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .ej-route__phases   { grid-template-columns: 1fr; }
+    .ej-gallery__grid   { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
+    .ej-gallery__slot--landscape { grid-column: span 2; }
+    .ej-practical__grid { grid-template-columns: 1fr; }
+    .ej-hero__title     { font-size: clamp(48px, 16vw, 80px); }
+  }
+
 </style>

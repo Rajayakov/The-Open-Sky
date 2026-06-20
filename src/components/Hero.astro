@@ -5,13 +5,14 @@
 
   <div class="hero__bg" aria-hidden="true">
     <img class="hero__img" src="/images/hero-bg.jpg" alt="" />
-    <div class="hero__overlay"></div>
+    <!-- No overlay — original photograph brightness preserved -->
   </div>
 
-  <!-- Brand mark — anchored in the dark zone at the bottom of the landscape -->
+  <!-- Brand mark — suspended in the open sky, beneath the sun -->
   <div class="hero__mark reveal">
     <p class="hero__name">The Open Sky</p>
-    <p class="hero__sub">by Yakov Rajuna &nbsp;·&nbsp; The Living Field of Transformation</p>
+    <p class="hero__sub">by Yakov Rajuna</p>
+    <p class="hero__tagline">The Living Field of Transformation</p>
   </div>
 
 </section>
@@ -23,7 +24,7 @@
     overflow: hidden;
   }
 
-  /* ─── Background ──────────────────────────────── */
+  /* ─── Background — photograph untouched ────────── */
 
   .hero__bg {
     position: absolute; inset: 0; z-index: 0;
@@ -35,70 +36,69 @@
     object-fit: cover;
     object-position: center 32%;
     display: block;
+    filter: none;
   }
 
-  /* Overlay: top-edge shadow for nav legibility, dark bottom for brand */
-  .hero__overlay {
-    position: absolute; inset: 0; z-index: 1;
-    background:
-      linear-gradient(to bottom, rgba(5, 2, 1, 0.16) 0%, transparent 14%),
-      linear-gradient(to top, rgba(5, 2, 1, 0.88) 0%, rgba(5, 2, 1, 0.52) 28%, rgba(5, 2, 1, 0.08) 58%, transparent 74%);
-  }
-
-  /* ─── Brand Mark — bottom-left, integrated into landscape ── */
+  /* ─── Brand Mark — floating in open sky ────────── */
 
   .hero__mark {
     position: absolute;
-    top: clamp(200px, 34vh, 300px);
-    left: 50%;
-    transform: translateX(-50%);
+    top: 14%;
+    right: clamp(24px, 4vw, 64px);
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    align-items: center;
-    text-align: center;
-    width: max-content;
+    gap: 10px;
+    align-items: flex-end;
+    text-align: right;
   }
 
-  /* Primary brand — large, luminous, reads like a campaign title */
   .hero__name {
     font-family: var(--mark);
-    font-size: clamp(28px, 3.6vw, 52px);
+    font-size: clamp(32px, 4.2vw, 60px);
     font-weight: 600;
-    letter-spacing: 0.20em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: rgba(255, 250, 238, 0.96);
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.98);
     margin: 0;
     line-height: 1;
-    text-shadow:
-      0 0 60px rgba(238, 196, 110, 0.20),
-      0 1px 20px rgba(0, 0, 0, 0.60),
-      0 2px 40px rgba(0, 0, 0, 0.36);
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
   }
 
-  /* Secondary line — condensed, elegant, single-line */
   .hero__sub {
-    font-family: var(--mark);
-    font-size: clamp(9px, 0.78vw, 11px);
-    font-weight: 400;
-    letter-spacing: 0.20em;
-    text-transform: uppercase;
-    color: rgba(245, 232, 210, 0.58);
+    font-family: var(--sans);
+    font-size: clamp(14px, 1.2vw, 18px);
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.85);
     margin: 0;
     line-height: 1;
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.44);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.20);
+  }
+
+  .hero__tagline {
+    font-family: var(--mark);
+    font-size: clamp(9px, 0.82vw, 12px);
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+    margin: 4px 0 0;
+    line-height: 1;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.18);
   }
 
   /* ─── Mobile ──────────────────────────────────── */
 
   @media (max-width: 768px) {
     .hero__mark {
-      top: clamp(160px, 28vh, 240px);
-      left: 50%;
-      transform: translateX(-50%);
-      gap: 10px;
+      top: 18%;
+      right: clamp(16px, 4vw, 32px);
+      gap: 8px;
     }
-    .hero__name { font-size: clamp(24px, 8vw, 36px); }
+    .hero__name { white-space: normal; }
+    .hero__name { font-size: clamp(26px, 9vw, 40px); }
+    .hero__sub  { font-size: 14px; }
   }
 </style>

@@ -268,10 +268,11 @@ button { cursor: pointer; }
   display: inline-block;
   width: 36px; height: 1px;
   background: currentColor;
-  transition: width 500ms var(--ease);
+  transform-origin: left center;
+  transition: transform 500ms var(--ease);
 }
 .btn-text:hover { gap: 22px; color: var(--honey); }
-.btn-text:hover::after { width: 56px; }
+.btn-text:hover::after { transform: scaleX(1.556); }
 
 .btn-text--d { color: rgba(250,247,240,0.60); }
 .btn-text--d:hover { color: var(--honey); }

@@ -3,36 +3,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CTASection from '../components/CTASection.astro';
 import QuoteBlock from '../components/QuoteBlock.astro';
-
-const programs = [
-  {
-    num: '01',
-    title: 'Inner Cartography',
-    duration: '8 weeks',
-    format: 'Live sessions + async',
-    size: '12 participants',
-    body: 'A structured journey through the terrain of identity, purpose, and direction. Weekly live calls with Yakov, guided practices between sessions, and an intimate cohort of people doing serious inner work.',
-    open: true,
-  },
-  {
-    num: '02',
-    title: 'The Fire Season',
-    duration: '12 weeks',
-    format: 'Cohort-based',
-    size: '8 participants',
-    body: 'A deeper container for people in the middle of a genuine life transition. Combines live sessions, written practice, and one private exchange with Yakov each month. Intensity over comfort.',
-    open: false,
-  },
-  {
-    num: '03',
-    title: 'Roots & Direction',
-    duration: '6 weeks',
-    format: 'Self-paced with live Q&A',
-    size: 'Open enrollment',
-    body: 'An introductory program for those new to this kind of work. Pre-recorded teachings, weekly live Q&A, and a community space for reflection and exchange.',
-    open: true,
-  },
-];
+import { programs } from '../data/programs';
 ---
 
 <PageLayout
@@ -73,11 +44,10 @@ const programs = [
         {programs.map((p, i) => (
           <div class={`programs-item reveal d${(i % 3) + 1}`}>
             <div class="programs-item__header">
-              <span class="t-label programs-item__num">{p.num}</span>
-              {p.open
-                ? <span class="programs-item__status programs-item__status--open">Open</span>
-                : <span class="programs-item__status programs-item__status--closed">Closed</span>
-              }
+              <span class="t-label programs-item__num">{String(i + 1).padStart(2, '0')}</span>
+              <span class={`programs-item__status programs-item__status--${p.status}`}>
+                {p.status === 'open' ? 'Open' : p.status === 'waitlist' ? 'Waitlist' : 'Closed'}
+              </span>
             </div>
             <h2 class="programs-item__title">{p.title}</h2>
             <p class="t-body programs-item__body">{p.body}</p>
@@ -92,14 +62,15 @@ const programs = [
               </span>
               <span class="programs-item__meta-row">
                 <span class="t-label">Group</span>
-                <span class="programs-item__meta-val">{p.size}</span>
+                <span class="programs-item__meta-val">{p.groupSize}</span>
               </span>
             </div>
-            {p.open && (
-              <div class="programs-item__cta">
+            <div class="programs-item__cta">
+              <a href={`/programs/${p.slug}`} class="btn-text">Explore program</a>
+              {p.status !== 'closed' && (
                 <a href="/connect" class="btn btn--warm">Express interest</a>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         ))}
       </div>
@@ -221,6 +192,10 @@ const programs = [
     background: rgba(139,130,117,0.12);
     color: var(--mist);
   }
+  .programs-item__status--waitlist {
+    background: rgba(166,124,77,0.08);
+    color: var(--honey);
+  }
 
   .programs-item__title {
     font-family: var(--serif);
@@ -251,7 +226,13 @@ const programs = [
     font-size: 16px;
     color: var(--fg-soft);
   }
-  .programs-item__cta { padding-top: var(--s-2); }
+  .programs-item__cta {
+    display: flex;
+    align-items: center;
+    gap: var(--s-5);
+    padding-top: var(--s-2);
+    flex-wrap: wrap;
+  }
 
   .programs-how { background: var(--pg-prg-bg); }
   .programs-how__grid {

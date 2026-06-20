@@ -237,10 +237,11 @@
     display: block;
     width: 24px; height: 1px;
     background: var(--earth);
-    transition: transform 400ms var(--ease), opacity 300ms, width 400ms;
+    transform-origin: left center;
+    transition: transform 400ms var(--ease), opacity 300ms;
   }
-  .nav__burger span:last-child { width: 16px; }
-  .nav__burger:hover span:last-child { width: 24px; }
+  .nav__burger span:last-child { transform: scaleX(0.667); }
+  .nav__burger:hover span:last-child { transform: scaleX(1); }
 
   /* Drawer */
   .nav__drawer {
@@ -290,9 +291,9 @@
     color: var(--earth);
     line-height: 1.2;
     font-optical-sizing: auto;
-    transition: color 240ms ease, padding-left 280ms var(--ease);
+    transition: color 240ms ease, transform 280ms var(--ease);
   }
-  .nav__drawer-link:hover { color: var(--honey); padding-left: var(--s-3); }
+  .nav__drawer-link:hover { color: var(--honey); transform: translateX(var(--s-3)); }
 
   .nav__drawer-link--cta {
     color: var(--honey);
