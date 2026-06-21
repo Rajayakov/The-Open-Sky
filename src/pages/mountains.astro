@@ -105,7 +105,6 @@ const testimonials = [
       <div class="pts-hero__overlay" aria-hidden="true"></div>
 
       <div class="pts-hero__inner frame">
-        <p class="pts-hero__label reveal">The Open Sky</p>
         <h1 class="pts-hero__title reveal d1">Path of the Spirit</h1>
         <p class="pts-hero__sub reveal d2">
           Journeys to sacred mountains,<br />
@@ -218,7 +217,6 @@ const testimonials = [
       <div class="frame">
 
         <div class="pts-past__header reveal">
-          <span class="pts-past__label">Where we have been</span>
           <h2 class="pts-past__title">Past Expeditions</h2>
         </div>
 
@@ -335,17 +333,17 @@ const testimonials = [
           <div class="pts-reg__row">
             <div class="pts-reg__field">
               <label class="pts-reg__label" for="reg-name">Name</label>
-              <input class="pts-reg__input" id="reg-name" name="name" type="text" placeholder="Your name" required />
+              <input class="pts-reg__input" id="reg-name" name="name" type="text" autocomplete="name" placeholder="Your name" required />
             </div>
             <div class="pts-reg__field">
               <label class="pts-reg__label" for="reg-tg">Telegram / WhatsApp</label>
-              <input class="pts-reg__input" id="reg-tg" name="telegram" type="text" placeholder="@username or +1 234 567" />
+              <input class="pts-reg__input" id="reg-tg" name="telegram" type="text" autocomplete="tel" placeholder="@username or +1 234 567" />
             </div>
           </div>
 
           <div class="pts-reg__field">
             <label class="pts-reg__label" for="reg-email">Email</label>
-            <input class="pts-reg__input" id="reg-email" name="email" type="email" placeholder="your@email.com" required />
+            <input class="pts-reg__input" id="reg-email" name="email" type="email" autocomplete="email" placeholder="your@email.com" required />
           </div>
 
           <div class="pts-reg__field">
@@ -369,13 +367,15 @@ const testimonials = [
   /* ─── PALETTE ─────────────────────────────────────── */
 
   .pts {
-    --deep:   #080E18;
-    --navy:   #0D1929;
-    --mid:    #14243A;
-    --silver: #6A8099;
-    --sky:    #C8DCF0;
-    --gold:   #C4A862;
-    --bone:   #F0EBE0;
+    --deep:       #080E18;
+    --navy:       #0D1929;
+    --mid:        #14243A;
+    --silver:     #6A8099;
+    --sky:        #C8DCF0;
+    --sky-rgb:    200 220 240;
+    --gold:       #C4A862;
+    --gold-hover: #B8983A;
+    --bone:       #F0EBE0;
   }
 
   /* ─── SHARED BUTTONS ──────────────────────────────── */
@@ -392,7 +392,7 @@ const testimonials = [
     padding: 16px 32px;
     border-radius: var(--r-pill);
     border: 1px solid transparent;
-    transition: all 350ms var(--ease);
+    transition: background-color 350ms var(--ease), border-color 350ms var(--ease), color 350ms var(--ease), transform 350ms var(--ease);
     white-space: nowrap;
     cursor: pointer;
   }
@@ -403,8 +403,8 @@ const testimonials = [
     color: var(--deep);
   }
   .pts-btn--gold:hover {
-    background: #B8983A;
-    border-color: #B8983A;
+    background: var(--gold-hover);
+    border-color: var(--gold-hover);
     transform: translateY(-1px);
   }
 
@@ -493,6 +493,7 @@ const testimonials = [
     color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
+    text-wrap: balance;
   }
 
   .pts-hero__sub {
@@ -501,7 +502,7 @@ const testimonials = [
     font-weight: 300;
     font-size: clamp(17px, 1.7vw, 24px);
     line-height: 1.55;
-    color: rgba(200,220,240,0.52);
+    color: rgb(var(--sky-rgb) / 0.68);
     margin: 0;
     font-optical-sizing: auto;
   }
@@ -677,7 +678,7 @@ const testimonials = [
     font-weight: 300;
     font-size: clamp(15px, 1.4vw, 17px);
     line-height: 1.85;
-    color: rgba(200,220,240,0.52);
+    color: rgb(var(--sky-rgb) / 0.70);
     margin: 0;
     max-width: 48ch;
   }
@@ -705,6 +706,7 @@ const testimonials = [
     color: var(--bone);
     margin: 0 0 clamp(48px, 7vw, 88px);
     font-optical-sizing: auto;
+    text-wrap: balance;
   }
 
   .pts-cards {
@@ -812,11 +814,13 @@ const testimonials = [
     font-weight: 600;
     letter-spacing: 0.20em;
     text-transform: uppercase;
-    color: rgba(200,220,240,0.48);
+    color: rgb(var(--sky-rgb) / 0.55);
     margin-top: var(--s-4);
-    transition: color 300ms var(--ease), gap 400ms var(--ease);
+    padding-block: 8px;
+    margin-block: -8px;
+    transition: color 300ms var(--ease);
   }
-  .pts-card__link:hover { color: var(--gold); gap: 18px; }
+  .pts-card__link:hover { color: var(--gold); }
 
   .pts-card__link-line {
     display: inline-block;
@@ -824,11 +828,11 @@ const testimonials = [
     height: 1px;
     background: currentColor;
     flex-shrink: 0;
-    transform: scaleX(0.74);
+    transform: scaleX(0.74) translateX(0px);
     transform-origin: left center;
     transition: transform 400ms var(--ease);
   }
-  .pts-card__link:hover .pts-card__link-line { transform: scaleX(1); }
+  .pts-card__link:hover .pts-card__link-line { transform: scaleX(1) translateX(4px); }
 
   /* ─── 4. PAST EXPEDITIONS ─────────────────────────── */
 
@@ -988,7 +992,7 @@ const testimonials = [
     font-family: var(--serif);
     font-style: italic;
     font-size: 14px;
-    color: rgba(200,220,240,0.55);
+    color: rgb(var(--sky-rgb) / 0.65);
   }
 
   .pts-tst__journey {
@@ -997,7 +1001,7 @@ const testimonials = [
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(200,220,240,0.28);
+    color: rgb(var(--sky-rgb) / 0.42);
   }
 
   /* ─── 6. GUIDE ────────────────────────────────────── */
@@ -1094,7 +1098,7 @@ const testimonials = [
     font-weight: 300;
     font-size: 15px;
     line-height: 1.85;
-    color: rgba(200,220,240,0.45);
+    color: rgb(var(--sky-rgb) / 0.70);
     margin: 0;
     max-width: 46ch;
   }
@@ -1150,7 +1154,7 @@ const testimonials = [
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(200,220,240,0.32);
+    color: rgb(var(--sky-rgb) / 0.55);
   }
 
   .pts-reg__input {
@@ -1170,7 +1174,7 @@ const testimonials = [
   }
 
   .pts-reg__input::placeholder {
-    color: rgba(200,220,240,0.20);
+    color: rgb(var(--sky-rgb) / 0.42);
   }
 
   .pts-reg__input:focus {
@@ -1233,6 +1237,13 @@ const testimonials = [
   @media (max-width: 400px) {
     .pts-cards { grid-template-columns: 1fr; }
     .pts-hero__title { font-size: clamp(44px, 13vw, 68px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pts * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
   }
 
 </style>
