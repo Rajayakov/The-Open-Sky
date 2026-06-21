@@ -2,166 +2,205 @@
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import { journeys, pastExpeditions } from '../data/mountains';
 import '../styles/global.css';
 
-const upcomingJourneys = journeys.filter(j => j.status === 'upcoming');
-const soonJourneys     = journeys.filter(j => j.status === 'soon');
-
-const calendar = [
-  ...upcomingJourneys.map(j => ({
-    month: j.dateShort.split(' ')[0],
-    name: j.title,
-    location: j.location.split(',')[0],
-    status: 'open' as const,
-    slug: j.slug,
-  })),
-  ...soonJourneys.map(j => ({
-    month: '—',
-    name: j.title,
-    location: j.location.split(',')[0],
-    status: 'soon' as const,
-    slug: null as null,
-  })),
+const upcoming = [
+  {
+    slug: 'kailash-2026',
+    name: 'Kailash',
+    terrain: 'Tibet',
+    date: 'September 20',
+    duration: '10 Days',
+    status: 'open',
+    bg: 'linear-gradient(160deg, #A8C0D8 0%, #4A6888 45%, #1A2C40 100%)',
+  },
+  {
+    slug: 'arunachala-2026',
+    name: 'Arunachala',
+    terrain: 'India',
+    date: 'November',
+    duration: '7 Days',
+    status: 'open',
+    bg: 'linear-gradient(160deg, #D4A87A 0%, #8C5A3A 50%, #3A1E12 100%)',
+  },
+  {
+    slug: null,
+    name: 'Annapurna',
+    terrain: 'Nepal',
+    date: 'May 2027',
+    duration: 'TBA',
+    status: 'soon',
+    bg: 'linear-gradient(160deg, #B8C8D0 0%, #6080A0 45%, #1E3048 100%)',
+  },
+  {
+    slug: null,
+    name: 'Coming Soon',
+    terrain: null,
+    date: null,
+    duration: null,
+    status: 'future',
+    bg: 'linear-gradient(160deg, #1A2030 0%, #0E1420 100%)',
+  },
 ];
 
-const past = pastExpeditions;
+const past = [
+  {
+    name: 'Mardi Himal',
+    terrain: 'Nepal',
+    year: '2025',
+    participants: '12 participants',
+    bg: 'linear-gradient(160deg, #7898B8 0%, #3A5878 50%, #18283A 100%)',
+  },
+  {
+    name: 'Himalayas',
+    terrain: 'India',
+    year: '2024',
+    participants: null,
+    bg: 'linear-gradient(160deg, #A0B4C8 0%, #506880 50%, #1E2C3A 100%)',
+  },
+  {
+    name: 'Georgian Highlands',
+    terrain: 'Georgia',
+    year: '2024',
+    participants: '8 participants',
+    bg: 'linear-gradient(160deg, #C8D0C8 0%, #8A9688 50%, #3A4035 100%)',
+  },
+];
 
-const featuredJourney = upcomingJourneys[0];
-
-const reviews = [
-  { quote: '[Review to be added after the expedition. A personal account of the experience.]', name: 'Name Surname', detail: 'Country · Year' },
-  { quote: '[Review to be added after the expedition. A personal account of the experience.]', name: 'Name Surname', detail: 'Country · Year' },
-  { quote: '[Review to be added after the expedition. A personal account of the experience.]', name: 'Name Surname', detail: 'Country · Year' },
+const testimonials = [
+  {
+    quote: 'I returned quieter. More certain of what matters. The mountain doesn\'t explain itself — and neither does the change.',
+    name: 'Elena K.',
+    location: 'Moscow',
+    journey: 'Mardi Himal 2025',
+  },
+  {
+    quote: 'Yakov holds the space without filling it. That quality is rare. The mountains do the work — he ensures you can receive it.',
+    name: 'David M.',
+    location: 'Berlin',
+    journey: 'Georgian Highlands 2024',
+  },
+  {
+    quote: 'Not transformed in any dramatic way — clarified. Like something blurry for years finally came into focus.',
+    name: 'Maria T.',
+    location: 'Tbilisi',
+    journey: 'Pontic Alps 2024',
+  },
 ];
 ---
 
 <Base
-  title="Mountains — The Open Sky"
-  description="Expeditions to sacred mountains. Kailash. Arunachala. Annapurna. Journeys to places of power and inner transformation, led by Yakov Rajuna."
+  title="Path of the Spirit — The Open Sky"
+  description="Sacred journeys to places of power. Pilgrimages to Kailash, Arunachala, Annapurna and beyond. Led by Yakov Rajuna."
 >
   <Nav />
-  <main>
+  <main class="pts">
 
     <!-- ══════════════════════════════════════════
-         1. MOUNTAINS HERO
+         1. HERO
          ══════════════════════════════════════════ -->
 
-    <section class="mhero" aria-label="Mountains">
-      <div class="mhero__overlay" aria-hidden="true"></div>
-      <div class="mhero__img" aria-hidden="true">
-        <!-- Replace with: <img src="/images/mountains-hero.jpg" alt="" class="mhero__photo" /> -->
-      </div>
-      <div class="mhero__content frame">
-        <span class="mhero__overline t-label reveal">The Open Sky</span>
-        <h1 class="mhero__title reveal d1">Mountains</h1>
-        <p class="mhero__sub reveal d2">
-          Journeys to sacred mountains,<br />places of power and inner transformation.
+    <section class="pts-hero" aria-label="Path of the Spirit">
+      <div class="pts-hero__bg" aria-hidden="true"></div>
+      <div class="pts-hero__overlay" aria-hidden="true"></div>
+
+      <div class="pts-hero__inner frame">
+        <p class="pts-hero__label reveal">The Open Sky</p>
+        <h1 class="pts-hero__title reveal d1">Path of the Spirit</h1>
+        <p class="pts-hero__sub reveal d2">
+          Journeys to sacred mountains,<br />
+          places of power and inner transformation.
         </p>
+        <a href="#upcoming" class="pts-hero__btn reveal d3">Explore Journeys</a>
+      </div>
+
+      <div class="pts-hero__scroll" aria-hidden="true">
+        <span class="pts-hero__scroll-line"></span>
+        <span class="pts-hero__scroll-text">scroll</span>
       </div>
     </section>
 
+
     <!-- ══════════════════════════════════════════
-         2. UPCOMING EXPEDITION — FEATURED
+         2. KAILASH — UPCOMING JOURNEY
          ══════════════════════════════════════════ -->
 
-    {featuredJourney && (
-    <section class="mfeat section" aria-label="Upcoming expedition">
+    <section class="pts-feat" id="upcoming" aria-label="Upcoming journey — Kailash">
       <div class="frame">
 
-        <div class="mfeat__header reveal">
-          <span class="t-label mfeat__label">Upcoming Expedition</span>
-        </div>
+        <p class="pts-feat__label reveal">Upcoming Journey</p>
 
-        <div class="mfeat__block">
-          <div class="mfeat__image reveal">
-            <div class="mfeat__img-placeholder" aria-hidden="true" style={`background: ${featuredJourney.bg};`}>
-              <span class="mfeat__img-label">{featuredJourney.title} · {featuredJourney.terrain}</span>
-            </div>
-            <div class="mfeat__img-badge reveal d2">
-              <span class="mfeat__img-badge-status">Applications Open</span>
+        <div class="pts-feat__body">
+
+          <div class="pts-feat__photo reveal d1">
+            <div class="pts-feat__photo-img" style="background: linear-gradient(160deg, #A8C0D8 0%, #4A6888 45%, #1A2C40 100%);" role="img" aria-label="Mount Kailash, Tibet"></div>
+            <div class="pts-feat__photo-badge">
+              <span class="pts-feat__badge-dot">●</span>
+              <span>4 places remaining</span>
             </div>
           </div>
 
-          <div class="mfeat__info">
-            <div class="mfeat__meta reveal">
-              <span class="mfeat__location">{featuredJourney.terrain}</span>
-              <span class="mfeat__dot" aria-hidden="true">·</span>
-              <span class="mfeat__date">{featuredJourney.dateShort}</span>
-              {featuredJourney.duration && <>
-                <span class="mfeat__dot" aria-hidden="true">·</span>
-                <span class="mfeat__duration">{featuredJourney.duration}</span>
-              </>}
+          <div class="pts-feat__content">
+            <span class="pts-feat__terrain reveal">Tibet · 6,638m · 10 Days</span>
+            <h2 class="pts-feat__title reveal d1">Kailash</h2>
+            <p class="pts-feat__tagline reveal d2">The Abode of Shiva</p>
+
+            <div class="pts-feat__meta reveal d2">
+              <span>September 20–30, 2026</span>
+              <span class="pts-feat__dot">·</span>
+              <span>Tibet</span>
+              <span class="pts-feat__dot">·</span>
+              <span>Max 6 people</span>
             </div>
 
-            <h2 class="mfeat__title reveal d1">{featuredJourney.title}</h2>
-
-            <p class="mfeat__teaser reveal d3">
-              {featuredJourney.description}
+            <p class="pts-feat__copy reveal d3">
+              Mount Kailash has been one of the most revered pilgrimage destinations
+              on Earth for thousands of years. This journey is not tourism.
+              It is an encounter with a place that has transformed seekers,
+              yogis and pilgrims for centuries.
             </p>
 
-            <div class="mfeat__details reveal d3">
-              <div class="mfeat__detail-row">
-                <span class="mfeat__detail-label">Departure</span>
-                <span class="mfeat__detail-val">{featuredJourney.date}</span>
-              </div>
-              <div class="mfeat__detail-row">
-                <span class="mfeat__detail-label">Duration</span>
-                <span class="mfeat__detail-val">{featuredJourney.duration}</span>
-              </div>
-              {featuredJourney.altitude && (
-                <div class="mfeat__detail-row">
-                  <span class="mfeat__detail-label">Altitude</span>
-                  <span class="mfeat__detail-val">{featuredJourney.altitude}</span>
-                </div>
-              )}
-              {featuredJourney.groupSize && (
-                <div class="mfeat__detail-row">
-                  <span class="mfeat__detail-label">Group</span>
-                  <span class="mfeat__detail-val">{featuredJourney.groupSize}</span>
-                </div>
-              )}
-            </div>
-
-            <div class="mfeat__actions reveal d4">
-              <a href={`/mountains/${featuredJourney.slug}`} class="btn mfeat__btn-primary">Explore Journey</a>
-              <a href="/connect" class="btn btn--outline mfeat__btn-secondary">Apply</a>
+            <div class="pts-feat__actions reveal d4">
+              <a href="/mountains/kailash-2026" class="pts-btn pts-btn--gold">View Full Journey</a>
+              <a href="#register" class="pts-btn pts-btn--ghost">Apply Now</a>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </section>
-    )}
+
 
     <!-- ══════════════════════════════════════════
-         3. EXPEDITION CALENDAR
+         3. UPCOMING SCHEDULE
          ══════════════════════════════════════════ -->
 
-    <section class="mcal section" aria-label="Expedition calendar">
+    <section class="pts-schedule section" aria-label="Upcoming expeditions">
       <div class="frame">
 
-        <div class="mcal__header reveal">
-          <span class="t-label mcal__label">2026 Expeditions</span>
-          <h2 class="mcal__heading">Where we go next.</h2>
-        </div>
+        <h2 class="pts-section-title reveal">Where we go next.</h2>
 
-        <div class="mcal__table" role="list">
-          {calendar.map((exp, i) => (
-            <div class={`mcal__row reveal d${(i % 3) + 1}`} role="listitem">
-              <span class="mcal__month">{exp.month}</span>
-              <div class="mcal__info">
-                <span class="mcal__name">{exp.name}</span>
-                <span class="mcal__loc">{exp.location}</span>
+        <div class="pts-cards">
+          {upcoming.map((j, i) => (
+            <div class={`pts-card reveal d${(i % 4) + 1} ${j.status === 'future' ? 'pts-card--future' : ''}`}>
+              <div class="pts-card__img" style={`background: ${j.bg};`} role="img" aria-label={j.name}>
+                <span class="pts-card__img-label">{j.status === 'future' ? 'More to come' : j.name}</span>
+                {j.status === 'soon' && <span class="pts-card__badge">Coming Soon</span>}
               </div>
-              <div class="mcal__right">
-                <span class={`mcal__status mcal__status--${exp.status}`}>
-                  {exp.status === 'open' ? 'Open' : 'Coming Soon'}
-                </span>
-                {exp.slug
-                  ? <a href={`/mountains/${exp.slug}`} class="btn-text mcal__link">View</a>
-                  : <span class="mcal__tba">Dates TBA</span>
-                }
+              <div class="pts-card__info">
+                {j.terrain && <span class="pts-card__region">{j.terrain}</span>}
+                <h3 class="pts-card__name">{j.name}</h3>
+                {j.date && (
+                  <p class="pts-card__meta">
+                    {j.date}{j.duration ? ` · ${j.duration}` : ''}
+                  </p>
+                )}
+                {j.slug && (
+                  <a href={`/mountains/${j.slug}`} class="pts-card__link">
+                    Learn More
+                    <span class="pts-card__link-line" aria-hidden="true"></span>
+                  </a>
+                )}
               </div>
             </div>
           ))}
@@ -169,101 +208,156 @@ const reviews = [
 
       </div>
     </section>
+
 
     <!-- ══════════════════════════════════════════
          4. PAST EXPEDITIONS
          ══════════════════════════════════════════ -->
 
-    <section class="mpast section" aria-label="Past expeditions">
+    <section class="pts-past section" aria-label="Past expeditions">
       <div class="frame">
 
-        <div class="mpast__header reveal">
-          <span class="t-label mpast__label">Past Expeditions</span>
-          <h2 class="mpast__heading">Where we have been.</h2>
+        <div class="pts-past__header reveal">
+          <span class="pts-past__label">Where we have been</span>
+          <h2 class="pts-past__title">Past Expeditions</h2>
         </div>
 
-        <div class="mpast__grid">
-          {past.map((exp, i) => (
-            <article class={`mpast__card reveal d${(i % 3) + 1}`}>
-              <div class="mpast__card-img" style={`background: ${exp.bg};`} aria-hidden="true">
-                <span class="mpast__card-region">{exp.region}</span>
-                <div class="mpast__card-video">
-                  <span class="mpast__play" aria-hidden="true">▷</span>
-                  <span>Video · coming soon</span>
-                </div>
-              </div>
-              <div class="mpast__card-body">
-                <h3 class="mpast__card-name">{exp.name}</h3>
-                <p class="mpast__card-summary">{exp.summary}</p>
-                <div class="mpast__card-footer">
-                  <span class="mpast__card-reviews">Reviews · coming soon</span>
-                  <a href="/connect" class="btn-text mpast__card-cta">See Experience</a>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         5. REVIEWS
-         ══════════════════════════════════════════ -->
-
-    <section class="mrev section" aria-label="Reviews">
-      <div class="frame">
-
-        <div class="mrev__header reveal">
-          <span class="t-label mrev__label">From Participants</span>
-          <h2 class="mrev__heading">What people carry back.</h2>
-        </div>
-
-        <div class="mrev__grid">
-          {reviews.map((r, i) => (
-            <div class={`mrev__item reveal d${i + 1}`}>
-              <blockquote class="mrev__quote">
-                <p class="mrev__quote-text">{r.quote}</p>
-                <footer class="mrev__quote-footer">
-                  <cite class="mrev__cite">
-                    <span class="mrev__cite-name">{r.name}</span>
-                    <span class="mrev__cite-detail">{r.detail}</span>
-                  </cite>
-                </footer>
-              </blockquote>
-              <div class="mrev__video-slot" aria-hidden="true">
-                <span class="mrev__video-icon">▷</span>
-                <span class="mrev__video-label">Video testimonial · coming soon</span>
+        <div class="pts-past-cards">
+          {past.map((p, i) => (
+            <div class={`pts-past-card reveal d${i + 1}`}>
+              <div class="pts-past-card__img" style={`background: ${p.bg};`} role="img" aria-label={p.name}></div>
+              <div class="pts-past-card__info">
+                <span class="pts-past-card__region">{p.terrain}</span>
+                <h3 class="pts-past-card__name">{p.name}</h3>
+                <p class="pts-past-card__meta">
+                  {p.year}{p.participants ? ` · ${p.participants}` : ''}
+                </p>
+                <a href="/connect" class="pts-card__link">
+                  Photos & Stories
+                  <span class="pts-card__link-line" aria-hidden="true"></span>
+                </a>
               </div>
             </div>
           ))}
         </div>
 
       </div>
-      <div class="mrev__bg" aria-hidden="true"></div>
     </section>
 
+
     <!-- ══════════════════════════════════════════
-         6. APPLICATION CTA
+         5. TESTIMONIALS
          ══════════════════════════════════════════ -->
 
-    <section class="mcta section" aria-label="Join the journey">
+    <section class="pts-tst section" aria-label="Participant voices">
       <div class="frame">
-        <div class="mcta__inner reveal">
-          <span class="t-label mcta__label">Expeditions</span>
-          <h2 class="mcta__title">Join The Journey</h2>
-          <p class="mcta__body">
-            Expeditions are announced to the community first.<br />
-            Applications are reviewed personally by Yakov Rajuna.
-          </p>
-          <div class="mcta__actions">
-            <a href="/connect"              class="btn mcta__btn-apply">Apply</a>
-            <a href="https://t.me/yakovrajuna" class="btn btn--ghost-d">Telegram</a>
-            <a href="/connect"              class="btn btn--ghost-d">Contact</a>
+
+        <p class="pts-tst__label reveal">Participant voices</p>
+
+        <div class="pts-tst__grid">
+          {testimonials.map((t, i) => (
+            <figure class={`pts-tst__card reveal d${i + 1}`}>
+              <span class="pts-tst__mark" aria-hidden="true">"</span>
+              <blockquote class="pts-tst__quote">{t.quote}</blockquote>
+              <figcaption class="pts-tst__attr">
+                <span class="pts-tst__name">{t.name}</span>
+                <span class="pts-tst__journey">{t.location} · {t.journey}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         6. ABOUT THE GUIDE
+         ══════════════════════════════════════════ -->
+
+    <section class="pts-guide section" aria-label="About the guide">
+      <div class="frame">
+        <div class="pts-guide__body">
+
+          <div class="pts-guide__photo reveal">
+            <div class="pts-guide__photo-img" role="img" aria-label="Yakov Rajuna"></div>
           </div>
+
+          <div class="pts-guide__content">
+            <span class="pts-guide__label reveal">Your guide</span>
+            <h2 class="pts-guide__name reveal d1">Yakov Rajuna</h2>
+
+            <div class="pts-guide__stats reveal d2">
+              <div class="pts-guide__stat">
+                <span class="pts-guide__stat-n">20+</span>
+                <span class="pts-guide__stat-l">Years of practice</span>
+              </div>
+              <div class="pts-guide__stat">
+                <span class="pts-guide__stat-n">350+</span>
+                <span class="pts-guide__stat-l">Ceremonies</span>
+              </div>
+              <div class="pts-guide__stat">
+                <span class="pts-guide__stat-n">3 500+</span>
+                <span class="pts-guide__stat-l">Participants</span>
+              </div>
+            </div>
+
+            <p class="pts-guide__roles reveal d2">
+              Guide · Healer · Teacher · Musician · Expedition leader
+            </p>
+
+            <p class="pts-guide__bio reveal d3">
+              Yakov has led groups into sacred terrain across Asia, the Caucasus and
+              Eastern Europe for two decades. Initiations in Peru and Brazil.
+              Each expedition is small, intentional, and led personally.
+            </p>
+
+            <a href="/about" class="pts-btn pts-btn--ghost-sm reveal d4">Learn More</a>
+          </div>
+
         </div>
       </div>
-      <div class="mcta__bg" aria-hidden="true"></div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         7. REGISTRATION
+         ══════════════════════════════════════════ -->
+
+    <section class="pts-reg section" id="register" aria-label="Apply for a journey">
+      <div class="frame frame--sm">
+
+        <h2 class="pts-reg__title reveal">Apply for a Journey</h2>
+        <p class="pts-reg__sub reveal d1">Applications are reviewed personally. Places are limited.</p>
+
+        <form class="pts-reg__form reveal d2" action="/connect" method="GET">
+
+          <div class="pts-reg__row">
+            <div class="pts-reg__field">
+              <label class="pts-reg__label" for="reg-name">Name</label>
+              <input class="pts-reg__input" id="reg-name" name="name" type="text" placeholder="Your name" required />
+            </div>
+            <div class="pts-reg__field">
+              <label class="pts-reg__label" for="reg-tg">Telegram / WhatsApp</label>
+              <input class="pts-reg__input" id="reg-tg" name="telegram" type="text" placeholder="@username or +1 234 567" />
+            </div>
+          </div>
+
+          <div class="pts-reg__field">
+            <label class="pts-reg__label" for="reg-email">Email</label>
+            <input class="pts-reg__input" id="reg-email" name="email" type="email" placeholder="your@email.com" required />
+          </div>
+
+          <div class="pts-reg__field">
+            <label class="pts-reg__label" for="reg-msg">Message</label>
+            <textarea class="pts-reg__input pts-reg__textarea" id="reg-msg" name="message" placeholder="Which journey interests you?" rows="4"></textarea>
+          </div>
+
+          <button class="pts-btn pts-btn--gold pts-reg__submit" type="submit">Apply for Journey</button>
+
+        </form>
+
+      </div>
     </section>
 
   </main>
@@ -272,780 +366,873 @@ const reviews = [
 
 <style>
 
-  /* ─── Nav override — white over dark hero ─── */
-  :global(.nav:not(.nav--scrolled) .nav__wordmark) {
-    color: rgba(230, 242, 255, 0.28);
-    text-shadow: none;
-    pointer-events: none;
-  }
-  :global(.nav:not(.nav--scrolled) .nav__link) {
-    color: rgba(215, 232, 248, 0.90);
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
-  }
-  :global(.nav:not(.nav--scrolled) .nav__link:hover) { color: #fff; }
-  :global(.nav:not(.nav--scrolled) .nav__link--connect) {
-    color: rgba(215, 232, 248, 0.90);
-    border-color: rgba(215, 232, 248, 0.26);
-  }
-  :global(.nav:not(.nav--scrolled) .nav__social) {
-    color: rgba(190, 218, 242, 0.52);
-    text-shadow: none;
-  }
-  :global(.nav:not(.nav--scrolled) .nav__social:hover) { color: #fff; opacity: 1; }
-  :global(.nav:not(.nav--scrolled) .nav__burger span) { background: rgba(215, 232, 248, 0.86); }
+  /* ─── PALETTE ─────────────────────────────────────── */
 
-  /* ─── Local palette ─────────────────────────── */
-  :root {
-    --mtn-deep:   #0B1825;
-    --mtn-navy:   #112035;
-    --mtn-slate:  #1E3A58;
-    --mtn-silver: #7A9EBA;
-    --mtn-ice:    #E8F2F8;
-    --mtn-snow:   #F4F9FC;
-    --mtn-gold:   #C8A85A;
-    --mtn-gold-d: rgba(200, 168, 90, 0.65);
+  .pts {
+    --deep:   #080E18;
+    --navy:   #0D1929;
+    --mid:    #14243A;
+    --silver: #6A8099;
+    --sky:    #C8DCF0;
+    --gold:   #C4A862;
+    --bone:   #F0EBE0;
   }
 
-  /* ══════════════════════════════════════════════
-     1. HERO
-     ══════════════════════════════════════════════ */
+  /* ─── SHARED BUTTONS ──────────────────────────────── */
 
-  .mhero {
-    position: relative;
-    min-height: 88svh;
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
-  }
-
-  .mhero__img {
-    position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 65% 55% at 15% 28%, rgba(80, 130, 190, 0.45) 0%, transparent 62%),
-      radial-gradient(ellipse 55% 45% at 82% 18%, rgba(160, 210, 240, 0.32) 0%, transparent 55%),
-      linear-gradient(172deg, #1A3250 0%, #0E1E32 38%, #081018 70%, #060C14 100%);
-    /* Replace contents with: <img src="/images/mountains-hero.jpg" alt="" style="width:100%;height:100%;object-fit:cover;" /> */
-  }
-
-  .mhero__overlay {
-    position: absolute; inset: 0; z-index: 1;
-    background:
-      linear-gradient(to bottom,
-        rgba(8, 14, 22, 0.48) 0%,
-        rgba(8, 14, 22, 0.08) 28%,
-        transparent 50%,
-        rgba(6, 10, 16, 0.64) 78%,
-        rgba(4, 8, 12, 0.90) 100%
-      );
-  }
-
-  .mhero__content {
-    position: relative; z-index: 2;
-    padding-bottom: clamp(72px, 12svh, 140px);
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-5);
-  }
-
-  .mhero__overline {
-    color: rgba(160, 205, 238, 0.55);
-    letter-spacing: 0.28em;
-  }
-
-  .mhero__title {
-    font-family: var(--display);
-    font-weight: 500;
-    font-size: clamp(80px, 14vw, 200px);
-    line-height: 0.88;
-    letter-spacing: -0.04em;
-    color: rgba(238, 248, 255, 0.97);
-    margin: 0;
-    font-optical-sizing: auto;
-  }
-
-  .mhero__sub {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(16px, 1.6vw, 22px);
-    line-height: 1.65;
-    color: rgba(190, 220, 242, 0.68);
-    margin: 0;
-    max-width: 42ch;
-    font-optical-sizing: auto;
-  }
-
-  /* ══════════════════════════════════════════════
-     2. FEATURED EXPEDITION — KAILASH
-     ══════════════════════════════════════════════ */
-
-  .mfeat {
-    background: var(--mtn-snow);
-  }
-
-  .mfeat__header {
-    margin-bottom: var(--s-7);
-  }
-
-  .mfeat__label {
-    color: var(--mtn-silver);
-    letter-spacing: 0.26em;
-  }
-
-  /* Two-column feature block — image left, content right */
-  .mfeat__block {
-    display: grid;
-    grid-template-columns: 1fr 480px;
-    gap: clamp(40px, 6vw, 80px);
-    align-items: start;
-  }
-
-  /* Image column */
-  .mfeat__image {
-    position: relative;
-  }
-
-  .mfeat__img-placeholder {
-    aspect-ratio: 3/4;
-    border-radius: var(--r-3);
-    overflow: hidden;
-    background:
-      radial-gradient(ellipse 70% 55% at 30% 20%, rgba(100, 160, 220, 0.50) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 40% at 75% 75%, rgba(20, 50, 90, 0.60) 0%, transparent 55%),
-      linear-gradient(160deg, #A8C0D8 0%, #4A6888 45%, #1A2C40 100%);
-    position: relative;
-  }
-
-  .mfeat__img-label {
-    position: absolute; left: 16px; bottom: 14px;
-    font-family: ui-monospace, monospace;
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(185, 218, 245, 0.42);
-  }
-
-  .mfeat__img-badge {
-    position: absolute;
-    top: 20px; left: 20px;
-    background: rgba(255, 255, 255, 0.96);
-    border-radius: var(--r-pill);
-    padding: 8px 18px;
-    backdrop-filter: blur(6px);
-  }
-
-  .mfeat__img-badge-status {
+  .pts-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-family: var(--mark);
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.20em;
     text-transform: uppercase;
-    color: #1A3A58;
+    padding: 16px 32px;
+    border-radius: var(--r-pill);
+    border: 1px solid transparent;
+    transition: all 350ms var(--ease);
+    white-space: nowrap;
+    cursor: pointer;
   }
 
-  /* Info column */
-  .mfeat__info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-5);
-    padding-top: var(--s-4);
+  .pts-btn--gold {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--deep);
+  }
+  .pts-btn--gold:hover {
+    background: #B8983A;
+    border-color: #B8983A;
+    transform: translateY(-1px);
   }
 
-  .mfeat__meta {
+  .pts-btn--ghost {
+    background: transparent;
+    border-color: rgba(200,220,240,0.28);
+    color: rgba(200,220,240,0.80);
+  }
+  .pts-btn--ghost:hover {
+    border-color: rgba(200,220,240,0.55);
+    color: var(--bone);
+    transform: translateY(-1px);
+  }
+
+  .pts-btn--ghost-sm {
+    background: transparent;
+    border-color: rgba(200,220,240,0.25);
+    color: rgba(200,220,240,0.65);
+    padding: 13px 26px;
+    font-size: 10px;
+    font-family: var(--mark);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: var(--r-pill);
+    display: inline-flex;
+    transition: all 350ms var(--ease);
+  }
+  .pts-btn--ghost-sm:hover {
+    border-color: rgba(200,220,240,0.50);
+    color: var(--bone);
+    transform: translateY(-1px);
+  }
+
+  /* ─── 1. HERO ─────────────────────────────────────── */
+
+  .pts-hero {
+    position: relative;
+    height: 100svh;
+    min-height: 640px;
     display: flex;
     align-items: center;
-    gap: var(--s-3);
-    flex-wrap: wrap;
+    overflow: hidden;
   }
 
-  .mfeat__location,
-  .mfeat__date,
-  .mfeat__duration {
+  .pts-hero__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 55% 30%, rgba(40,80,140,0.55) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 80% at 20% 60%, rgba(15,30,60,0.60) 0%, transparent 60%),
+      linear-gradient(165deg, #0D1E38 0%, #060E1C 60%, #030810 100%);
+  }
+
+  .pts-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(6,10,18,0.80) 0%, transparent 60%);
+  }
+
+  .pts-hero__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+    max-width: 780px;
+  }
+
+  .pts-hero__label {
     font-family: var(--mark);
     font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.20em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--mtn-silver);
+    color: rgba(200,220,240,0.40);
+    margin: 0;
   }
 
-  .mfeat__dot {
-    color: rgba(122, 158, 186, 0.40);
-    font-size: 10px;
-  }
-
-  .mfeat__title {
+  .pts-hero__title {
     font-family: var(--display);
-    font-weight: 500;
-    font-size: clamp(52px, 7vw, 100px);
-    line-height: 0.90;
-    letter-spacing: -0.035em;
-    color: var(--mtn-deep);
+    font-weight: 300;
+    font-size: clamp(52px, 8.5vw, 120px);
+    line-height: 0.93;
+    letter-spacing: -0.02em;
+    color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
   }
 
-  .mfeat__subtitle {
+  .pts-hero__sub {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(16px, 1.5vw, 22px);
-    color: var(--mtn-silver);
+    font-size: clamp(17px, 1.7vw, 24px);
+    line-height: 1.55;
+    color: rgba(200,220,240,0.52);
     margin: 0;
-    letter-spacing: 0.01em;
     font-optical-sizing: auto;
   }
 
-  .mfeat__teaser {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 1.85;
-    color: rgba(17, 32, 53, 0.62);
-    margin: 0;
-    max-width: 46ch;
+  .pts-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    padding: 18px clamp(32px, 8vw, 80px);
+    border-radius: var(--r-pill);
+    border: 1px solid rgba(200,220,240,0.22);
+    color: rgba(200,220,240,0.80);
+    background: transparent;
+    transition: all 350ms var(--ease);
+    margin-top: var(--s-4);
+  }
+  .pts-hero__btn:hover {
+    border-color: rgba(200,220,240,0.55);
+    color: var(--bone);
+    transform: translateY(-1px);
   }
 
-  /* Detail rows */
-  .mfeat__details {
+  .pts-hero__scroll {
+    position: absolute;
+    right: var(--frame-x);
+    bottom: 40px;
+    z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 0;
-    border-top: 1px solid rgba(30, 58, 88, 0.10);
-    border-bottom: 1px solid rgba(30, 58, 88, 0.10);
-    padding: var(--s-2) 0;
-  }
-
-  .mfeat__detail-row {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: var(--s-3) 0;
-    border-bottom: 1px solid rgba(30, 58, 88, 0.06);
+    gap: var(--s-3);
   }
-  .mfeat__detail-row:last-child { border-bottom: none; }
 
-  .mfeat__detail-label {
+  .pts-hero__scroll-line {
+    display: block;
+    width: 1px;
+    height: 52px;
+    background: linear-gradient(to bottom, rgba(200,220,240,0.50), rgba(200,220,240,0.05));
+  }
+
+  .pts-hero__scroll-text {
     font-family: var(--mark);
     font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.20em;
-    text-transform: uppercase;
-    color: rgba(122, 158, 186, 0.70);
-  }
-
-  .mfeat__detail-val {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 15px;
-    color: var(--mtn-deep);
-    font-optical-sizing: auto;
-  }
-
-  /* CTA buttons */
-  .mfeat__actions {
-    display: flex;
-    gap: var(--s-3);
-    flex-wrap: wrap;
-    margin-top: var(--s-2);
-  }
-
-  .mfeat__btn-primary {
-    background: var(--mtn-deep);
-    border-color: var(--mtn-deep);
-    color: var(--mtn-ice);
-  }
-  .mfeat__btn-primary:hover {
-    background: var(--mtn-slate);
-    border-color: var(--mtn-slate);
-  }
-
-  .mfeat__btn-secondary {
-    color: var(--mtn-deep);
-    border-color: rgba(17, 32, 53, 0.30);
-  }
-  .mfeat__btn-secondary:hover {
-    background: var(--mtn-deep);
-    border-color: var(--mtn-deep);
-    color: var(--mtn-ice);
-  }
-
-  /* ══════════════════════════════════════════════
-     3. EXPEDITION CALENDAR
-     ══════════════════════════════════════════════ */
-
-  .mcal {
-    background:
-      radial-gradient(ellipse 80% 55% at 10% 0%, rgba(100, 160, 220, 0.18) 0%, transparent 60%),
-      linear-gradient(180deg, #EAF2F8 0%, #DDE8F0 100%);
-  }
-
-  .mcal__header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-3);
-    margin-bottom: var(--s-8);
-  }
-
-  .mcal__label {
-    color: var(--mtn-silver);
     letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.28);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
   }
 
-  .mcal__heading {
-    font-family: var(--display);
-    font-weight: 500;
-    font-size: clamp(28px, 3.5vw, 52px);
-    letter-spacing: -0.025em;
-    color: var(--mtn-deep);
-    margin: 0;
-    font-optical-sizing: auto;
+  /* ─── 2. KAILASH FEATURED ─────────────────────────── */
+
+  .pts-feat {
+    background: var(--deep);
+    padding-block: clamp(80px, 14svh, 160px);
+    border-top: 1px solid rgba(200,220,240,0.05);
   }
 
-  .mcal__table {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .mcal__row {
-    display: grid;
-    grid-template-columns: 120px 1fr auto;
-    align-items: center;
-    gap: var(--s-5);
-    padding: var(--s-6) 0;
-    border-bottom: 1px solid rgba(30, 58, 88, 0.10);
-    transition: background 280ms;
-  }
-  .mcal__row:first-child { border-top: 1px solid rgba(30, 58, 88, 0.10); }
-
-  .mcal__month {
+  .pts-feat__label {
     font-family: var(--mark);
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(122, 158, 186, 0.65);
-    flex-shrink: 0;
+    color: rgba(196,168,98,0.70);
+    margin: 0 0 clamp(40px, 6vw, 80px);
+    display: block;
   }
 
-  .mcal__info {
-    display: flex;
-    align-items: baseline;
-    gap: var(--s-4);
+  .pts-feat__body {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(40px, 6vw, 100px);
+    align-items: center;
   }
 
-  .mcal__name {
-    font-family: var(--display);
-    font-weight: 500;
-    font-size: clamp(22px, 2.5vw, 36px);
-    letter-spacing: -0.02em;
-    color: var(--mtn-deep);
-    font-optical-sizing: auto;
+  .pts-feat__photo {
+    position: relative;
   }
 
-  .mcal__loc {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 15px;
-    color: rgba(30, 58, 88, 0.45);
-    font-optical-sizing: auto;
+  .pts-feat__photo-img {
+    border-radius: var(--r-3);
+    aspect-ratio: 3/4;
+    overflow: hidden;
   }
 
-  .mcal__right {
+  .pts-feat__photo-badge {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
     display: flex;
     align-items: center;
-    gap: var(--s-5);
-    flex-shrink: 0;
-  }
-
-  .mcal__status {
-    font-family: var(--mark);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding: 6px 14px;
+    gap: var(--s-3);
+    background: rgba(6,10,18,0.80);
+    backdrop-filter: blur(10px);
+    padding: 9px 15px;
     border-radius: var(--r-pill);
-  }
-
-  .mcal__status--open {
-    color: #1A3A58;
-    background: rgba(100, 165, 220, 0.18);
-    border: 1px solid rgba(100, 165, 220, 0.28);
-  }
-
-  .mcal__status--soon {
-    color: rgba(122, 158, 186, 0.65);
-    background: rgba(122, 158, 186, 0.08);
-    border: 1px solid rgba(122, 158, 186, 0.16);
-  }
-
-  .mcal__link {
-    color: var(--mtn-deep);
-  }
-  .mcal__link::after { background: var(--mtn-deep); }
-
-  .mcal__tba {
+    border: 1px solid rgba(196,168,98,0.22);
     font-family: var(--mark);
-    font-size: 9px;
-    letter-spacing: 0.16em;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(122, 158, 186, 0.40);
+    color: var(--gold);
   }
 
-  /* ══════════════════════════════════════════════
-     4. PAST EXPEDITIONS
-     ══════════════════════════════════════════════ */
-
-  .mpast {
-    background: var(--mtn-snow);
+  .pts-feat__badge-dot {
+    font-size: 7px;
+    color: var(--gold);
   }
 
-  .mpast__header {
+  .pts-feat__content {
     display: flex;
     flex-direction: column;
-    gap: var(--s-3);
-    margin-bottom: var(--s-8);
+    gap: var(--s-6);
   }
 
-  .mpast__label {
-    color: var(--mtn-silver);
-    letter-spacing: 0.24em;
-  }
-
-  .mpast__heading {
-    font-family: var(--display);
+  .pts-feat__terrain {
+    font-family: var(--mark);
+    font-size: 10px;
     font-weight: 500;
-    font-size: clamp(28px, 3.5vw, 52px);
-    letter-spacing: -0.025em;
-    color: var(--mtn-deep);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.35);
+    display: block;
+  }
+
+  .pts-feat__title {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(64px, 10vw, 140px);
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
   }
 
-  .mpast__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--s-5);
+  .pts-feat__tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 1.8vw, 26px);
+    color: rgba(196,168,98,0.75);
+    margin: 0;
+    line-height: 1.4;
+    font-optical-sizing: auto;
   }
 
-  .mpast__card {
+  .pts-feat__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px var(--s-4);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(200,220,240,0.38);
+    padding-top: var(--s-4);
+    border-top: 1px solid rgba(200,220,240,0.07);
+  }
+
+  .pts-feat__dot { opacity: 0.28; }
+
+  .pts-feat__copy {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(15px, 1.4vw, 17px);
+    line-height: 1.85;
+    color: rgba(200,220,240,0.52);
+    margin: 0;
+    max-width: 48ch;
+  }
+
+  .pts-feat__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    flex-wrap: wrap;
+    margin-top: var(--s-2);
+  }
+
+  /* ─── 3. UPCOMING SCHEDULE ────────────────────────── */
+
+  .pts-schedule {
+    background: var(--navy);
+  }
+
+  .pts-section-title {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--bone);
+    margin: 0 0 clamp(48px, 7vw, 88px);
+    font-optical-sizing: auto;
+  }
+
+  .pts-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(12px, 2vw, 20px);
+  }
+
+  .pts-card {
     display: flex;
     flex-direction: column;
     border-radius: var(--r-3);
     overflow: hidden;
-    border: 1px solid rgba(30, 58, 88, 0.10);
-    background: #fff;
+    background: var(--mid);
+    border: 1px solid rgba(200,220,240,0.06);
     transition: transform 400ms var(--ease), box-shadow 400ms var(--ease);
   }
-  .mpast__card:hover {
+  .pts-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 24px 48px -24px rgba(17, 32, 53, 0.16);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
   }
 
-  .mpast__card-img {
+  .pts-card--future { opacity: 0.35; }
+  .pts-card--future:hover { transform: none; box-shadow: none; }
+
+  .pts-card__img {
     position: relative;
-    aspect-ratio: 16/9;
+    aspect-ratio: 4/3;
     overflow: hidden;
   }
 
-  .mpast__card-region {
-    position: absolute; top: 14px; left: 14px;
-    font-family: var(--mark);
-    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(200, 228, 248, 0.75);
-  }
-
-  .mpast__card-video {
-    position: absolute; bottom: 14px; left: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  .pts-card__img-label {
+    position: absolute;
+    bottom: 14px;
+    left: 16px;
     font-family: var(--mark);
     font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: rgba(240,236,228,0.50);
+  }
+
+  .pts-card__badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(185, 218, 245, 0.48);
+    background: rgba(10,18,30,0.80);
+    border: 1px solid rgba(200,220,240,0.18);
+    color: rgba(200,220,240,0.65);
+    padding: 5px 10px;
+    border-radius: var(--r-pill);
+    backdrop-filter: blur(6px);
   }
 
-  .mpast__play {
-    font-size: 12px;
-    opacity: 0.55;
-  }
-
-  .mpast__card-body {
-    padding: var(--s-5) var(--s-5) var(--s-6);
+  .pts-card__info {
+    padding: clamp(16px, 2.5vw, 24px);
     display: flex;
     flex-direction: column;
-    gap: var(--s-3);
+    gap: var(--s-2);
     flex: 1;
   }
 
-  .mpast__card-name {
-    font-family: var(--display);
+  .pts-card__region {
+    font-family: var(--mark);
+    font-size: 9px;
     font-weight: 500;
-    font-size: clamp(20px, 2vw, 28px);
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: var(--silver);
+    display: block;
+  }
+
+  .pts-card__name {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(20px, 2.5vw, 30px);
+    line-height: 1.1;
     letter-spacing: -0.015em;
-    color: var(--mtn-deep);
+    color: var(--bone);
+    margin: var(--s-1) 0 0;
+    font-optical-sizing: auto;
+  }
+
+  .pts-card__meta {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(200,220,240,0.38);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .pts-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.48);
+    margin-top: var(--s-4);
+    transition: color 300ms var(--ease), gap 400ms var(--ease);
+  }
+  .pts-card__link:hover { color: var(--gold); gap: 18px; }
+
+  .pts-card__link-line {
+    display: inline-block;
+    width: 38px;
+    height: 1px;
+    background: currentColor;
+    flex-shrink: 0;
+    transform: scaleX(0.74);
+    transform-origin: left center;
+    transition: transform 400ms var(--ease);
+  }
+  .pts-card__link:hover .pts-card__link-line { transform: scaleX(1); }
+
+  /* ─── 4. PAST EXPEDITIONS ─────────────────────────── */
+
+  .pts-past {
+    background: var(--deep);
+  }
+
+  .pts-past__header {
+    margin-bottom: clamp(48px, 7vw, 88px);
+  }
+
+  .pts-past__label {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(196,168,98,0.60);
+    display: block;
+    margin-bottom: var(--s-4);
+  }
+
+  .pts-past__title {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
   }
 
-  .mpast__card-summary {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 1.75;
-    color: rgba(17, 32, 53, 0.52);
-    margin: 0;
+  .pts-past-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(12px, 2vw, 20px);
   }
 
-  .mpast__card-footer {
+  .pts-past-card {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-4);
-    margin-top: var(--s-2);
-    padding-top: var(--s-4);
-    border-top: 1px solid rgba(30, 58, 88, 0.07);
+    flex-direction: column;
+    border-radius: var(--r-3);
+    overflow: hidden;
+    background: var(--mid);
+    border: 1px solid rgba(200,220,240,0.05);
+    transition: transform 400ms var(--ease);
   }
+  .pts-past-card:hover { transform: translateY(-3px); }
 
-  .mpast__card-reviews {
-    font-family: var(--mark);
-    font-size: 9px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(122, 158, 186, 0.50);
-  }
-
-  .mpast__card-cta {
-    color: var(--mtn-deep);
-    font-size: 9px;
-  }
-  .mpast__card-cta::after { background: var(--mtn-deep); width: 24px; }
-  .mpast__card-cta:hover { color: var(--mtn-slate); }
-  .mpast__card-cta:hover::after { width: 40px; }
-
-  /* ══════════════════════════════════════════════
-     5. REVIEWS
-     ══════════════════════════════════════════════ */
-
-  .mrev {
-    position: relative;
+  .pts-past-card__img {
+    aspect-ratio: 16/10;
     overflow: hidden;
   }
 
-  .mrev__bg {
-    position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 70% 55% at 20% 20%, rgba(50, 100, 168, 0.30) 0%, transparent 60%),
-      radial-gradient(ellipse 55% 45% at 80% 80%, rgba(18, 48, 90, 0.35) 0%, transparent 60%),
-      linear-gradient(172deg, #0E1E34 0%, #091528 55%, #06101E 100%);
-  }
-
-  .mrev .frame { position: relative; z-index: 1; }
-
-  .mrev__header {
+  .pts-past-card__info {
+    padding: clamp(18px, 2.5vw, 28px);
     display: flex;
     flex-direction: column;
-    gap: var(--s-3);
-    margin-bottom: var(--s-8);
+    gap: var(--s-2);
   }
 
-  .mrev__label {
-    color: rgba(140, 195, 235, 0.50);
-    letter-spacing: 0.24em;
-  }
-
-  .mrev__heading {
-    font-family: var(--display);
+  .pts-past-card__region {
+    font-family: var(--mark);
+    font-size: 9px;
     font-weight: 500;
-    font-size: clamp(28px, 3.5vw, 52px);
-    letter-spacing: -0.025em;
-    color: rgba(225, 242, 255, 0.95);
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: var(--silver);
+    display: block;
+  }
+
+  .pts-past-card__name {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(20px, 2.5vw, 28px);
+    line-height: 1.1;
+    letter-spacing: -0.012em;
+    color: var(--bone);
+    margin: var(--s-1) 0 0;
+    font-optical-sizing: auto;
+  }
+
+  .pts-past-card__meta {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(200,220,240,0.35);
+    margin: 0;
+  }
+
+  /* ─── 5. TESTIMONIALS ─────────────────────────────── */
+
+  .pts-tst {
+    background: var(--navy);
+  }
+
+  .pts-tst__label {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(196,168,98,0.65);
+    display: block;
+    margin-bottom: clamp(40px, 6vw, 72px);
+  }
+
+  .pts-tst__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2.5vw, 28px);
+    align-items: start;
+  }
+
+  .pts-tst__card {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    padding: clamp(20px, 2.5vw, 32px);
+    border: 1px solid rgba(200,220,240,0.07);
+    border-radius: var(--r-3);
+    background: rgba(200,220,240,0.03);
+  }
+
+  .pts-tst__mark {
+    font-family: var(--display);
+    font-size: 40px;
+    line-height: 0.6;
+    color: rgba(196,168,98,0.40);
+    display: block;
+    font-optical-sizing: auto;
+  }
+
+  .pts-tst__quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(14px, 1.4vw, 17px);
+    line-height: 1.70;
+    color: rgba(200,220,240,0.70);
     margin: 0;
     font-optical-sizing: auto;
   }
 
-  .mrev__grid {
+  .pts-tst__attr {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: var(--s-4);
+    border-top: 1px solid rgba(200,220,240,0.07);
+    margin-top: auto;
+  }
+
+  .pts-tst__name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(200,220,240,0.55);
+  }
+
+  .pts-tst__journey {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.28);
+  }
+
+  /* ─── 6. GUIDE ────────────────────────────────────── */
+
+  .pts-guide {
+    background: var(--deep);
+  }
+
+  .pts-guide__body {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: clamp(48px, 8vw, 120px);
+    align-items: center;
+  }
+
+  .pts-guide__photo-img {
+    border-radius: var(--r-3);
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background:
+      linear-gradient(160deg, #2A3848 0%, #18283A 55%, #0E1A28 100%);
+    border: 1px solid rgba(200,220,240,0.06);
+  }
+
+  .pts-guide__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .pts-guide__label {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(196,168,98,0.65);
+    display: block;
+  }
+
+  .pts-guide__name {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: var(--bone);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .pts-guide__stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--s-5);
+    padding: var(--s-6) 0;
+    border-top: 1px solid rgba(200,220,240,0.08);
+    border-bottom: 1px solid rgba(200,220,240,0.08);
   }
 
-  .mrev__item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-5);
+  .pts-guide__stat { display: flex; flex-direction: column; gap: var(--s-2); }
+
+  .pts-guide__stat-n {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(24px, 3vw, 42px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--bone);
+    font-optical-sizing: auto;
   }
 
-  .mrev__quote {
+  .pts-guide__stat-l {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.30);
+  }
+
+  .pts-guide__roles {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(196,168,98,0.55);
     margin: 0;
-    padding: var(--s-6);
-    border: 1px solid rgba(100, 158, 218, 0.12);
-    border-radius: var(--r-3);
-    background: rgba(255, 255, 255, 0.04);
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-5);
-    flex: 1;
   }
 
-  .mrev__quote-text {
+  .pts-guide__bio {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.85;
+    color: rgba(200,220,240,0.45);
+    margin: 0;
+    max-width: 46ch;
+  }
+
+  /* ─── 7. REGISTRATION ─────────────────────────────── */
+
+  .pts-reg {
+    background: var(--navy);
+  }
+
+  .pts-reg__title {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(32px, 4.5vw, 64px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--bone);
+    margin: 0 0 var(--s-4);
+    font-optical-sizing: auto;
+  }
+
+  .pts-reg__sub {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(15px, 1.4vw, 18px);
-    line-height: 1.75;
-    color: rgba(196, 222, 245, 0.68);
-    margin: 0;
+    font-size: clamp(15px, 1.4vw, 19px);
+    color: rgba(200,220,240,0.40);
+    margin: 0 0 clamp(36px, 5vw, 64px);
     font-optical-sizing: auto;
   }
 
-  .mrev__quote-footer { margin-top: auto; }
-
-  .mrev__cite {
+  .pts-reg__form {
     display: flex;
     flex-direction: column;
-    gap: var(--s-1);
-    font-style: normal;
+    gap: var(--s-7);
   }
 
-  .mrev__cite-name {
-    font-family: var(--mark);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(148, 198, 235, 0.72);
+  .pts-reg__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(16px, 3vw, 48px);
   }
 
-  .mrev__cite-detail {
-    font-family: var(--mark);
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(100, 158, 218, 0.38);
-  }
-
-  .mrev__video-slot {
+  .pts-reg__field {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: var(--s-3);
-    padding: var(--s-4);
-    border: 1px dashed rgba(100, 158, 218, 0.16);
-    border-radius: var(--r-2);
-    aspect-ratio: 16/9;
-    justify-content: center;
-    flex-direction: column;
   }
 
-  .mrev__video-icon {
-    font-size: 22px;
-    color: rgba(100, 158, 218, 0.28);
-  }
-
-  .mrev__video-label {
+  .pts-reg__label {
     font-family: var(--mark);
     font-size: 9px;
+    font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(100, 158, 218, 0.32);
-    text-align: center;
+    color: rgba(200,220,240,0.32);
   }
 
-  /* ══════════════════════════════════════════════
-     6. APPLICATION CTA
-     ══════════════════════════════════════════════ */
-
-  .mcta {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .mcta__bg {
-    position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 55% 60% at 50% 50%, rgba(28, 72, 138, 0.28) 0%, transparent 65%),
-      linear-gradient(180deg, #0A1828 0%, #060F1A 100%);
-  }
-
-  .mcta__inner {
-    position: relative; z-index: 1;
-    max-width: 560px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--s-5);
-  }
-
-  .mcta__label {
-    color: rgba(130, 185, 228, 0.50);
-    letter-spacing: 0.26em;
-  }
-
-  .mcta__title {
-    font-family: var(--display);
-    font-weight: 500;
-    font-size: clamp(36px, 5vw, 72px);
-    letter-spacing: -0.03em;
-    line-height: 0.95;
-    color: rgba(228, 244, 255, 0.96);
-    margin: 0;
-    font-optical-sizing: auto;
-  }
-
-  .mcta__body {
+  .pts-reg__input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(200,220,240,0.14);
+    padding: var(--s-4) 0;
     font-family: var(--sans);
+    font-size: 15px;
     font-weight: 300;
-    font-size: 16px;
-    line-height: 1.80;
-    color: rgba(155, 205, 238, 0.52);
-    margin: 0;
+    color: var(--bone);
+    outline: none;
+    transition: border-color 300ms var(--ease);
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
   }
 
-  .mcta__actions {
-    display: flex;
-    align-items: center;
-    gap: var(--s-3);
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: var(--s-3);
+  .pts-reg__input::placeholder {
+    color: rgba(200,220,240,0.20);
   }
 
-  .mcta__btn-apply {
-    background: rgba(230, 245, 255, 0.96);
-    border-color: rgba(230, 245, 255, 0.96);
-    color: var(--mtn-deep);
-  }
-  .mcta__btn-apply:hover {
-    background: #fff;
-    border-color: #fff;
-    transform: translateY(-1px);
+  .pts-reg__input:focus {
+    border-bottom-color: rgba(196,168,98,0.55);
   }
 
-  /* ══════════════════════════════════════════════
-     RESPONSIVE
-     ══════════════════════════════════════════════ */
-
-  @media (max-width: 960px) {
-    .mfeat__block { grid-template-columns: 1fr; }
-    .mfeat__image { max-width: 520px; }
-    .mrev__grid   { grid-template-columns: 1fr; gap: var(--s-7); }
+  .pts-reg__textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.75;
   }
 
-  @media (max-width: 720px) {
-    .mcal__row { grid-template-columns: 80px 1fr; }
-    .mcal__right { grid-column: 2; }
-    .mpast__grid { grid-template-columns: 1fr; }
-    .mhero__title { font-size: clamp(64px, 20vw, 100px); }
+  .pts-reg__submit {
+    align-self: flex-start;
+    margin-top: var(--s-2);
   }
 
-  @media (max-width: 480px) {
-    .mfeat__actions { flex-direction: column; align-items: stretch; }
-    .mcta__actions  { flex-direction: column; align-items: stretch; }
-    .mcal__row { grid-template-columns: 1fr; }
-    .mcal__month { display: none; }
+  /* ─── NAV OVERRIDE ────────────────────────────────── */
+
+  :global(.nav:not(.nav--scrolled) .nav__link) {
+    color: rgba(200,220,240,0.65);
+  }
+  :global(.nav:not(.nav--scrolled) .nav__link--connect) {
+    color: rgba(196,168,98,0.80);
+  }
+  :global(.nav:not(.nav--scrolled) .nav__wordmark) {
+    color: rgba(200,220,240,0.18);
+    pointer-events: none;
+  }
+  :global(.nav:not(.nav--scrolled) .nav__social) {
+    color: rgba(200,220,240,0.45);
+  }
+
+  /* ─── RESPONSIVE ──────────────────────────────────── */
+
+  @media (max-width: 1100px) {
+    .pts-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 900px) {
+    .pts-feat__body { grid-template-columns: 1fr; gap: clamp(32px, 5vw, 56px); }
+    .pts-feat__photo-img { aspect-ratio: 16/9; }
+    .pts-guide__body { grid-template-columns: 1fr; }
+    .pts-guide__photo-img { max-width: 200px; aspect-ratio: 3/4; }
+  }
+
+  @media (max-width: 768px) {
+    .pts-past-cards { grid-template-columns: 1fr 1fr; }
+    .pts-tst__grid { grid-template-columns: 1fr; }
+    .pts-reg__row { grid-template-columns: 1fr; }
+    .pts-guide__stats { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 560px) {
+    .pts-cards { grid-template-columns: 1fr 1fr; }
+    .pts-past-cards { grid-template-columns: 1fr; }
+    .pts-guide__stats { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 400px) {
+    .pts-cards { grid-template-columns: 1fr; }
+    .pts-hero__title { font-size: clamp(44px, 13vw, 68px); }
   }
 
 </style>
