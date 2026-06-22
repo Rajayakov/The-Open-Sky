@@ -1,0 +1,1253 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { getJourney } from '../../data/mountains';
+import '../../styles/global.css';
+
+const journey = getJourney('kailash-2026')!;
+---
+
+<Base
+  title="Kailash 2026 — Sacred Expedition — The Open Sky"
+  description="Ten days around Mount Kailash, Tibet. The kora at altitude through one of the most remote and revered landscapes on earth. Led by Yakov Rajuna."
+>
+  <Nav />
+  <main class="kl">
+
+    <!-- ══════════════════════════════════════════
+         1. HERO
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-hero" aria-label="Kailash 2026 expedition">
+      <img
+        class="kl-hero__img"
+        src="/images/mountains/kailash-hero.jpg"
+        alt="Mount Kailash with prayer flags and stupa, Tibet"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="kl-hero__overlay" aria-hidden="true"></div>
+
+      <div class="kl-hero__inner frame">
+        <nav class="kl-breadcrumb reveal" aria-label="Breadcrumb">
+          <a href="/mountains" class="kl-breadcrumb__link">Mountains</a>
+          <span aria-hidden="true" class="kl-breadcrumb__sep">→</span>
+          <span class="kl-breadcrumb__current">Kailash</span>
+        </nav>
+
+        <div class="kl-hero__tags reveal d1">
+          <span class="kl-hero__tag">Tibet</span>
+          <span class="kl-hero__tag-dot" aria-hidden="true">·</span>
+          <span class="kl-hero__tag">6,638m</span>
+          <span class="kl-hero__tag-dot" aria-hidden="true">·</span>
+          <span class="kl-hero__tag">10 Days</span>
+        </div>
+
+        <h1 class="kl-hero__title reveal d2">Kailash</h1>
+        <p class="kl-hero__sub reveal d2">The Abode of Shiva</p>
+
+        <div class="kl-hero__meta reveal d3">
+          <span>September 20–30, 2026</span>
+          <span class="kl-hero__meta-dot" aria-hidden="true">·</span>
+          <span>Max 6 people</span>
+        </div>
+
+        <a href="#apply" class="kl-hero__cta reveal d4">Apply for this expedition</a>
+      </div>
+
+      <div class="kl-hero__scroll" aria-hidden="true">
+        <span class="kl-hero__scroll-line"></span>
+        <span class="kl-hero__scroll-text">scroll</span>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         2. INTRODUCTION
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-intro" aria-label="Introduction">
+      <div class="frame kl-intro__inner">
+        <p class="kl-intro__text reveal">
+          Mount Kailash has never been climbed. Not for lack of attempt — but because
+          the mountain is considered too sacred to ascend by any tradition that holds
+          it holy. You come not to conquer, but to circumambulate. The kora — three days
+          of walking around the mountain at altitudes above 5,000 metres — is one of the
+          most demanding and most ancient pilgrimage routes on earth.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         3. WHY PEOPLE COME
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-why section" aria-label="Why people come">
+      <div class="frame">
+        <h2 class="kl-section-title reveal">Why People Come</h2>
+
+        <div class="kl-why__grid">
+          {([
+            {
+              n: '01',
+              title: 'Pilgrimage',
+              body: 'To walk around Kailash is to participate in something continuous across more than a thousand years. Hindus, Buddhists, Jains, Bonpo — all traditions converge here. The mountain does not belong to any one of them.',
+            },
+            {
+              n: '02',
+              title: 'Inner Work',
+              body: 'The kora strips away what is not necessary. Three days on foot at altitude, in silence, in small company — what remains is rarely ordinary. People return changed in ways that take months to understand.',
+            },
+            {
+              n: '03',
+              title: 'The Landscape',
+              body: 'The terrain surrounding Kailash — the Barkha Plateau, Lake Manasarovar, the red and black valleys — carries a quality that is difficult to translate into language. You have to be there.',
+            },
+            {
+              n: '04',
+              title: 'The Encounter',
+              body: 'The mountain has never been summited. Not out of inability, but reverence. You do not conquer Kailash. You meet it. That difference in relationship changes something in how you approach the journey.',
+            },
+          ] as const).map((item, i) => (
+            <div class={`kl-why__item reveal d${i + 1}`}>
+              <span class="kl-why__n" aria-hidden="true">{item.n}</span>
+              <h3 class="kl-why__title">{item.title}</h3>
+              <p class="kl-why__body">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         4. THE JOURNEY
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-journey section" aria-label="The journey">
+      <div class="frame">
+        <h2 class="kl-section-title reveal">The Journey</h2>
+
+        <div class="kl-journey__layout">
+
+          <div class="kl-journey__phases">
+            {(journey.structure ?? []).map((phase, i) => (
+              <div class={`kl-phase reveal d${(i % 3) + 1}`}>
+                <span class="kl-phase__label">{phase.phase}</span>
+                <p class="kl-phase__text">{phase.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <aside class="kl-journey__panel reveal d2">
+            <h3 class="kl-panel__title">Expedition Details</h3>
+            <div class="kl-panel__rows">
+              {([
+                { label: 'Dates',      value: journey.date },
+                { label: 'Duration',   value: journey.duration },
+                { label: 'Location',   value: journey.location },
+                { label: 'Altitude',   value: journey.altitude ?? '—' },
+                { label: 'Group',      value: journey.groupSize ?? '—' },
+                { label: 'Difficulty', value: journey.difficulty ?? '—' },
+              ] as const).map(row => (
+                <div class="kl-panel__row">
+                  <span class="kl-panel__row-label">{row.label}</span>
+                  <span class="kl-panel__row-val">{row.value}</span>
+                </div>
+              ))}
+            </div>
+            <a href="#apply" class="kl-panel__cta">Apply for this expedition</a>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         5. WHAT THE EXPEDITION OFFERS
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-offers section" aria-label="What the expedition offers">
+      <div class="frame">
+        <h2 class="kl-section-title--light reveal">What the Expedition Offers</h2>
+
+        <div class="kl-offers__grid">
+          {([
+            {
+              title: 'Personal Accompaniment',
+              body: 'Yakov accompanies the group throughout all ten days — not as a logistics coordinator, but as a guide in the full sense.',
+            },
+            {
+              title: 'Ceremony on the Kora',
+              body: 'Ceremonies at high passes and sacred sites during the three-day circumambulation. Integrated into the walk, not added onto it.',
+            },
+            {
+              title: 'Small Group',
+              body: 'Six participants maximum. The group size is not a marketing choice — it is a condition of the experience.',
+            },
+            {
+              title: 'Full Logistics',
+              body: 'Tibet travel permits, Chinese visas, accommodation, ground transport, and all meals on route fully arranged.',
+            },
+            {
+              title: 'Altitude Support',
+              body: 'Emergency oxygen carried throughout. Two acclimatisation days built in. We do not continue if a participant cannot safely do so.',
+            },
+            {
+              title: 'Integration',
+              body: 'A closing circle in the final days. Space to begin digesting what happened before returning to ordinary life.',
+            },
+          ] as const).map((item, i) => (
+            <div class={`kl-offer reveal d${(i % 3) + 1}`}>
+              <h3 class="kl-offer__title">{item.title}</h3>
+              <p class="kl-offer__body">{item.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         6. ABOUT THE GUIDE
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-guide section" aria-label="About the guide">
+      <div class="frame">
+        <div class="kl-guide__body">
+
+          <div class="kl-guide__photo reveal">
+            <div class="kl-guide__photo-img" role="img" aria-label="Yakov Rajuna"></div>
+          </div>
+
+          <div class="kl-guide__content">
+            <span class="kl-guide__label reveal">Your Guide</span>
+            <h2 class="kl-guide__name reveal d1">Yakov Rajuna</h2>
+
+            <div class="kl-guide__stats reveal d2">
+              <div class="kl-guide__stat">
+                <span class="kl-guide__stat-n">20+</span>
+                <span class="kl-guide__stat-l">Years in practice</span>
+              </div>
+              <div class="kl-guide__stat">
+                <span class="kl-guide__stat-n">350+</span>
+                <span class="kl-guide__stat-l">Ceremonies led</span>
+              </div>
+              <div class="kl-guide__stat">
+                <span class="kl-guide__stat-n">3 500+</span>
+                <span class="kl-guide__stat-l">Participants</span>
+              </div>
+            </div>
+
+            <p class="kl-guide__bio reveal d3">
+              Yakov has led groups into sacred terrain across Asia, the Caucasus, and Eastern
+              Europe for two decades. Initiations in the Amazonian, South Indian, and Himalayan
+              traditions. Each expedition is small, personal, and led entirely by him.
+            </p>
+
+            <a href="/about" class="kl-guide__link reveal d4">About Yakov →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         7. TESTIMONIALS
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-tst section" aria-label="Participant voices">
+      <div class="frame">
+        <h2 class="kl-section-title--light reveal">From Participants</h2>
+
+        <div class="kl-tst__grid">
+          {([
+            {
+              quote: 'I returned quieter. More certain of what matters. The mountain doesn\'t explain itself — and neither does the change.',
+              name: 'Elena K.',
+              detail: 'Moscow · Mardi Himal 2025',
+            },
+            {
+              quote: 'Yakov holds the space without filling it. That quality is rare. The mountains do the work — he ensures you can receive it.',
+              name: 'David M.',
+              detail: 'Berlin · Georgian Highlands 2024',
+            },
+            {
+              quote: 'Not transformed in any dramatic way — clarified. Like something blurry for years finally came into focus.',
+              name: 'Maria T.',
+              detail: 'Tbilisi · Pontic Alps 2024',
+            },
+          ] as const).map((t, i) => (
+            <figure class={`kl-tst__card reveal d${i + 1}`}>
+              <span class="kl-tst__mark" aria-hidden="true">"</span>
+              <blockquote class="kl-tst__quote">{t.quote}</blockquote>
+              <figcaption class="kl-tst__attr">
+                <span class="kl-tst__name">{t.name}</span>
+                <span class="kl-tst__detail">{t.detail}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         8. QUESTIONS
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-faq section" aria-label="Questions">
+      <div class="frame">
+        <h2 class="kl-section-title reveal">Questions</h2>
+
+        <div class="kl-faq__list">
+          {([
+            {
+              q: 'What physical preparation is needed?',
+              a: 'You should be able to walk 6–8 hours daily at altitudes between 4,800–5,600 metres, carrying a light day pack. The kora covers approximately 52km over three days. No technical climbing is involved. Cardiovascular fitness matters more than mountain experience.',
+            },
+            {
+              q: 'When should I confirm my place?',
+              a: 'Places for September 2026 are limited to six. The first step is a short conversation with Yakov. Write through the form below or via Telegram — he responds personally to each message.',
+            },
+            {
+              q: 'Is this a religious event?',
+              a: 'No particular religion or practice is required or assumed. The expedition respects all traditions present at Kailash and is grounded in personal, direct experience rather than doctrine. People of any background join these journeys.',
+            },
+            {
+              q: 'What happens at altitude?',
+              a: 'Two acclimatisation days are built into the programme. Emergency oxygen is carried throughout the kora. We hold safety above all other considerations — we do not continue if a participant cannot safely do so.',
+            },
+            {
+              q: 'Can I join as a solo traveller?',
+              a: 'Most participants arrive alone and meet the group for the first time in Lhasa or Kathmandu. Shared experience in a small group at altitude creates its own form of connection.',
+            },
+            {
+              q: 'What is the cost of the expedition?',
+              a: 'Investment details are shared during the initial conversation. The price reflects the complexity of Tibet permits, emergency logistics, small group format, and the fully personal accompaniment throughout.',
+            },
+          ] as const).map((item, i) => (
+            <details class={`kl-faq__item reveal d${(i % 3) + 1}`}>
+              <summary class="kl-faq__q">{item.q}</summary>
+              <p class="kl-faq__a">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         9. FINAL CTA
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-apply section" id="apply" aria-label="Apply">
+      <div class="frame">
+        <div class="kl-apply__inner">
+          <span class="kl-apply__label reveal">Applications Open</span>
+          <h2 class="kl-apply__title reveal d1">Write a short message.</h2>
+          <p class="kl-apply__body reveal d2">
+            Tell Yakov where you are and what you are looking for. He responds personally
+            to each message. Places for September 2026 are limited to six.
+          </p>
+          <div class="kl-apply__actions reveal d3">
+            <a href="/connect" class="kl-apply__btn kl-apply__btn--gold">Express Interest</a>
+            <a
+              href="https://t.me/yakovrajuna"
+              class="kl-apply__btn kl-apply__btn--ghost"
+              rel="noopener noreferrer"
+              target="_blank"
+            >Join Telegram</a>
+          </div>
+          <a href="/mountains" class="kl-apply__back reveal d4">← All mountain expeditions</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</Base>
+
+<style>
+
+  /* ─── PALETTE ─────────────────────────────────── */
+
+  .kl {
+    --deep:   #080E18;
+    --navy:   #0D1929;
+    --mid:    #14243A;
+    --warm:   #E8E4DA;
+    --silver: #6A8099;
+    --sky:    #C8DCF0;
+    --gold:   #C4A862;
+    --bone:   #F0EBE0;
+    --ink:    #2C2A26;
+  }
+
+  /* ─── NAV OVERRIDE ────────────────────────────── */
+
+  :global(.nav:not(.nav--scrolled) .nav__link) {
+    color: rgba(200,220,240,0.65);
+  }
+  :global(.nav:not(.nav--scrolled) .nav__link--connect) {
+    color: rgba(196,168,98,0.80);
+  }
+  :global(.nav:not(.nav--scrolled) .nav__wordmark) {
+    color: rgba(200,220,240,0.18);
+    pointer-events: none;
+  }
+  :global(.nav:not(.nav--scrolled) .nav__social) {
+    color: rgba(200,220,240,0.45);
+  }
+
+
+  /* ══════════════════════════════════════════════
+     1. HERO
+     ══════════════════════════════════════════════ */
+
+  .kl-hero {
+    position: relative;
+    height: 100svh;
+    min-height: 680px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .kl-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+
+  .kl-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top,
+        rgba(6,10,18,0.97) 0%,
+        rgba(6,10,18,0.76) 32%,
+        rgba(6,10,18,0.30) 60%,
+        rgba(6,10,18,0.08) 82%,
+        transparent 100%
+      ),
+      linear-gradient(to right,
+        rgba(6,10,18,0.42) 0%,
+        transparent 60%
+      );
+    z-index: 1;
+  }
+
+  .kl-hero__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    padding-bottom: clamp(64px, 10svh, 120px);
+  }
+
+  .kl-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    margin-bottom: var(--s-2);
+  }
+
+  .kl-breadcrumb__link {
+    font-family: var(--mark);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(160,200,240,0.50);
+    transition: color 280ms;
+  }
+  .kl-breadcrumb__link:hover { color: rgba(200,230,255,0.80); }
+
+  .kl-breadcrumb__sep { font-size: 10px; color: rgba(120,165,210,0.28); }
+
+  .kl-breadcrumb__current {
+    font-family: var(--mark);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(180,215,248,0.70);
+  }
+
+  .kl-hero__tags {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+  }
+
+  .kl-hero__tag {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.40);
+  }
+
+  .kl-hero__tag-dot { color: rgba(200,220,240,0.18); }
+
+  .kl-hero__title {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(72px, 12vw, 180px);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    color: var(--bone);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-hero__sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 2vw, 28px);
+    color: rgba(196,168,98,0.78);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-hero__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(200,220,240,0.38);
+    padding-top: var(--s-4);
+    border-top: 1px solid rgba(200,220,240,0.07);
+  }
+
+  .kl-hero__meta-dot { opacity: 0.30; }
+
+  .kl-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    padding: 18px 40px;
+    border-radius: var(--r-pill);
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    color: var(--deep);
+    transition: background-color 350ms var(--ease), border-color 350ms var(--ease), transform 350ms var(--ease);
+    margin-top: var(--s-4);
+  }
+  .kl-hero__cta:hover {
+    background: #B8983A;
+    border-color: #B8983A;
+    transform: translateY(-1px);
+  }
+
+  .kl-hero__scroll {
+    position: absolute;
+    right: var(--frame-x);
+    bottom: 40px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-3);
+  }
+
+  .kl-hero__scroll-line {
+    display: block;
+    width: 1px;
+    height: 52px;
+    background: linear-gradient(to bottom, rgba(200,220,240,0.45), rgba(200,220,240,0.05));
+  }
+
+  .kl-hero__scroll-text {
+    font-family: var(--mark);
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.26);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+
+  /* ══════════════════════════════════════════════
+     2. INTRODUCTION
+     ══════════════════════════════════════════════ */
+
+  .kl-intro {
+    background: var(--navy);
+    padding-block: clamp(80px, 14svh, 160px);
+    border-top: 1px solid rgba(200,220,240,0.04);
+  }
+
+  .kl-intro__inner {
+    max-width: 840px;
+  }
+
+  .kl-intro__text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 2vw, 27px);
+    line-height: 1.78;
+    color: rgba(200,220,240,0.68);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     3. WHY PEOPLE COME
+     ══════════════════════════════════════════════ */
+
+  .kl-why {
+    background: var(--warm);
+  }
+
+  .kl-section-title {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0 0 clamp(56px, 8vw, 96px);
+    font-optical-sizing: auto;
+  }
+
+  .kl-section-title--light {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--bone);
+    margin: 0 0 clamp(56px, 8vw, 96px);
+    font-optical-sizing: auto;
+  }
+
+  .kl-why__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(40px, 6vw, 80px) clamp(48px, 8vw, 120px);
+  }
+
+  .kl-why__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .kl-why__n {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(40px, 5vw, 68px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: rgba(44,42,38,0.09);
+    font-optical-sizing: auto;
+    display: block;
+  }
+
+  .kl-why__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(20px, 2vw, 27px);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-why__body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.88;
+    color: rgba(44,42,38,0.58);
+    margin: 0;
+    max-width: 42ch;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     4. THE JOURNEY
+     ══════════════════════════════════════════════ */
+
+  .kl-journey {
+    background: var(--warm);
+    border-top: 1px solid rgba(44,42,38,0.07);
+  }
+
+  .kl-journey__layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: clamp(48px, 8vw, 120px);
+    align-items: start;
+  }
+
+  .kl-journey__phases {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(44,42,38,0.09);
+    border-radius: var(--r-3);
+    overflow: hidden;
+  }
+
+  .kl-phase {
+    padding: clamp(20px, 3vw, 32px) clamp(24px, 4vw, 40px);
+    border-bottom: 1px solid rgba(44,42,38,0.07);
+    background: rgba(255,255,255,0.42);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+  }
+  .kl-phase:last-child { border-bottom: none; }
+
+  .kl-phase__label {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(44,42,38,0.35);
+    display: block;
+  }
+
+  .kl-phase__text {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.78;
+    color: rgba(44,42,38,0.62);
+    margin: 0;
+  }
+
+  .kl-journey__panel {
+    position: sticky;
+    top: 80px;
+    background: rgba(255,255,255,0.58);
+    border: 1px solid rgba(44,42,38,0.09);
+    border-radius: var(--r-3);
+    padding: var(--s-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .kl-panel__title {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(44,42,38,0.32);
+    margin: 0;
+    padding-bottom: var(--s-4);
+    border-bottom: 1px solid rgba(44,42,38,0.07);
+  }
+
+  .kl-panel__rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .kl-panel__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s-4);
+    padding: var(--s-3) 0;
+    border-bottom: 1px solid rgba(44,42,38,0.05);
+  }
+  .kl-panel__row:last-child { border-bottom: none; }
+
+  .kl-panel__row-label {
+    font-family: var(--mark);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(44,42,38,0.38);
+    flex-shrink: 0;
+  }
+
+  .kl-panel__row-val {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink);
+    text-align: right;
+  }
+
+  .kl-panel__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    border-radius: var(--r-pill);
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    color: var(--deep);
+    transition: background-color 300ms var(--ease), border-color 300ms var(--ease), transform 300ms var(--ease);
+    margin-top: var(--s-2);
+  }
+  .kl-panel__cta:hover {
+    background: #B8983A;
+    border-color: #B8983A;
+    transform: translateY(-1px);
+  }
+
+
+  /* ══════════════════════════════════════════════
+     5. WHAT THE EXPEDITION OFFERS
+     ══════════════════════════════════════════════ */
+
+  .kl-offers {
+    background: var(--navy);
+    border-top: 1px solid rgba(200,220,240,0.04);
+  }
+
+  .kl-offers__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.5vw, 32px);
+  }
+
+  .kl-offer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    padding: clamp(24px, 3vw, 36px);
+    border: 1px solid rgba(200,220,240,0.07);
+    border-radius: var(--r-3);
+    background: rgba(200,220,240,0.025);
+  }
+
+  .kl-offer__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(16px, 1.6vw, 21px);
+    letter-spacing: -0.01em;
+    color: rgba(220,235,248,0.88);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-offer__body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.82;
+    color: rgba(200,220,240,0.48);
+    margin: 0;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     6. ABOUT THE GUIDE
+     ══════════════════════════════════════════════ */
+
+  .kl-guide {
+    background: var(--warm);
+    border-top: 1px solid rgba(44,42,38,0.05);
+  }
+
+  .kl-guide__body {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: clamp(48px, 8vw, 120px);
+    align-items: center;
+  }
+
+  .kl-guide__photo-img {
+    border-radius: var(--r-3);
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: linear-gradient(160deg, #CCC8BC 0%, #A8A498 55%, #807C70 100%);
+    border: 1px solid rgba(44,42,38,0.09);
+  }
+
+  .kl-guide__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .kl-guide__label {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(166,124,77,0.68);
+    display: block;
+  }
+
+  .kl-guide__name {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-guide__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+    padding: var(--s-6) 0;
+    border-top: 1px solid rgba(44,42,38,0.09);
+    border-bottom: 1px solid rgba(44,42,38,0.09);
+  }
+
+  .kl-guide__stat { display: flex; flex-direction: column; gap: var(--s-2); }
+
+  .kl-guide__stat-n {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(24px, 3vw, 42px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-optical-sizing: auto;
+  }
+
+  .kl-guide__stat-l {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(44,42,38,0.35);
+  }
+
+  .kl-guide__bio {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.88;
+    color: rgba(44,42,38,0.56);
+    margin: 0;
+    max-width: 50ch;
+  }
+
+  .kl-guide__link {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(166,124,77,0.70);
+    transition: color 280ms var(--ease);
+  }
+  .kl-guide__link:hover { color: rgba(166,124,77,1); }
+
+
+  /* ══════════════════════════════════════════════
+     7. TESTIMONIALS
+     ══════════════════════════════════════════════ */
+
+  .kl-tst {
+    background: var(--navy);
+    border-top: 1px solid rgba(200,220,240,0.04);
+  }
+
+  .kl-tst__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2.5vw, 28px);
+    align-items: start;
+  }
+
+  .kl-tst__card {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    padding: clamp(20px, 2.5vw, 32px);
+    border: 1px solid rgba(200,220,240,0.07);
+    border-radius: var(--r-3);
+    background: rgba(200,220,240,0.025);
+  }
+
+  .kl-tst__mark {
+    font-family: var(--display);
+    font-size: 40px;
+    line-height: 0.6;
+    color: rgba(196,168,98,0.32);
+    display: block;
+    font-optical-sizing: auto;
+  }
+
+  .kl-tst__quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(14px, 1.4vw, 17px);
+    line-height: 1.72;
+    color: rgba(200,220,240,0.68);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-tst__attr {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: var(--s-4);
+    border-top: 1px solid rgba(200,220,240,0.07);
+    margin-top: auto;
+  }
+
+  .kl-tst__name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(200,220,240,0.52);
+  }
+
+  .kl-tst__detail {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.26);
+  }
+
+
+  /* ══════════════════════════════════════════════
+     8. FAQ
+     ══════════════════════════════════════════════ */
+
+  .kl-faq {
+    background: var(--warm);
+    border-top: 1px solid rgba(44,42,38,0.05);
+  }
+
+  .kl-faq__list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(44,42,38,0.09);
+    border-radius: var(--r-3);
+    overflow: hidden;
+  }
+
+  .kl-faq__item {
+    border-bottom: 1px solid rgba(44,42,38,0.07);
+    background: rgba(255,255,255,0.42);
+  }
+  .kl-faq__item:last-child { border-bottom: none; }
+  .kl-faq__item[open] { background: rgba(255,255,255,0.62); }
+
+  .kl-faq__q {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(16px, 1.6vw, 20px);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    padding: clamp(18px, 2.5vw, 28px) clamp(24px, 4vw, 40px);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-4);
+    font-optical-sizing: auto;
+    transition: color 250ms;
+  }
+  .kl-faq__q::-webkit-details-marker { display: none; }
+  .kl-faq__q::marker { display: none; }
+  .kl-faq__q::after {
+    content: '+';
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 22px;
+    color: rgba(44,42,38,0.30);
+    flex-shrink: 0;
+    transition: transform 280ms var(--ease), color 250ms;
+  }
+  .kl-faq__item[open] .kl-faq__q::after {
+    transform: rotate(45deg);
+    color: rgba(44,42,38,0.55);
+  }
+  .kl-faq__q:hover { color: rgba(44,42,38,0.70); }
+
+  .kl-faq__a {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.82;
+    color: rgba(44,42,38,0.56);
+    margin: 0;
+    padding: 0 clamp(24px, 4vw, 40px) clamp(18px, 2.5vw, 28px);
+    max-width: 65ch;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     9. FINAL CTA
+     ══════════════════════════════════════════════ */
+
+  .kl-apply {
+    background: var(--deep);
+    border-top: 1px solid rgba(200,220,240,0.04);
+  }
+
+  .kl-apply__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--s-5);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .kl-apply__label {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(196,168,98,0.62);
+    display: block;
+  }
+
+  .kl-apply__title {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--bone);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-apply__body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(15px, 1.4vw, 17px);
+    line-height: 1.82;
+    color: rgba(200,220,240,0.48);
+    margin: 0;
+  }
+
+  .kl-apply__actions {
+    display: flex;
+    gap: var(--s-4);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--s-4);
+  }
+
+  .kl-apply__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    padding: 18px 40px;
+    border-radius: var(--r-pill);
+    border: 1px solid transparent;
+    transition: background-color 300ms var(--ease), border-color 300ms var(--ease), color 300ms var(--ease), transform 300ms var(--ease);
+  }
+
+  .kl-apply__btn--gold {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--deep);
+  }
+  .kl-apply__btn--gold:hover {
+    background: #B8983A;
+    border-color: #B8983A;
+    transform: translateY(-1px);
+  }
+
+  .kl-apply__btn--ghost {
+    background: transparent;
+    border-color: rgba(200,220,240,0.22);
+    color: rgba(200,220,240,0.68);
+  }
+  .kl-apply__btn--ghost:hover {
+    border-color: rgba(200,220,240,0.52);
+    color: var(--bone);
+    transform: translateY(-1px);
+  }
+
+  .kl-apply__back {
+    font-family: var(--mark);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(120,165,210,0.35);
+    transition: color 280ms;
+    margin-top: var(--s-2);
+  }
+  .kl-apply__back:hover { color: rgba(160,200,240,0.65); }
+
+
+  /* ─── RESPONSIVE ──────────────────────────────── */
+
+  @media (max-width: 1000px) {
+    .kl-journey__layout { grid-template-columns: 1fr; }
+    .kl-journey__panel { position: static; }
+    .kl-offers__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .kl-why__grid { grid-template-columns: 1fr; }
+    .kl-tst__grid { grid-template-columns: 1fr; }
+    .kl-guide__body { grid-template-columns: 1fr; }
+    .kl-guide__photo-img { max-width: 160px; }
+    .kl-guide__stats { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 560px) {
+    .kl-offers__grid { grid-template-columns: 1fr; }
+    .kl-hero__title { font-size: clamp(56px, 16vw, 96px); }
+    .kl-guide__stats { grid-template-columns: 1fr 1fr; }
+    .kl-apply__actions { flex-direction: column; align-items: stretch; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kl * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+
+</style>

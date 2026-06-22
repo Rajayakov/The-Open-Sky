@@ -31,8 +31,18 @@ const isSoon     = journey.status === 'soon';
     <section class="ej-hero" aria-label={journey.title}>
       <div class="ej-hero__bg" aria-hidden="true"></div>
       <div class="ej-hero__img" aria-hidden="true">
-        <!-- Photo placeholder — replace with expedition image -->
-        <div class="ej-hero__img-slot" style={`background: ${journey.bg};`}></div>
+        {journey.heroImage ? (
+          <img
+            class="ej-hero__img-photo"
+            src={journey.heroImage}
+            alt={journey.title}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        ) : (
+          <div class="ej-hero__img-slot" style={`background: ${journey.bg};`}></div>
+        )}
       </div>
       <div class="ej-hero__inner frame">
         <nav class="ej-breadcrumb reveal" aria-label="Breadcrumb">
@@ -383,7 +393,16 @@ const isSoon     = journey.status === 'soon';
 
   .ej-hero__img-slot {
     width: 100%; height: 100%;
-    /* Replace with: <img ... object-fit="cover" /> */
+  }
+
+  .ej-hero__img-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    display: block;
   }
 
   .ej-hero__inner {

@@ -19,6 +19,7 @@ export interface MountainJourney {
   status: 'upcoming' | 'soon' | 'past';
   upcoming: boolean;
   bg: string;
+  heroImage?: string;
   structure?: { phase: string; description: string }[];
   forWhom?: string[];
   included?: string[];
@@ -41,6 +42,7 @@ export const journeys: MountainJourney[] = [
     status: 'upcoming',
     upcoming: true,
     bg: 'linear-gradient(160deg, #A8C0D8 0%, #4A6888 45%, #1A2C40 100%)',
+    heroImage: '/images/mountains/kailash-hero.jpg',
     structure: [
       { phase: 'Days I–II', description: 'Arrival and acclimatisation. Lhasa or Kathmandu. First group gathering.' },
       { phase: 'Days III–IV', description: 'Transfer to the mountain. First encounter with Kailash. Preparation.' },
