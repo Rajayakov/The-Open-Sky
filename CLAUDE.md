@@ -1,5 +1,25 @@
 # CLAUDE.md
 
+--------------------------------------------------
+PROJECT CONTEXT (REQUIRED READING)
+--------------------------------------------------
+
+Before working on any task, read the following files from the `context/` directory:
+
+- `context/docs/SYSTEM_PROMPT.md` — who Yakov Radjuna is, what The Open Sky is, voice and positioning
+- `context/docs/Projects_AI_Optimized.md` — full project matrix: all products, audiences, revenue, deliverables
+- `context/docs/context_structured.json` — structured data: identity, projects, tools, brand positioning
+
+These files are the source of truth for:
+- What products and experiences exist
+- Who the audience is
+- What the brand voice sounds like
+- What each page of the site must serve
+
+If any design or copy decision is unclear — look here first.
+
+--------------------------------------------------
+
 # RAJUNA — PROJECT CORE RULES
 
 This project is NOT a generic website.
