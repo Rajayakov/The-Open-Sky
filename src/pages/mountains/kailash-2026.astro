@@ -258,47 +258,7 @@ const journey = getJourney('kailash-2026')!;
 
 
     <!-- ══════════════════════════════════════════
-         7. TESTIMONIALS
-         ══════════════════════════════════════════ -->
-
-    <section class="kl-tst section" aria-label="Participant voices">
-      <div class="frame">
-        <h2 class="kl-section-title--light reveal">From Participants</h2>
-
-        <div class="kl-tst__grid">
-          {([
-            {
-              quote: 'I returned quieter. More certain of what matters. The mountain doesn\'t explain itself — and neither does the change.',
-              name: 'Elena K.',
-              detail: 'Moscow · Mardi Himal 2025',
-            },
-            {
-              quote: 'Yakov holds the space without filling it. That quality is rare. The mountains do the work — he ensures you can receive it.',
-              name: 'David M.',
-              detail: 'Berlin · Georgian Highlands 2024',
-            },
-            {
-              quote: 'Not transformed in any dramatic way — clarified. Like something blurry for years finally came into focus.',
-              name: 'Maria T.',
-              detail: 'Tbilisi · Pontic Alps 2024',
-            },
-          ] as const).map((t, i) => (
-            <figure class={`kl-tst__card reveal d${i + 1}`}>
-              <span class="kl-tst__mark" aria-hidden="true">"</span>
-              <blockquote class="kl-tst__quote">{t.quote}</blockquote>
-              <figcaption class="kl-tst__attr">
-                <span class="kl-tst__name">{t.name}</span>
-                <span class="kl-tst__detail">{t.detail}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════
-         8. QUESTIONS
+         7. QUESTIONS
          ══════════════════════════════════════════ -->
 
     <section class="kl-faq section" aria-label="Questions">
@@ -343,7 +303,7 @@ const journey = getJourney('kailash-2026')!;
 
 
     <!-- ══════════════════════════════════════════
-         9. FINAL CTA
+         8. FINAL CTA
          ══════════════════════════════════════════ -->
 
     <section class="kl-apply section" id="apply" aria-label="Apply">
@@ -365,6 +325,46 @@ const journey = getJourney('kailash-2026')!;
             >Join Telegram</a>
           </div>
           <a href="/mountains" class="kl-apply__back reveal d4">← All mountain expeditions</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         9. TESTIMONIALS
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-tst section" aria-label="Participant voices">
+      <div class="frame">
+        <h2 class="kl-section-title--light reveal">From Participants</h2>
+
+        <div class="kl-tst__grid">
+          {([
+            {
+              quote: 'I returned quieter. More certain of what matters. The mountain doesn\'t explain itself — and neither does the change.',
+              name: 'Elena K.',
+              detail: 'Moscow · Mardi Himal 2025',
+            },
+            {
+              quote: 'Yakov holds the space without filling it. That quality is rare. The mountains do the work — he ensures you can receive it.',
+              name: 'David M.',
+              detail: 'Berlin · Georgian Highlands 2024',
+            },
+            {
+              quote: 'Not transformed in any dramatic way — clarified. Like something blurry for years finally came into focus.',
+              name: 'Maria T.',
+              detail: 'Tbilisi · Pontic Alps 2024',
+            },
+          ] as const).map((t, i) => (
+            <figure class={`kl-tst__card reveal d${i + 1}`}>
+              <span class="kl-tst__mark" aria-hidden="true">"</span>
+              <blockquote class="kl-tst__quote">{t.quote}</blockquote>
+              <figcaption class="kl-tst__attr">
+                <span class="kl-tst__name">{t.name}</span>
+                <span class="kl-tst__detail">{t.detail}</span>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </div>
     </section>
