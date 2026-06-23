@@ -57,10 +57,6 @@ const journey = getJourney('kailash-2026')!;
         <a href="#apply" class="kl-hero__cta reveal d4">Apply for this expedition</a>
       </div>
 
-      <div class="kl-hero__scroll" aria-hidden="true">
-        <span class="kl-hero__scroll-line"></span>
-        <span class="kl-hero__scroll-text">scroll</span>
-      </div>
     </section>
 
 
@@ -113,7 +109,6 @@ const journey = getJourney('kailash-2026')!;
             },
           ] as const).map((item, i) => (
             <div class={`kl-why__item reveal d${i + 1}`}>
-              <span class="kl-why__n" aria-hidden="true">{item.n}</span>
               <h3 class="kl-why__title">{item.title}</h3>
               <p class="kl-why__body">{item.body}</p>
             </div>
@@ -175,7 +170,7 @@ const journey = getJourney('kailash-2026')!;
       <div class="frame">
         <h2 class="kl-section-title--light reveal">What the Expedition Offers</h2>
 
-        <div class="kl-offers__grid">
+        <div class="kl-offers__list">
           {([
             {
               title: 'Personal Accompaniment',
@@ -202,9 +197,9 @@ const journey = getJourney('kailash-2026')!;
               body: 'A closing circle in the final days. Space to begin digesting what happened before returning to ordinary life.',
             },
           ] as const).map((item, i) => (
-            <div class={`kl-offer reveal d${(i % 3) + 1}`}>
-              <h3 class="kl-offer__title">{item.title}</h3>
-              <p class="kl-offer__body">{item.body}</p>
+            <div class={`kl-offer-row reveal d${(i % 2) + 1}`}>
+              <h3 class="kl-offer-row__title">{item.title}</h3>
+              <p class="kl-offer-row__body">{item.body}</p>
             </div>
           ))}
         </div>
@@ -225,31 +220,16 @@ const journey = getJourney('kailash-2026')!;
           </div>
 
           <div class="kl-guide__content">
-            <span class="kl-guide__label reveal">Your Guide</span>
             <h2 class="kl-guide__name reveal d1">Yakov Rajuna</h2>
 
-            <div class="kl-guide__stats reveal d2">
-              <div class="kl-guide__stat">
-                <span class="kl-guide__stat-n">20+</span>
-                <span class="kl-guide__stat-l">Years in practice</span>
-              </div>
-              <div class="kl-guide__stat">
-                <span class="kl-guide__stat-n">350+</span>
-                <span class="kl-guide__stat-l">Ceremonies led</span>
-              </div>
-              <div class="kl-guide__stat">
-                <span class="kl-guide__stat-n">3 500+</span>
-                <span class="kl-guide__stat-l">Participants</span>
-              </div>
-            </div>
-
-            <p class="kl-guide__bio reveal d3">
-              Yakov has led groups into sacred terrain across Asia, the Caucasus, and Eastern
-              Europe for two decades. Initiations in the Amazonian, South Indian, and Himalayan
-              traditions. Each expedition is small, personal, and led entirely by him.
+            <p class="kl-guide__bio reveal d2">
+              Two decades leading groups into sacred terrain across Asia, the Caucasus,
+              and Eastern Europe. Over 350 ceremonies. 3,500+ participants. Initiations
+              in the Amazonian, South Indian, and Himalayan traditions — each expedition
+              small, personal, led entirely by him.
             </p>
 
-            <a href="/about" class="kl-guide__link reveal d4">About Yakov →</a>
+            <a href="/about" class="kl-guide__link reveal d3">About Yakov →</a>
           </div>
 
         </div>
@@ -309,7 +289,6 @@ const journey = getJourney('kailash-2026')!;
     <section class="kl-apply section" id="apply" aria-label="Apply">
       <div class="frame">
         <div class="kl-apply__inner">
-          <span class="kl-apply__label reveal">Applications Open</span>
           <h2 class="kl-apply__title reveal d1">Write a short message.</h2>
           <p class="kl-apply__body reveal d2">
             Tell Yakov where you are and what you are looking for. He responds personally
@@ -338,7 +317,7 @@ const journey = getJourney('kailash-2026')!;
       <div class="frame">
         <h2 class="kl-section-title--light reveal">From Participants</h2>
 
-        <div class="kl-tst__grid">
+        <div class="kl-tst__list">
           {([
             {
               quote: 'I returned quieter. More certain of what matters. The mountain doesn\'t explain itself — and neither does the change.',
@@ -356,9 +335,8 @@ const journey = getJourney('kailash-2026')!;
               detail: 'Tbilisi · Pontic Alps 2024',
             },
           ] as const).map((t, i) => (
-            <figure class={`kl-tst__card reveal d${i + 1}`}>
-              <span class="kl-tst__mark" aria-hidden="true">"</span>
-              <blockquote class="kl-tst__quote">{t.quote}</blockquote>
+            <figure class={`kl-tst__row reveal d${(i % 2) + 1}`}>
+              <p class="kl-tst__quote">"{t.quote}"</p>
               <figcaption class="kl-tst__attr">
                 <span class="kl-tst__name">{t.name}</span>
                 <span class="kl-tst__detail">{t.detail}</span>
@@ -503,7 +481,8 @@ const journey = getJourney('kailash-2026')!;
   .kl-hero__title {
     font-family: var(--display);
     font-weight: 300;
-    font-size: clamp(72px, 12vw, 180px);
+    font-size: clamp(56px, 9vw, 96px);
+    text-wrap: balance;
     line-height: 0.88;
     letter-spacing: -0.04em;
     color: var(--bone);
@@ -558,33 +537,6 @@ const journey = getJourney('kailash-2026')!;
     transform: translateY(-1px);
   }
 
-  .kl-hero__scroll {
-    position: absolute;
-    right: var(--frame-x);
-    bottom: 40px;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--s-3);
-  }
-
-  .kl-hero__scroll-line {
-    display: block;
-    width: 1px;
-    height: 52px;
-    background: linear-gradient(to bottom, rgba(200,220,240,0.45), rgba(200,220,240,0.05));
-  }
-
-  .kl-hero__scroll-text {
-    font-family: var(--mark);
-    font-size: 9px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: rgba(200,220,240,0.26);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-  }
 
 
   /* ══════════════════════════════════════════════
@@ -630,6 +582,7 @@ const journey = getJourney('kailash-2026')!;
     color: var(--ink);
     margin: 0 0 clamp(56px, 8vw, 96px);
     font-optical-sizing: auto;
+    text-wrap: balance;
   }
 
   .kl-section-title--light {
@@ -641,6 +594,7 @@ const journey = getJourney('kailash-2026')!;
     color: var(--bone);
     margin: 0 0 clamp(56px, 8vw, 96px);
     font-optical-sizing: auto;
+    text-wrap: balance;
   }
 
   .kl-why__grid {
@@ -653,17 +607,6 @@ const journey = getJourney('kailash-2026')!;
     display: flex;
     flex-direction: column;
     gap: var(--s-4);
-  }
-
-  .kl-why__n {
-    font-family: var(--display);
-    font-weight: 200;
-    font-size: clamp(40px, 5vw, 68px);
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: rgba(44,42,38,0.09);
-    font-optical-sizing: auto;
-    display: block;
   }
 
   .kl-why__title {
@@ -681,9 +624,10 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 300;
     font-size: 15px;
     line-height: 1.88;
-    color: rgba(44,42,38,0.58);
+    color: rgba(44,42,38,0.72);
     margin: 0;
     max-width: 42ch;
+    text-wrap: pretty;
   }
 
 
@@ -831,39 +775,39 @@ const journey = getJourney('kailash-2026')!;
     border-top: 1px solid rgba(200,220,240,0.04);
   }
 
-  .kl-offers__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(20px, 2.5vw, 32px);
-  }
-
-  .kl-offer {
+  .kl-offers__list {
     display: flex;
     flex-direction: column;
-    gap: var(--s-4);
-    padding: clamp(24px, 3vw, 36px);
-    border: 1px solid rgba(200,220,240,0.07);
-    border-radius: var(--r-3);
-    background: rgba(200,220,240,0.025);
+    border-top: 1px solid rgba(200,220,240,0.08);
   }
 
-  .kl-offer__title {
+  .kl-offer-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(24px, 4vw, 64px);
+    padding-block: clamp(28px, 4vw, 44px);
+    border-bottom: 1px solid rgba(200,220,240,0.07);
+    align-items: start;
+  }
+
+  .kl-offer-row__title {
     font-family: var(--serif);
     font-weight: 400;
-    font-size: clamp(16px, 1.6vw, 21px);
+    font-size: clamp(16px, 1.5vw, 20px);
     letter-spacing: -0.01em;
-    color: rgba(220,235,248,0.88);
+    color: rgba(220,235,248,0.90);
     margin: 0;
     font-optical-sizing: auto;
   }
 
-  .kl-offer__body {
+  .kl-offer-row__body {
     font-family: var(--sans);
     font-weight: 300;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.82;
-    color: rgba(200,220,240,0.48);
+    color: rgba(200,220,240,0.65);
     margin: 0;
+    text-wrap: pretty;
   }
 
 
@@ -897,16 +841,6 @@ const journey = getJourney('kailash-2026')!;
     gap: var(--s-6);
   }
 
-  .kl-guide__label {
-    font-family: var(--mark);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(166,124,77,0.68);
-    display: block;
-  }
-
   .kl-guide__name {
     font-family: var(--display);
     font-weight: 300;
@@ -918,44 +852,15 @@ const journey = getJourney('kailash-2026')!;
     font-optical-sizing: auto;
   }
 
-  .kl-guide__stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-5);
-    padding: var(--s-6) 0;
-    border-top: 1px solid rgba(44,42,38,0.09);
-    border-bottom: 1px solid rgba(44,42,38,0.09);
-  }
-
-  .kl-guide__stat { display: flex; flex-direction: column; gap: var(--s-2); }
-
-  .kl-guide__stat-n {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(24px, 3vw, 42px);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    font-optical-sizing: auto;
-  }
-
-  .kl-guide__stat-l {
-    font-family: var(--mark);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(44,42,38,0.35);
-  }
-
   .kl-guide__bio {
     font-family: var(--sans);
     font-weight: 300;
     font-size: 15px;
     line-height: 1.88;
-    color: rgba(44,42,38,0.56);
+    color: rgba(44,42,38,0.72);
     margin: 0;
     max-width: 50ch;
+    text-wrap: pretty;
   }
 
   .kl-guide__link {
@@ -981,58 +886,49 @@ const journey = getJourney('kailash-2026')!;
     border-top: 1px solid rgba(200,220,240,0.04);
   }
 
-  .kl-tst__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(16px, 2.5vw, 28px);
-    align-items: start;
-  }
-
-  .kl-tst__card {
-    margin: 0;
+  .kl-tst__list {
     display: flex;
     flex-direction: column;
-    gap: var(--s-5);
-    padding: clamp(20px, 2.5vw, 32px);
-    border: 1px solid rgba(200,220,240,0.07);
-    border-radius: var(--r-3);
-    background: rgba(200,220,240,0.025);
   }
 
-  .kl-tst__mark {
-    font-family: var(--display);
-    font-size: 40px;
-    line-height: 0.6;
-    color: rgba(196,168,98,0.32);
-    display: block;
-    font-optical-sizing: auto;
+  .kl-tst__row {
+    margin: 0;
+    padding-block: clamp(48px, 7vw, 88px);
+    border-top: 1px solid rgba(200,220,240,0.08);
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: clamp(32px, 5vw, 72px);
+    align-items: end;
+  }
+
+  .kl-tst__row:last-child {
+    border-bottom: 1px solid rgba(200,220,240,0.07);
   }
 
   .kl-tst__quote {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(14px, 1.4vw, 17px);
-    line-height: 1.72;
-    color: rgba(200,220,240,0.68);
+    font-size: clamp(20px, 2.4vw, 32px);
+    line-height: 1.58;
+    color: rgba(200,220,240,0.80);
     margin: 0;
+    text-wrap: pretty;
     font-optical-sizing: auto;
   }
 
   .kl-tst__attr {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    padding-top: var(--s-4);
-    border-top: 1px solid rgba(200,220,240,0.07);
-    margin-top: auto;
+    gap: 6px;
+    text-align: right;
   }
 
   .kl-tst__name {
     font-family: var(--serif);
     font-style: italic;
     font-size: 14px;
-    color: rgba(200,220,240,0.52);
+    color: rgba(200,220,240,0.55);
   }
 
   .kl-tst__detail {
@@ -1041,7 +937,7 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(200,220,240,0.26);
+    color: rgba(200,220,240,0.28);
   }
 
 
@@ -1107,10 +1003,11 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 300;
     font-size: 15px;
     line-height: 1.82;
-    color: rgba(44,42,38,0.56);
+    color: rgba(44,42,38,0.72);
     margin: 0;
     padding: 0 clamp(24px, 4vw, 40px) clamp(18px, 2.5vw, 28px);
     max-width: 65ch;
+    text-wrap: pretty;
   }
 
 
@@ -1225,21 +1122,21 @@ const journey = getJourney('kailash-2026')!;
   @media (max-width: 1000px) {
     .kl-journey__layout { grid-template-columns: 1fr; }
     .kl-journey__panel { position: static; }
-    .kl-offers__grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 768px) {
     .kl-why__grid { grid-template-columns: 1fr; }
-    .kl-tst__grid { grid-template-columns: 1fr; }
     .kl-guide__body { grid-template-columns: 1fr; }
     .kl-guide__photo-img { max-width: 160px; }
-    .kl-guide__stats { grid-template-columns: repeat(3, 1fr); }
+    .kl-tst__row { grid-template-columns: 1fr; }
+    .kl-tst__attr { text-align: left; }
+  }
+
+  @media (max-width: 640px) {
+    .kl-offer-row { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 560px) {
-    .kl-offers__grid { grid-template-columns: 1fr; }
-    .kl-hero__title { font-size: clamp(56px, 16vw, 96px); }
-    .kl-guide__stats { grid-template-columns: 1fr 1fr; }
     .kl-apply__actions { flex-direction: column; align-items: stretch; }
   }
 
