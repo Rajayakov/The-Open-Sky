@@ -100,9 +100,9 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
       <div class="pts-hero__inner frame">
         <div class="pts-hero__hed">
           <h1 class="pts-hero__title reveal d1">Path of the Spirit</h1>
-          <p class="pts-hero__byline reveal d1">by Yakov Rajuna</p>
+          <p class="pts-hero__byline reveal d2">by Yakov Rajuna</p>
         </div>
-        <a href="#upcoming" class="pts-hero__btn reveal d2">Explore Journeys</a>
+        <a href="#upcoming" class="pts-hero__btn reveal d3">Explore Journeys</a>
       </div>
     </section>
 
@@ -223,13 +223,14 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     <section class="pts-tst section" aria-label="Participant voices">
       <div class="frame">
 
-        <div class="pts-tst__list">
+        <div class="pts-tst__grid">
           {testimonials.map((t, i) => (
-            <figure class={`pts-tst__row reveal d${(i % 2) + 1}`}>
-              <p class="pts-tst__quote">"{t.quote}"</p>
+            <figure class={`pts-tst__card reveal d${i + 1}`}>
+              <span class="pts-tst__glyph" aria-hidden="true">"</span>
+              <blockquote class="pts-tst__quote">{t.quote}</blockquote>
               <figcaption class="pts-tst__attr">
                 <span class="pts-tst__name">{t.name}</span>
-                <span class="pts-tst__journey">{t.location} · {t.journey}</span>
+                <span class="pts-tst__meta">{t.location} · {t.journey}</span>
               </figcaption>
             </figure>
           ))}
@@ -243,11 +244,13 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
          05. DIVIDER — СУТЬ ФОРМАТА
          ══════════════════════════════════════════ -->
 
-    <div class="pts-divider-phrase frame reveal">
-      <p class="pts-divider-phrase__text">
-        This is not tourism. It is an encounter with places that have shaped
-        the inner life of humanity for centuries.
-      </p>
+    <div class="pts-divider-phrase">
+      <div class="frame">
+        <p class="pts-divider-phrase__text reveal">
+          This is not tourism. It is an encounter with places that have shaped
+          the inner life of humanity for centuries.
+        </p>
+      </div>
     </div>
 
 
@@ -471,33 +474,54 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 38%;
+    object-position: center 36%;
     display: block;
+    /* Cold altitude: slightly desaturated + lifted contrast */
+    filter: contrast(1.08) saturate(0.80) brightness(0.92);
+    transform-origin: 50% 36%;
+    will-change: transform;
+    animation: ptsHeroFloat 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes ptsHeroFloat {
+    from { transform: scale(1.00); }
+    to   { transform: scale(1.05) translateY(-8px); }
   }
 
   .pts-hero__overlay {
     position: absolute;
     inset: 0;
     background:
+      /* Cold atmosphere at peaks — very subtle blue-black top haze */
+      linear-gradient(to bottom,
+        rgba(6,10,20,0.45) 0%,
+        rgba(6,10,20,0.14) 18%,
+        transparent 42%
+      ),
+      /* Bottom anchor — strong dark ground for text legibility */
       linear-gradient(to top,
-        rgba(6,10,18,0.92) 0%,
-        rgba(6,10,18,0.70) 25%,
-        rgba(6,10,18,0.32) 52%,
-        rgba(6,10,18,0.10) 72%,
-        rgba(6,10,18,0.02) 100%
+        rgba(4,7,14,0.98) 0%,
+        rgba(4,7,14,0.85) 18%,
+        rgba(4,7,14,0.55) 36%,
+        rgba(4,7,14,0.22) 54%,
+        rgba(4,7,14,0.06) 68%,
+        transparent 82%
       ),
-      linear-gradient(to right,
-        rgba(6,10,18,0.50) 0%,
-        rgba(6,10,18,0.18) 35%,
-        transparent 58%
+      /* Left panel — softens left edge for text */
+      linear-gradient(105deg,
+        rgba(6,10,20,0.60) 0%,
+        rgba(6,10,20,0.24) 28%,
+        transparent 52%
       ),
+      /* Right edge — atmospheric depth */
       linear-gradient(to left,
-        rgba(6,10,18,0.28) 0%,
-        transparent 38%
+        rgba(6,10,20,0.28) 0%,
+        transparent 34%
       ),
-      radial-gradient(ellipse 110% 70% at 50% 100%,
-        rgba(6,10,18,0.42) 0%,
-        transparent 65%
+      /* Altitude vignette — darkens perimeter subtly */
+      radial-gradient(ellipse 90% 80% at 50% 42%,
+        transparent 45%,
+        rgba(4,7,14,0.30) 100%
       );
   }
 
@@ -508,35 +532,39 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     flex-direction: column;
     gap: var(--s-7);
     width: 100%;
-    padding-bottom: clamp(64px, 10svh, 120px);
+    /* Push text up from the very bottom — let landscape breathe */
+    padding-bottom: clamp(104px, 18svh, 200px);
   }
 
   .pts-hero__hed {
     display: flex;
     flex-direction: column;
-    gap: var(--s-4);
+    gap: var(--s-3);
   }
 
   .pts-hero__title {
     font-family: var(--display);
     font-weight: 300;
-    font-size: clamp(52px, 9.5vw, 136px);
-    line-height: 0.90;
+    /* Slightly pulled back — landscape stays primary */
+    font-size: clamp(48px, 8vw, 110px);
+    line-height: 0.92;
     letter-spacing: -0.01em;
     color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
     text-wrap: balance;
+    /* Subtle text shadow for depth against mountain */
+    text-shadow: 0 2px 40px rgba(4,7,14,0.55);
   }
 
   .pts-hero__byline {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(15px, 1.3vw, 19px);
-    color: rgba(196,168,98,0.72);
+    font-size: clamp(14px, 1.2vw, 17px);
+    color: rgba(196,168,98,0.65);
     margin: 0;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
     font-optical-sizing: auto;
   }
 
@@ -550,15 +578,15 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-weight: 600;
     letter-spacing: 0.20em;
     text-transform: uppercase;
-    padding: 18px clamp(32px, 5vw, 56px);
+    padding: 16px clamp(28px, 4vw, 48px);
     border-radius: var(--r-pill);
-    border: 1px solid rgba(200,220,240,0.22);
-    color: rgba(200,220,240,0.80);
+    border: 1px solid rgba(200,220,240,0.20);
+    color: rgba(200,220,240,0.75);
     background: transparent;
     transition: all 350ms var(--ease);
   }
   .pts-hero__btn:hover {
-    border-color: rgba(200,220,240,0.55);
+    border-color: rgba(200,220,240,0.50);
     color: var(--bone);
     transform: translateY(-1px);
   }
@@ -958,38 +986,50 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
 
   /* ══════════════════════════════════════════════════
-     04. TESTIMONIALS
+     04. TESTIMONIALS — compact editorial cards
      ══════════════════════════════════════════════════ */
 
-  .pts-tst { background: var(--deep); }
+  /* Navy separates testimonials from guide (both on --deep) */
+  .pts-tst { background: var(--navy); }
 
-  .pts-tst__list {
+  .pts-tst__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(14px, 2vw, 22px);
+    align-items: start;
+  }
+
+  .pts-tst__card {
+    margin: 0;
+    padding: clamp(24px, 3vw, 36px) clamp(22px, 2.5vw, 30px);
+    border: 1px solid rgba(200,220,240,0.07);
+    border-radius: var(--r-3);
+    background: rgba(200,220,240,0.022);
     display: flex;
     flex-direction: column;
+    gap: var(--s-5);
   }
 
-  .pts-tst__row {
-    margin: 0;
-    padding-block: clamp(48px, 7vw, 88px);
-    border-top: 1px solid rgba(200,220,240,0.07);
-    display: grid;
-    grid-template-columns: 1fr 220px;
-    gap: clamp(32px, 5vw, 72px);
-    align-items: end;
-  }
-
-  .pts-tst__row:last-child {
-    border-bottom: 1px solid rgba(200,220,240,0.06);
+  .pts-tst__glyph {
+    font-family: var(--display);
+    font-size: 28px;
+    line-height: 0.7;
+    color: rgba(196,168,98,0.28);
+    display: block;
+    user-select: none;
+    font-optical-sizing: auto;
   }
 
   .pts-tst__quote {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(20px, 2.4vw, 32px);
-    line-height: 1.58;
-    color: rgba(200,220,240,0.80);
+    /* Small — intimate, like a handwritten memory */
+    font-size: clamp(13px, 1.15vw, 15px);
+    line-height: 1.78;
+    color: rgba(200,220,240,0.70);
     margin: 0;
+    padding: 0;
     text-wrap: pretty;
     font-optical-sizing: auto;
   }
@@ -997,24 +1037,27 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-tst__attr {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    text-align: right;
+    gap: 4px;
+    padding-top: var(--s-4);
+    border-top: 1px solid rgba(200,220,240,0.06);
+    margin-top: auto;
   }
 
   .pts-tst__name {
     font-family: var(--serif);
     font-style: italic;
-    font-size: 14px;
-    color: rgb(var(--sky-rgb) / 0.58);
+    font-size: 13px;
+    color: rgb(var(--sky-rgb) / 0.52);
+    line-height: 1.3;
   }
 
-  .pts-tst__journey {
+  .pts-tst__meta {
     font-family: var(--mark);
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgb(var(--sky-rgb) / 0.32);
+    color: rgb(var(--sky-rgb) / 0.28);
   }
 
 
@@ -1196,8 +1239,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   }
 
   @media (max-width: 768px) {
-    .pts-tst__row { grid-template-columns: 1fr; }
-    .pts-tst__attr { text-align: left; }
+    .pts-tst__grid { grid-template-columns: 1fr; }
     .pts-guide__stats { grid-template-columns: repeat(3, 1fr); }
   }
 
