@@ -98,17 +98,11 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
       />
       <div class="pts-hero__overlay" aria-hidden="true"></div>
       <div class="pts-hero__inner frame">
-        <p class="pts-hero__label reveal">Путями Духа</p>
-        <h1 class="pts-hero__title reveal d1">Path of the Spirit</h1>
-        <p class="pts-hero__sub reveal d2">
-          Journeys to sacred mountains,<br />
-          places of power and inner transformation.
-        </p>
-        <a href="#upcoming" class="pts-hero__btn reveal d3">Explore Journeys</a>
-      </div>
-      <div class="pts-hero__scroll" aria-hidden="true">
-        <span class="pts-hero__scroll-line"></span>
-        <span class="pts-hero__scroll-text">scroll</span>
+        <div class="pts-hero__hed">
+          <h1 class="pts-hero__title reveal d1">Path of the Spirit</h1>
+          <p class="pts-hero__byline reveal d1">by Yakov Rajuna</p>
+        </div>
+        <a href="#upcoming" class="pts-hero__btn reveal d2">Explore Journeys</a>
       </div>
     </section>
 
@@ -174,7 +168,79 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
 
     <!-- ══════════════════════════════════════════
-         03. DIVIDER — СУТЬ ФОРМАТА
+         03. КТО ВЕДЁТ
+         ══════════════════════════════════════════ -->
+
+    <section class="pts-guide section" aria-label="About the guide">
+      <div class="frame">
+        <div class="pts-guide__body">
+
+          <div class="pts-guide__photo reveal">
+            <div class="pts-guide__photo-img" role="img" aria-label="Yakov Rajuna"></div>
+          </div>
+
+          <div class="pts-guide__content">
+            <span class="pts-guide__label t-label t-label--gold reveal">Your guide</span>
+            <h2 class="pts-guide__name reveal d1">Yakov Rajuna</h2>
+
+            <div class="pts-guide__stats reveal d2">
+              <div class="pts-guide__stat">
+                <span class="pts-guide__stat-n">20+</span>
+                <span class="pts-guide__stat-l">Years of practice</span>
+              </div>
+              <div class="pts-guide__stat">
+                <span class="pts-guide__stat-n">350+</span>
+                <span class="pts-guide__stat-l">Ceremonies led</span>
+              </div>
+              <div class="pts-guide__stat">
+                <span class="pts-guide__stat-n">3 500+</span>
+                <span class="pts-guide__stat-l">Participants</span>
+              </div>
+            </div>
+
+            <p class="pts-guide__roles reveal d2">
+              Guide · Healer · Teacher · Musician · Expedition leader
+            </p>
+
+            <p class="pts-guide__bio reveal d3">
+              Yakov has led groups into sacred terrain across Asia, the Caucasus and
+              Eastern Europe for two decades. Initiations in Peru and Brazil.
+              Each expedition is small, intentional, and led personally.
+            </p>
+
+            <a href="/about" class="pts-btn pts-btn--ghost-sm reveal d4">Learn More</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         04. ОТЗЫВЫ УЧАСТНИКОВ
+         ══════════════════════════════════════════ -->
+
+    <section class="pts-tst section" aria-label="Participant voices">
+      <div class="frame">
+
+        <div class="pts-tst__list">
+          {testimonials.map((t, i) => (
+            <figure class={`pts-tst__row reveal d${(i % 2) + 1}`}>
+              <p class="pts-tst__quote">"{t.quote}"</p>
+              <figcaption class="pts-tst__attr">
+                <span class="pts-tst__name">{t.name}</span>
+                <span class="pts-tst__journey">{t.location} · {t.journey}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         05. DIVIDER — СУТЬ ФОРМАТА
          ══════════════════════════════════════════ -->
 
     <div class="pts-divider-phrase frame reveal">
@@ -224,23 +290,6 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
 
     <!-- ══════════════════════════════════════════
-         05. ПРОМЕЖУТОЧНЫЙ CTA
-         ══════════════════════════════════════════ -->
-
-    <section class="pts-mid-cta" aria-label="Contact">
-      <div class="frame">
-        <div class="pts-mid-cta__inner reveal">
-          <p class="pts-mid-cta__text">
-            Don't see the right journey? Write directly — some expeditions
-            are announced to the community before the site.
-          </p>
-          <a href="/connect" class="pts-btn pts-btn--ghost">Ask a question</a>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════
          06. ПРОШЛЫЕ ЭКСПЕДИЦИИ
          ══════════════════════════════════════════ -->
 
@@ -276,82 +325,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
 
     <!-- ══════════════════════════════════════════
-         07. ОТЗЫВЫ УЧАСТНИКОВ
-         ══════════════════════════════════════════ -->
-
-    <section class="pts-tst section" aria-label="Participant voices">
-      <div class="frame">
-
-        <p class="pts-tst__label t-label t-label--gold reveal">Participant voices</p>
-
-        <div class="pts-tst__grid">
-          {testimonials.map((t, i) => (
-            <figure class={`pts-tst__card reveal d${i + 1}`}>
-              <span class="pts-tst__mark" aria-hidden="true">"</span>
-              <blockquote class="pts-tst__quote">{t.quote}</blockquote>
-              <figcaption class="pts-tst__attr">
-                <span class="pts-tst__name">{t.name}</span>
-                <span class="pts-tst__journey">{t.location} · {t.journey}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════
-         08. ЯКОВ — КТО ВЕДЁТ
-         ══════════════════════════════════════════ -->
-
-    <section class="pts-guide section" aria-label="About the guide">
-      <div class="frame">
-        <div class="pts-guide__body">
-
-          <div class="pts-guide__photo reveal">
-            <div class="pts-guide__photo-img" role="img" aria-label="Yakov Rajuna"></div>
-          </div>
-
-          <div class="pts-guide__content">
-            <span class="pts-guide__label t-label t-label--gold reveal">Your guide</span>
-            <h2 class="pts-guide__name reveal d1">Yakov Rajuna</h2>
-
-            <div class="pts-guide__stats reveal d2">
-              <div class="pts-guide__stat">
-                <span class="pts-guide__stat-n">20+</span>
-                <span class="pts-guide__stat-l">Years of practice</span>
-              </div>
-              <div class="pts-guide__stat">
-                <span class="pts-guide__stat-n">350+</span>
-                <span class="pts-guide__stat-l">Ceremonies led</span>
-              </div>
-              <div class="pts-guide__stat">
-                <span class="pts-guide__stat-n">3 500+</span>
-                <span class="pts-guide__stat-l">Participants</span>
-              </div>
-            </div>
-
-            <p class="pts-guide__roles reveal d2">
-              Guide · Healer · Teacher · Musician · Expedition leader
-            </p>
-
-            <p class="pts-guide__bio reveal d3">
-              Yakov has led groups into sacred terrain across Asia, the Caucasus and
-              Eastern Europe for two decades. Initiations in Peru and Brazil.
-              Each expedition is small, intentional, and led personally.
-            </p>
-
-            <a href="/about" class="pts-btn pts-btn--ghost-sm reveal d4">Learn More</a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════
-         09. ФИНАЛЬНЫЙ CTA
+         08. ФИНАЛЬНЫЙ CTA
          ══════════════════════════════════════════ -->
 
     <section class="pts-final-cta section" aria-label="Apply">
@@ -487,7 +461,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     height: 100svh;
     min-height: 640px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     overflow: hidden;
   }
 
@@ -506,15 +480,24 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     inset: 0;
     background:
       linear-gradient(to top,
-        rgba(6,10,18,0.96) 0%,
-        rgba(6,10,18,0.72) 35%,
-        rgba(6,10,18,0.30) 62%,
-        rgba(6,10,18,0.08) 85%,
-        transparent 100%
+        rgba(6,10,18,0.92) 0%,
+        rgba(6,10,18,0.70) 25%,
+        rgba(6,10,18,0.32) 52%,
+        rgba(6,10,18,0.10) 72%,
+        rgba(6,10,18,0.02) 100%
       ),
       linear-gradient(to right,
-        rgba(6,10,18,0.45) 0%,
-        transparent 55%
+        rgba(6,10,18,0.50) 0%,
+        rgba(6,10,18,0.18) 35%,
+        transparent 58%
+      ),
+      linear-gradient(to left,
+        rgba(6,10,18,0.28) 0%,
+        transparent 38%
+      ),
+      radial-gradient(ellipse 110% 70% at 50% 100%,
+        rgba(6,10,18,0.42) 0%,
+        transparent 65%
       );
   }
 
@@ -523,40 +506,37 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: var(--s-6);
-    max-width: 780px;
+    gap: var(--s-7);
+    width: 100%;
+    padding-bottom: clamp(64px, 10svh, 120px);
   }
 
-  .pts-hero__label {
-    font-family: var(--mark);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: rgba(200,220,240,0.40);
-    margin: 0;
+  .pts-hero__hed {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
   }
 
   .pts-hero__title {
     font-family: var(--display);
     font-weight: 300;
-    font-size: clamp(52px, 8.5vw, 120px);
-    line-height: 0.93;
-    letter-spacing: -0.02em;
+    font-size: clamp(52px, 9.5vw, 136px);
+    line-height: 0.90;
+    letter-spacing: -0.01em;
     color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
     text-wrap: balance;
   }
 
-  .pts-hero__sub {
+  .pts-hero__byline {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(17px, 1.7vw, 24px);
-    line-height: 1.55;
-    color: rgb(var(--sky-rgb) / 0.68);
+    font-size: clamp(15px, 1.3vw, 19px);
+    color: rgba(196,168,98,0.72);
     margin: 0;
+    letter-spacing: 0.02em;
     font-optical-sizing: auto;
   }
 
@@ -570,46 +550,17 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-weight: 600;
     letter-spacing: 0.20em;
     text-transform: uppercase;
-    padding: 18px clamp(32px, 8vw, 80px);
+    padding: 18px clamp(32px, 5vw, 56px);
     border-radius: var(--r-pill);
     border: 1px solid rgba(200,220,240,0.22);
     color: rgba(200,220,240,0.80);
     background: transparent;
     transition: all 350ms var(--ease);
-    margin-top: var(--s-4);
   }
   .pts-hero__btn:hover {
     border-color: rgba(200,220,240,0.55);
     color: var(--bone);
     transform: translateY(-1px);
-  }
-
-  .pts-hero__scroll {
-    position: absolute;
-    right: var(--frame-x);
-    bottom: 40px;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--s-3);
-  }
-
-  .pts-hero__scroll-line {
-    display: block;
-    width: 1px;
-    height: 52px;
-    background: linear-gradient(to bottom, rgba(200,220,240,0.50), rgba(200,220,240,0.05));
-  }
-
-  .pts-hero__scroll-text {
-    font-family: var(--mark);
-    font-size: 9px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
-    color: rgba(200,220,240,0.28);
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
   }
 
 
@@ -919,35 +870,6 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-card__link:hover .pts-card__link-line { transform: scaleX(1) translateX(4px); }
 
 
-  /* ══════════════════════════════════════════════════
-     05. MID-PAGE CTA
-     ══════════════════════════════════════════════════ */
-
-  .pts-mid-cta {
-    background: var(--navy);
-    border-top: 1px solid rgba(200,220,240,0.05);
-    padding-block: clamp(48px, 7svh, 72px);
-  }
-
-  .pts-mid-cta__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-7);
-    flex-wrap: wrap;
-  }
-
-  .pts-mid-cta__text {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(15px, 1.4vw, 19px);
-    line-height: 1.6;
-    color: rgb(var(--sky-rgb) / 0.55);
-    margin: 0;
-    max-width: 52ch;
-    font-optical-sizing: auto;
-  }
 
 
   /* ══════════════════════════════════════════════════
@@ -1036,68 +958,54 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
 
   /* ══════════════════════════════════════════════════
-     07. TESTIMONIALS
+     04. TESTIMONIALS
      ══════════════════════════════════════════════════ */
 
-  .pts-tst { background: var(--navy); }
+  .pts-tst { background: var(--deep); }
 
-  .pts-tst__label {
-    display: block;
-    margin-bottom: clamp(40px, 6vw, 72px);
-  }
-
-  .pts-tst__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(16px, 2.5vw, 28px);
-    align-items: start;
-  }
-
-  .pts-tst__card {
-    margin: 0;
+  .pts-tst__list {
     display: flex;
     flex-direction: column;
-    gap: var(--s-5);
-    padding: clamp(20px, 2.5vw, 32px);
-    border: 1px solid rgba(200,220,240,0.07);
-    border-radius: var(--r-3);
-    background: rgba(200,220,240,0.03);
   }
 
-  .pts-tst__mark {
-    font-family: var(--display);
-    font-size: 40px;
-    line-height: 0.6;
-    color: rgba(196,168,98,0.40);
-    display: block;
-    font-optical-sizing: auto;
+  .pts-tst__row {
+    margin: 0;
+    padding-block: clamp(48px, 7vw, 88px);
+    border-top: 1px solid rgba(200,220,240,0.07);
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: clamp(32px, 5vw, 72px);
+    align-items: end;
+  }
+
+  .pts-tst__row:last-child {
+    border-bottom: 1px solid rgba(200,220,240,0.06);
   }
 
   .pts-tst__quote {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(14px, 1.4vw, 17px);
-    line-height: 1.70;
-    color: rgba(200,220,240,0.70);
+    font-size: clamp(20px, 2.4vw, 32px);
+    line-height: 1.58;
+    color: rgba(200,220,240,0.80);
     margin: 0;
+    text-wrap: pretty;
     font-optical-sizing: auto;
   }
 
   .pts-tst__attr {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    padding-top: var(--s-4);
-    border-top: 1px solid rgba(200,220,240,0.07);
-    margin-top: auto;
+    gap: 6px;
+    text-align: right;
   }
 
   .pts-tst__name {
     font-family: var(--serif);
     font-style: italic;
     font-size: 14px;
-    color: rgb(var(--sky-rgb) / 0.65);
+    color: rgb(var(--sky-rgb) / 0.58);
   }
 
   .pts-tst__journey {
@@ -1106,7 +1014,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgb(var(--sky-rgb) / 0.42);
+    color: rgb(var(--sky-rgb) / 0.32);
   }
 
 
@@ -1288,17 +1196,14 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   }
 
   @media (max-width: 768px) {
-    .pts-tst__grid { grid-template-columns: 1fr; }
+    .pts-tst__row { grid-template-columns: 1fr; }
+    .pts-tst__attr { text-align: left; }
     .pts-guide__stats { grid-template-columns: repeat(3, 1fr); }
   }
 
   @media (max-width: 760px) {
     .pts-final-cta__inner { grid-template-columns: 1fr; }
     .pts-final-cta__actions { flex-direction: row; flex-wrap: wrap; }
-  }
-
-  @media (max-width: 640px) {
-    .pts-mid-cta__inner { flex-direction: column; align-items: flex-start; }
   }
 
   @media (max-width: 560px) {
