@@ -11,7 +11,7 @@ const upcoming = [
     terrain: 'Tibet',
     date: 'September 20',
     duration: '10 Days',
-    status: 'open',
+    status: 'open' as const,
     bg: 'linear-gradient(160deg, #A8C0D8 0%, #4A6888 45%, #1A2C40 100%)',
   },
   {
@@ -20,16 +20,16 @@ const upcoming = [
     terrain: 'India',
     date: 'November',
     duration: '7 Days',
-    status: 'open',
+    status: 'open' as const,
     bg: 'linear-gradient(160deg, #D4A87A 0%, #8C5A3A 50%, #3A1E12 100%)',
   },
   {
-    slug: null,
+    slug: null as string | null,
     name: 'Annapurna',
     terrain: 'Nepal',
     date: 'May 2027',
     duration: 'TBA',
-    status: 'soon',
+    status: 'soon' as const,
     bg: 'linear-gradient(160deg, #B8C8D0 0%, #6080A0 45%, #1E3048 100%)',
   },
 ];
@@ -46,7 +46,7 @@ const past = [
     name: 'Himalayas',
     terrain: 'India',
     year: '2024',
-    participants: null,
+    participants: null as string | null,
     bg: 'linear-gradient(160deg, #A0B4C8 0%, #506880 50%, #1E2C3A 100%)',
   },
 ];
@@ -71,6 +71,8 @@ const testimonials = [
     journey: 'Pontic Alps 2024',
   },
 ];
+
+const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ?? null;
 ---
 
 <Base
@@ -81,7 +83,7 @@ const testimonials = [
   <main class="pts">
 
     <!-- ══════════════════════════════════════════
-         1. HERO
+         01. HERO
          ══════════════════════════════════════════ -->
 
     <section class="pts-hero" aria-label="Path of the Spirit">
@@ -95,7 +97,6 @@ const testimonials = [
         decoding="async"
       />
       <div class="pts-hero__overlay" aria-hidden="true"></div>
-
       <div class="pts-hero__inner frame">
         <p class="pts-hero__label reveal">Путями Духа</p>
         <h1 class="pts-hero__title reveal d1">Path of the Spirit</h1>
@@ -105,7 +106,6 @@ const testimonials = [
         </p>
         <a href="#upcoming" class="pts-hero__btn reveal d3">Explore Journeys</a>
       </div>
-
       <div class="pts-hero__scroll" aria-hidden="true">
         <span class="pts-hero__scroll-line"></span>
         <span class="pts-hero__scroll-text">scroll</span>
@@ -114,10 +114,10 @@ const testimonials = [
 
 
     <!-- ══════════════════════════════════════════
-         2. KAILASH — UPCOMING JOURNEY
+         02. KAILASH — FEATURED JOURNEY
          ══════════════════════════════════════════ -->
 
-    <section class="pts-feat" id="upcoming" aria-label="Upcoming journey — Kailash">
+    <section class="pts-feat" id="upcoming" aria-label={`Upcoming journey — ${upcoming[0].name}`}>
       <div class="frame">
 
         <p class="pts-feat__label reveal">Upcoming Journey</p>
@@ -159,8 +159,12 @@ const testimonials = [
             </p>
 
             <div class="pts-feat__actions reveal d4">
-              <a href="/mountains/kailash-2026" class="pts-btn pts-btn--gold pts-feat__cover-link">View Full Journey</a>
-              <a href="#register" class="pts-btn pts-btn--ghost pts-feat__secondary-btn">Apply Now</a>
+              <a href="/mountains/kailash-2026" class="pts-btn pts-btn--gold pts-feat__cover-link">
+                View Full Journey
+              </a>
+              <a href="/connect" class="pts-btn pts-btn--ghost pts-feat__secondary-btn">
+                Apply Now
+              </a>
             </div>
           </div>
 
@@ -170,7 +174,19 @@ const testimonials = [
 
 
     <!-- ══════════════════════════════════════════
-         3. UPCOMING SCHEDULE
+         03. DIVIDER — СУТЬ ФОРМАТА
+         ══════════════════════════════════════════ -->
+
+    <div class="pts-divider-phrase frame reveal">
+      <p class="pts-divider-phrase__text">
+        This is not tourism. It is an encounter with places that have shaped
+        the inner life of humanity for centuries.
+      </p>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════
+         04. РАСПИСАНИЕ — ВСЕ ВЫЕЗДЫ
          ══════════════════════════════════════════ -->
 
     <section class="pts-schedule section" aria-label="Upcoming expeditions">
@@ -180,7 +196,7 @@ const testimonials = [
 
         <div class="pts-cards">
           {upcoming.map((j, i) => (
-            <div class={`pts-card reveal d${(i % 4) + 1} ${j.status === 'future' ? 'pts-card--future' : ''}`}>
+            <div class={`pts-card reveal d${(i % 3) + 1}${j.status === 'soon' ? ' pts-card--soon' : ''}`}>
               <div class="pts-card__img" style={`background: ${j.bg};`} role="img" aria-label={j.name}>
                 {j.status === 'soon' && <span class="pts-card__badge">Coming Soon</span>}
               </div>
@@ -189,7 +205,7 @@ const testimonials = [
                 <h3 class="pts-card__name">{j.name}</h3>
                 {j.date && (
                   <p class="pts-card__meta">
-                    {j.date}{j.duration ? ` · ${j.duration}` : ''}
+                    {j.date}{j.duration && j.duration !== 'TBA' ? ` · ${j.duration}` : ''}
                   </p>
                 )}
                 {j.slug && (
@@ -208,14 +224,32 @@ const testimonials = [
 
 
     <!-- ══════════════════════════════════════════
-         4. PAST EXPEDITIONS
+         05. ПРОМЕЖУТОЧНЫЙ CTA
+         ══════════════════════════════════════════ -->
+
+    <section class="pts-mid-cta" aria-label="Contact">
+      <div class="frame">
+        <div class="pts-mid-cta__inner reveal">
+          <p class="pts-mid-cta__text">
+            Don't see the right journey? Write directly — some expeditions
+            are announced to the community before the site.
+          </p>
+          <a href="/connect" class="pts-btn pts-btn--ghost">Ask a question</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         06. ПРОШЛЫЕ ЭКСПЕДИЦИИ
          ══════════════════════════════════════════ -->
 
     <section class="pts-past section" aria-label="Past expeditions">
       <div class="frame">
 
         <div class="pts-past__header reveal">
-          <h2 class="pts-past__title">Past Expeditions</h2>
+          <p class="pts-past__label t-label t-label--gold">Past Expeditions</p>
+          <h2 class="pts-past__title">Where we have been.</h2>
         </div>
 
         <div class="pts-past-cards">
@@ -229,7 +263,7 @@ const testimonials = [
                   {p.year}{p.participants ? ` · ${p.participants}` : ''}
                 </p>
                 <a href="/connect" class="pts-card__link">
-                  Photos & Stories
+                  Photos &amp; Stories
                   <span class="pts-card__link-line" aria-hidden="true"></span>
                 </a>
               </div>
@@ -242,13 +276,13 @@ const testimonials = [
 
 
     <!-- ══════════════════════════════════════════
-         5. TESTIMONIALS
+         07. ОТЗЫВЫ УЧАСТНИКОВ
          ══════════════════════════════════════════ -->
 
     <section class="pts-tst section" aria-label="Participant voices">
       <div class="frame">
 
-        <p class="pts-tst__label reveal">Participant voices</p>
+        <p class="pts-tst__label t-label t-label--gold reveal">Participant voices</p>
 
         <div class="pts-tst__grid">
           {testimonials.map((t, i) => (
@@ -268,7 +302,7 @@ const testimonials = [
 
 
     <!-- ══════════════════════════════════════════
-         6. ABOUT THE GUIDE
+         08. ЯКОВ — КТО ВЕДЁТ
          ══════════════════════════════════════════ -->
 
     <section class="pts-guide section" aria-label="About the guide">
@@ -280,7 +314,7 @@ const testimonials = [
           </div>
 
           <div class="pts-guide__content">
-            <span class="pts-guide__label reveal">Your guide</span>
+            <span class="pts-guide__label t-label t-label--gold reveal">Your guide</span>
             <h2 class="pts-guide__name reveal d1">Yakov Rajuna</h2>
 
             <div class="pts-guide__stats reveal d2">
@@ -290,7 +324,7 @@ const testimonials = [
               </div>
               <div class="pts-guide__stat">
                 <span class="pts-guide__stat-n">350+</span>
-                <span class="pts-guide__stat-l">Ceremonies</span>
+                <span class="pts-guide__stat-l">Ceremonies led</span>
               </div>
               <div class="pts-guide__stat">
                 <span class="pts-guide__stat-n">3 500+</span>
@@ -315,6 +349,48 @@ const testimonials = [
       </div>
     </section>
 
+
+    <!-- ══════════════════════════════════════════
+         09. ФИНАЛЬНЫЙ CTA
+         ══════════════════════════════════════════ -->
+
+    <section class="pts-final-cta section" aria-label="Apply">
+      <div class="frame">
+        <div class="pts-final-cta__inner">
+
+          <div class="pts-final-cta__text">
+            <p class="t-label t-label--gold reveal">Ready to go</p>
+            <h2 class="pts-final-cta__title reveal d1">
+              Max 6 people.<br />
+              <em>Each journey led personally.</em>
+            </h2>
+            <p class="pts-final-cta__sub reveal d2">
+              Places fill months before departure. Write now —
+              Yakov reads every message himself.
+            </p>
+          </div>
+
+          <div class="pts-final-cta__actions reveal d2">
+            {openJourney ? (
+              <a href={`/mountains/${openJourney.slug!}`} class="pts-btn pts-btn--gold">
+                View {openJourney.name}
+              </a>
+            ) : (
+              <a
+                href="https://t.me/yakovrajuna"
+                class="pts-btn pts-btn--gold"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join Telegram
+              </a>
+            )}
+            <a href="/connect" class="pts-btn pts-btn--ghost">Write directly</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
   </main>
   <Footer />
@@ -350,7 +426,11 @@ const testimonials = [
     padding: 16px 32px;
     border-radius: var(--r-pill);
     border: 1px solid transparent;
-    transition: background-color 350ms var(--ease), border-color 350ms var(--ease), color 350ms var(--ease), transform 350ms var(--ease);
+    transition:
+      background-color 350ms var(--ease),
+      border-color 350ms var(--ease),
+      color 350ms var(--ease),
+      transform 350ms var(--ease);
     white-space: nowrap;
     cursor: pointer;
   }
@@ -397,7 +477,10 @@ const testimonials = [
     transform: translateY(-1px);
   }
 
-  /* ─── 1. HERO ─────────────────────────────────────── */
+
+  /* ══════════════════════════════════════════════════
+     01. HERO
+     ══════════════════════════════════════════════════ */
 
   .pts-hero {
     position: relative;
@@ -529,7 +612,10 @@ const testimonials = [
     transform: rotate(180deg);
   }
 
-  /* ─── 2. KAILASH FEATURED ─────────────────────────── */
+
+  /* ══════════════════════════════════════════════════
+     02. KAILASH FEATURED
+     ══════════════════════════════════════════════════ */
 
   .pts-feat {
     background: var(--deep);
@@ -539,13 +625,13 @@ const testimonials = [
     cursor: pointer;
   }
 
-  /* Stretched link — весь блок кликабельный */
   .pts-feat__cover-link::after {
     content: '';
     position: absolute;
     inset: 0;
     z-index: 1;
   }
+
   .pts-feat__secondary-btn {
     position: relative;
     z-index: 2;
@@ -569,9 +655,7 @@ const testimonials = [
     align-items: center;
   }
 
-  .pts-feat__photo {
-    position: relative;
-  }
+  .pts-feat__photo { position: relative; }
 
   .pts-feat__photo-img {
     display: block;
@@ -591,6 +675,7 @@ const testimonials = [
     gap: var(--s-3);
     background: rgba(6,10,18,0.80);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 9px 15px;
     border-radius: var(--r-pill);
     border: 1px solid rgba(196,168,98,0.22);
@@ -602,10 +687,7 @@ const testimonials = [
     color: var(--gold);
   }
 
-  .pts-feat__badge-dot {
-    font-size: 7px;
-    color: var(--gold);
-  }
+  .pts-feat__badge-dot { font-size: 7px; color: var(--gold); }
 
   .pts-feat__content {
     display: flex;
@@ -678,11 +760,35 @@ const testimonials = [
     margin-top: var(--s-2);
   }
 
-  /* ─── 3. UPCOMING SCHEDULE ────────────────────────── */
 
-  .pts-schedule {
-    background: var(--navy);
+  /* ══════════════════════════════════════════════════
+     03. DIVIDER PHRASE
+     ══════════════════════════════════════════════════ */
+
+  .pts-divider-phrase {
+    padding-block: clamp(48px, 7svh, 80px);
+    background: var(--deep);
+    border-top: 1px solid rgba(200,220,240,0.05);
   }
+
+  .pts-divider-phrase__text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(18px, 2vw, 28px);
+    line-height: 1.55;
+    color: rgb(var(--sky-rgb) / 0.45);
+    max-width: 60ch;
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+
+  /* ══════════════════════════════════════════════════
+     04. SCHEDULE
+     ══════════════════════════════════════════════════ */
+
+  .pts-schedule { background: var(--navy); }
 
   .pts-section-title {
     font-family: var(--display);
@@ -716,25 +822,15 @@ const testimonials = [
     box-shadow: 0 20px 60px rgba(0,0,0,0.35);
   }
 
-  .pts-card--future { opacity: 0.35; }
-  .pts-card--future:hover { transform: none; box-shadow: none; }
+  .pts-card--soon {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
   .pts-card__img {
     position: relative;
     aspect-ratio: 4/3;
     overflow: hidden;
-  }
-
-  .pts-card__img-label {
-    position: absolute;
-    bottom: 14px;
-    left: 16px;
-    font-family: var(--mark);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.20em;
-    text-transform: uppercase;
-    color: rgba(240,236,228,0.50);
   }
 
   .pts-card__badge {
@@ -752,6 +848,7 @@ const testimonials = [
     padding: 5px 10px;
     border-radius: var(--r-pill);
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
   }
 
   .pts-card__info {
@@ -815,29 +912,55 @@ const testimonials = [
     height: 1px;
     background: currentColor;
     flex-shrink: 0;
-    transform: scaleX(0.74) translateX(0px);
+    transform: scaleX(0.74);
     transform-origin: left center;
     transition: transform 400ms var(--ease);
   }
   .pts-card__link:hover .pts-card__link-line { transform: scaleX(1) translateX(4px); }
 
-  /* ─── 4. PAST EXPEDITIONS ─────────────────────────── */
 
-  .pts-past {
-    background: var(--deep);
+  /* ══════════════════════════════════════════════════
+     05. MID-PAGE CTA
+     ══════════════════════════════════════════════════ */
+
+  .pts-mid-cta {
+    background: var(--navy);
+    border-top: 1px solid rgba(200,220,240,0.05);
+    padding-block: clamp(48px, 7svh, 72px);
   }
+
+  .pts-mid-cta__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-7);
+    flex-wrap: wrap;
+  }
+
+  .pts-mid-cta__text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(15px, 1.4vw, 19px);
+    line-height: 1.6;
+    color: rgb(var(--sky-rgb) / 0.55);
+    margin: 0;
+    max-width: 52ch;
+    font-optical-sizing: auto;
+  }
+
+
+  /* ══════════════════════════════════════════════════
+     06. PAST EXPEDITIONS
+     ══════════════════════════════════════════════════ */
+
+  .pts-past { background: var(--deep); }
 
   .pts-past__header {
     margin-bottom: clamp(48px, 7vw, 88px);
   }
 
   .pts-past__label {
-    font-family: var(--mark);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(196,168,98,0.60);
     display: block;
     margin-bottom: var(--s-4);
   }
@@ -911,19 +1034,14 @@ const testimonials = [
     margin: 0;
   }
 
-  /* ─── 5. TESTIMONIALS ─────────────────────────────── */
 
-  .pts-tst {
-    background: var(--navy);
-  }
+  /* ══════════════════════════════════════════════════
+     07. TESTIMONIALS
+     ══════════════════════════════════════════════════ */
+
+  .pts-tst { background: var(--navy); }
 
   .pts-tst__label {
-    font-family: var(--mark);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(196,168,98,0.65);
     display: block;
     margin-bottom: clamp(40px, 6vw, 72px);
   }
@@ -991,11 +1109,12 @@ const testimonials = [
     color: rgb(var(--sky-rgb) / 0.42);
   }
 
-  /* ─── 6. GUIDE ────────────────────────────────────── */
 
-  .pts-guide {
-    background: var(--deep);
-  }
+  /* ══════════════════════════════════════════════════
+     08. GUIDE
+     ══════════════════════════════════════════════════ */
+
+  .pts-guide { background: var(--deep); }
 
   .pts-guide__body {
     display: grid;
@@ -1008,8 +1127,7 @@ const testimonials = [
     border-radius: var(--r-3);
     aspect-ratio: 3/4;
     overflow: hidden;
-    background:
-      linear-gradient(160deg, #2A3848 0%, #18283A 55%, #0E1A28 100%);
+    background: linear-gradient(160deg, #2A3848 0%, #18283A 55%, #0E1A28 100%);
     border: 1px solid rgba(200,220,240,0.06);
   }
 
@@ -1019,15 +1137,7 @@ const testimonials = [
     gap: var(--s-6);
   }
 
-  .pts-guide__label {
-    font-family: var(--mark);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(196,168,98,0.65);
-    display: block;
-  }
+  .pts-guide__label { display: block; }
 
   .pts-guide__name {
     font-family: var(--display);
@@ -1090,6 +1200,63 @@ const testimonials = [
     max-width: 46ch;
   }
 
+
+  /* ══════════════════════════════════════════════════
+     09. FINAL CTA
+     ══════════════════════════════════════════════════ */
+
+  .pts-final-cta {
+    background: var(--navy);
+    border-top: 1px solid rgba(200,220,240,0.05);
+  }
+
+  .pts-final-cta__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: clamp(40px, 7vw, 100px);
+    align-items: center;
+  }
+
+  .pts-final-cta__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+
+  .pts-final-cta__title {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(32px, 4.5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--bone);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .pts-final-cta__title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .pts-final-cta__sub {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgb(var(--sky-rgb) / 0.50);
+    margin: 0;
+    max-width: 44ch;
+  }
+
+  .pts-final-cta__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    flex-shrink: 0;
+  }
+
+
   /* ─── NAV OVERRIDE ────────────────────────────────── */
 
   :global(.nav:not(.nav--scrolled) .nav__link) {
@@ -1106,6 +1273,7 @@ const testimonials = [
     color: rgba(200,220,240,0.45);
   }
 
+
   /* ─── RESPONSIVE ──────────────────────────────────── */
 
   @media (max-width: 1100px) {
@@ -1120,10 +1288,17 @@ const testimonials = [
   }
 
   @media (max-width: 768px) {
-    .pts-past-cards { grid-template-columns: 1fr 1fr; }
     .pts-tst__grid { grid-template-columns: 1fr; }
-    .pts-reg__row { grid-template-columns: 1fr; }
     .pts-guide__stats { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 760px) {
+    .pts-final-cta__inner { grid-template-columns: 1fr; }
+    .pts-final-cta__actions { flex-direction: row; flex-wrap: wrap; }
+  }
+
+  @media (max-width: 640px) {
+    .pts-mid-cta__inner { flex-direction: column; align-items: flex-start; }
   }
 
   @media (max-width: 560px) {
