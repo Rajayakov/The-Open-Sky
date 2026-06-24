@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import { journeys, getJourney } from '../../data/mountains';
+import { journeys, getJourney, pastExpeditions } from '../../data/mountains';
 import '../../styles/global.css';
 
 export function getStaticPaths() {
@@ -15,17 +15,66 @@ if (!journey) return Astro.redirect('/mountains');
 
 const isUpcoming = journey.status === 'upcoming';
 const isSoon     = journey.status === 'soon';
+const isKailash  = journey.slug === 'kailash-2026';
+
+const pastTwo = pastExpeditions.slice(0, 2);
+
+const klFaq = [
+  {
+    q: 'What level of physical fitness is required?',
+    a: 'You should be able to walk 6–8 hours daily at altitudes between 4,800 and 5,600 metres, carrying a light day pack. The kora covers approximately 52 kilometres over three days. No technical climbing is involved. Cardiovascular fitness matters more than mountain experience.',
+  },
+  {
+    q: 'What happens with altitude sickness?',
+    a: 'Two acclimatisation days are built into the programme. Emergency oxygen is carried throughout the kora. We hold safety above all other considerations and will not continue if a participant cannot safely do so.',
+  },
+  {
+    q: 'How do Tibet visas work?',
+    a: 'Tibet requires a Tibet Travel Permit in addition to a Chinese visa. We arrange all documentation through our on-the-ground partners. Full details and costs are explained at the point of application.',
+  },
+  {
+    q: 'What is the payment schedule?',
+    a: 'A deposit of $700 USD secures your place. The remaining balance is due 60 days before departure. Full payment details are shared during the initial conversation.',
+  },
+  {
+    q: 'What if I need to cancel?',
+    a: 'Cancellation policy is standard for high-altitude expeditions of this complexity. Full details are shared at the point of application. We recommend travel insurance that covers cancellation.',
+  },
+  {
+    q: 'Will there be time alone, or is everything guided?',
+    a: 'There is deliberate space for solitude throughout, particularly during the kora itself. The group process and ceremonies are integral, but so is unstructured time with the mountain. The balance is held by Yakov.',
+  },
+];
+
+const klGiveCards = [
+  { title: 'Clarity',       body: 'Arrives not as insight but as a quieting. You understand what matters without having to think about it.' },
+  { title: 'Stillness',     body: 'The kind that cannot be reproduced at home. A reference point your body will remember when ordinary noise returns.' },
+  { title: 'Perspective',   body: 'Distance from what seemed large. Altitude does this literally — and then something else does it more permanently.' },
+  { title: 'Direction',     body: 'Not answers, but a deepened ability to hear your own questions. The mountain does not tell you what to do.' },
+  { title: 'Vitality',      body: 'Your body will have done something real. The tiredness that follows is the earned kind.' },
+  { title: 'A fixed point', body: 'An interior place you return to for years. People describe this a long time after the journey ends.' },
+];
+
+const klRecogQuestions = [
+  'A feeling that what you are building is important, but that something equally important is being missed.',
+  'A need for something that cannot be purchased or scheduled — something the usual solutions do not reach.',
+  'A recurring pull toward significant terrain, long walks, and the kind of silence that asks something of you.',
+  'The sense that your next step will not be found by thinking harder, but by going somewhere that demands more.',
+  'A readiness to be changed by an experience, not merely moved by it.',
+];
 ---
 
 <Base
-  title={`${journey.title} — Mountains — The Open Sky`}
+  title={isKailash
+    ? 'Kailash 2026 — Sacred Expedition — The Open Sky'
+    : `${journey.title} — Mountains — The Open Sky`}
   description={journey.description}
 >
   <Nav />
-  <main>
+  <main class:list={[isKailash && 'kl-land']}>
 
     <!-- ══════════════════════════════════════════
-         1. HERO
+         1. HERO — untouched for all slugs
          ══════════════════════════════════════════ -->
 
     <section class="ej-hero" aria-label={journey.title}>
@@ -66,290 +115,1713 @@ const isSoon     = journey.status === 'soon';
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════════
-         2. ABOUT THE JOURNEY
-         ══════════════════════════════════════════ -->
+    {isKailash ? (
 
-    <section class="ej-about section frame" aria-label="About the journey">
-      <div class="ej-about__grid">
+      /* ═══════════════════════════════════════════════════
+         KAILASH 2026 — FULL LANDING (Sections 2–14)
+         ═══════════════════════════════════════════════════ */
+      <>
 
-        <div class="ej-about__text reveal">
-          <span class="t-label t-label--warm">About This Journey</span>
-          <h2 class="ej-section-heading">{journey.description}</h2>
-          <p class="t-body ej-about__body">
-            [Detailed description of the expedition — the landscape, the physical experience, the inner dimension. To be written.]
-          </p>
-          <p class="t-body ej-about__body">
-            [What makes this mountain significant. What participants can expect to encounter — physically, emotionally, and in terms of the group process.]
-          </p>
-        </div>
+        <!-- ══════════════════════════════════════════
+             2. PERSONAL LETTER
+             ══════════════════════════════════════════ -->
 
-        <div class="ej-about__sidebar reveal d2">
-          <div class="ej-meta-panel">
-            <h3 class="ej-meta-panel__title">Expedition Details</h3>
-            <div class="ej-meta-panel__rows">
-              {[
-                { label: 'Dates',       value: journey.date },
-                { label: 'Location',    value: journey.location },
-                { label: 'Duration',    value: journey.duration },
-                ...(journey.altitude  ? [{ label: 'Altitude',   value: journey.altitude  }] : []),
-                ...(journey.groupSize ? [{ label: 'Group size', value: journey.groupSize }] : []),
-                ...(journey.difficulty ? [{ label: 'Difficulty', value: journey.difficulty }] : []),
-              ].map(row => (
-                <div class="ej-meta-panel__row">
-                  <span class="t-label ej-meta-panel__row-label">{row.label}</span>
-                  <span class="ej-meta-panel__row-val">{row.value}</span>
+        <section class="kl-letter section" aria-label="A letter from Yakov">
+          <div class="frame">
+            <div class="kl-letter__inner">
+              <span class="t-label t-label--warm kl-letter__label reveal">A letter from Yakov</span>
+              <!-- LETTER_PLACEHOLDER -->
+              <p class="kl-letter__para reveal d1">
+                I have been to Kailash once. That was enough to understand that once is
+                not the point. The mountain does not reveal itself in full on any single
+                circumambulation. What it gives you instead is a direction — and the
+                clarity to recognise it.
+              </p>
+              <p class="kl-letter__para reveal d2">
+                I am bringing a small group in September 2026. Six people, ten days,
+                one of the most demanding and most revered landscapes on earth.
+                There will be altitude, distance, silence, and ceremony. There will also
+                be a quality of interior encounter that I have not found anywhere else.
+              </p>
+              <p class="kl-letter__para reveal d3">
+                If you are reading this and something in you recognises it — write.
+                We will speak, and you will know whether this is your moment.
+              </p>
+              <p class="kl-letter__sig reveal d4">— Yakov Rajuna</p>
+            </div>
+          </div>
+          <div class="kl-letter__rule" aria-hidden="true"></div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             3. RECOGNITION
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-recog section" aria-label="Perhaps you recognise this">
+          <div class="frame kl-recog__frame">
+
+            <div class="kl-recog__left">
+              <span class="t-label t-label--warm reveal">Recognition</span>
+              <h2 class="kl-recog__heading reveal d1">Perhaps you<br/>recognise this.</h2>
+            </div>
+
+            <div class="kl-recog__right">
+              <div class="kl-recog__questions">
+                {klRecogQuestions.map((q, i) => (
+                  <p class={`kl-recog__q reveal d${(i % 3) + 1}`}>{q}</p>
+                ))}
+              </div>
+              <p class="kl-recog__close reveal d2">
+                If any of this is familiar, you are in the right place.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             4. WHY KAILASH
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-why2 section" aria-label="Why Kailash">
+          <div class="frame kl-why2__frame">
+
+            <div class="kl-why2__content">
+              <span class="t-label t-label--warm reveal">The Mountain</span>
+              <h2 class="kl-why2__heading reveal d1">Why Kailash.</h2>
+              <p class="kl-why2__body reveal d2">
+                Kailash is considered the axis of the world across four living traditions:
+                Hindu, Buddhist, Jain, and Bonpo. It has never been summited. Not for lack
+                of attempt — but because every tradition that holds it sacred has chosen not to.
+                The mountain is approached through circumambulation, not conquest.
+              </p>
+              <p class="kl-why2__body reveal d3">
+                The kora — three days of walking around the mountain at altitudes above
+                5,000 metres — is one of the most ancient pilgrimage routes on earth.
+                The terrain surrounding Kailash carries a quality that is very difficult
+                to translate into language. People who have been there will understand
+                immediately what this means.
+              </p>
+              <p class="kl-why2__body reveal d4">
+                What the mountain gives is not comfort or beauty in any easy sense.
+                It gives scale — interior and exterior simultaneously. Most people return
+                quieter. More certain of what matters. Changed in ways that take months
+                to fully understand.
+              </p>
+            </div>
+
+            <div class="kl-why2__visual reveal d2">
+              {journey.heroImage ? (
+                <img
+                  class="kl-why2__img"
+                  src={journey.heroImage}
+                  alt="Mount Kailash, Tibet"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div class="kl-img-slot" style={`background: ${journey.bg}`}></div>
+              )}
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             5. WHAT THIS JOURNEY MAY GIVE YOU
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-give section" aria-label="What this journey may give you">
+          <div class="frame">
+            <span class="t-label t-label--warm reveal">Gifts of the journey</span>
+            <h2 class="kl-give__heading reveal d1">What this journey<br/>may give you.</h2>
+
+            <div class="kl-give__grid">
+              {klGiveCards.map((card, i) => (
+                <div class={`kl-give__card reveal d${(i % 3) + 1}`}>
+                  <h3 class="kl-give__card-title">{card.title}</h3>
+                  <p class="kl-give__card-body">{card.body}</p>
                 </div>
               ))}
             </div>
-            {isUpcoming && (
-              <a href="#apply" class="btn btn--warm ej-meta-panel__cta">Express Interest</a>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             6. THE ROUTE — Programme by day
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-route section" aria-label="The route">
+          <div class="frame">
+            <span class="t-label t-label--warm reveal">Programme</span>
+            <h2 class="kl-route__heading reveal d1">The Route.</h2>
+
+            <div class="kl-route__timeline" role="list">
+              {(journey.structure ?? []).map((phase, i) => (
+                <div class={`kl-route__row reveal d${(i % 2) + 1}`} role="listitem">
+                  <span class="kl-route__label">{phase.phase}</span>
+                  <div class="kl-route__track" aria-hidden="true">
+                    <span class="kl-route__dot"></span>
+                  </div>
+                  <p class="kl-route__desc">{phase.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             7. INCLUDED / NOT INCLUDED
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-incl section" aria-label="What is included">
+          <div class="frame">
+            <h2 class="kl-incl__heading reveal">Included.</h2>
+
+            <div class="kl-incl__cols">
+
+              <div class="kl-incl__col reveal d1">
+                <p class="kl-incl__col-title">In the expedition</p>
+                <ul class="kl-incl__list" role="list">
+                  {(journey.included ?? []).map((item) => (
+                    <li class="kl-incl__item">
+                      <span class="kl-incl__check kl-incl__check--yes" aria-hidden="true">✓</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="kl-incl__col reveal d2">
+                <p class="kl-incl__col-title">Arranged separately</p>
+                <ul class="kl-incl__list" role="list">
+                  {(['International flights', 'Travel insurance (mandatory)', 'Personal trekking equipment', 'Visa fees'] as const).map((item) => (
+                    <li class="kl-incl__item kl-incl__item--other">
+                      <span class="kl-incl__check" aria-hidden="true">✓</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             8. INVESTMENT
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-invest section" aria-label="Investment">
+          <div class="frame">
+            <div class="kl-invest__inner">
+              <span class="t-label t-label--warm reveal">Investment</span>
+              <p class="kl-invest__price reveal d1">$3,500 <span class="kl-invest__currency">USD</span></p>
+              <p class="kl-invest__per reveal d2">per person · all-inclusive</p>
+
+              <div class="kl-invest__metas reveal d2">
+                <p class="kl-invest__meta">Deposit to reserve <span>$700 USD</span></p>
+                <p class="kl-invest__meta">Group size <span>Max 6 people</span></p>
+                <p class="kl-invest__meta">Places remaining <span>4</span></p>
+              </div>
+
+              <p class="kl-invest__scarcity reveal d3">
+                When the current allocation fills, pricing increases.
+              </p>
+
+              <a href="#apply" class="btn btn--warm kl-invest__cta reveal d4">Apply for your place</a>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             9. FOR WHOM / NOT FOR WHOM
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-whom section" aria-label="Who this journey is for">
+          <div class="frame kl-whom__frame">
+
+            <div class="kl-whom__col">
+              <p class="kl-whom__col-title reveal">This journey is for you if</p>
+              <ul class="kl-whom__list" role="list">
+                {(journey.forWhom ?? []).map((item, i) => (
+                  <li class={`kl-whom__item reveal d${(i % 2) + 1}`}>
+                    <span class="kl-whom__mark" aria-hidden="true">—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="kl-whom__col kl-whom__col--not">
+              <p class="kl-whom__col-title reveal">This journey is not for you if</p>
+              <ul class="kl-whom__list" role="list">
+                {([
+                  'You expect comfort over meaning',
+                  'Physical challenge is something you avoid rather than meet',
+                  'You are looking for a group tour with a fixed programme',
+                ] as const).map((item, i) => (
+                  <li class={`kl-whom__item reveal d${(i % 2) + 1}`}>
+                    <span class="kl-whom__mark" aria-hidden="true">—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             10. YAKOV — THE GUIDE
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-gd section" aria-label="About the guide">
+          <div class="frame kl-gd__frame">
+
+            <div class="kl-gd__photo reveal d1" role="img" aria-label="Yakov Rajuna"></div>
+
+            <div class="kl-gd__content">
+              <span class="t-label t-label--warm reveal">Your guide</span>
+              <h2 class="kl-gd__name reveal d1">Yakov Rajuna</h2>
+
+              <div class="kl-gd__stats reveal d2">
+                {([
+                  { num: '20+',    label: 'Years' },
+                  { num: '350+',   label: 'Ceremonies' },
+                  { num: '3,500+', label: 'Participants' },
+                ] as const).map((s) => (
+                  <div class="kl-gd__stat">
+                    <span class="kl-gd__stat-num">{s.num}</span>
+                    <span class="kl-gd__stat-label">{s.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              <p class="kl-gd__roles reveal d2">Guide · Healer · Teacher · Expedition Leader</p>
+
+              <p class="kl-gd__quote reveal d3">
+                Every expedition is led by Yakov personally. No assistants. No proxies.
+                This is why the groups are small.
+              </p>
+
+              <a href="/about" class="btn btn--ghost-d kl-gd__link reveal d4">Full biography →</a>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             11. PAST EXPEDITIONS
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-past section" aria-label="Past expeditions">
+          <div class="frame">
+            <span class="t-label t-label--warm reveal">Precedent</span>
+            <h2 class="kl-past__heading reveal d1">Where we have been.</h2>
+
+            <div class="kl-past__grid">
+              {([
+                { name: 'Mardi Himal',  region: 'Nepal', meta: '2025 · 12 participants', bg: pastTwo[0]?.bg ?? 'linear-gradient(160deg,#7898B8,#18283A)' },
+                { name: 'Himalayas',    region: 'Nepal', meta: '2024',                   bg: pastTwo[1]?.bg ?? 'linear-gradient(160deg,#A0B4C8,#1E2C3A)' },
+              ] as const).map((card, i) => (
+                <div class={`kl-past__card reveal d${i + 1}`}>
+                  <div class="kl-past__card-bg" style={`background: ${card.bg}`} aria-hidden="true"></div>
+                  <div class="kl-past__card-content">
+                    <p class="kl-past__card-name">{card.name}</p>
+                    <p class="kl-past__card-meta">{card.region} · {card.meta}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p class="kl-past__note reveal">
+              Kailash is a new destination for this group. The guide is not.
+            </p>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             12. TESTIMONIALS
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-tst3 section" aria-label="From participants">
+          <div class="frame">
+            <span class="t-label t-label--warm reveal">From participants</span>
+            <h2 class="kl-tst3__heading reveal d1">What people say.</h2>
+
+            <div class="kl-tst3__grid">
+              {([
+                {
+                  quote: 'I returned quieter. More certain of what matters. The mountain does not explain itself, and neither does the change.',
+                  name:  'Elena K.',
+                  meta:  'Moscow · Mardi Himal 2025',
+                },
+                {
+                  quote: 'Yakov holds the space without filling it. That quality is rare. The mountains do the work. He ensures you can receive it.',
+                  name:  'David M.',
+                  meta:  'Berlin · Georgian Highlands 2024',
+                },
+                {
+                  quote: 'Not transformed in any dramatic way. Clarified. Like something blurry for years finally came into focus.',
+                  name:  'Maria T.',
+                  meta:  'Tbilisi · Pontic Alps 2024',
+                },
+              ] as const).map((t, i) => (
+                <figure class={`kl-tst3__card reveal d${i + 1}`}>
+                  <span class="kl-tst3__glyph" aria-hidden="true">"</span>
+                  <blockquote class="kl-tst3__quote">{t.quote}</blockquote>
+                  <figcaption class="kl-tst3__attr">
+                    <span class="kl-tst3__name">{t.name}</span>
+                    <span class="kl-tst3__meta">{t.meta}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+
+            <p class="kl-tst3__note reveal">
+              These journeys were different from Kailash in terrain. The inner process is the same.
+            </p>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             13. FAQ
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-faq2 section" aria-label="Questions">
+          <div class="frame">
+            <div class="kl-faq2__inner">
+              <span class="t-label t-label--warm reveal">Questions</span>
+              <h2 class="kl-faq2__heading reveal d1">Before you write.</h2>
+
+              <div class="kl-faq2__list">
+                {klFaq.map((item, i) => (
+                  <div class={`kl-faq2__item reveal d${(i % 3) + 1}`}>
+                    <button class="kl-faq2__btn" type="button" aria-expanded="false">
+                      <span class="kl-faq2__q">{item.q}</span>
+                      <span class="kl-faq2__icon" aria-hidden="true">+</span>
+                    </button>
+                    <div class="kl-faq2__ans" role="region">
+                      <div class="kl-faq2__ans-inner">
+                        <p class="kl-faq2__ans-text">{item.a}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+             14. FINAL APPLY
+             ══════════════════════════════════════════ -->
+
+        <section class="kl-apply2 section" id="apply" aria-label="Apply">
+          <div class="frame">
+            <div class="kl-apply2__inner">
+              <span class="t-label t-label--warm reveal">Apply</span>
+              <h2 class="kl-apply2__title reveal d1">Kailash.</h2>
+              <p class="kl-apply2__dates reveal d2">
+                September 20–30, 2026 · Tibet · 4 places remaining
+              </p>
+
+              <div class="kl-apply2__btns reveal d3">
+                <a href="/connect?from=kailash-2026" class="btn btn--warm">Apply for your place</a>
+                <a
+                  href="https://t.me/yakovrajuna"
+                  class="btn btn--ghost-d"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Write in Telegram</a>
+              </div>
+
+              <p class="kl-apply2__note reveal d4">Yakov reads every message himself.</p>
+            </div>
+          </div>
+        </section>
+
+      </>
+
+    ) : (
+
+      /* ═══════════════════════════════════════════════════
+         GENERIC EXPEDITION TEMPLATE (all other slugs)
+         ═══════════════════════════════════════════════════ */
+      <>
+
+        <!-- 2. ABOUT -->
+        <section class="ej-about section frame" aria-label="About the journey">
+          <div class="ej-about__grid">
+            <div class="ej-about__text reveal">
+              <span class="t-label t-label--warm">About This Journey</span>
+              <h2 class="ej-section-heading">{journey.description}</h2>
+              <p class="t-body ej-about__body">
+                [Detailed description of the expedition — the landscape, the physical experience, the inner dimension. To be written.]
+              </p>
+              <p class="t-body ej-about__body">
+                [What makes this mountain significant. What participants can expect to encounter — physically, emotionally, and in terms of the group process.]
+              </p>
+            </div>
+            <div class="ej-about__sidebar reveal d2">
+              <div class="ej-meta-panel">
+                <h3 class="ej-meta-panel__title">Expedition Details</h3>
+                <div class="ej-meta-panel__rows">
+                  {[
+                    { label: 'Dates',       value: journey.date },
+                    { label: 'Location',    value: journey.location },
+                    { label: 'Duration',    value: journey.duration },
+                    ...(journey.altitude   ? [{ label: 'Altitude',   value: journey.altitude   }] : []),
+                    ...(journey.groupSize  ? [{ label: 'Group size', value: journey.groupSize  }] : []),
+                    ...(journey.difficulty ? [{ label: 'Difficulty', value: journey.difficulty }] : []),
+                  ].map(row => (
+                    <div class="ej-meta-panel__row">
+                      <span class="t-label ej-meta-panel__row-label">{row.label}</span>
+                      <span class="ej-meta-panel__row-val">{row.value}</span>
+                    </div>
+                  ))}
+                </div>
+                {isUpcoming && (
+                  <a href="#apply" class="btn btn--warm ej-meta-panel__cta">Express Interest</a>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. ROUTE -->
+        <section class="ej-route section" aria-label="Route">
+          <div class="frame">
+            <span class="t-label t-label--warm reveal">The Route</span>
+            <h2 class="ej-section-heading reveal d1">Day by day.</h2>
+            {(journey.structure ?? []).length > 0 ? (
+              <div class="ej-route__phases">
+                {(journey.structure ?? []).map((phase, i) => (
+                  <div class={`ej-route__phase reveal d${(i % 3) + 1}`}>
+                    <span class="t-label ej-route__phase-label">{phase.phase}</span>
+                    <p class="t-body ej-route__phase-body">{phase.description}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div class="ej-placeholder reveal d1">
+                <p class="ej-placeholder__text">Route details to be announced.</p>
+              </div>
             )}
           </div>
-        </div>
+          <div class="ej-route__bg" aria-hidden="true"></div>
+        </section>
 
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         3. ROUTE
-         ══════════════════════════════════════════ -->
-
-    <section class="ej-route section" aria-label="Route">
-      <div class="frame">
-        <span class="t-label t-label--warm reveal">The Route</span>
-        <h2 class="ej-section-heading reveal d1">Day by day.</h2>
-
-        {(journey.structure ?? []).length > 0 ? (
-          <div class="ej-route__phases">
-            {(journey.structure ?? []).map((phase, i) => (
-              <div class={`ej-route__phase reveal d${(i % 3) + 1}`}>
-                <span class="t-label ej-route__phase-label">{phase.phase}</span>
-                <p class="t-body ej-route__phase-body">{phase.description}</p>
+        <!-- 4. HIGHLIGHTS -->
+        <section class="ej-highlights section frame" aria-label="Highlights">
+          <span class="t-label t-label--warm reveal">Highlights</span>
+          <h2 class="ej-section-heading reveal d1">What this journey offers.</h2>
+          <div class="ej-highlights__grid">
+            {[
+              { title: 'The Landscape', body: '[Description of the specific landscape and what it demands and offers.]' },
+              { title: 'The Group',     body: '[Small group dynamic — who comes, how the group works together, the intimacy that forms.]' },
+              { title: 'The Inner Work', body: '[The ceremonies, the silences, the conversations. What happens beyond the physical walking.]' },
+              { title: 'The Return',    body: '[What participants typically carry back. The integration that happens in the weeks that follow.]' },
+            ].map((item, i) => (
+              <div class={`ej-highlight reveal d${(i % 3) + 1}`}>
+                <h3 class="ej-highlight__title">{item.title}</h3>
+                <p class="t-body ej-highlight__body">{item.body}</p>
               </div>
             ))}
           </div>
-        ) : (
-          <div class="ej-placeholder reveal d1">
-            <p class="ej-placeholder__text">Route details to be announced.</p>
-          </div>
-        )}
-      </div>
-      <div class="ej-route__bg" aria-hidden="true"></div>
-    </section>
+        </section>
 
-    <!-- ══════════════════════════════════════════
-         4. HIGHLIGHTS
-         ══════════════════════════════════════════ -->
-
-    <section class="ej-highlights section frame" aria-label="Highlights">
-      <span class="t-label t-label--warm reveal">Highlights</span>
-      <h2 class="ej-section-heading reveal d1">What this journey offers.</h2>
-
-      <div class="ej-highlights__grid">
-        {[
-          { title: 'The Landscape', body: '[Description of the specific landscape and what it demands and offers.]' },
-          { title: 'The Group',     body: '[Small group dynamic — who comes, how the group works together, the intimacy that forms.]' },
-          { title: 'The Inner Work', body: '[The ceremonies, the silences, the conversations. What happens beyond the physical walking.]' },
-          { title: 'The Return',    body: '[What participants typically carry back. The integration that happens in the weeks that follow.]' },
-        ].map((item, i) => (
-          <div class={`ej-highlight reveal d${(i % 3) + 1}`}>
-            <h3 class="ej-highlight__title">{item.title}</h3>
-            <p class="t-body ej-highlight__body">{item.body}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         5. GALLERY
-         ══════════════════════════════════════════ -->
-
-    <section class="ej-gallery section frame" aria-label="Gallery">
-      <span class="t-label t-label--warm reveal">Gallery</span>
-      <h2 class="ej-section-heading reveal d1">In the field.</h2>
-
-      <div class="ej-gallery__grid">
-        {[
-          { ratio: 'landscape', label: 'Gallery · 01' },
-          { ratio: 'portrait',  label: 'Gallery · 02' },
-          { ratio: 'portrait',  label: 'Gallery · 03' },
-          { ratio: 'landscape', label: 'Gallery · 04' },
-          { ratio: 'landscape', label: 'Gallery · 05' },
-          { ratio: 'landscape', label: 'Gallery · 06' },
-        ].map((slot, i) => (
-          <div
-            class={`ej-gallery__slot ej-gallery__slot--${slot.ratio} reveal d${(i % 3) + 1}`}
-            style={`background: ${journey.bg}; opacity: ${0.6 + i * 0.05};`}
-            aria-hidden="true"
-            data-label={slot.label}
-          ></div>
-        ))}
-      </div>
-
-      <p class="ej-gallery__note reveal">Photos and video from this expedition will be published here.</p>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         6. TESTIMONIALS
-         ══════════════════════════════════════════ -->
-
-    <section class="ej-testimonials section" aria-label="Testimonials">
-      <div class="frame">
-        <span class="t-label t-label--warm reveal">From Participants</span>
-        <h2 class="ej-section-heading ej-section-heading--light reveal d1">What people say.</h2>
-
-        <div class="ej-testimonials__grid">
-          {[1, 2, 3].map((n, i) => (
-            <div class={`ej-testimonial reveal d${i + 1}`}>
-              <blockquote class="ej-testimonial__quote">
-                [Testimonial {n} — to be added after the expedition.]
-              </blockquote>
-              <cite class="ej-testimonial__author">
-                <span class="ej-testimonial__name">Name Surname</span>
-                <span class="ej-testimonial__detail">Country · Year</span>
-              </cite>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div class="ej-testimonials__bg" aria-hidden="true"></div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         7. PRACTICAL INFORMATION
-         ══════════════════════════════════════════ -->
-
-    <section class="ej-practical section frame" aria-label="Practical information">
-      <span class="t-label t-label--warm reveal">Practical Information</span>
-      <h2 class="ej-section-heading reveal d1">What's included.</h2>
-
-      <div class="ej-practical__grid">
-
-        <div class="ej-practical__col reveal">
-          <h3 class="ej-practical__col-title">Included</h3>
-          <ul class="ej-practical__list">
-            {(journey.included ?? [
-              'All accommodation on route',
-              'All meals',
-              'Guided group work',
-              'Local transport',
-              'Emergency equipment',
-            ]).map(item => (
-              <li class="ej-practical__item">
-                <span class="ej-practical__mark" aria-hidden="true">—</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div class="ej-practical__col reveal d2">
-          <h3 class="ej-practical__col-title">Not Included</h3>
-          <ul class="ej-practical__list">
+        <!-- 5. GALLERY -->
+        <section class="ej-gallery section frame" aria-label="Gallery">
+          <span class="t-label t-label--warm reveal">Gallery</span>
+          <h2 class="ej-section-heading reveal d1">In the field.</h2>
+          <div class="ej-gallery__grid">
             {[
-              'International flights',
-              'Travel insurance (required)',
-              'Personal gear and equipment',
-              'Optional extensions',
-            ].map(item => (
-              <li class="ej-practical__item">
-                <span class="ej-practical__mark" aria-hidden="true">—</span>
-                <span>{item}</span>
-              </li>
+              { ratio: 'landscape', label: 'Gallery · 01' },
+              { ratio: 'portrait',  label: 'Gallery · 02' },
+              { ratio: 'portrait',  label: 'Gallery · 03' },
+              { ratio: 'landscape', label: 'Gallery · 04' },
+              { ratio: 'landscape', label: 'Gallery · 05' },
+              { ratio: 'landscape', label: 'Gallery · 06' },
+            ].map((slot, i) => (
+              <div
+                class={`ej-gallery__slot ej-gallery__slot--${slot.ratio} reveal d${(i % 3) + 1}`}
+                style={`background: ${journey.bg}; opacity: ${0.6 + i * 0.05};`}
+                aria-hidden="true"
+                data-label={slot.label}
+              ></div>
             ))}
-          </ul>
-        </div>
-
-        <div class="ej-practical__col reveal d3">
-          <h3 class="ej-practical__col-title">Who This Is For</h3>
-          <ul class="ej-practical__list">
-            {(journey.forWhom?.length
-              ? journey.forWhom
-              : ['People who are physically prepared for the terrain',
-                 'Those drawn to the inner dimension of pilgrimage',
-                 'People comfortable with uncertainty and remoteness']
-            ).map(item => (
-              <li class="ej-practical__item">
-                <span class="ej-practical__mark" aria-hidden="true">—</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-         8. APPLICATION CTA
-         ══════════════════════════════════════════ -->
-
-    <section class="ej-apply section" id="apply" aria-label="Apply">
-      <div class="frame">
-        <div class="ej-apply__inner reveal">
-          <span class="t-label ej-apply__label">
-            {isUpcoming ? 'Applications Open' : 'Stay Informed'}
-          </span>
-          <h2 class="ej-apply__heading">
-            {isUpcoming
-              ? 'Write a short message.'
-              : 'This expedition will be announced soon.'}
-          </h2>
-          <p class="ej-apply__body">
-            {isUpcoming
-              ? `Tell me where you are and what you are looking for. Yakov responds personally to each message.`
-              : `Join the Telegram channel to be notified when applications open for ${journey.title}.`
-            }
-          </p>
-          <div class="ej-apply__actions">
-            {isUpcoming ? (
-              <>
-                <a href="/connect" class="btn">Express interest</a>
-                <a href="https://t.me/yakovrajuna" class="btn btn--ghost-d">Join Telegram</a>
-              </>
-            ) : (
-              <>
-                <a href="https://t.me/yakovrajuna" class="btn">Join Telegram</a>
-                <a href="/mountains" class="btn btn--ghost-d">All expeditions</a>
-              </>
-            )}
           </div>
-          <p class="ej-apply__note">
-            <a href="/mountains" class="ej-apply__back">← All mountain expeditions</a>
-          </p>
-        </div>
-      </div>
-      <div class="ej-apply__bg" aria-hidden="true"></div>
-    </section>
+          <p class="ej-gallery__note reveal">Photos and video from this expedition will be published here.</p>
+        </section>
+
+        <!-- 6. TESTIMONIALS -->
+        <section class="ej-testimonials section" aria-label="Testimonials">
+          <div class="frame">
+            <span class="t-label t-label--warm reveal">From Participants</span>
+            <h2 class="ej-section-heading ej-section-heading--light reveal d1">What people say.</h2>
+            <div class="ej-testimonials__grid">
+              {[1, 2, 3].map((n, i) => (
+                <div class={`ej-testimonial reveal d${i + 1}`}>
+                  <blockquote class="ej-testimonial__quote">
+                    [Testimonial {n} — to be added after the expedition.]
+                  </blockquote>
+                  <cite class="ej-testimonial__author">
+                    <span class="ej-testimonial__name">Name Surname</span>
+                    <span class="ej-testimonial__detail">Country · Year</span>
+                  </cite>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="ej-testimonials__bg" aria-hidden="true"></div>
+        </section>
+
+        <!-- 7. PRACTICAL INFORMATION -->
+        <section class="ej-practical section frame" aria-label="Practical information">
+          <span class="t-label t-label--warm reveal">Practical Information</span>
+          <h2 class="ej-section-heading reveal d1">What's included.</h2>
+          <div class="ej-practical__grid">
+            <div class="ej-practical__col reveal">
+              <h3 class="ej-practical__col-title">Included</h3>
+              <ul class="ej-practical__list">
+                {(journey.included ?? [
+                  'All accommodation on route',
+                  'All meals',
+                  'Guided group work',
+                  'Local transport',
+                  'Emergency equipment',
+                ]).map(item => (
+                  <li class="ej-practical__item">
+                    <span class="ej-practical__mark" aria-hidden="true">—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="ej-practical__col reveal d2">
+              <h3 class="ej-practical__col-title">Not Included</h3>
+              <ul class="ej-practical__list">
+                {['International flights', 'Travel insurance (required)', 'Personal gear and equipment', 'Optional extensions'].map(item => (
+                  <li class="ej-practical__item">
+                    <span class="ej-practical__mark" aria-hidden="true">—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="ej-practical__col reveal d3">
+              <h3 class="ej-practical__col-title">Who This Is For</h3>
+              <ul class="ej-practical__list">
+                {(journey.forWhom?.length
+                  ? journey.forWhom
+                  : ['People who are physically prepared for the terrain', 'Those drawn to the inner dimension of pilgrimage', 'People comfortable with uncertainty and remoteness']
+                ).map(item => (
+                  <li class="ej-practical__item">
+                    <span class="ej-practical__mark" aria-hidden="true">—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. APPLICATION CTA -->
+        <section class="ej-apply section" id="apply" aria-label="Apply">
+          <div class="frame">
+            <div class="ej-apply__inner reveal">
+              <span class="t-label ej-apply__label">
+                {isUpcoming ? 'Applications Open' : 'Stay Informed'}
+              </span>
+              <h2 class="ej-apply__heading">
+                {isUpcoming ? 'Write a short message.' : 'This expedition will be announced soon.'}
+              </h2>
+              <p class="ej-apply__body">
+                {isUpcoming
+                  ? `Tell me where you are and what you are looking for. Yakov responds personally to each message.`
+                  : `Join the Telegram channel to be notified when applications open for ${journey.title}.`}
+              </p>
+              <div class="ej-apply__actions">
+                {isUpcoming ? (
+                  <>
+                    <a href="/connect" class="btn">Express interest</a>
+                    <a href="https://t.me/yakovrajuna" class="btn btn--ghost-d">Join Telegram</a>
+                  </>
+                ) : (
+                  <>
+                    <a href="https://t.me/yakovrajuna" class="btn">Join Telegram</a>
+                    <a href="/mountains" class="btn btn--ghost-d">All expeditions</a>
+                  </>
+                )}
+              </div>
+              <p class="ej-apply__note">
+                <a href="/mountains" class="ej-apply__back">← All mountain expeditions</a>
+              </p>
+            </div>
+          </div>
+          <div class="ej-apply__bg" aria-hidden="true"></div>
+        </section>
+
+      </>
+    )}
 
   </main>
   <Footer />
 </Base>
 
+<script>
+  /* ── Kailash FAQ accordion ───────────────────── */
+  const faqItems = document.querySelectorAll('.kl-faq2__item');
+  faqItems.forEach(item => {
+    const btn = item.querySelector('.kl-faq2__btn');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+      faqItems.forEach(i => {
+        i.classList.remove('is-open');
+        const b = i.querySelector('.kl-faq2__btn');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
+
 <style>
 
-  /* ── Nav override — white over dark mountain hero ── */
+  /* ══════════════════════════════════════════════
+     KAILASH LAND — palette tokens
+     ══════════════════════════════════════════════ */
+
+  .kl-land {
+    --deep:   #080E18;
+    --navy:   #0D1929;
+    --mid:    #14243A;
+    --sky:    #C8DCF0;
+    --silver: #6A8099;
+    --gold:   #C4A862;
+    --bone:   #F0EBE0;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     S2. LETTER
+     ══════════════════════════════════════════════ */
+
+  .kl-letter {
+    background: var(--deep);
+    position: relative;
+  }
+
+  .kl-letter__inner {
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .kl-letter__label { margin-bottom: var(--s-3); }
+
+  .kl-letter__para {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(17px, 1.6vw, 22px);
+    line-height: 1.80;
+    color: rgba(200,220,240,0.78);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-letter__sig {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.5vw, 20px);
+    color: var(--gold);
+    margin: var(--s-3) 0 0;
+  }
+
+  .kl-letter__rule {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(200,220,240,0.07);
+  }
+
+
+  /* ══════════════════════════════════════════════
+     S3. RECOGNITION
+     ══════════════════════════════════════════════ */
+
+  .kl-recog { background: var(--navy); }
+
+  .kl-recog__frame {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(48px, 8vw, 120px);
+    align-items: start;
+  }
+
+  .kl-recog__left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    position: sticky;
+    top: 100px;
+  }
+
+  .kl-recog__heading {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(36px, 5vw, 68px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--bone);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-recog__questions {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(200,220,240,0.08);
+  }
+
+  .kl-recog__q {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.72;
+    color: rgba(200,220,240,0.62);
+    margin: 0;
+    padding-block: clamp(20px, 3vw, 32px);
+    border-bottom: 1px solid rgba(200,220,240,0.07);
+    font-optical-sizing: auto;
+  }
+
+  .kl-recog__close {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: rgba(196,168,98,0.58);
+    margin: clamp(28px,4vw,44px) 0 0;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     S4. WHY KAILASH
+     ══════════════════════════════════════════════ */
+
+  .kl-why2 { background: var(--deep); }
+
+  .kl-why2__frame {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: clamp(48px, 8vw, 100px);
+    align-items: start;
+  }
+
+  .kl-why2__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .kl-why2__heading {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(40px, 5.5vw, 80px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--bone);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-why2__body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(15px, 1.4vw, 17px);
+    line-height: 1.85;
+    color: rgba(200,220,240,0.68);
+    margin: 0;
+    max-width: 56ch;
+    text-wrap: pretty;
+  }
+
+  .kl-why2__visual {
+    position: sticky;
+    top: 100px;
+  }
+
+  .kl-why2__img,
+  .kl-img-slot {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 12px;
+    filter: contrast(1.04) saturate(0.82) brightness(0.88);
+  }
+
+  .kl-img-slot { width: 100%; }
+
+
+  /* ══════════════════════════════════════════════
+     S5. GIVE YOU
+     ══════════════════════════════════════════════ */
+
+  .kl-give { background: var(--navy); }
+
+  .kl-give__heading {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(36px, 4.5vw, 64px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--bone);
+    margin: clamp(16px,2.5vw,24px) 0 clamp(48px,7vw,80px);
+    font-optical-sizing: auto;
+  }
+
+  .kl-give__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .kl-give__card {
+    background: rgba(200,220,240,0.032);
+    border: 1px solid rgba(200,220,240,0.07);
+    border-radius: 12px;
+    padding: clamp(22px, 3vw, 32px) clamp(20px, 2.5vw, 28px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+    transition: border-color 300ms;
+  }
+  .kl-give__card:hover { border-color: rgba(200,220,240,0.13); }
+
+  .kl-give__card-title {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(20px, 2vw, 28px);
+    letter-spacing: -0.01em;
+    color: var(--bone);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-give__card-body {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.78;
+    color: rgba(200,220,240,0.50);
+    margin: 0;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     S6. ROUTE / TIMELINE
+     ══════════════════════════════════════════════ */
+
+  .kl-route { background: var(--deep); }
+
+  .kl-route__heading {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(40px, 5.5vw, 80px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--bone);
+    margin: clamp(16px,2.5vw,24px) 0 clamp(48px,7vw,72px);
+    font-optical-sizing: auto;
+  }
+
+  .kl-route__timeline {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+  }
+
+  .kl-route__row {
+    display: grid;
+    grid-template-columns: 140px 32px 1fr;
+    align-items: start;
+    padding-block: clamp(28px, 4vw, 44px);
+    position: relative;
+  }
+
+  .kl-route__label {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding-top: 4px;
+    display: block;
+  }
+
+  .kl-route__track {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-self: stretch;
+  }
+
+  .kl-route__track::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(200,220,240,0.10);
+    transform: translateX(-50%);
+  }
+
+  .kl-route__row:first-child .kl-route__track::before { top: 50%; }
+  .kl-route__row:last-child  .kl-route__track::before { bottom: 50%; }
+
+  .kl-route__dot {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    margin-top: 5px;
+  }
+
+  .kl-route__desc {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(14px, 1.4vw, 16px);
+    line-height: 1.78;
+    color: rgba(200,220,240,0.65);
+    margin: 0;
+    padding-left: clamp(12px, 2vw, 24px);
+    text-wrap: pretty;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     S7. INCLUDED
+     ══════════════════════════════════════════════ */
+
+  .kl-incl { background: var(--navy); }
+
+  .kl-incl__heading {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(40px, 5.5vw, 80px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--bone);
+    margin: 0 0 clamp(48px,7vw,80px);
+    font-optical-sizing: auto;
+  }
+
+  .kl-incl__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+  }
+
+  .kl-incl__cols::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(200,220,240,0.07);
+    transform: translateX(-50%);
+  }
+
+  .kl-incl__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .kl-incl__col:first-child { padding-right: clamp(40px,6vw,80px); }
+  .kl-incl__col:last-child  { padding-left:  clamp(40px,6vw,80px); }
+
+  .kl-incl__col-title {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(196,168,98,0.55);
+    margin: 0;
+  }
+
+  .kl-incl__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(200,220,240,0.07);
+  }
+
+  .kl-incl__item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-4);
+    padding-block: clamp(12px, 1.8vw, 18px);
+    border-bottom: 1px solid rgba(200,220,240,0.05);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(200,220,240,0.72);
+  }
+  .kl-incl__item:last-child { border-bottom: none; }
+
+  .kl-incl__item--other { color: rgba(200,220,240,0.32); }
+
+  .kl-incl__check { font-size: 12px; color: var(--gold); flex-shrink: 0; }
+  .kl-incl__item--other .kl-incl__check { color: rgba(200,220,240,0.20); }
+
+
+  /* ══════════════════════════════════════════════
+     S8. INVESTMENT
+     ══════════════════════════════════════════════ */
+
+  .kl-invest { background: var(--deep); }
+
+  .kl-invest__inner {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--s-5);
+  }
+
+  .kl-invest__price {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(56px, 8vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    color: var(--bone);
+    margin: var(--s-3) 0 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-invest__currency {
+    font-size: 0.45em;
+    letter-spacing: 0.06em;
+    vertical-align: middle;
+    opacity: 0.60;
+  }
+
+  .kl-invest__per {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.32);
+    margin: calc(-1 * var(--s-3)) 0 0;
+  }
+
+  .kl-invest__metas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    padding: var(--s-5) clamp(24px,4vw,48px);
+    border: 1px solid rgba(200,220,240,0.07);
+    border-radius: 12px;
+    width: 100%;
+  }
+
+  .kl-invest__meta {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(200,220,240,0.45);
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: var(--s-4);
+  }
+
+  .kl-invest__meta span {
+    color: rgba(200,220,240,0.78);
+    font-weight: 400;
+  }
+
+  .kl-invest__scarcity {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+    color: rgba(196,168,98,0.62);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-invest__cta { margin-top: var(--s-3); }
+
+
+  /* ══════════════════════════════════════════════
+     S9. FOR WHOM
+     ══════════════════════════════════════════════ */
+
+  .kl-whom { background: var(--navy); }
+
+  .kl-whom__frame {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 7vw, 100px);
+    align-items: start;
+  }
+
+  .kl-whom__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .kl-whom__col-title {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(196,168,98,0.55);
+    margin: 0;
+  }
+
+  .kl-whom__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(200,220,240,0.08);
+  }
+
+  .kl-whom__item {
+    display: flex;
+    gap: var(--s-4);
+    align-items: baseline;
+    padding-block: clamp(16px, 2.2vw, 24px);
+    border-bottom: 1px solid rgba(200,220,240,0.06);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(200,220,240,0.72);
+  }
+  .kl-whom__item:last-child { border-bottom: none; }
+
+  .kl-whom__col--not .kl-whom__item { color: rgba(200,220,240,0.38); }
+
+  .kl-whom__mark {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: rgba(196,168,98,0.50);
+    flex-shrink: 0;
+    line-height: 1.75;
+  }
+
+  .kl-whom__col--not .kl-whom__mark { color: rgba(200,220,240,0.20); }
+
+
+  /* ══════════════════════════════════════════════
+     S10. GUIDE
+     ══════════════════════════════════════════════ */
+
+  .kl-gd { background: var(--deep); }
+
+  .kl-gd__frame {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: clamp(48px, 8vw, 120px);
+    align-items: center;
+  }
+
+  .kl-gd__photo {
+    aspect-ratio: 3/4;
+    border-radius: 12px;
+    background: linear-gradient(160deg, #2A3848 0%, #18283A 100%);
+    border: 1px solid rgba(200,220,240,0.06);
+  }
+
+  .kl-gd__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+
+  .kl-gd__name {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(40px, 6vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--bone);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-gd__stats {
+    display: flex;
+    gap: clamp(28px, 5vw, 56px);
+    padding: clamp(20px, 3vw, 28px) 0;
+    border-top: 1px solid rgba(200,220,240,0.07);
+    border-bottom: 1px solid rgba(200,220,240,0.07);
+  }
+
+  .kl-gd__stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+
+  .kl-gd__stat-num {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(28px, 3vw, 48px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--bone);
+    font-optical-sizing: auto;
+  }
+
+  .kl-gd__stat-label {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.28);
+  }
+
+  .kl-gd__roles {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(196,168,98,0.52);
+    margin: 0;
+  }
+
+  .kl-gd__quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.5vw, 20px);
+    line-height: 1.72;
+    color: rgba(200,220,240,0.62);
+    margin: 0;
+    max-width: 50ch;
+    font-optical-sizing: auto;
+  }
+
+  .kl-gd__link { align-self: flex-start; }
+
+
+  /* ══════════════════════════════════════════════
+     S11. PAST EXPEDITIONS
+     ══════════════════════════════════════════════ */
+
+  .kl-past { background: var(--navy); }
+
+  .kl-past__heading {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(36px, 4.5vw, 64px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--bone);
+    margin: clamp(16px,2.5vw,24px) 0 clamp(40px,6vw,64px);
+    font-optical-sizing: auto;
+  }
+
+  .kl-past__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(16px, 2.5vw, 28px);
+  }
+
+  .kl-past__card {
+    position: relative;
+    aspect-ratio: 16/10;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .kl-past__card-bg {
+    position: absolute;
+    inset: 0;
+    filter: saturate(0.75) brightness(0.72);
+    transition: filter 500ms;
+  }
+  .kl-past__card:hover .kl-past__card-bg {
+    filter: saturate(0.88) brightness(0.82);
+  }
+
+  .kl-past__card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: clamp(20px,3vw,32px);
+    background: linear-gradient(to top, rgba(8,14,24,0.88) 0%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+  }
+
+  .kl-past__card-name {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(22px, 2.5vw, 36px);
+    letter-spacing: -0.02em;
+    color: var(--bone);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-past__card-meta {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.45);
+    margin: 0;
+  }
+
+  .kl-past__note {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(200,220,240,0.38);
+    margin: clamp(28px,4vw,44px) 0 0;
+    text-align: center;
+    font-optical-sizing: auto;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     S12. TESTIMONIALS
+     ══════════════════════════════════════════════ */
+
+  .kl-tst3 { background: var(--deep); }
+
+  .kl-tst3__heading {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(36px, 4.5vw, 64px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--bone);
+    margin: clamp(16px,2.5vw,24px) 0 clamp(40px,6vw,64px);
+    font-optical-sizing: auto;
+  }
+
+  .kl-tst3__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(14px, 2vw, 20px);
+    align-items: start;
+  }
+
+  .kl-tst3__card {
+    margin: 0;
+    padding: clamp(24px, 3vw, 36px) clamp(20px, 2.5vw, 28px);
+    border: 1px solid rgba(200,220,240,0.07);
+    border-radius: 12px;
+    background: rgba(200,220,240,0.022);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .kl-tst3__glyph {
+    font-family: var(--display);
+    font-size: 32px;
+    line-height: 0.7;
+    color: rgba(196,168,98,0.28);
+    display: block;
+    user-select: none;
+    font-optical-sizing: auto;
+  }
+
+  .kl-tst3__quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(13px, 1.1vw, 15px);
+    line-height: 1.80;
+    color: rgba(200,220,240,0.68);
+    margin: 0;
+    padding: 0;
+    text-wrap: pretty;
+    font-optical-sizing: auto;
+  }
+
+  .kl-tst3__attr {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: var(--s-4);
+    border-top: 1px solid rgba(200,220,240,0.06);
+    margin-top: auto;
+  }
+
+  .kl-tst3__name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(200,220,240,0.50);
+    line-height: 1.3;
+  }
+
+  .kl-tst3__meta {
+    font-family: var(--mark);
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.24);
+  }
+
+  .kl-tst3__note {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(200,220,240,0.30);
+    margin: clamp(28px,4vw,44px) 0 0;
+    text-align: center;
+    font-optical-sizing: auto;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     S13. FAQ
+     ══════════════════════════════════════════════ */
+
+  .kl-faq2 { background: var(--navy); }
+
+  .kl-faq2__inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .kl-faq2__heading {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(36px, 4.5vw, 64px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--bone);
+    margin: clamp(16px,2.5vw,24px) 0 clamp(40px,6vw,56px);
+    font-optical-sizing: auto;
+  }
+
+  .kl-faq2__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(200,220,240,0.08);
+  }
+
+  .kl-faq2__item {
+    border-bottom: 1px solid rgba(200,220,240,0.07);
+    overflow: hidden;
+  }
+
+  .kl-faq2__btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-5);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: clamp(18px,2.5vw,28px) 0;
+    text-align: left;
+  }
+
+  .kl-faq2__q {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: clamp(15px, 1.5vw, 17px);
+    line-height: 1.5;
+    color: var(--bone);
+    transition: color 250ms;
+  }
+  .kl-faq2__btn:hover .kl-faq2__q { color: rgba(240,235,224,0.75); }
+
+  .kl-faq2__icon {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1;
+    color: rgba(200,220,240,0.28);
+    flex-shrink: 0;
+    transition: transform 320ms var(--ease), color 250ms;
+  }
+
+  .kl-faq2__item.is-open .kl-faq2__icon {
+    transform: rotate(45deg);
+    color: rgba(200,220,240,0.55);
+  }
+
+  .kl-faq2__ans {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 420ms cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .kl-faq2__ans-inner { overflow: hidden; }
+
+  .kl-faq2__item.is-open .kl-faq2__ans { grid-template-rows: 1fr; }
+
+  .kl-faq2__ans-text {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.80;
+    color: rgba(200,220,240,0.62);
+    margin: 0;
+    padding-bottom: clamp(18px,2.5vw,28px);
+    max-width: 62ch;
+    text-wrap: pretty;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     S14. APPLY
+     ══════════════════════════════════════════════ */
+
+  .kl-apply2 { background: var(--deep); }
+
+  .kl-apply2__inner {
+    max-width: 560px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--s-5);
+  }
+
+  .kl-apply2__title {
+    font-family: var(--display);
+    font-weight: 200;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    color: var(--bone);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+  .kl-apply2__dates {
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.32);
+    margin: 0;
+  }
+
+  .kl-apply2__btns {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    width: 100%;
+    max-width: 360px;
+    margin-top: var(--s-4);
+  }
+
+  .kl-apply2__btns .btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .kl-apply2__note {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 13px;
+    color: rgba(200,220,240,0.32);
+    margin: 0;
+    font-optical-sizing: auto;
+  }
+
+
+  /* ══════════════════════════════════════════════
+     NAV OVERRIDE — shared for all expedition pages
+     ══════════════════════════════════════════════ */
+
   :global(.nav:not(.nav--scrolled) .nav__wordmark) {
-    color: rgba(240, 248, 255, 0.30);
+    color: rgba(240,248,255,0.30);
     text-shadow: none;
     pointer-events: none;
   }
   :global(.nav:not(.nav--scrolled) .nav__link) {
-    color: rgba(220, 235, 248, 0.90);
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.40);
+    color: rgba(220,235,248,0.90);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.40);
   }
   :global(.nav:not(.nav--scrolled) .nav__link:hover) { color: #fff; }
   :global(.nav:not(.nav--scrolled) .nav__link--connect) {
-    color: rgba(220, 235, 248, 0.92);
-    border-color: rgba(220, 235, 248, 0.28);
+    color: rgba(220,235,248,0.92);
+    border-color: rgba(220,235,248,0.28);
   }
   :global(.nav:not(.nav--scrolled) .nav__social) {
-    color: rgba(200, 220, 240, 0.55);
+    color: rgba(200,220,240,0.55);
   }
-  :global(.nav:not(.nav--scrolled) .nav__burger span) { background: rgba(220, 235, 248, 0.88); }
+  :global(.nav:not(.nav--scrolled) .nav__burger span) { background: rgba(220,235,248,0.88); }
 
-  /* ── Shared section heading ─────────────────────── */
+
+  /* ── Shared section heading (generic template) ── */
   .ej-section-heading {
     font-family: var(--display);
     font-weight: 500;
@@ -360,11 +1832,12 @@ const isSoon     = journey.status === 'soon';
     font-optical-sizing: auto;
     line-height: 1.1;
   }
-  .ej-section-heading--light { color: rgba(225, 240, 255, 0.94); }
+  .ej-section-heading--light { color: rgba(225,240,255,0.94); }
 
-  /* ──────────────────────────────────────────────────
-     1. HERO
-     ────────────────────────────────────────────────── */
+
+  /* ══════════════════════════════════════════════
+     1. HERO (shared)
+     ══════════════════════════════════════════════ */
 
   .ej-hero {
     position: relative;
@@ -378,22 +1851,18 @@ const isSoon     = journey.status === 'soon';
     position: absolute; inset: 0; z-index: 1;
     background:
       linear-gradient(to bottom,
-        rgba(8, 14, 24, 0.50) 0%,
-        rgba(8, 14, 24, 0.08) 25%,
+        rgba(8,14,24,0.50) 0%,
+        rgba(8,14,24,0.08) 25%,
         transparent 48%,
-        rgba(6, 10, 18, 0.60) 78%,
-        rgba(4, 8, 14, 0.92) 100%
+        rgba(6,10,18,0.60) 78%,
+        rgba(4,8,14,0.92) 100%
       );
     pointer-events: none;
   }
 
-  .ej-hero__img {
-    position: absolute; inset: 0; z-index: 0;
-  }
+  .ej-hero__img { position: absolute; inset: 0; z-index: 0; }
 
-  .ej-hero__img-slot {
-    width: 100%; height: 100%;
-  }
+  .ej-hero__img-slot { width: 100%; height: 100%; }
 
   .ej-hero__img-photo {
     position: absolute;
@@ -426,39 +1895,25 @@ const isSoon     = journey.status === 'soon';
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(160, 200, 240, 0.60);
+    color: rgba(160,200,240,0.60);
     transition: color 280ms;
   }
-  .ej-breadcrumb__link:hover { color: rgba(200, 230, 255, 0.90); }
+  .ej-breadcrumb__link:hover { color: rgba(200,230,255,0.90); }
 
-  .ej-breadcrumb__sep {
-    font-size: 10px;
-    color: rgba(120, 165, 210, 0.35);
-  }
+  .ej-breadcrumb__sep { font-size: 10px; color: rgba(120,165,210,0.35); }
 
   .ej-breadcrumb__current {
     font-family: var(--mark);
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(180, 215, 248, 0.80);
+    color: rgba(180,215,248,0.80);
   }
 
-  .ej-hero__meta {
-    display: flex;
-    align-items: center;
-    gap: var(--s-5);
-  }
+  .ej-hero__meta { display: flex; align-items: center; gap: var(--s-5); }
 
-  .ej-hero__terrain {
-    color: rgba(140, 185, 230, 0.65);
-    letter-spacing: 0.22em;
-  }
-
-  .ej-hero__date-label {
-    color: rgba(120, 170, 220, 0.50);
-    letter-spacing: 0.18em;
-  }
+  .ej-hero__terrain { color: rgba(140,185,230,0.65); letter-spacing: 0.22em; }
+  .ej-hero__date-label { color: rgba(120,170,220,0.50); letter-spacing: 0.18em; }
 
   .ej-hero__title {
     font-family: var(--display);
@@ -466,7 +1921,7 @@ const isSoon     = journey.status === 'soon';
     font-size: clamp(60px, 11vw, 160px);
     line-height: 0.90;
     letter-spacing: -0.04em;
-    color: rgba(240, 248, 255, 0.96);
+    color: rgba(240,248,255,0.96);
     margin: 0;
     font-optical-sizing: auto;
     max-width: 10ch;
@@ -477,40 +1932,29 @@ const isSoon     = journey.status === 'soon';
     font-size: 10px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(140, 185, 230, 0.55);
+    color: rgba(140,185,230,0.55);
   }
 
-  /* ──────────────────────────────────────────────────
-     2. ABOUT
-     ────────────────────────────────────────────────── */
+
+  /* ── Generic template styles (ej-about through ej-apply) ── */
 
   .ej-about { background: #EDEAE2; }
 
   .ej-about__grid {
     display: grid;
     grid-template-columns: 1fr 340px;
-    gap: clamp(48px, 7vw, 88px);
+    gap: clamp(48px,7vw,88px);
     align-items: start;
   }
 
-  .ej-about__text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-5);
-  }
+  .ej-about__text { display: flex; flex-direction: column; gap: var(--s-5); }
+  .ej-about__body { max-width: 52ch; color: rgba(44,42,38,0.58); margin: 0; }
 
-  .ej-about__body {
-    max-width: 52ch;
-    color: rgba(44, 42, 38, 0.58);
-    margin: 0;
-  }
-
-  /* Meta panel */
   .ej-meta-panel {
-    border: 1px solid rgba(44, 42, 38, 0.12);
+    border: 1px solid rgba(44,42,38,0.12);
     border-radius: var(--r-3);
     padding: var(--s-6);
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(255,255,255,0.55);
     display: flex;
     flex-direction: column;
     gap: var(--s-5);
@@ -522,17 +1966,13 @@ const isSoon     = journey.status === 'soon';
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(44, 42, 38, 0.38);
+    color: rgba(44,42,38,0.38);
     margin: 0;
     padding-bottom: var(--s-4);
-    border-bottom: 1px solid rgba(44, 42, 38, 0.08);
+    border-bottom: 1px solid rgba(44,42,38,0.08);
   }
 
-  .ej-meta-panel__rows {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
+  .ej-meta-panel__rows { display: flex; flex-direction: column; gap: 0; }
 
   .ej-meta-panel__row {
     display: flex;
@@ -540,368 +1980,112 @@ const isSoon     = journey.status === 'soon';
     align-items: baseline;
     gap: var(--s-4);
     padding: var(--s-3) 0;
-    border-bottom: 1px solid rgba(44, 42, 38, 0.06);
+    border-bottom: 1px solid rgba(44,42,38,0.06);
   }
   .ej-meta-panel__row:last-child { border-bottom: none; }
-
-  .ej-meta-panel__row-label { color: rgba(44, 42, 38, 0.45); }
-
-  .ej-meta-panel__row-val {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 14px;
-    color: #2C2A26;
-    text-align: right;
-  }
-
+  .ej-meta-panel__row-label { color: rgba(44,42,38,0.45); }
+  .ej-meta-panel__row-val { font-family: var(--serif); font-style: italic; font-size: 14px; color: #2C2A26; text-align: right; }
   .ej-meta-panel__cta { margin-top: var(--s-3); align-self: stretch; justify-content: center; }
-
-  /* ──────────────────────────────────────────────────
-     3. ROUTE
-     ────────────────────────────────────────────────── */
 
   .ej-route {
     position: relative;
-    background:
-      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(190, 185, 170, 0.18), transparent 60%),
-      linear-gradient(180deg, #DDD9D0 0%, #D4D0C8 100%);
+    background: radial-gradient(ellipse 60% 50% at 80% 20%, rgba(190,185,170,0.18), transparent 60%), linear-gradient(180deg,#DDD9D0 0%,#D4D0C8 100%);
     overflow: hidden;
   }
-
-  .ej-route__bg {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 40% at 10% 80%, rgba(160, 155, 140, 0.12), transparent 60%);
-    pointer-events: none;
-  }
-
-  .ej-route__phases {
-    position: relative; z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    border: 1px solid rgba(44, 42, 38, 0.10);
-    border-radius: var(--r-3);
-    overflow: hidden;
-    margin-top: var(--s-6);
-  }
-
-  .ej-route__phase {
-    padding: var(--s-6);
-    border-right: 1px solid rgba(44, 42, 38, 0.10);
-    background: rgba(255, 255, 255, 0.35);
-  }
+  .ej-route__bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 40% at 10% 80%, rgba(160,155,140,0.12), transparent 60%); pointer-events: none; }
+  .ej-route__phases { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); border: 1px solid rgba(44,42,38,0.10); border-radius: var(--r-3); overflow: hidden; margin-top: var(--s-6); }
+  .ej-route__phase { padding: var(--s-6); border-right: 1px solid rgba(44,42,38,0.10); background: rgba(255,255,255,0.35); }
   .ej-route__phase:last-child { border-right: none; }
-
-  .ej-route__phase-label {
-    color: rgba(100, 90, 78, 0.65);
-    display: block;
-    margin-bottom: var(--s-3);
-  }
-
-  .ej-route__phase-body {
-    color: rgba(44, 42, 38, 0.62);
-    margin: 0;
-  }
-
-  .ej-placeholder {
-    margin-top: var(--s-6);
-    padding: var(--s-6);
-    border: 1px dashed rgba(44, 42, 38, 0.18);
-    border-radius: var(--r-2);
-  }
-
-  .ej-placeholder__text {
-    font-family: var(--sans);
-    font-size: 14px;
-    color: rgba(44, 42, 38, 0.40);
-    font-style: italic;
-    margin: 0;
-  }
-
-  /* ──────────────────────────────────────────────────
-     4. HIGHLIGHTS
-     ────────────────────────────────────────────────── */
+  .ej-route__phase-label { color: rgba(100,90,78,0.65); display: block; margin-bottom: var(--s-3); }
+  .ej-route__phase-body { color: rgba(44,42,38,0.62); margin: 0; }
+  .ej-placeholder { margin-top: var(--s-6); padding: var(--s-6); border: 1px dashed rgba(44,42,38,0.18); border-radius: var(--r-2); }
+  .ej-placeholder__text { font-family: var(--sans); font-size: 14px; color: rgba(44,42,38,0.40); font-style: italic; margin: 0; }
 
   .ej-highlights { background: #EDEAE2; }
-
-  .ej-highlights__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--s-6) var(--s-8);
-  }
-
-  .ej-highlight__title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(20px, 2vw, 28px);
-    letter-spacing: -0.01em;
-    color: #2C2A26;
-    margin: 0 0 var(--s-3);
-    font-optical-sizing: auto;
-  }
-
-  .ej-highlight__body {
-    color: rgba(44, 42, 38, 0.55);
-    margin: 0;
-    font-style: italic;
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 1.75;
-  }
-
-  /* ──────────────────────────────────────────────────
-     5. GALLERY
-     ────────────────────────────────────────────────── */
+  .ej-highlights__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-6) var(--s-8); }
+  .ej-highlight__title { font-family: var(--serif); font-weight: 400; font-size: clamp(20px,2vw,28px); letter-spacing: -0.01em; color: #2C2A26; margin: 0 0 var(--s-3); font-optical-sizing: auto; }
+  .ej-highlight__body { color: rgba(44,42,38,0.55); margin: 0; font-style: italic; font-family: var(--serif); font-weight: 300; font-size: 15px; line-height: 1.75; }
 
   .ej-gallery { background: #EDEAE2; }
+  .ej-gallery__grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 240px; gap: var(--s-3); }
+  .ej-gallery__slot { border-radius: var(--r-2); overflow: hidden; position: relative; }
+  .ej-gallery__slot::after { content: attr(data-label); position: absolute; left: 10px; bottom: 8px; font-family: ui-monospace,monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,225,248,0.45); }
+  .ej-gallery__slot--landscape { grid-column: span 2; }
+  .ej-gallery__note { font-family: var(--mark); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(44,42,38,0.30); text-align: center; margin: var(--s-6) 0 0; }
 
-  .ej-gallery__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 240px;
-    gap: var(--s-3);
-  }
-
-  .ej-gallery__slot {
-    border-radius: var(--r-2);
-    overflow: hidden;
-    position: relative;
-  }
-
-  .ej-gallery__slot::after {
-    content: attr(data-label);
-    position: absolute; left: 10px; bottom: 8px;
-    font-family: ui-monospace, monospace;
-    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(200, 225, 248, 0.45);
-  }
-
-  .ej-gallery__slot--landscape {
-    grid-column: span 2;
-  }
-
-  .ej-gallery__note {
-    font-family: var(--mark);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(44, 42, 38, 0.30);
-    text-align: center;
-    margin: var(--s-6) 0 0;
-  }
-
-  /* ──────────────────────────────────────────────────
-     6. TESTIMONIALS
-     ────────────────────────────────────────────────── */
-
-  .ej-testimonials {
-    position: relative;
-    background:
-      radial-gradient(ellipse 60% 50% at 30% 20%, rgba(50, 90, 140, 0.28), transparent 60%),
-      linear-gradient(180deg, #0E1A28 0%, #080F18 100%);
-    overflow: hidden;
-  }
-
-  .ej-testimonials__bg {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 40% at 70% 80%, rgba(30, 60, 100, 0.22), transparent 55%);
-    pointer-events: none;
-  }
-
-  .ej-testimonials__grid {
-    position: relative; z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-6);
-    margin-top: var(--s-6);
-  }
-
-  .ej-testimonial {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-4);
-    padding: var(--s-6);
-    border: 1px solid rgba(100, 150, 210, 0.12);
-    border-radius: var(--r-3);
-    background: rgba(255, 255, 255, 0.04);
-  }
-
-  .ej-testimonial__quote {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(15px, 1.4vw, 18px);
-    line-height: 1.7;
-    color: rgba(200, 225, 248, 0.65);
-    margin: 0;
-    font-optical-sizing: auto;
-  }
-
-  .ej-testimonial__author {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-1);
-    font-style: normal;
-  }
-
-  .ej-testimonial__name {
-    font-family: var(--mark);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(160, 200, 240, 0.70);
-  }
-
-  .ej-testimonial__detail {
-    font-family: var(--mark);
-    font-size: 9px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(100, 150, 210, 0.40);
-  }
-
-  /* ──────────────────────────────────────────────────
-     7. PRACTICAL INFORMATION
-     ────────────────────────────────────────────────── */
+  .ej-testimonials { position: relative; background: radial-gradient(ellipse 60% 50% at 30% 20%, rgba(50,90,140,0.28), transparent 60%), linear-gradient(180deg,#0E1A28 0%,#080F18 100%); overflow: hidden; }
+  .ej-testimonials__bg { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 40% at 70% 80%, rgba(30,60,100,0.22), transparent 55%); pointer-events: none; }
+  .ej-testimonials__grid { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-6); margin-top: var(--s-6); }
+  .ej-testimonial { display: flex; flex-direction: column; gap: var(--s-4); padding: var(--s-6); border: 1px solid rgba(100,150,210,0.12); border-radius: var(--r-3); background: rgba(255,255,255,0.04); }
+  .ej-testimonial__quote { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(15px,1.4vw,18px); line-height: 1.7; color: rgba(200,225,248,0.65); margin: 0; font-optical-sizing: auto; }
+  .ej-testimonial__author { display: flex; flex-direction: column; gap: var(--s-1); font-style: normal; }
+  .ej-testimonial__name { font-family: var(--mark); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(160,200,240,0.70); }
+  .ej-testimonial__detail { font-family: var(--mark); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(100,150,210,0.40); }
 
   .ej-practical { background: #EDEAE2; }
+  .ej-practical__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-6) var(--s-8); }
+  .ej-practical__col-title { font-family: var(--serif); font-weight: 400; font-size: clamp(18px,1.8vw,24px); letter-spacing: -0.01em; color: #2C2A26; margin: 0 0 var(--s-5); font-optical-sizing: auto; }
+  .ej-practical__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s-3); border-top: 1px solid rgba(44,42,38,0.10); padding-top: var(--s-4); }
+  .ej-practical__item { display: flex; align-items: baseline; gap: var(--s-3); font-family: var(--sans); font-weight: 300; font-size: 15px; line-height: 1.6; color: rgba(44,42,38,0.60); padding-bottom: var(--s-3); border-bottom: 1px solid rgba(44,42,38,0.06); }
+  .ej-practical__mark { color: rgba(166,124,77,0.60); flex-shrink: 0; font-size: 14px; }
 
-  .ej-practical__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-6) var(--s-8);
-  }
+  .ej-apply { position: relative; overflow: hidden; }
+  .ej-apply__bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(40,72,128,0.32), transparent 65%), linear-gradient(180deg,#0A1420 0%,#060C16 100%); }
+  .ej-apply__inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--s-5); }
+  .ej-apply__label { color: rgba(140,185,230,0.55); }
+  .ej-apply__heading { font-family: var(--display); font-weight: 500; font-size: clamp(28px,3.5vw,52px); letter-spacing: -0.025em; line-height: 1.12; color: rgba(225,240,255,0.95); margin: 0; font-optical-sizing: auto; }
+  .ej-apply__body { font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.8; color: rgba(160,200,240,0.55); margin: 0; }
+  .ej-apply__actions { display: flex; gap: var(--s-4); flex-wrap: wrap; justify-content: center; margin-top: var(--s-3); }
+  .ej-apply__note { margin: var(--s-4) 0 0; }
+  .ej-apply__back { font-family: var(--mark); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(120,165,210,0.45); transition: color 280ms; }
+  .ej-apply__back:hover { color: rgba(160,200,240,0.75); }
 
-  .ej-practical__col-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(18px, 1.8vw, 24px);
-    letter-spacing: -0.01em;
-    color: #2C2A26;
-    margin: 0 0 var(--s-5);
-    font-optical-sizing: auto;
-  }
 
-  .ej-practical__list {
-    list-style: none;
-    margin: 0; padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-3);
-    border-top: 1px solid rgba(44, 42, 38, 0.10);
-    padding-top: var(--s-4);
-  }
-
-  .ej-practical__item {
-    display: flex;
-    align-items: baseline;
-    gap: var(--s-3);
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 1.6;
-    color: rgba(44, 42, 38, 0.60);
-    padding-bottom: var(--s-3);
-    border-bottom: 1px solid rgba(44, 42, 38, 0.06);
-  }
-
-  .ej-practical__mark {
-    color: rgba(166, 124, 77, 0.60);
-    flex-shrink: 0;
-    font-size: 14px;
-  }
-
-  /* ──────────────────────────────────────────────────
-     8. APPLICATION CTA
-     ────────────────────────────────────────────────── */
-
-  .ej-apply {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .ej-apply__bg {
-    position: absolute; inset: 0; z-index: 0;
-    background:
-      radial-gradient(ellipse 70% 60% at 50% 50%, rgba(40, 72, 128, 0.32), transparent 65%),
-      linear-gradient(180deg, #0A1420 0%, #060C16 100%);
-  }
-
-  .ej-apply__inner {
-    position: relative; z-index: 1;
-    max-width: 640px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--s-5);
-  }
-
-  .ej-apply__label {
-    color: rgba(140, 185, 230, 0.55);
-  }
-
-  .ej-apply__heading {
-    font-family: var(--display);
-    font-weight: 500;
-    font-size: clamp(28px, 3.5vw, 52px);
-    letter-spacing: -0.025em;
-    line-height: 1.12;
-    color: rgba(225, 240, 255, 0.95);
-    margin: 0;
-    font-optical-sizing: auto;
-  }
-
-  .ej-apply__body {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 1.8;
-    color: rgba(160, 200, 240, 0.55);
-    margin: 0;
-  }
-
-  .ej-apply__actions {
-    display: flex;
-    gap: var(--s-4);
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: var(--s-3);
-  }
-
-  .ej-apply__note {
-    margin: var(--s-4) 0 0;
-  }
-
-  .ej-apply__back {
-    font-family: var(--mark);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(120, 165, 210, 0.45);
-    transition: color 280ms;
-  }
-  .ej-apply__back:hover { color: rgba(160, 200, 240, 0.75); }
-
-  /* ──────────────────────────────────────────────────
+  /* ══════════════════════════════════════════════
      RESPONSIVE
-     ────────────────────────────────────────────────── */
+     ══════════════════════════════════════════════ */
 
-  @media (max-width: 960px) {
-    .ej-about__grid     { grid-template-columns: 1fr; }
+  @media (max-width: 1000px) {
+    .kl-why2__frame    { grid-template-columns: 1fr; }
+    .kl-why2__visual   { position: static; max-width: 400px; }
+    .kl-gd__frame      { grid-template-columns: 1fr; }
+    .kl-gd__photo      { max-width: 200px; }
+  }
+
+  @media (max-width: 900px) {
+    .kl-give__grid     { grid-template-columns: repeat(2, 1fr); }
+    .kl-recog__frame   { grid-template-columns: 1fr; }
+    .kl-recog__left    { position: static; }
+  }
+
+  @media (max-width: 768px) {
+    .kl-whom__frame    { grid-template-columns: 1fr; }
+    .kl-tst3__grid     { grid-template-columns: 1fr; }
+    .kl-past__grid     { grid-template-columns: 1fr; }
+    .kl-incl__cols     { grid-template-columns: 1fr; gap: var(--s-8); }
+    .kl-incl__cols::after { display: none; }
+    .kl-incl__col:first-child { padding-right: 0; }
+    .kl-incl__col:last-child  { padding-left: 0; }
+    .kl-route__row     { grid-template-columns: 100px 24px 1fr; }
+    .ej-about__grid    { grid-template-columns: 1fr; }
     .ej-highlights__grid { grid-template-columns: 1fr; }
     .ej-testimonials__grid { grid-template-columns: 1fr; }
-    .ej-practical__grid { grid-template-columns: 1fr 1fr; }
+    .ej-practical__grid  { grid-template-columns: 1fr 1fr; }
   }
 
-  @media (max-width: 640px) {
-    .ej-route__phases   { grid-template-columns: 1fr; }
-    .ej-gallery__grid   { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
+  @media (max-width: 560px) {
+    .kl-give__grid     { grid-template-columns: 1fr; }
+    .kl-apply2__btns   { max-width: 100%; }
+    .kl-gd__stats      { flex-wrap: wrap; gap: var(--s-5); }
+    .ej-route__phases  { grid-template-columns: 1fr; }
+    .ej-gallery__grid  { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
     .ej-gallery__slot--landscape { grid-column: span 2; }
     .ej-practical__grid { grid-template-columns: 1fr; }
-    .ej-hero__title     { font-size: clamp(48px, 16vw, 80px); }
+    .ej-hero__title    { font-size: clamp(48px,16vw,80px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
   }
 
 </style>
