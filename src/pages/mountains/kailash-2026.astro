@@ -37,24 +37,12 @@ const journey = getJourney('kailash-2026')!;
           <span class="kl-breadcrumb__current">Kailash</span>
         </nav>
 
-        <div class="kl-hero__tags reveal d1">
-          <span class="kl-hero__tag">Tibet</span>
-          <span class="kl-hero__tag-dot" aria-hidden="true">·</span>
-          <span class="kl-hero__tag">6,638m</span>
-          <span class="kl-hero__tag-dot" aria-hidden="true">·</span>
-          <span class="kl-hero__tag">10 Days</span>
+        <div class="kl-hero__hed">
+          <h1 class="kl-hero__title reveal d1">Kailash</h1>
+          <p class="kl-hero__sub reveal d2">The Abode of Shiva</p>
         </div>
 
-        <h1 class="kl-hero__title reveal d2">Kailash</h1>
-        <p class="kl-hero__sub reveal d2">The Abode of Shiva</p>
-
-        <div class="kl-hero__meta reveal d3">
-          <span>September 20–30, 2026</span>
-          <span class="kl-hero__meta-dot" aria-hidden="true">·</span>
-          <span>Max 6 people</span>
-        </div>
-
-        <a href="#apply" class="kl-hero__cta reveal d4">Apply for this expedition</a>
+        <a href="#apply" class="kl-hero__cta reveal d3">Apply for this expedition</a>
       </div>
 
     </section>
@@ -317,26 +305,27 @@ const journey = getJourney('kailash-2026')!;
       <div class="frame">
         <h2 class="kl-section-title--light reveal">From Participants</h2>
 
-        <div class="kl-tst__list">
+        <div class="kl-tst__grid">
           {([
             {
-              quote: 'I returned quieter. More certain of what matters. The mountain doesn\'t explain itself — and neither does the change.',
+              quote: 'I returned quieter. More certain of what matters. The mountain does not explain itself, and neither does the change.',
               name: 'Elena K.',
               detail: 'Moscow · Mardi Himal 2025',
             },
             {
-              quote: 'Yakov holds the space without filling it. That quality is rare. The mountains do the work — he ensures you can receive it.',
+              quote: 'Yakov holds the space without filling it. That quality is rare. The mountains do the work. He ensures you can receive it.',
               name: 'David M.',
               detail: 'Berlin · Georgian Highlands 2024',
             },
             {
-              quote: 'Not transformed in any dramatic way — clarified. Like something blurry for years finally came into focus.',
+              quote: 'Not transformed in any dramatic way. Clarified. Like something blurry for years finally came into focus.',
               name: 'Maria T.',
               detail: 'Tbilisi · Pontic Alps 2024',
             },
           ] as const).map((t, i) => (
-            <figure class={`kl-tst__row reveal d${(i % 2) + 1}`}>
-              <p class="kl-tst__quote">"{t.quote}"</p>
+            <figure class={`kl-tst__card reveal d${i + 1}`}>
+              <span class="kl-tst__glyph" aria-hidden="true">"</span>
+              <blockquote class="kl-tst__quote">{t.quote}</blockquote>
               <figcaption class="kl-tst__attr">
                 <span class="kl-tst__name">{t.name}</span>
                 <span class="kl-tst__detail">{t.detail}</span>
@@ -405,24 +394,54 @@ const journey = getJourney('kailash-2026')!;
     object-fit: cover;
     object-position: center 30%;
     display: block;
+    /* Cold high-altitude: desaturate slightly, lift contrast */
+    filter: contrast(1.08) saturate(0.78) brightness(0.90);
+    transform-origin: 50% 30%;
+    will-change: transform;
+    animation: klHeroFloat 22s ease-in-out infinite alternate;
+  }
+
+  @keyframes klHeroFloat {
+    from { transform: scale(1.00); }
+    to   { transform: scale(1.06) translateY(-10px); }
   }
 
   .kl-hero__overlay {
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(to top,
-        rgba(6,10,18,0.97) 0%,
-        rgba(6,10,18,0.76) 32%,
-        rgba(6,10,18,0.30) 60%,
-        rgba(6,10,18,0.08) 82%,
-        transparent 100%
-      ),
-      linear-gradient(to right,
-        rgba(6,10,18,0.42) 0%,
-        transparent 60%
-      );
     z-index: 1;
+    background:
+      /* Cold sky at peaks */
+      linear-gradient(to bottom,
+        rgba(6,10,20,0.50) 0%,
+        rgba(6,10,20,0.16) 20%,
+        transparent 44%
+      ),
+      /* Strong bottom anchor — text legibility */
+      linear-gradient(to top,
+        rgba(4,7,14,0.99) 0%,
+        rgba(4,7,14,0.88) 18%,
+        rgba(4,7,14,0.58) 36%,
+        rgba(4,7,14,0.24) 55%,
+        rgba(4,7,14,0.06) 70%,
+        transparent 84%
+      ),
+      /* Left softening panel */
+      linear-gradient(108deg,
+        rgba(6,10,20,0.62) 0%,
+        rgba(6,10,20,0.26) 30%,
+        transparent 54%
+      ),
+      /* Right edge depth */
+      linear-gradient(to left,
+        rgba(6,10,20,0.30) 0%,
+        transparent 36%
+      ),
+      /* Perimeter vignette — frames the mountain */
+      radial-gradient(ellipse 88% 76% at 50% 36%,
+        transparent 42%,
+        rgba(4,7,14,0.32) 100%
+      );
   }
 
   .kl-hero__inner {
@@ -430,15 +449,22 @@ const journey = getJourney('kailash-2026')!;
     z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: var(--s-5);
-    padding-bottom: clamp(64px, 10svh, 120px);
+    gap: var(--s-7);
+    /* Push text higher — let the mountain breathe above */
+    padding-bottom: clamp(108px, 18svh, 210px);
+  }
+
+  .kl-hero__hed {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
   }
 
   .kl-breadcrumb {
     display: flex;
     align-items: center;
     gap: var(--s-3);
-    margin-bottom: var(--s-2);
+    margin-bottom: var(--s-3);
   }
 
   .kl-breadcrumb__link {
@@ -446,73 +472,44 @@ const journey = getJourney('kailash-2026')!;
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(160,200,240,0.50);
+    color: rgba(160,200,240,0.42);
     transition: color 280ms;
   }
   .kl-breadcrumb__link:hover { color: rgba(200,230,255,0.80); }
 
-  .kl-breadcrumb__sep { font-size: 10px; color: rgba(120,165,210,0.28); }
+  .kl-breadcrumb__sep { font-size: 10px; color: rgba(120,165,210,0.22); }
 
   .kl-breadcrumb__current {
     font-family: var(--mark);
     font-size: 10px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(180,215,248,0.70);
+    color: rgba(180,215,248,0.58);
   }
 
-  .kl-hero__tags {
-    display: flex;
-    align-items: center;
-    gap: var(--s-3);
-  }
-
-  .kl-hero__tag {
-    font-family: var(--mark);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.20em;
-    text-transform: uppercase;
-    color: rgba(200,220,240,0.40);
-  }
-
-  .kl-hero__tag-dot { color: rgba(200,220,240,0.18); }
-
+  /* Title pulled large — the mountain deserves scale */
   .kl-hero__title {
     font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(56px, 9vw, 96px);
-    text-wrap: balance;
-    line-height: 0.88;
+    font-weight: 200;
+    font-size: clamp(72px, 12vw, 172px);
+    line-height: 0.86;
     letter-spacing: -0.04em;
     color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
+    text-shadow: 0 2px 48px rgba(4,7,14,0.60);
   }
 
   .kl-hero__sub {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(18px, 2vw, 28px);
-    color: rgba(196,168,98,0.78);
+    font-size: clamp(16px, 1.6vw, 22px);
+    color: rgba(196,168,98,0.68);
     margin: 0;
     font-optical-sizing: auto;
+    letter-spacing: 0.01em;
   }
-
-  .kl-hero__meta {
-    display: flex;
-    align-items: center;
-    gap: var(--s-4);
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 300;
-    color: rgba(200,220,240,0.38);
-    padding-top: var(--s-4);
-    border-top: 1px solid rgba(200,220,240,0.07);
-  }
-
-  .kl-hero__meta-dot { opacity: 0.30; }
 
   .kl-hero__cta {
     display: inline-flex;
@@ -523,18 +520,17 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 600;
     letter-spacing: 0.20em;
     text-transform: uppercase;
-    padding: 18px 40px;
+    padding: 18px 44px;
     border-radius: var(--r-pill);
     background: var(--gold);
     border: 1px solid var(--gold);
     color: var(--deep);
     transition: background-color 350ms var(--ease), border-color 350ms var(--ease), transform 350ms var(--ease);
-    margin-top: var(--s-4);
   }
   .kl-hero__cta:hover {
     background: #B8983A;
     border-color: #B8983A;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
   }
 
 
@@ -650,20 +646,17 @@ const journey = getJourney('kailash-2026')!;
   .kl-journey__phases {
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(44,42,38,0.09);
-    border-radius: var(--r-3);
-    overflow: hidden;
+    border-top: 1px solid rgba(44,42,38,0.10);
   }
 
   .kl-phase {
-    padding: clamp(20px, 3vw, 32px) clamp(24px, 4vw, 40px);
-    border-bottom: 1px solid rgba(44,42,38,0.07);
-    background: rgba(255,255,255,0.42);
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-3);
+    padding: clamp(28px, 4vw, 48px) 0;
+    border-bottom: 1px solid rgba(44,42,38,0.08);
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: baseline;
   }
-  .kl-phase:last-child { border-bottom: none; }
 
   .kl-phase__label {
     font-family: var(--mark);
@@ -671,31 +664,33 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(44,42,38,0.35);
+    color: rgba(44,42,38,0.32);
     display: block;
+    padding-top: 3px;
   }
 
   .kl-phase__text {
     font-family: var(--sans);
     font-weight: 300;
     font-size: 15px;
-    line-height: 1.78;
-    color: rgba(44,42,38,0.62);
+    line-height: 1.82;
+    color: rgba(44,42,38,0.68);
     margin: 0;
   }
 
   .kl-journey__panel {
     position: sticky;
     top: 80px;
-    background: rgba(255,255,255,0.58);
-    border: 1px solid rgba(44,42,38,0.09);
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(44,42,38,0.08);
     border-radius: var(--r-3);
-    padding: var(--s-6);
+    padding: clamp(28px, 4vw, 44px);
     display: flex;
     flex-direction: column;
     gap: var(--s-5);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 40px rgba(44,42,38,0.06);
   }
 
   .kl-panel__title {
@@ -704,15 +699,16 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(44,42,38,0.32);
+    color: rgba(44,42,38,0.28);
     margin: 0;
-    padding-bottom: var(--s-4);
+    padding-bottom: var(--s-5);
     border-bottom: 1px solid rgba(44,42,38,0.07);
   }
 
   .kl-panel__rows {
     display: flex;
     flex-direction: column;
+    gap: 0;
   }
 
   .kl-panel__row {
@@ -720,7 +716,7 @@ const journey = getJourney('kailash-2026')!;
     justify-content: space-between;
     align-items: baseline;
     gap: var(--s-4);
-    padding: var(--s-3) 0;
+    padding: clamp(10px, 1.4vw, 14px) 0;
     border-bottom: 1px solid rgba(44,42,38,0.05);
   }
   .kl-panel__row:last-child { border-bottom: none; }
@@ -730,16 +726,17 @@ const journey = getJourney('kailash-2026')!;
     font-size: 9px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(44,42,38,0.38);
+    color: rgba(44,42,38,0.32);
     flex-shrink: 0;
   }
 
   .kl-panel__row-val {
     font-family: var(--serif);
     font-style: italic;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--ink);
     text-align: right;
+    line-height: 1.4;
   }
 
   .kl-panel__cta {
@@ -751,13 +748,13 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    padding: 14px 24px;
+    padding: 15px 24px;
     border-radius: var(--r-pill);
     background: var(--gold);
     border: 1px solid var(--gold);
     color: var(--deep);
     transition: background-color 300ms var(--ease), border-color 300ms var(--ease), transform 300ms var(--ease);
-    margin-top: var(--s-2);
+    margin-top: var(--s-3);
   }
   .kl-panel__cta:hover {
     background: #B8983A;
@@ -878,7 +875,7 @@ const journey = getJourney('kailash-2026')!;
 
 
   /* ══════════════════════════════════════════════
-     7. TESTIMONIALS
+     9. TESTIMONIALS — compact editorial cards
      ══════════════════════════════════════════════ */
 
   .kl-tst {
@@ -886,33 +883,43 @@ const journey = getJourney('kailash-2026')!;
     border-top: 1px solid rgba(200,220,240,0.04);
   }
 
-  .kl-tst__list {
+  .kl-tst__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(14px, 2vw, 22px);
+    align-items: start;
+  }
+
+  .kl-tst__card {
+    margin: 0;
+    padding: clamp(24px, 3vw, 36px) clamp(22px, 2.5vw, 30px);
+    border: 1px solid rgba(200,220,240,0.07);
+    border-radius: var(--r-3);
+    background: rgba(200,220,240,0.022);
     display: flex;
     flex-direction: column;
+    gap: var(--s-5);
   }
 
-  .kl-tst__row {
-    margin: 0;
-    padding-block: clamp(48px, 7vw, 88px);
-    border-top: 1px solid rgba(200,220,240,0.08);
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    gap: clamp(32px, 5vw, 72px);
-    align-items: end;
-  }
-
-  .kl-tst__row:last-child {
-    border-bottom: 1px solid rgba(200,220,240,0.07);
+  .kl-tst__glyph {
+    font-family: var(--display);
+    font-size: 30px;
+    line-height: 0.7;
+    color: rgba(196,168,98,0.26);
+    display: block;
+    user-select: none;
+    font-optical-sizing: auto;
   }
 
   .kl-tst__quote {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(20px, 2.4vw, 32px);
-    line-height: 1.58;
-    color: rgba(200,220,240,0.80);
+    font-size: clamp(13px, 1.1vw, 15px);
+    line-height: 1.80;
+    color: rgba(200,220,240,0.68);
     margin: 0;
+    padding: 0;
     text-wrap: pretty;
     font-optical-sizing: auto;
   }
@@ -920,24 +927,27 @@ const journey = getJourney('kailash-2026')!;
   .kl-tst__attr {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    text-align: right;
+    gap: 4px;
+    padding-top: var(--s-4);
+    border-top: 1px solid rgba(200,220,240,0.06);
+    margin-top: auto;
   }
 
   .kl-tst__name {
     font-family: var(--serif);
     font-style: italic;
-    font-size: 14px;
-    color: rgba(200,220,240,0.55);
+    font-size: 13px;
+    color: rgba(200,220,240,0.50);
+    line-height: 1.3;
   }
 
   .kl-tst__detail {
     font-family: var(--mark);
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(200,220,240,0.28);
+    color: rgba(200,220,240,0.26);
   }
 
 
@@ -953,17 +963,15 @@ const journey = getJourney('kailash-2026')!;
   .kl-faq__list {
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(44,42,38,0.09);
-    border-radius: var(--r-3);
-    overflow: hidden;
+    border-top: 1px solid rgba(44,42,38,0.09);
   }
 
   .kl-faq__item {
     border-bottom: 1px solid rgba(44,42,38,0.07);
-    background: rgba(255,255,255,0.42);
+    background: transparent;
   }
   .kl-faq__item:last-child { border-bottom: none; }
-  .kl-faq__item[open] { background: rgba(255,255,255,0.62); }
+  .kl-faq__item[open] { background: rgba(255,255,255,0.28); }
 
   .kl-faq__q {
     font-family: var(--serif);
@@ -1128,8 +1136,8 @@ const journey = getJourney('kailash-2026')!;
     .kl-why__grid { grid-template-columns: 1fr; }
     .kl-guide__body { grid-template-columns: 1fr; }
     .kl-guide__photo-img { max-width: 160px; }
-    .kl-tst__row { grid-template-columns: 1fr; }
-    .kl-tst__attr { text-align: left; }
+    .kl-tst__grid { grid-template-columns: 1fr; }
+    .kl-phase { grid-template-columns: 80px 1fr; gap: var(--s-5); }
   }
 
   @media (max-width: 640px) {
