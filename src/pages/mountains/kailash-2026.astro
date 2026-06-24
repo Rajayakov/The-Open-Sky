@@ -107,7 +107,37 @@ const journey = getJourney('kailash-2026')!;
 
 
     <!-- ══════════════════════════════════════════
-         4. THE JOURNEY
+         4. FOR WHOM
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-forwhom section" aria-label="Who this expedition is for">
+      <div class="frame">
+        <div class="kl-forwhom__layout">
+
+          <div class="kl-forwhom__left">
+            <h2 class="kl-forwhom__title reveal d1">For Whom</h2>
+            <p class="kl-forwhom__note reveal d2">
+              The kora covers 52km over three days at altitudes between 4,800 and 5,600 metres.
+              No prior pilgrimage required. Physical readiness and interior willingness, yes.
+            </p>
+          </div>
+
+          <ul class="kl-forwhom__list" role="list">
+            {(journey.forWhom ?? []).map((item, i) => (
+              <li class={`kl-forwhom__item reveal d${i + 1}`}>
+                <span class="kl-forwhom__marker" aria-hidden="true">—</span>
+                <span class="kl-forwhom__text">{item}</span>
+              </li>
+            ))}
+          </ul>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         5. THE JOURNEY
          ══════════════════════════════════════════ -->
 
     <section class="kl-journey section" aria-label="The journey">
@@ -196,7 +226,39 @@ const journey = getJourney('kailash-2026')!;
 
 
     <!-- ══════════════════════════════════════════
-         6. ABOUT THE GUIDE
+         7. WHAT'S INCLUDED
+         ══════════════════════════════════════════ -->
+
+    <section class="kl-included section" aria-label="What's included">
+      <div class="frame">
+        <h2 class="kl-section-title--light reveal">Included</h2>
+        <div class="kl-included__cols">
+
+          <div class="kl-included__col">
+            <p class="kl-included__col-label reveal">In the expedition</p>
+            <ul class="kl-included__list" role="list">
+              {(journey.included ?? []).map((item, i) => (
+                <li class={`kl-included__item reveal d${(i % 2) + 1}`}>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="kl-included__col">
+            <p class="kl-included__col-label reveal">Arranged separately</p>
+            <ul class="kl-included__list kl-included__list--other" role="list">
+              {(['International flights', 'Travel insurance (mandatory)', 'Personal trekking equipment', 'Chinese visa (we provide support)'] as const).map((item, i) => (
+                <li class={`kl-included__item reveal d${(i % 2) + 1}`}>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         8. ABOUT THE GUIDE
          ══════════════════════════════════════════ -->
 
     <section class="kl-guide section" aria-label="About the guide">
@@ -291,7 +353,8 @@ const journey = getJourney('kailash-2026')!;
               target="_blank"
             >Join Telegram</a>
           </div>
-          <a href="/mountains" class="kl-apply__back reveal d4">← All mountain expeditions</a>
+          <p class="kl-apply__meta reveal d4">6 places · September 20, 2026 · Investment on enquiry</p>
+          <a href="/mountains" class="kl-apply__back reveal d5">← All mountain expeditions</a>
         </div>
       </div>
     </section>
@@ -1125,6 +1188,159 @@ const journey = getJourney('kailash-2026')!;
   .kl-apply__back:hover { color: rgba(160,200,240,0.65); }
 
 
+  /* ══════════════════════════════════════════════
+     4. FOR WHOM
+     ══════════════════════════════════════════════ */
+
+  .kl-forwhom {
+    background: var(--warm);
+    border-top: 1px solid rgba(44,42,38,0.07);
+  }
+
+  .kl-forwhom__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 8vw, 120px);
+    align-items: start;
+  }
+
+  .kl-forwhom__left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .kl-forwhom__title {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+
+  .kl-forwhom__note {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.82;
+    color: rgba(44,42,38,0.52);
+    margin: 0;
+    max-width: 38ch;
+    text-wrap: pretty;
+  }
+
+  .kl-forwhom__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(44,42,38,0.09);
+  }
+
+  .kl-forwhom__item {
+    display: flex;
+    gap: var(--s-5);
+    padding-block: clamp(20px, 2.8vw, 30px);
+    border-bottom: 1px solid rgba(44,42,38,0.07);
+    align-items: baseline;
+  }
+  .kl-forwhom__item:last-child { border-bottom: none; }
+
+  .kl-forwhom__marker {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: rgba(196,168,98,0.48);
+    flex-shrink: 0;
+    line-height: 1.82;
+  }
+
+  .kl-forwhom__text {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.82;
+    color: rgba(44,42,38,0.72);
+  }
+
+
+  /* ══════════════════════════════════════════════
+     7. INCLUDED
+     ══════════════════════════════════════════════ */
+
+  .kl-included {
+    background: var(--navy);
+    border-top: 1px solid rgba(200,220,240,0.04);
+  }
+
+  .kl-included__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 8vw, 120px);
+    align-items: start;
+  }
+
+  .kl-included__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-6);
+  }
+
+  .kl-included__col-label {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(196,168,98,0.50);
+    margin: 0;
+  }
+
+  .kl-included__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(200,220,240,0.07);
+  }
+
+  .kl-included__item {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.82;
+    color: rgba(200,220,240,0.72);
+    padding-block: clamp(12px, 1.8vw, 18px);
+    border-bottom: 1px solid rgba(200,220,240,0.05);
+    text-wrap: pretty;
+  }
+  .kl-included__item:last-child { border-bottom: none; }
+
+  .kl-included__list--other .kl-included__item {
+    color: rgba(200,220,240,0.34);
+  }
+
+
+  /* ══════════════════════════════════════════════
+     Apply meta
+     ══════════════════════════════════════════════ */
+
+  .kl-apply__meta {
+    font-family: var(--mark);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(200,220,240,0.20);
+    margin: 0;
+  }
+
+
   /* ─── RESPONSIVE ──────────────────────────────── */
 
   @media (max-width: 1000px) {
@@ -1134,6 +1350,8 @@ const journey = getJourney('kailash-2026')!;
 
   @media (max-width: 768px) {
     .kl-why__grid { grid-template-columns: 1fr; }
+    .kl-forwhom__layout { grid-template-columns: 1fr; }
+    .kl-included__cols { grid-template-columns: 1fr; }
     .kl-guide__body { grid-template-columns: 1fr; }
     .kl-guide__photo-img { max-width: 160px; }
     .kl-tst__grid { grid-template-columns: 1fr; }
