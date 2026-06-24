@@ -380,14 +380,17 @@ const journey = getJourney('kailash-2026')!;
   /* ─── PALETTE ─────────────────────────────────── */
 
   .kl {
-    --deep:   #080E18;
-    --navy:   #0D1929;
-    --mid:    #14243A;
-    --silver: #6A8099;
-    --sky:    #C8DCF0;
-    --gold:   #C4A862;
-    --bone:   #F0EBE0;
-    --ink:    #2C2A26;
+    --deep:     #080E18;
+    --dusk:     #091422;
+    --navy:     #0D1929;
+    --mid:      #14243A;
+    --silver:   #6A8099;
+    --sky:      #C8DCF0;
+    --gold:     #C4A862;
+    --bone:     #F0EBE0;
+    --ink:      #2C2A26;
+    --midnight: #06101A;
+    --abyss:    #040912;
   }
 
   /* ─── NAV OVERRIDE ────────────────────────────── */
@@ -445,25 +448,25 @@ const journey = getJourney('kailash-2026')!;
     z-index: 1;
     background:
       linear-gradient(to bottom,
-        rgba(6,10,20,0.32) 0%,
-        rgba(6,10,20,0.08) 16%,
-        transparent 38%
+        rgba(6,10,20,0.26) 0%,
+        rgba(6,10,20,0.05) 18%,
+        transparent 44%
       ),
       linear-gradient(to top,
-        rgba(4,7,14,0.99) 0%,
-        rgba(4,7,14,0.82) 16%,
-        rgba(4,7,14,0.44) 34%,
-        rgba(4,7,14,0.12) 52%,
+        rgba(4,7,14,0.88) 0%,
+        rgba(4,7,14,0.68) 14%,
+        rgba(4,7,14,0.34) 30%,
+        rgba(4,7,14,0.08) 50%,
         transparent 72%
       ),
       linear-gradient(108deg,
-        rgba(6,10,20,0.48) 0%,
-        rgba(6,10,20,0.18) 28%,
-        transparent 52%
+        rgba(6,10,20,0.35) 0%,
+        rgba(6,10,20,0.10) 26%,
+        transparent 50%
       ),
-      radial-gradient(ellipse 88% 76% at 50% 28%,
-        transparent 48%,
-        rgba(4,7,14,0.28) 100%
+      radial-gradient(ellipse 92% 72% at 50% 28%,
+        transparent 54%,
+        rgba(4,7,14,0.18) 100%
       );
   }
 
@@ -482,20 +485,20 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 200;
     font-size: clamp(80px, 14vw, 200px);
     line-height: 0.86;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
-    text-shadow: 0 2px 48px rgba(4,7,14,0.55);
+    text-shadow: 0 2px 64px rgba(4,7,14,0.38);
   }
 
   .kl-hero__date {
     font-family: var(--mark);
     font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.30em;
     text-transform: uppercase;
-    color: rgba(196,168,98,0.62);
+    color: rgba(196,168,98,0.58);
     margin: 0;
   }
 
@@ -505,20 +508,21 @@ const journey = getJourney('kailash-2026')!;
     align-self: flex-start;
     font-family: var(--mark);
     font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.20em;
+    font-weight: 500;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    padding: 18px 44px;
+    padding: 16px 40px;
     border-radius: var(--r-pill);
-    background: var(--gold);
-    border: 1px solid var(--gold);
-    color: var(--deep);
-    transition: background-color 350ms var(--ease), border-color 350ms var(--ease), transform 350ms var(--ease);
+    background: transparent;
+    border: 1px solid rgba(196,168,98,0.48);
+    color: rgba(196,168,98,0.84);
+    transition: background-color 350ms var(--ease), border-color 350ms var(--ease), box-shadow 350ms var(--ease), color 350ms var(--ease);
   }
   .kl-hero__cta:hover {
-    background: #B8983A;
-    border-color: #B8983A;
-    transform: translateY(-2px);
+    background: rgba(196,168,98,0.06);
+    border-color: rgba(196,168,98,0.72);
+    color: rgba(196,168,98,0.96);
+    box-shadow: 0 0 28px rgba(196,168,98,0.07);
   }
 
 
@@ -527,7 +531,9 @@ const journey = getJourney('kailash-2026')!;
      ══════════════════════════════════════════════ */
 
   .kl-letter {
-    background: var(--deep);
+    background:
+      radial-gradient(ellipse 55% 45% at 14% 62%, rgba(196,168,98,0.022) 0%, transparent 68%),
+      linear-gradient(to bottom, #080E18 0%, var(--dusk) 100%);
     padding-block: clamp(96px, 16svh, 180px);
   }
 
@@ -539,9 +545,9 @@ const journey = getJourney('kailash-2026')!;
     font-family: var(--mark);
     font-size: 9px;
     font-weight: 500;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: rgba(196,168,98,0.52);
+    color: rgba(196,168,98,0.46);
     margin: 0 0 clamp(36px, 5vw, 56px);
   }
 
@@ -578,7 +584,9 @@ const journey = getJourney('kailash-2026')!;
      ══════════════════════════════════════════════ */
 
   .kl-why2 {
-    background: var(--navy);
+    background:
+      radial-gradient(ellipse 90% 50% at 50% 0%, rgba(20,48,90,0.22) 0%, transparent 62%),
+      linear-gradient(to bottom, var(--dusk) 0%, var(--navy) 100%);
     padding-block: clamp(96px, 16svh, 180px);
   }
 
@@ -587,7 +595,7 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 200;
     font-size: clamp(44px, 7vw, 110px);
     line-height: 1.0;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     color: var(--bone);
     margin: 0 0 clamp(64px, 10vw, 100px);
     font-optical-sizing: auto;
@@ -597,15 +605,13 @@ const journey = getJourney('kailash-2026')!;
   .kl-why2__rows {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid rgba(200,220,240,0.07);
   }
 
   .kl-why2__row {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: clamp(32px, 5vw, 80px);
-    padding-block: clamp(36px, 5vw, 56px);
-    border-bottom: 1px solid rgba(200,220,240,0.06);
+    padding-block: clamp(44px, 6vw, 68px);
     align-items: baseline;
   }
 
@@ -613,8 +619,8 @@ const journey = getJourney('kailash-2026')!;
     font-family: var(--serif);
     font-weight: 300;
     font-size: clamp(16px, 1.5vw, 20px);
-    letter-spacing: -0.01em;
-    color: rgba(220,235,248,0.85);
+    letter-spacing: 0.005em;
+    color: rgba(220,235,248,0.82);
     margin: 0;
     font-optical-sizing: auto;
     font-style: italic;
@@ -624,8 +630,8 @@ const journey = getJourney('kailash-2026')!;
     font-family: var(--sans);
     font-weight: 300;
     font-size: 15px;
-    line-height: 1.85;
-    color: rgba(200,220,240,0.55);
+    line-height: 1.88;
+    color: rgba(200,220,240,0.52);
     margin: 0;
     max-width: 58ch;
     text-wrap: pretty;
@@ -637,7 +643,9 @@ const journey = getJourney('kailash-2026')!;
      ══════════════════════════════════════════════ */
 
   .kl-give {
-    background: var(--deep);
+    background:
+      radial-gradient(ellipse 80% 50% at 75% 10%, rgba(15,32,62,0.30) 0%, transparent 65%),
+      linear-gradient(to bottom, var(--navy) 0%, #0A1520 100%);
     padding-block: clamp(96px, 16svh, 180px);
   }
 
@@ -646,7 +654,7 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 200;
     font-size: clamp(44px, 7vw, 100px);
     line-height: 1.0;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     color: var(--bone);
     margin: 0 0 clamp(64px, 10vw, 100px);
     font-optical-sizing: auto;
@@ -691,7 +699,9 @@ const journey = getJourney('kailash-2026')!;
      ══════════════════════════════════════════════ */
 
   .kl-route {
-    background: var(--navy);
+    background:
+      radial-gradient(ellipse 80% 40% at 40% 100%, rgba(8,18,38,0.45) 0%, transparent 70%),
+      linear-gradient(to bottom, #0A1520 0%, var(--midnight) 100%);
     padding-block: clamp(96px, 16svh, 180px);
   }
 
@@ -700,7 +710,7 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 200;
     font-size: clamp(44px, 7vw, 110px);
     line-height: 1.0;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     color: var(--bone);
     margin: 0 0 clamp(64px, 10vw, 100px);
     font-optical-sizing: auto;
@@ -709,7 +719,6 @@ const journey = getJourney('kailash-2026')!;
   .kl-route__phases {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid rgba(200,220,240,0.07);
     margin-bottom: clamp(56px, 8vw, 96px);
   }
 
@@ -717,8 +726,7 @@ const journey = getJourney('kailash-2026')!;
     display: grid;
     grid-template-columns: 140px 1fr;
     gap: clamp(24px, 4vw, 56px);
-    padding-block: clamp(28px, 4vw, 44px);
-    border-bottom: 1px solid rgba(200,220,240,0.06);
+    padding-block: clamp(32px, 4.5vw, 52px);
     align-items: baseline;
   }
 
@@ -726,9 +734,9 @@ const journey = getJourney('kailash-2026')!;
     font-family: var(--mark);
     font-size: 9px;
     font-weight: 600;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: rgba(200,220,240,0.28);
+    color: rgba(200,220,240,0.24);
     display: block;
     padding-top: 3px;
   }
@@ -738,7 +746,7 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 300;
     font-size: 15px;
     line-height: 1.82;
-    color: rgba(200,220,240,0.55);
+    color: rgba(200,220,240,0.52);
     margin: 0;
     max-width: 58ch;
     text-wrap: pretty;
@@ -747,19 +755,16 @@ const journey = getJourney('kailash-2026')!;
   .kl-route__meta {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid rgba(200,220,240,0.07);
+    gap: clamp(20px, 3.5vw, 40px);
+    padding-top: clamp(24px, 3.5vw, 40px);
   }
 
   .kl-route__meta-row {
     display: flex;
     flex-direction: column;
     gap: var(--s-3);
-    padding: clamp(24px, 3.5vw, 40px) clamp(20px, 3vw, 36px);
-    border-right: 1px solid rgba(200,220,240,0.05);
+    padding: clamp(20px, 2.5vw, 32px) 0;
   }
-  .kl-route__meta-row:last-child,
-  .kl-route__meta-row:nth-child(3) { border-right: none; }
 
   .kl-route__meta-label {
     font-family: var(--mark);
@@ -784,7 +789,9 @@ const journey = getJourney('kailash-2026')!;
      ══════════════════════════════════════════════ */
 
   .kl-incl {
-    background: var(--deep);
+    background:
+      radial-gradient(ellipse 55% 40% at 85% 15%, rgba(10,22,45,0.40) 0%, transparent 68%),
+      linear-gradient(to bottom, var(--midnight) 0%, #081218 100%);
     padding-block: clamp(96px, 16svh, 180px);
   }
 
@@ -793,7 +800,7 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 200;
     font-size: clamp(44px, 7vw, 110px);
     line-height: 1.0;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     color: var(--bone);
     margin: 0 0 clamp(64px, 10vw, 100px);
     font-optical-sizing: auto;
@@ -810,9 +817,9 @@ const journey = getJourney('kailash-2026')!;
     font-family: var(--mark);
     font-size: 9px;
     font-weight: 500;
-    letter-spacing: 0.20em;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
-    color: rgba(200,220,240,0.28);
+    color: rgba(200,220,240,0.24);
     margin: 0 0 clamp(24px, 3vw, 36px);
   }
 
@@ -822,7 +829,7 @@ const journey = getJourney('kailash-2026')!;
     padding: 0;
     display: flex;
     flex-direction: column;
-    border-top: 1px solid rgba(200,220,240,0.07);
+    gap: clamp(14px, 2vw, 22px);
   }
 
   .kl-incl__item {
@@ -830,13 +837,11 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 300;
     font-size: 15px;
     line-height: 1.5;
-    color: rgba(200,220,240,0.65);
-    padding: clamp(14px, 2vw, 20px) 0;
-    border-bottom: 1px solid rgba(200,220,240,0.05);
+    color: rgba(200,220,240,0.60);
   }
 
   .kl-incl__list--dim .kl-incl__item {
-    color: rgba(200,220,240,0.34);
+    color: rgba(200,220,240,0.28);
   }
 
 
@@ -845,7 +850,9 @@ const journey = getJourney('kailash-2026')!;
      ══════════════════════════════════════════════ */
 
   .kl-guide {
-    background: var(--navy);
+    background:
+      radial-gradient(ellipse 110% 60% at 0% 50%, rgba(10,25,52,0.40) 0%, transparent 62%),
+      linear-gradient(to bottom, #081218 0%, var(--navy) 100%);
     padding-block: clamp(96px, 16svh, 180px);
   }
 
@@ -861,7 +868,6 @@ const journey = getJourney('kailash-2026')!;
     aspect-ratio: 3/4;
     overflow: hidden;
     background: linear-gradient(160deg, #1a2a40 0%, #0f1e30 55%, #080e18 100%);
-    border: 1px solid rgba(200,220,240,0.06);
   }
 
   .kl-guide__content {
@@ -875,9 +881,9 @@ const journey = getJourney('kailash-2026')!;
     font-family: var(--mark);
     font-size: 9px;
     font-weight: 500;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: rgba(196,168,98,0.50);
+    color: rgba(196,168,98,0.46);
     margin: 0;
   }
 
@@ -907,8 +913,8 @@ const journey = getJourney('kailash-2026')!;
     display: flex;
     gap: clamp(24px, 4vw, 48px);
     padding-block: clamp(20px, 3vw, 28px);
-    border-top: 1px solid rgba(196,168,98,0.10);
-    border-bottom: 1px solid rgba(196,168,98,0.10);
+    border-top: 1px solid rgba(196,168,98,0.06);
+    border-bottom: 1px solid rgba(196,168,98,0.06);
   }
 
   .kl-guide__stat {
@@ -954,8 +960,10 @@ const journey = getJourney('kailash-2026')!;
      ══════════════════════════════════════════════ */
 
   .kl-tst {
-    background: var(--deep);
-    padding-block: clamp(80px, 13svh, 150px);
+    background:
+      radial-gradient(ellipse 90% 55% at 50% 100%, rgba(4,8,18,0.70) 0%, transparent 72%),
+      linear-gradient(to bottom, var(--navy) 0%, var(--midnight) 100%);
+    padding-block: clamp(96px, 16svh, 160px);
   }
 
   .kl-tst__heading {
@@ -963,16 +971,16 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 200;
     font-size: clamp(28px, 3.5vw, 52px);
     line-height: 1.0;
-    letter-spacing: -0.03em;
-    color: rgba(200,220,240,0.35);
-    margin: 0 0 clamp(40px, 6vw, 72px);
+    letter-spacing: -0.025em;
+    color: rgba(200,220,240,0.28);
+    margin: 0 0 clamp(48px, 7vw, 88px);
     font-optical-sizing: auto;
   }
 
   .kl-tst__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: clamp(32px, 5vw, 64px);
+    gap: clamp(40px, 6vw, 80px);
     align-items: start;
   }
 
@@ -981,14 +989,14 @@ const journey = getJourney('kailash-2026')!;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--s-4);
+    gap: var(--s-5);
   }
 
   .kl-tst__glyph {
     font-family: var(--display);
-    font-size: 20px;
+    font-size: 24px;
     line-height: 0.7;
-    color: rgba(196,168,98,0.20);
+    color: rgba(196,168,98,0.12);
     display: block;
     user-select: none;
     font-optical-sizing: auto;
@@ -998,9 +1006,9 @@ const journey = getJourney('kailash-2026')!;
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(11px, 0.95vw, 13px);
-    line-height: 1.82;
-    color: rgba(200,220,240,0.55);
+    font-size: clamp(12px, 1.05vw, 14px);
+    line-height: 1.88;
+    color: rgba(200,220,240,0.50);
     margin: 0;
     padding: 0;
     text-wrap: pretty;
@@ -1010,17 +1018,16 @@ const journey = getJourney('kailash-2026')!;
   .kl-tst__attr {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    padding-top: var(--s-4);
-    border-top: 1px solid rgba(200,220,240,0.05);
+    gap: 4px;
+    padding-top: var(--s-5);
     margin-top: auto;
   }
 
   .kl-tst__name {
     font-family: var(--serif);
     font-style: italic;
-    font-size: 11px;
-    color: rgba(200,220,240,0.40);
+    font-size: 12px;
+    color: rgba(200,220,240,0.34);
     line-height: 1.3;
   }
 
@@ -1030,7 +1037,7 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(200,220,240,0.20);
+    color: rgba(200,220,240,0.17);
   }
 
 
@@ -1039,7 +1046,9 @@ const journey = getJourney('kailash-2026')!;
      ══════════════════════════════════════════════ */
 
   .kl-faq {
-    background: var(--navy);
+    background:
+      radial-gradient(ellipse 70% 40% at 25% 0%, rgba(14,30,58,0.25) 0%, transparent 62%),
+      linear-gradient(to bottom, var(--midnight) 0%, var(--navy) 100%);
     padding-block: clamp(96px, 16svh, 180px);
   }
 
@@ -1048,7 +1057,7 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 200;
     font-size: clamp(36px, 5vw, 80px);
     line-height: 1.0;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     color: var(--bone);
     margin: 0 0 clamp(56px, 8vw, 88px);
     font-optical-sizing: auto;
@@ -1057,11 +1066,10 @@ const journey = getJourney('kailash-2026')!;
   .kl-faq__list {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid rgba(200,220,240,0.07);
   }
 
   .kl-faq__item {
-    border-bottom: 1px solid rgba(200,220,240,0.06);
+    border-bottom: 1px solid rgba(200,220,240,0.04);
     background: transparent;
   }
   .kl-faq__item:last-child { border-bottom: none; }
@@ -1071,9 +1079,9 @@ const journey = getJourney('kailash-2026')!;
     font-weight: 300;
     font-style: italic;
     font-size: clamp(15px, 1.5vw, 19px);
-    letter-spacing: -0.01em;
-    color: rgba(200,220,240,0.72);
-    padding: clamp(20px, 2.8vw, 30px) 0;
+    letter-spacing: 0;
+    color: rgba(200,220,240,0.65);
+    padding: clamp(22px, 3vw, 34px) 0;
     cursor: pointer;
     list-style: none;
     display: flex;
@@ -1081,32 +1089,33 @@ const journey = getJourney('kailash-2026')!;
     align-items: center;
     gap: var(--s-4);
     font-optical-sizing: auto;
-    transition: color 250ms;
+    transition: color 280ms;
   }
   .kl-faq__q::-webkit-details-marker { display: none; }
   .kl-faq__q::marker { display: none; }
   .kl-faq__q::after {
-    content: '+';
+    content: '—';
     font-family: var(--sans);
     font-style: normal;
-    font-weight: 300;
-    font-size: 20px;
-    color: rgba(200,220,240,0.22);
+    font-weight: 200;
+    font-size: 13px;
+    letter-spacing: 0;
+    color: rgba(200,220,240,0.16);
     flex-shrink: 0;
-    transition: transform 280ms var(--ease), color 250ms;
+    transition: color 280ms var(--ease);
   }
   .kl-faq__item[open] .kl-faq__q::after {
-    transform: rotate(45deg);
-    color: rgba(200,220,240,0.45);
+    color: rgba(196,168,98,0.30);
   }
-  .kl-faq__q:hover { color: rgba(200,220,240,0.88); }
+  .kl-faq__q:hover { color: rgba(200,220,240,0.85); }
+  .kl-faq__q:hover::after { color: rgba(200,220,240,0.28); }
 
   .kl-faq__a {
     font-family: var(--sans);
     font-weight: 300;
     font-size: 15px;
     line-height: 1.82;
-    color: rgba(200,220,240,0.50);
+    color: rgba(200,220,240,0.44);
     margin: 0;
     padding: 0 0 clamp(20px, 2.8vw, 32px);
     max-width: 60ch;
@@ -1119,8 +1128,10 @@ const journey = getJourney('kailash-2026')!;
      ══════════════════════════════════════════════ */
 
   .kl-apply {
-    background: oklch(6.5% 0.010 250);
-    padding-block: clamp(120px, 20svh, 240px);
+    background:
+      radial-gradient(ellipse 55% 35% at 50% 8%, rgba(196,168,98,0.035) 0%, transparent 58%),
+      linear-gradient(to bottom, var(--navy) 0%, var(--abyss) 100%);
+    padding-block: clamp(140px, 24svh, 280px);
   }
 
   .kl-apply__inner {
@@ -1167,35 +1178,35 @@ const journey = getJourney('kailash-2026')!;
     justify-content: center;
     font-family: var(--mark);
     font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.20em;
+    font-weight: 500;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    padding: 18px 40px;
+    padding: 16px 40px;
     border-radius: var(--r-pill);
     border: 1px solid transparent;
-    transition: background-color 300ms var(--ease), border-color 300ms var(--ease), color 300ms var(--ease), transform 300ms var(--ease);
+    transition: background-color 300ms var(--ease), border-color 300ms var(--ease), color 300ms var(--ease), box-shadow 300ms var(--ease);
   }
 
   .kl-apply__btn--gold {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--deep);
+    background: transparent;
+    border-color: rgba(196,168,98,0.52);
+    color: rgba(196,168,98,0.88);
   }
   .kl-apply__btn--gold:hover {
-    background: #B8983A;
-    border-color: #B8983A;
-    transform: translateY(-1px);
+    background: rgba(196,168,98,0.06);
+    border-color: rgba(196,168,98,0.78);
+    color: rgba(196,168,98,1.0);
+    box-shadow: 0 0 36px rgba(196,168,98,0.08);
   }
 
   .kl-apply__btn--ghost {
     background: transparent;
-    border-color: rgba(200,220,240,0.18);
-    color: rgba(200,220,240,0.55);
+    border-color: rgba(200,220,240,0.14);
+    color: rgba(200,220,240,0.44);
   }
   .kl-apply__btn--ghost:hover {
-    border-color: rgba(200,220,240,0.45);
-    color: var(--bone);
-    transform: translateY(-1px);
+    border-color: rgba(200,220,240,0.36);
+    color: rgba(200,220,240,0.80);
   }
 
   .kl-apply__meta {
