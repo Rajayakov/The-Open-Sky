@@ -23,12 +23,14 @@ import QuoteBlock from '../components/QuoteBlock.astro';
     <div class="about-page__grid">
 
       <div class="about-page__image-col">
-        <div
+        <img
           class="img-slot img-slot--tall reveal"
-          data-label="Portrait · Yakov Rajuna"
-          style="background: radial-gradient(ellipse 60% 50% at 40% 30%, rgba(255,228,175,0.6), transparent 60%), linear-gradient(175deg, #C19763 0%, #8E6B40 40%, #4A371F 100%);"
-          aria-hidden="true"
-        ></div>
+          style="object-fit: cover;"
+          src="/images/portrait/yakov-flags.jpg"
+          alt="Yakov Rajuna"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       <div class="about-page__text-col">
@@ -119,6 +121,7 @@ import QuoteBlock from '../components/QuoteBlock.astro';
     titleEm=""
     body="Send a short message about where you are and what you are looking for. No forms, no funnels — just an honest exchange."
     primaryHref="/connect"
+    primarySource="about_cta"
     primaryLabel="Get in touch"
     secondaryHref="/retreats"
     secondaryLabel="See upcoming retreats"

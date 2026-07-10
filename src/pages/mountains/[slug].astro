@@ -758,7 +758,7 @@ const klRecogQuestions = [
               <div class="ej-apply__actions">
                 {isUpcoming ? (
                   <>
-                    <a href="/connect" class="btn">Express interest</a>
+                    <a href={`/connect?source=${journey.slug}_apply`} class="btn">Express interest</a>
                     <a href="https://t.me/yakovrajuna" class="btn btn--ghost-d">Join Telegram</a>
                   </>
                 ) : (

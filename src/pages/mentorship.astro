@@ -34,12 +34,14 @@ import QuoteBlock from '../components/QuoteBlock.astro';
       </div>
 
       <div class="mentorship-intro__image reveal d2">
-        <div
+        <img
           class="img-slot img-slot--tall"
-          data-label="Mentorship · One-on-one"
-          style="background: radial-gradient(ellipse 60% 50% at 35% 25%, rgba(255,228,175,0.5), transparent 60%), linear-gradient(175deg, #C19763 0%, #8E6B40 40%, #4A371F 100%);"
-          aria-hidden="true"
-        ></div>
+          style="object-fit: cover;"
+          src="/images/portrait/yakov-flags.jpg"
+          alt="Yakov Rajuna"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   </section>
@@ -161,6 +163,7 @@ import QuoteBlock from '../components/QuoteBlock.astro';
     title="A small number of places are open."
     body="Write a short message about where you are and what you are looking for. Yakov reads each one personally and responds directly."
     primaryHref="/connect"
+    primarySource="mentorship_cta"
     primaryLabel="Write to Yakov"
     secondaryHref="/about"
     secondaryLabel="About Yakov"

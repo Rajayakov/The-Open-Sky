@@ -55,7 +55,7 @@ const statusLabel = {
         ))}
         {program.status !== 'closed' && (
           <div class="pg-overview__cta">
-            <a href="/connect" class="btn btn--warm">
+            <a href={`/connect?source=program_${program.slug}_overview`} class="btn btn--warm">
               {program.status === 'waitlist' ? 'Join waitlist' : 'Apply now'}
             </a>
           </div>
@@ -100,6 +100,7 @@ const statusLabel = {
       ? 'Tell me which program interests you and where you are in your life right now. Yakov reads each message personally.'
       : 'Join the Telegram channel to hear about the next cohort before applications open.'}
     primaryHref={program.status !== 'closed' ? '/connect' : 'https://t.me/yakovrajuna'}
+    primarySource={program.status !== 'closed' ? `program_${program.slug}_cta` : undefined}
     primaryLabel={program.status !== 'closed' ? 'Apply now' : 'Join Telegram'}
     secondaryHref="/programs"
     secondaryLabel="All programs"

@@ -34,7 +34,7 @@ import PageHero from '../components/PageHero.astro';
           I read everything personally and respond to most things within a few days.
         </p>
         <div class="connect-primary__action reveal d3">
-          <a href="mailto:yakov@rajuna.com" class="btn btn--warm">yakov@rajuna.com</a>
+          <a href="mailto:yakov@rajuna.com" id="connect-mailto" class="btn btn--warm">yakov@rajuna.com</a>
         </div>
       </div>
 
@@ -150,6 +150,19 @@ import PageHero from '../components/PageHero.astro';
   </section>
 
 </PageLayout>
+
+<script>
+  import { getSourceLabel } from '../data/connectSources';
+
+  const params = new URLSearchParams(window.location.search);
+  const sourceLabel = getSourceLabel(params.get('source'));
+
+  const mailLink = document.getElementById('connect-mailto') as HTMLAnchorElement | null;
+  if (mailLink) {
+    const body = `Source: ${sourceLabel}\n\n`;
+    mailLink.href = `mailto:yakov@rajuna.com?body=${encodeURIComponent(body)}`;
+  }
+</script>
 
 <style>
   .connect-main { background: var(--pg-con-bg); }

@@ -98,71 +98,52 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
       />
       <div class="pts-hero__overlay" aria-hidden="true"></div>
       <div class="pts-hero__inner frame">
-        <div class="pts-hero__hed">
-          <h1 class="pts-hero__title reveal d1">Path of the Spirit</h1>
-          <p class="pts-hero__byline reveal d2">by Yakov Rajuna</p>
+        <div class="pts-hero__col-text">
+          <div class="pts-hero__hed">
+            <h1 class="pts-hero__title reveal d1">Path of the Spirit</h1>
+            <p class="pts-hero__byline reveal d2">by Yakov Rajuna</p>
+          </div>
+          <a href="#schedule" class="pts-hero__btn reveal d3">Explore Journeys</a>
         </div>
-        <a href="#upcoming" class="pts-hero__btn reveal d3">Explore Journeys</a>
-      </div>
-    </section>
 
+        {openJourney && (
+          <div class="pts-hero__col-card">
+            <div class="pts-hero__card reveal d3">
+              <span class="pts-hero__card-label">Upcoming Expedition</span>
 
-    <!-- ══════════════════════════════════════════
-         02. KAILASH — FEATURED JOURNEY
-         ══════════════════════════════════════════ -->
+              <div class="pts-hero__card-photo">
+                <img
+                  class="pts-hero__card-photo-img"
+                  src="/images/mountains/kailash-featured.jpg"
+                  alt="Mount Kailash, Tibet — sacred pilgrimage destination"
+                  loading="eager"
+                  decoding="async"
+                />
+                <div class="pts-hero__card-badge">
+                  <span class="pts-hero__card-badge-dot">●</span>
+                  <span>4 places remaining</span>
+                </div>
+              </div>
 
-    <section class="pts-feat" id="upcoming" aria-label={`Upcoming journey — ${upcoming[0].name}`}>
-      <div class="frame">
+              <span class="pts-hero__card-terrain">Tibet · 6,638m · 10 Days</span>
+              <h2 class="pts-hero__card-title">{openJourney.name}</h2>
+              <p class="pts-hero__card-tagline">The Abode of Shiva</p>
 
-        <p class="pts-feat__label reveal">Upcoming Journey</p>
+              <div class="pts-hero__card-meta">
+                <span>September 20–30, 2026</span>
+                <span class="pts-hero__card-dot">·</span>
+                <span>Tibet</span>
+                <span class="pts-hero__card-dot">·</span>
+                <span>Max 6 people</span>
+              </div>
 
-        <div class="pts-feat__body">
-
-          <div class="pts-feat__photo reveal d1">
-            <img
-              class="pts-feat__photo-img"
-              src="/images/mountains/kailash-featured.jpg"
-              alt="Mount Kailash, Tibet — sacred pilgrimage destination"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="pts-feat__photo-badge">
-              <span class="pts-feat__badge-dot">●</span>
-              <span>4 places remaining</span>
+              <div class="pts-hero__card-actions">
+                <a href={`/mountains/${openJourney.slug!}`} class="pts-btn pts-btn--gold">View Full Journey</a>
+                <a href="/connect?source=mountains_hub_kailash_apply" class="pts-btn pts-btn--ghost">Apply Now</a>
+              </div>
             </div>
           </div>
-
-          <div class="pts-feat__content">
-            <span class="pts-feat__terrain reveal">Tibet · 6,638m · 10 Days</span>
-            <h2 class="pts-feat__title reveal d1">Kailash</h2>
-            <p class="pts-feat__tagline reveal d2">The Abode of Shiva</p>
-
-            <div class="pts-feat__meta reveal d2">
-              <span>September 20–30, 2026</span>
-              <span class="pts-feat__dot">·</span>
-              <span>Tibet</span>
-              <span class="pts-feat__dot">·</span>
-              <span>Max 6 people</span>
-            </div>
-
-            <p class="pts-feat__copy reveal d3">
-              Mount Kailash has been one of the most revered pilgrimage destinations
-              on Earth for thousands of years. This journey is not tourism.
-              It is an encounter with a place that has transformed seekers,
-              yogis and pilgrims for centuries.
-            </p>
-
-            <div class="pts-feat__actions reveal d4">
-              <a href="/mountains/kailash-2026" class="pts-btn pts-btn--gold pts-feat__cover-link">
-                View Full Journey
-              </a>
-              <a href="/connect" class="pts-btn pts-btn--ghost pts-feat__secondary-btn">
-                Apply Now
-              </a>
-            </div>
-          </div>
-
-        </div>
+        )}
       </div>
     </section>
 
@@ -258,7 +239,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
          04. РАСПИСАНИЕ — ВСЕ ВЫЕЗДЫ
          ══════════════════════════════════════════ -->
 
-    <section class="pts-schedule section" aria-label="Upcoming expeditions">
+    <section class="pts-schedule section" id="schedule" aria-label="Upcoming expeditions">
       <div class="frame">
 
         <h2 class="pts-section-title reveal">Where we go next.</h2>
@@ -314,7 +295,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
                 <p class="pts-past-card__meta">
                   {p.year}{p.participants ? ` · ${p.participants}` : ''}
                 </p>
-                <a href="/connect" class="pts-card__link">
+                <a href={`/connect?source=mountains_hub_past_${i + 1}`} class="pts-card__link">
                   Photos &amp; Stories
                   <span class="pts-card__link-line" aria-hidden="true"></span>
                 </a>
@@ -362,7 +343,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
                 Join Telegram
               </a>
             )}
-            <a href="/connect" class="pts-btn pts-btn--ghost">Write directly</a>
+            <a href="/connect?source=mountains_hub_footer" class="pts-btn pts-btn--ghost">Write directly</a>
           </div>
 
         </div>
@@ -528,12 +509,25 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-hero__inner {
     position: relative;
     z-index: 2;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-7);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(32px, 5vw, 64px);
     width: 100%;
     /* Push text up from the very bottom — let landscape breathe */
     padding-bottom: clamp(104px, 18svh, 200px);
+  }
+
+  .pts-hero__col-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-7);
+  }
+
+  .pts-hero__col-card {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 
   .pts-hero__hed {
@@ -593,150 +587,124 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
 
   /* ══════════════════════════════════════════════════
-     02. KAILASH FEATURED
+     02. HERO CARD — UPCOMING EXPEDITION
      ══════════════════════════════════════════════════ */
 
-  .pts-feat {
-    background: var(--deep);
-    padding-block: clamp(80px, 14svh, 160px);
-    border-top: 1px solid rgba(200,220,240,0.05);
-    position: relative;
-    cursor: pointer;
+  .pts-hero__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    width: 100%;
+    max-width: 230px;
+    background: rgba(6,10,18,0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: var(--r-3);
+    border: 1px solid rgba(200,220,240,0.08);
+    padding: clamp(18px, 2.2vw, 28px);
   }
 
-  .pts-feat__cover-link::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-  }
-
-  .pts-feat__secondary-btn {
-    position: relative;
-    z-index: 2;
-  }
-
-  .pts-feat__label {
+  .pts-hero__card-label {
     font-family: var(--mark);
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 500;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.20em;
     text-transform: uppercase;
     color: rgba(196,168,98,0.70);
-    margin: 0 0 clamp(40px, 6vw, 80px);
-    display: block;
   }
 
-  .pts-feat__body {
-    display: grid;
-    grid-template-columns: 5fr 7fr;
-    gap: clamp(40px, 6vw, 100px);
-    align-items: center;
-  }
+  .pts-hero__card-photo { position: relative; }
 
-  .pts-feat__photo { position: relative; }
-
-  .pts-feat__photo-img {
+  .pts-hero__card-photo-img {
     display: block;
     width: 100%;
-    border-radius: var(--r-3);
     aspect-ratio: 3/4;
+    border-radius: var(--r-2);
     object-fit: cover;
     object-position: center 30%;
   }
 
-  .pts-feat__photo-badge {
+  .pts-hero__card-badge {
     position: absolute;
-    bottom: 18px;
-    left: 18px;
+    bottom: 12px;
+    left: 12px;
     display: flex;
     align-items: center;
     gap: var(--s-3);
     background: rgba(6,10,18,0.80);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 9px 15px;
+    padding: 7px 12px;
     border-radius: var(--r-pill);
     border: 1px solid rgba(196,168,98,0.22);
     font-family: var(--mark);
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--gold);
   }
 
-  .pts-feat__badge-dot { font-size: 7px; color: var(--gold); }
+  .pts-hero__card-badge-dot { font-size: 6px; color: var(--gold); }
 
-  .pts-feat__content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-6);
-  }
-
-  .pts-feat__terrain {
+  .pts-hero__card-terrain {
     font-family: var(--mark);
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 500;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: rgba(200,220,240,0.35);
     display: block;
   }
 
-  .pts-feat__title {
+  .pts-hero__card-title {
     font-family: var(--display);
     font-weight: 200;
-    font-size: clamp(64px, 10vw, 140px);
-    line-height: 0.88;
-    letter-spacing: -0.03em;
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
     color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
   }
 
-  .pts-feat__tagline {
+  .pts-hero__card-tagline {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(18px, 1.8vw, 26px);
+    font-size: clamp(13px, 1.2vw, 15px);
     color: rgba(196,168,98,0.75);
     margin: 0;
     line-height: 1.4;
     font-optical-sizing: auto;
   }
 
-  .pts-feat__meta {
+  .pts-hero__card-meta {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 8px var(--s-4);
+    gap: 6px var(--s-3);
     font-family: var(--sans);
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 300;
-    color: rgba(200,220,240,0.38);
-    padding-top: var(--s-4);
-    border-top: 1px solid rgba(200,220,240,0.07);
+    color: rgba(200,220,240,0.40);
+    padding-top: var(--s-3);
+    border-top: 1px solid rgba(200,220,240,0.08);
   }
 
-  .pts-feat__dot { opacity: 0.28; }
+  .pts-hero__card-dot { opacity: 0.28; }
 
-  .pts-feat__copy {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: clamp(15px, 1.4vw, 17px);
-    line-height: 1.85;
-    color: rgb(var(--sky-rgb) / 0.70);
-    margin: 0;
-    max-width: 48ch;
-  }
-
-  .pts-feat__actions {
+  .pts-hero__card-actions {
     display: flex;
     align-items: center;
     gap: var(--s-4);
     flex-wrap: wrap;
     margin-top: var(--s-2);
+  }
+
+  .pts-hero__card-actions .pts-btn {
+    padding: 12px 18px;
+    font-size: 9px;
   }
 
 
@@ -1232,8 +1200,10 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   }
 
   @media (max-width: 900px) {
-    .pts-feat__body { grid-template-columns: 1fr; gap: clamp(32px, 5vw, 56px); }
-    .pts-feat__photo-img { aspect-ratio: 16/9; }
+    .pts-hero__inner { grid-template-columns: 1fr; }
+    .pts-hero__col-card { justify-content: center; }
+    .pts-hero__card { max-width: 420px; }
+    .pts-hero__card-photo-img { aspect-ratio: 16/9; }
     .pts-guide__body { grid-template-columns: 1fr; }
     .pts-guide__photo-img { max-width: 200px; aspect-ratio: 3/4; }
   }
@@ -1252,6 +1222,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     .pts-cards { grid-template-columns: 1fr 1fr; }
     .pts-past-cards { grid-template-columns: 1fr; }
     .pts-guide__stats { grid-template-columns: 1fr 1fr; }
+    .pts-hero__col-card { display: none; }
   }
 
   @media (max-width: 400px) {

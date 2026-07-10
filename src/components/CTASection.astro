@@ -6,6 +6,7 @@ export interface Props {
   body?: string;
   primaryHref?: string;
   primaryLabel?: string;
+  primarySource?: string;
   secondaryHref?: string;
   secondaryLabel?: string;
   dark?: boolean;
@@ -17,10 +18,15 @@ const {
   body,
   primaryHref = '/connect',
   primaryLabel = 'Get in touch',
+  primarySource,
   secondaryHref,
   secondaryLabel,
   dark = false,
 } = Astro.props;
+
+const primaryHrefFinal = primarySource
+  ? `${primaryHref}${primaryHref.includes('?') ? '&' : '?'}source=${encodeURIComponent(primarySource)}`
+  : primaryHref;
 ---
 
 <section class={`cta-section section ${dark ? 'cta-section--dark' : ''}`} aria-label="Call to action">
@@ -35,7 +41,7 @@ const {
       {body && <p class="t-lede cta-section__body reveal d2">{body}</p>}
 
       <div class="cta-section__actions reveal d3">
-        <a href={primaryHref} class={`btn ${dark ? '' : 'btn--warm'}`}>{primaryLabel}</a>
+        <a href={primaryHrefFinal} class={`btn ${dark ? '' : 'btn--warm'}`}>{primaryLabel}</a>
         {secondaryHref && secondaryLabel && (
           <a href={secondaryHref} class="btn-text">{secondaryLabel}</a>
         )}

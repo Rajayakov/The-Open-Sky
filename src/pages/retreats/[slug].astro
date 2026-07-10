@@ -66,12 +66,14 @@ if (!retreat) return Astro.redirect('/retreats');
       </div>
 
       <div class="retreat-description__image reveal d1">
-        <div
+        <img
           class="img-slot img-slot--wide"
-          data-label="Retreat · Location"
-          style={`background: ${retreat.bg};`}
-          aria-hidden="true"
-        ></div>
+          style="object-fit: cover;"
+          src="/images/portrait/yakov-flags.jpg"
+          alt="Yakov Rajuna"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   </section>
@@ -172,6 +174,7 @@ if (!retreat) return Astro.redirect('/retreats');
     title="This retreat fills quickly."
     body="Send a short message to express interest. Yakov reviews each application personally."
     primaryHref="/connect"
+    primarySource={`retreat_${retreat.slug}_cta`}
     primaryLabel="Express interest"
     secondaryHref="/retreats"
     secondaryLabel="See all retreats"
