@@ -170,22 +170,44 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
         <div class="pts-cards">
           {upcoming.map((j, i) => (
-            <div class={`pts-card reveal d${(i % 3) + 1}${j.status === 'soon' ? ' pts-card--soon' : ''}`}>
-              <div class="pts-card__img" style={`background: ${j.bg};`} role="img" aria-label={j.name}>
-                {j.status === 'soon' && <span class="pts-card__badge">Coming Soon</span>}
+            <div class={`pts-hero__card reveal d${(i % 3) + 1}${j.status === 'soon' ? ' pts-card--soon' : ''}`}>
+              <div class="pts-hero__card-photo">
+                <div style={`background: ${j.bg}; width:100%; height:100%;`}></div>
+                <div class="pts-hero__card-photo-fade" aria-hidden="true"></div>
+                {j.status === 'open' && (
+                  <div class="pts-hero__card-badge">
+                    <span class="pts-hero__card-badge-dot">●</span>
+                    <span>Open now</span>
+                  </div>
+                )}
+                {j.status === 'soon' && (
+                  <div class="pts-hero__card-badge">
+                    <span>Coming Soon</span>
+                  </div>
+                )}
               </div>
-              <div class="pts-card__info">
-                {j.terrain && <span class="pts-card__region">{j.terrain}</span>}
-                <h3 class="pts-card__name">{j.name}</h3>
+              <div class="pts-hero__card-body">
+                {j.terrain && <span class="pts-hero__card-terrain">{j.terrain}</span>}
+                <h3 class="pts-hero__card-title">{j.name}</h3>
                 {j.date && (
-                  <p class="pts-card__meta">
-                    {j.date}{j.duration && j.duration !== 'TBA' ? ` · ${j.duration}` : ''}
-                  </p>
+                  <div class="pts-hero__card-meta">
+                    <span>{j.date}</span>
+                    {j.duration && j.duration !== 'TBA' && (
+                      <>
+                        <span class="pts-hero__card-dot">·</span>
+                        <span>{j.duration}</span>
+                      </>
+                    )}
+                  </div>
                 )}
                 {j.slug && (
-                  <a href={`/mountains/${j.slug}`} class="pts-btn pts-btn--ghost-sm" style="margin-top: var(--s-4); text-align: center;">
-                    View Journey
-                  </a>
+                  <>
+                    <div class="pts-hero__card-divider"></div>
+                    <div class="pts-hero__card-actions">
+                      <a href={`/mountains/${j.slug}`} class="pts-btn pts-btn--gold">View Journey</a>
+                      <a href={`/connect?source=mountains_schedule_${j.slug}`} class="pts-btn pts-btn--ghost">Apply Now</a>
+                    </div>
+                  </>
                 )}
               </div>
             </div>
@@ -752,91 +774,16 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: clamp(12px, 2vw, 20px);
+    gap: clamp(16px, 2.5vw, 24px);
+    align-items: start;
   }
 
-  .pts-card {
-    display: flex;
-    flex-direction: column;
-    border-radius: 16px;
-    overflow: hidden;
-    background: rgba(247,242,232,0.07);
-    backdrop-filter: blur(20px) saturate(1.4);
-    -webkit-backdrop-filter: blur(20px) saturate(1.4);
-    border: 1px solid rgba(247,242,232,0.13);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.28), inset 0 1px 0 rgba(247,242,232,0.08);
-    transition: transform 400ms var(--ease), box-shadow 400ms var(--ease);
-  }
-  .pts-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-  }
+  /* Hero card is fixed-width for its Hero column; here it fills the grid cell */
+  .pts-cards .pts-hero__card { width: 100%; }
 
   .pts-card--soon {
-    opacity: 0.5;
+    opacity: 0.45;
     pointer-events: none;
-  }
-
-  .pts-card__img {
-    position: relative;
-    aspect-ratio: 3/2;
-    overflow: hidden;
-  }
-
-  .pts-card__badge {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    font-family: var(--mark);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    background: rgba(10,18,30,0.80);
-    border: 1px solid rgba(200,220,240,0.18);
-    color: rgba(200,220,240,0.65);
-    padding: 5px 10px;
-    border-radius: var(--r-pill);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-  }
-
-  .pts-card__info {
-    padding: clamp(16px, 2.5vw, 24px);
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-2);
-    flex: 1;
-  }
-
-  .pts-card__region {
-    font-family: var(--mark);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.20em;
-    text-transform: uppercase;
-    color: var(--silver);
-    display: block;
-  }
-
-  .pts-card__name {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: clamp(20px, 2.5vw, 30px);
-    line-height: 1.1;
-    letter-spacing: -0.015em;
-    color: var(--bone);
-    margin: var(--s-1) 0 0;
-    font-optical-sizing: auto;
-  }
-
-  .pts-card__meta {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 300;
-    color: rgba(200,220,240,0.38);
-    margin: 0;
-    line-height: 1.4;
   }
 
 
