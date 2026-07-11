@@ -146,79 +146,6 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
 
     <!-- ══════════════════════════════════════════
-         03. КТО ВЕДЁТ
-         ══════════════════════════════════════════ -->
-
-    <section class="pts-guide section" aria-label="About the guide">
-      <div class="frame">
-        <div class="pts-guide__body">
-
-          <div class="pts-guide__photo reveal">
-            <div class="pts-guide__photo-img" role="img" aria-label="Yakov Rajuna"></div>
-          </div>
-
-          <div class="pts-guide__content">
-            <span class="pts-guide__label t-label t-label--gold reveal">Your guide</span>
-            <h2 class="pts-guide__name reveal d1">Yakov Rajuna</h2>
-
-            <div class="pts-guide__stats reveal d2">
-              <div class="pts-guide__stat">
-                <span class="pts-guide__stat-n">20+</span>
-                <span class="pts-guide__stat-l">Years of practice</span>
-              </div>
-              <div class="pts-guide__stat">
-                <span class="pts-guide__stat-n">350+</span>
-                <span class="pts-guide__stat-l">Ceremonies led</span>
-              </div>
-              <div class="pts-guide__stat">
-                <span class="pts-guide__stat-n">3 500+</span>
-                <span class="pts-guide__stat-l">Participants</span>
-              </div>
-            </div>
-
-            <p class="pts-guide__roles reveal d2">
-              Guide · Healer · Teacher · Musician · Expedition leader
-            </p>
-
-            <p class="pts-guide__bio reveal d3">
-              Yakov has led groups into sacred terrain across Asia, the Caucasus and
-              Eastern Europe for two decades. Initiations in Peru and Brazil.
-              Each expedition is small, intentional, and led personally.
-            </p>
-
-            <a href="/about" class="pts-btn pts-btn--ghost-sm reveal d4">Learn More</a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════
-         04. ОТЗЫВЫ УЧАСТНИКОВ
-         ══════════════════════════════════════════ -->
-
-    <section class="pts-tst section" aria-label="Participant voices">
-      <div class="frame">
-
-        <div class="pts-tst__grid">
-          {testimonials.map((t, i) => (
-            <figure class={`pts-tst__card reveal d${i + 1}`}>
-              <span class="pts-tst__glyph" aria-hidden="true">"</span>
-              <blockquote class="pts-tst__quote">{t.quote}</blockquote>
-              <figcaption class="pts-tst__attr">
-                <span class="pts-tst__name">{t.name}</span>
-                <span class="pts-tst__meta">{t.location} · {t.journey}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════
          05. DIVIDER — СУТЬ ФОРМАТА
          ══════════════════════════════════════════ -->
 
@@ -298,6 +225,79 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
                 </a>
               </div>
             </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         03. КТО ВЕДЁТ
+         ══════════════════════════════════════════ -->
+
+    <section class="pts-guide section" aria-label="About the guide">
+      <div class="frame">
+        <div class="pts-guide__body">
+
+          <div class="pts-guide__photo reveal">
+            <div class="pts-guide__photo-img" role="img" aria-label="Yakov Rajuna"></div>
+          </div>
+
+          <div class="pts-guide__content">
+            <span class="pts-guide__label t-label t-label--gold reveal">Your guide</span>
+            <h2 class="pts-guide__name reveal d1">Yakov Rajuna</h2>
+
+            <div class="pts-guide__stats reveal d2">
+              <div class="pts-guide__stat">
+                <span class="pts-guide__stat-n">20+</span>
+                <span class="pts-guide__stat-l">Years of practice</span>
+              </div>
+              <div class="pts-guide__stat">
+                <span class="pts-guide__stat-n">350+</span>
+                <span class="pts-guide__stat-l">Ceremonies led</span>
+              </div>
+              <div class="pts-guide__stat">
+                <span class="pts-guide__stat-n">3 500+</span>
+                <span class="pts-guide__stat-l">Participants</span>
+              </div>
+            </div>
+
+            <p class="pts-guide__roles reveal d2">
+              Guide · Healer · Teacher · Musician · Expedition leader
+            </p>
+
+            <p class="pts-guide__bio reveal d3">
+              Yakov has led groups into sacred terrain across Asia, the Caucasus and
+              Eastern Europe for two decades. Initiations in Peru and Brazil.
+              Each expedition is small, intentional, and led personally.
+            </p>
+
+            <a href="/about" class="pts-btn pts-btn--ghost-sm reveal d4">Learn More</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         04. ОТЗЫВЫ УЧАСТНИКОВ
+         ══════════════════════════════════════════ -->
+
+    <section class="pts-tst section" aria-label="Participant voices">
+      <div class="frame">
+
+        <div class="pts-tst__grid">
+          {testimonials.map((t, i) => (
+            <figure class={`pts-tst__card reveal d${i + 1}`}>
+              <span class="pts-tst__glyph" aria-hidden="true">"</span>
+              <blockquote class="pts-tst__quote">{t.quote}</blockquote>
+              <figcaption class="pts-tst__attr">
+                <span class="pts-tst__name">{t.name}</span>
+                <span class="pts-tst__meta">{t.location} · {t.journey}</span>
+              </figcaption>
+            </figure>
           ))}
         </div>
 
