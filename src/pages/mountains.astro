@@ -183,9 +183,8 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
                   </p>
                 )}
                 {j.slug && (
-                  <a href={`/mountains/${j.slug}`} class="pts-card__link">
-                    Learn More
-                    <span class="pts-card__link-line" aria-hidden="true"></span>
+                  <a href={`/mountains/${j.slug}`} class="pts-btn pts-btn--ghost-sm" style="margin-top: var(--s-4); text-align: center;">
+                    View Journey
                   </a>
                 )}
               </div>
@@ -219,9 +218,8 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
                 <p class="pts-past-card__meta">
                   {p.year}{p.participants ? ` · ${p.participants}` : ''}
                 </p>
-                <a href={`/connect?source=mountains_hub_past_${i + 1}`} class="pts-card__link">
+                <a href={`/connect?source=mountains_hub_past_${i + 1}`} class="pts-btn pts-btn--ghost-sm" style="margin-top: var(--s-4); text-align: center;">
                   Photos &amp; Stories
-                  <span class="pts-card__link-line" aria-hidden="true"></span>
                 </a>
               </div>
             </div>
@@ -241,7 +239,13 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
         <div class="pts-guide__body">
 
           <div class="pts-guide__photo reveal">
-            <div class="pts-guide__photo-img" role="img" aria-label="Yakov Rajuna"></div>
+            <img
+              src="/images/portrait/yakov-flags.jpg"
+              alt="Yakov Rajuna"
+              class="pts-guide__photo-img"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
 
           <div class="pts-guide__content">
@@ -718,10 +722,10 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(18px, 2vw, 28px);
+    font-size: clamp(20px, 2.5vw, 32px);
     line-height: 1.55;
-    color: rgb(var(--sky-rgb) / 0.45);
-    max-width: 60ch;
+    color: rgba(247,242,232,0.55);
+    max-width: 52ch;
     margin: 0;
     font-optical-sizing: auto;
   }
@@ -731,7 +735,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
      04. SCHEDULE
      ══════════════════════════════════════════════════ */
 
-  .pts-schedule { background: var(--navy); }
+  .pts-schedule { background: var(--atm-mtn); }
 
   .pts-section-title {
     font-family: var(--display);
@@ -754,10 +758,13 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-card {
     display: flex;
     flex-direction: column;
-    border-radius: var(--r-3);
+    border-radius: 16px;
     overflow: hidden;
-    background: var(--mid);
-    border: 1px solid rgba(200,220,240,0.06);
+    background: rgba(247,242,232,0.07);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border: 1px solid rgba(247,242,232,0.13);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.28), inset 0 1px 0 rgba(247,242,232,0.08);
     transition: transform 400ms var(--ease), box-shadow 400ms var(--ease);
   }
   .pts-card:hover {
@@ -772,7 +779,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-card__img {
     position: relative;
-    aspect-ratio: 4/3;
+    aspect-ratio: 3/2;
     overflow: hidden;
   }
 
@@ -832,36 +839,6 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     line-height: 1.4;
   }
 
-  .pts-card__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-family: var(--mark);
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 0.20em;
-    text-transform: uppercase;
-    color: rgb(var(--sky-rgb) / 0.55);
-    margin-top: var(--s-4);
-    padding-block: 8px;
-    margin-block: -8px;
-    transition: color 300ms var(--ease);
-  }
-  .pts-card__link:hover { color: var(--gold); }
-
-  .pts-card__link-line {
-    display: inline-block;
-    width: 38px;
-    height: 1px;
-    background: currentColor;
-    flex-shrink: 0;
-    transform: scaleX(0.74);
-    transform-origin: left center;
-    transition: transform 400ms var(--ease);
-  }
-  .pts-card__link:hover .pts-card__link-line { transform: scaleX(1) translateX(4px); }
-
-
 
 
   /* ══════════════════════════════════════════════════
@@ -899,16 +876,17 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-past-card {
     display: flex;
     flex-direction: column;
-    border-radius: var(--r-3);
+    border-radius: 16px;
     overflow: hidden;
-    background: var(--mid);
-    border: 1px solid rgba(200,220,240,0.05);
+    background: rgba(247,242,232,0.05);
+    border: 1px solid rgba(247,242,232,0.10);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
     transition: transform 400ms var(--ease);
   }
   .pts-past-card:hover { transform: translateY(-3px); }
 
   .pts-past-card__img {
-    aspect-ratio: 16/10;
+    aspect-ratio: 3/2;
     overflow: hidden;
   }
 
@@ -966,9 +944,9 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-tst__card {
     margin: 0;
     padding: clamp(24px, 3vw, 36px) clamp(22px, 2.5vw, 30px);
-    border: 1px solid rgba(200,220,240,0.07);
+    border: 1px solid rgba(247,242,232,0.08);
     border-radius: var(--r-3);
-    background: rgba(200,220,240,0.022);
+    background: rgba(247,242,232,0.04);
     display: flex;
     flex-direction: column;
     gap: var(--s-5);
@@ -991,7 +969,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     /* Small — intimate, like a handwritten memory */
     font-size: clamp(13px, 1.15vw, 15px);
     line-height: 1.78;
-    color: rgba(200,220,240,0.70);
+    color: rgba(247,242,232,0.70);
     margin: 0;
     padding: 0;
     text-wrap: pretty;
@@ -1011,7 +989,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-family: var(--serif);
     font-style: italic;
     font-size: 13px;
-    color: rgb(var(--sky-rgb) / 0.52);
+    color: rgba(196,168,98,0.65);
     line-height: 1.3;
   }
 
@@ -1029,21 +1007,25 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
      08. GUIDE
      ══════════════════════════════════════════════════ */
 
-  .pts-guide { background: var(--deep); }
+  .pts-guide { background: var(--atm-mtn); }
 
   .pts-guide__body {
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 320px 1fr;
     gap: clamp(48px, 8vw, 120px);
     align-items: center;
   }
 
   .pts-guide__photo-img {
-    border-radius: var(--r-3);
-    aspect-ratio: 3/4;
-    overflow: hidden;
-    background: linear-gradient(160deg, #2A3848 0%, #18283A 55%, #0E1A28 100%);
-    border: 1px solid rgba(200,220,240,0.06);
+    aspect-ratio: 2/3;
+    border-radius: 12px;
+    border: 1px solid rgba(247,242,232,0.10);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .pts-guide__content {
