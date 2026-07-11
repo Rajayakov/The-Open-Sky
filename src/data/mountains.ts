@@ -79,6 +79,7 @@ export const journeys: MountainJourney[] = [
     status: 'upcoming',
     upcoming: false,
     bg: 'linear-gradient(160deg, #D4A87A 0%, #8C5A3A 50%, #3A1E12 100%)',
+    heroImage: '/images/mountains/arunachala-featured.jpg',
     structure: [
       { phase: 'Days I–II', description: 'Arrival. First encounter with the mountain. Setting intention.' },
       { phase: 'Days III–V', description: 'Daily girivalam — circumambulation of the mountain. Early morning walks. Evening silence.' },

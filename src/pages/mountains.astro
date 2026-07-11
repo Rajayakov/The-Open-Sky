@@ -13,6 +13,7 @@ const upcoming = [
     duration: '10 Days',
     status: 'open' as const,
     bg: 'linear-gradient(160deg, #A8C0D8 0%, #4A6888 45%, #1A2C40 100%)',
+    heroImage: '/images/mountains/kailash-featured.jpg',
   },
   {
     slug: 'arunachala-2026',
@@ -22,6 +23,7 @@ const upcoming = [
     duration: '7 Days',
     status: 'open' as const,
     bg: 'linear-gradient(160deg, #D4A87A 0%, #8C5A3A 50%, #3A1E12 100%)',
+    heroImage: '/images/mountains/arunachala-featured.jpg',
   },
   {
     slug: null as string | null,
@@ -172,7 +174,11 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
           {upcoming.map((j, i) => (
             <div class={`pts-hero__card reveal d${(i % 3) + 1}${j.status === 'soon' ? ' pts-card--soon' : ''}`}>
               <div class="pts-hero__card-photo">
-                <div style={`background: ${j.bg}; width:100%; height:100%;`}></div>
+                {j.heroImage ? (
+                  <img src={j.heroImage} alt={j.name} loading="lazy" decoding="async" />
+                ) : (
+                  <div style={`background: ${j.bg}; width:100%; height:100%;`}></div>
+                )}
                 <div class="pts-hero__card-photo-fade" aria-hidden="true"></div>
                 {j.status === 'open' && (
                   <div class="pts-hero__card-badge">
