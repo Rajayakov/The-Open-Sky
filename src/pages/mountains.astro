@@ -128,10 +128,11 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
                 <h2 class="pts-hero__card-title">{openJourney.name}</h2>
                 <p class="pts-hero__card-tagline">The Abode of Shiva</p>
                 <div class="pts-hero__card-meta">
-                  <span>September 20–30, 2026</span>
+                  <span>September 20–30</span>
                   <span class="pts-hero__card-dot">·</span>
                   <span>Max 6 people</span>
                 </div>
+                <div class="pts-hero__card-divider"></div>
                 <div class="pts-hero__card-actions">
                   <a href={`/mountains/${openJourney.slug!}`} class="pts-btn pts-btn--gold">View Journey</a>
                   <a href="/connect?source=mountains_hub_kailash_apply" class="pts-btn pts-btn--ghost">Apply Now</a>
@@ -506,11 +507,12 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     position: relative;
     z-index: 2;
     display: grid;
-    grid-template-columns: 1fr 380px;
+    grid-template-columns: 1fr 360px;
     align-items: center;
-    gap: clamp(32px, 5vw, 64px);
+    gap: 40px;
     width: 100%;
-    padding-bottom: clamp(80px, 12svh, 140px);
+    padding-right: clamp(24px, 4vw, 60px);
+    padding-bottom: clamp(60px, 10svh, 120px);
   }
 
   .pts-hero__left {
@@ -580,20 +582,23 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
      ══════════════════════════════════════════════════ */
 
   .pts-hero__card {
-    width: 100%;
+    width: 360px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    background: rgba(8,14,24,0.78);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(200,220,240,0.10);
-    border-radius: var(--r-3);
+    background: rgba(6,10,18,0.82);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid rgba(196,168,98,0.15);
+    border-radius: 20px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 0 0 0.5px rgba(196,168,98,0.08);
     overflow: hidden;
   }
 
   .pts-hero__card-photo {
     position: relative;
-    height: 260px;
+    height: 240px;
+    width: 100%;
     flex-shrink: 0;
     overflow: hidden;
   }
@@ -603,75 +608,66 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 25%;
-    border-radius: var(--r-3) var(--r-3) 0 0;
+    object-position: center 20%;
+    border-radius: 20px 20px 0 0;
   }
 
   .pts-hero__card-photo-fade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, #080E18 0%, transparent 60%);
+    background: linear-gradient(to top, rgba(6,10,18,0.95) 0%, rgba(6,10,18,0.2) 50%, transparent 100%);
   }
 
   .pts-hero__card-badge {
     position: absolute;
     bottom: 12px;
-    left: 12px;
+    left: 16px;
     display: flex;
     align-items: center;
     gap: var(--s-3);
-    background: rgba(6,10,18,0.80);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 7px 12px;
-    border-radius: var(--r-pill);
-    border: 1px solid rgba(196,168,98,0.22);
-    font-family: var(--mark);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
+    background: rgba(6,10,18,0.75);
+    border: 1px solid rgba(196,168,98,0.3);
+    border-radius: 99px;
+    padding: 5px 12px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #C4A862;
   }
 
   .pts-hero__card-badge-dot { font-size: 6px; color: var(--gold); }
 
   .pts-hero__card-body {
-    padding: 20px 24px 24px;
+    padding: 20px 22px 22px;
     display: flex;
     flex-direction: column;
-    gap: var(--s-3);
+    gap: 6px;
   }
 
   .pts-hero__card-terrain {
     font-family: var(--mark);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
+    font-size: 10px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(200,220,240,0.35);
+    color: rgba(196,168,98,0.6);
     display: block;
   }
 
   .pts-hero__card-title {
     font-family: var(--display);
+    font-size: 42px;
     font-weight: 200;
-    font-size: clamp(28px, 3vw, 40px);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
+    line-height: 1;
     color: var(--bone);
-    margin: 0;
+    margin: 4px 0;
     font-optical-sizing: auto;
   }
 
   .pts-hero__card-tagline {
     font-family: var(--serif);
     font-style: italic;
-    font-weight: 300;
-    font-size: clamp(13px, 1.2vw, 15px);
-    color: rgba(196,168,98,0.75);
+    font-size: 14px;
+    color: rgba(196,168,98,0.7);
     margin: 0;
-    line-height: 1.4;
     font-optical-sizing: auto;
   }
 
@@ -681,28 +677,30 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     flex-wrap: wrap;
     gap: 6px var(--s-3);
     font-family: var(--sans);
-    font-size: 11px;
-    font-weight: 300;
-    color: rgba(200,220,240,0.40);
-    padding-top: var(--s-3);
-    border-top: 1px solid rgba(200,220,240,0.08);
+    font-size: 12px;
+    color: rgba(200,210,225,0.45);
+    margin-top: 4px;
   }
 
   .pts-hero__card-dot { opacity: 0.28; }
 
+  .pts-hero__card-divider {
+    border-top: 1px solid rgba(196,168,98,0.12);
+    margin: 14px 0 16px;
+  }
+
   .pts-hero__card-actions {
     display: flex;
     flex-direction: row;
-    gap: var(--s-3);
-    flex-wrap: wrap;
-    margin-top: var(--s-4);
+    gap: 10px;
   }
 
   .pts-hero__card-actions .pts-btn {
     flex: 1;
-    min-width: 120px;
-    padding: 12px 18px;
-    font-size: 9px;
+    text-align: center;
+    justify-content: center;
+    font-size: 11px;
+    padding: 12px 16px;
   }
 
 
@@ -1197,8 +1195,9 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     .pts-cards { grid-template-columns: repeat(2, 1fr); }
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: 1024px) {
     .pts-hero__inner { grid-template-columns: 1fr 320px; }
+    .pts-hero__card { width: 320px; }
   }
 
   @media (max-width: 900px) {
@@ -1206,8 +1205,9 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     .pts-guide__photo-img { max-width: 200px; aspect-ratio: 3/4; }
   }
 
-  @media (max-width: 720px) {
+  @media (max-width: 780px) {
     .pts-hero__inner { grid-template-columns: 1fr; }
+    .pts-hero__card { width: 100%; max-width: 400px; }
   }
 
   @media (max-width: 768px) {
