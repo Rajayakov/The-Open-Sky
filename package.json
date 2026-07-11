@@ -12,10 +12,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.4.6"
+    "astro": "^7.0.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.0",
-    "@types/node": "^26.0.0"
+    "@types/node": "^26.0.0",
+    "shadcn": "^4.11.0"
   }
 }
