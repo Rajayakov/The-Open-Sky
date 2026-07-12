@@ -397,6 +397,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     --gold:       #C4A862;
     --gold-hover: #B8983A;
     --bone:       #F0EBE0;
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.40'/%3E%3C/svg%3E");
   }
 
   /* ─── SHARED BUTTONS ──────────────────────────────── */
@@ -484,54 +485,54 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 36%;
+    object-position: center 32%;
     display: block;
     /* Cold altitude: slightly desaturated + lifted contrast */
     filter: contrast(1.08) saturate(0.80) brightness(0.92);
     transform-origin: 50% 36%;
     will-change: transform;
-    animation: ptsHeroFloat 20s ease-in-out infinite alternate;
+    animation: ptsHeroBreathe 34s ease-in-out infinite alternate;
   }
 
-  @keyframes ptsHeroFloat {
-    from { transform: scale(1.00); }
-    to   { transform: scale(1.05) translateY(-8px); }
+  /* Not an animation — a breath. Barely perceptible drift, never a loop you can catch. */
+  @keyframes ptsHeroBreathe {
+    from { transform: scale(1.00) translate(0, 0); }
+    to   { transform: scale(1.028) translate(-7px, -9px); }
   }
 
   .pts-hero__overlay {
     position: absolute;
     inset: 0;
     background:
-      /* Cold atmosphere at peaks — very subtle blue-black top haze */
+      /* Soft atmospheric haze at the peaks — no hard edge, just thinning air */
       linear-gradient(to bottom,
-        rgba(6,10,20,0.45) 0%,
-        rgba(6,10,20,0.14) 18%,
-        transparent 42%
+        rgba(10,16,28,0.30) 0%,
+        rgba(10,16,28,0.08) 24%,
+        transparent 48%
       ),
-      /* Bottom anchor — strong dark ground for text legibility */
+      /* Natural shadow pooling toward the ground — gradual, not a wall */
       linear-gradient(to top,
-        rgba(4,7,14,0.98) 0%,
-        rgba(4,7,14,0.85) 18%,
-        rgba(4,7,14,0.55) 36%,
-        rgba(4,7,14,0.22) 54%,
-        rgba(4,7,14,0.06) 68%,
-        transparent 82%
+        rgba(6,9,16,0.86) 0%,
+        rgba(6,9,16,0.58) 20%,
+        rgba(6,9,16,0.30) 40%,
+        rgba(6,9,16,0.10) 60%,
+        transparent 80%
       ),
-      /* Left panel — softens left edge for text */
-      linear-gradient(105deg,
-        rgba(6,10,20,0.60) 0%,
-        rgba(6,10,20,0.24) 28%,
-        transparent 52%
+      /* Low warm glow behind the title — the last light still held in the valley */
+      radial-gradient(ellipse 58% 42% at 16% 90%,
+        rgba(160,118,54,0.14) 0%,
+        transparent 62%
       ),
-      /* Right edge — atmospheric depth */
-      linear-gradient(to left,
-        rgba(6,10,20,0.28) 0%,
-        transparent 34%
+      /* Left panel — barely softens the text side */
+      linear-gradient(100deg,
+        rgba(6,9,16,0.34) 0%,
+        rgba(6,9,16,0.10) 30%,
+        transparent 54%
       ),
-      /* Altitude vignette — darkens perimeter subtly */
-      radial-gradient(ellipse 90% 80% at 50% 42%,
-        transparent 45%,
-        rgba(4,7,14,0.30) 100%
+      /* Thin edge vignette — a frame, not a spotlight */
+      radial-gradient(ellipse 100% 92% at 50% 46%,
+        transparent 62%,
+        rgba(4,6,11,0.20) 100%
       );
   }
 
@@ -544,7 +545,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     gap: 40px;
     width: 100%;
     padding-right: clamp(24px, 4vw, 60px);
-    padding-bottom: clamp(60px, 10svh, 120px);
+    padding-bottom: clamp(76px, 12svh, 136px);
   }
 
   .pts-hero__left {
@@ -614,17 +615,38 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
      ══════════════════════════════════════════════════ */
 
   .pts-hero__card {
+    position: relative;
     width: 360px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    background: rgba(247,242,232,0.12);
-    backdrop-filter: blur(28px) saturate(1.6);
-    -webkit-backdrop-filter: blur(28px) saturate(1.6);
-    border: 1px solid rgba(247,242,232,0.25);
+    background: linear-gradient(155deg,
+      rgba(247,242,232,0.14) 0%,
+      rgba(247,242,232,0.08) 55%,
+      rgba(196,168,98,0.07) 100%
+    );
+    backdrop-filter: blur(28px) saturate(1.5);
+    -webkit-backdrop-filter: blur(28px) saturate(1.5);
+    border: 1px solid rgba(196,168,98,0.22);
     border-radius: 20px;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.4), inset 0 1px 0 rgba(247,242,232,0.15);
+    box-shadow:
+      0 28px 70px rgba(10,6,2,0.45),
+      inset 0 1px 0 rgba(247,242,232,0.16),
+      inset 0 0 0 1px rgba(196,168,98,0.06);
     overflow: hidden;
+  }
+
+  /* A trace of paper, not a screen — quiet, not printed */
+  .pts-hero__card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 1;
   }
 
   .pts-hero__card-photo {
@@ -660,10 +682,13 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     background: rgba(6,10,18,0.75);
     border: 1px solid rgba(196,168,98,0.3);
     border-radius: 99px;
-    padding: 5px 12px;
-    font-size: 11px;
-    letter-spacing: 0.08em;
+    padding: 5px 13px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.02em;
     color: #C4A862;
+    z-index: 2;
   }
 
   .pts-hero__card-badge-dot { font-size: 6px; color: var(--gold); }
@@ -680,8 +705,10 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(247,242,232,0.55);
+    color: rgba(247,242,232,0.5);
     display: block;
+    position: relative;
+    z-index: 2;
   }
 
   .pts-hero__card-title {
@@ -741,10 +768,22 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
      ══════════════════════════════════════════════════ */
 
   .pts-divider-phrase {
+    position: relative;
     padding-block: clamp(48px, 7svh, 80px);
     background: var(--deep);
-    border-top: 1px solid rgba(200,220,240,0.05);
+    overflow: hidden;
   }
+
+  /* Night sky as material — two faint held points of light, nothing more */
+  .pts-divider-phrase::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 40% 60% at 12% 20%, rgba(180,200,230,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 50% at 88% 80%, rgba(196,168,98,0.045) 0%, transparent 60%);
+  }
+  .pts-divider-phrase .frame { position: relative; z-index: 1; }
 
   .pts-divider-phrase__text {
     font-family: var(--serif);
@@ -763,7 +802,30 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
      04. SCHEDULE
      ══════════════════════════════════════════════════ */
 
-  .pts-schedule { background: var(--atm-mtn); }
+  .pts-schedule {
+    position: relative;
+    background: linear-gradient(180deg, var(--deep) 0%, var(--atm-mtn) 24%, var(--atm-mtn) 100%);
+    overflow: hidden;
+  }
+  /* Warm stone, catching low light from one side */
+  .pts-schedule::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 55% at 12% 8%, rgba(196,160,100,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .pts-schedule::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .pts-schedule .frame { position: relative; z-index: 1; }
 
   .pts-section-title {
     font-family: var(--display);
@@ -785,7 +847,19 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   }
 
   /* Hero card is fixed-width for its Hero column; here it fills the grid cell */
-  .pts-cards .pts-hero__card { width: 100%; }
+  .pts-cards .pts-hero__card {
+    width: 100%;
+    transition: transform 650ms var(--ease-slow), box-shadow 650ms var(--ease-slow);
+  }
+  /* Comes toward you, doesn't bounce */
+  .pts-cards .pts-hero__card:hover {
+    transform: scale(1.016);
+    box-shadow:
+      0 36px 90px rgba(10,6,2,0.5),
+      inset 0 1px 0 rgba(247,242,232,0.16),
+      inset 0 0 0 1px rgba(196,168,98,0.08);
+  }
+  .pts-cards .pts-hero__card-photo { height: 280px; }
 
   .pts-card--soon {
     opacity: 0.45;
@@ -798,7 +872,22 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
      06. PAST EXPEDITIONS
      ══════════════════════════════════════════════════ */
 
-  .pts-past { background: var(--deep); }
+  .pts-past {
+    position: relative;
+    background: linear-gradient(180deg, var(--atm-mtn) 0%, var(--deep) 24%, var(--deep) 100%);
+    overflow: hidden;
+  }
+  /* Fog — diffuse, no edges */
+  .pts-past::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 45% at 85% 10%, rgba(140,165,195,0.07) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(140,165,195,0.05) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .pts-past .frame { position: relative; z-index: 1; }
 
   .pts-past__header {
     margin-bottom: clamp(48px, 7vw, 88px);
@@ -823,7 +912,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-past-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(12px, 2vw, 20px);
+    gap: clamp(28px, 5vw, 64px);
   }
 
   .pts-past-card {
@@ -831,12 +920,17 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     flex-direction: column;
     border-radius: 16px;
     overflow: hidden;
-    background: rgba(247,242,232,0.05);
-    border: 1px solid rgba(247,242,232,0.10);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
-    transition: transform 400ms var(--ease);
+    background: rgba(247,242,232,0.03);
+    border: 1px solid rgba(247,242,232,0.07);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.16);
+    transition: transform 650ms var(--ease-slow), box-shadow 650ms var(--ease-slow);
   }
-  .pts-past-card:hover { transform: translateY(-3px); }
+  .pts-past-card:hover {
+    transform: scale(1.012);
+    box-shadow: 0 26px 72px rgba(0,0,0,0.22);
+  }
+  /* A quiet offset — two photographs laid down, not a grid */
+  .pts-past-card:nth-child(2) { margin-top: clamp(28px, 4vw, 48px); }
 
   .pts-past-card__img {
     aspect-ratio: 3/2;
@@ -885,21 +979,38 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
      ══════════════════════════════════════════════════ */
 
   /* Navy separates testimonials from guide (both on --deep) */
-  .pts-tst { background: var(--navy); }
+  .pts-tst {
+    position: relative;
+    background: linear-gradient(180deg, var(--atm-mtn) 0%, var(--navy) 24%, var(--navy) 100%);
+    overflow: hidden;
+  }
+  .pts-tst::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.035;
+    pointer-events: none;
+  }
+  .pts-tst .frame { position: relative; z-index: 1; }
 
   .pts-tst__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: clamp(14px, 2vw, 22px);
+    gap: clamp(32px, 5vw, 64px);
     align-items: start;
   }
 
+  /* A page, not a card — a hairline at the top is enough */
   .pts-tst__card {
     margin: 0;
-    padding: clamp(24px, 3vw, 36px) clamp(22px, 2.5vw, 30px);
-    border: 1px solid rgba(247,242,232,0.08);
-    border-radius: var(--r-3);
-    background: rgba(247,242,232,0.04);
+    padding: clamp(28px, 3.5vw, 40px) 0 0;
+    border: none;
+    border-top: 1px solid rgba(247,242,232,0.12);
+    border-radius: 0;
+    background: transparent;
     display: flex;
     flex-direction: column;
     gap: var(--s-5);
@@ -960,13 +1071,56 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
      08. GUIDE
      ══════════════════════════════════════════════════ */
 
-  .pts-guide { background: var(--atm-mtn); }
+  .pts-guide {
+    position: relative;
+    background: linear-gradient(180deg, var(--deep) 0%, var(--atm-mtn) 24%, var(--atm-mtn) 100%);
+    overflow: hidden;
+  }
+  /* Warm shadow, aged wood — light gathers around him, not the frame */
+  .pts-guide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 55% 65% at 22% 45%, rgba(196,160,100,0.10) 0%, transparent 62%);
+    pointer-events: none;
+  }
+  .pts-guide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.045;
+    pointer-events: none;
+  }
+  .pts-guide .frame { position: relative; z-index: 1; }
 
   .pts-guide__body {
     display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: clamp(48px, 8vw, 120px);
+    grid-template-columns: 360px 1fr;
+    gap: clamp(56px, 9vw, 140px);
     align-items: center;
+  }
+
+  .pts-guide__photo {
+    position: relative;
+  }
+
+  /* A thread between the two of you, not a border */
+  .pts-guide__photo::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    right: clamp(-70px, -4.5vw, -28px);
+    width: 1px;
+    background: linear-gradient(to bottom,
+      transparent,
+      rgba(196,168,98,0.4) 25%,
+      rgba(196,168,98,0.4) 75%,
+      transparent
+    );
   }
 
   .pts-guide__photo-img {
@@ -984,7 +1138,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-guide__content {
     display: flex;
     flex-direction: column;
-    gap: var(--s-6);
+    gap: var(--s-7);
   }
 
   .pts-guide__label { display: block; }
@@ -1056,20 +1210,33 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
      ══════════════════════════════════════════════════ */
 
   .pts-final-cta {
+    position: relative;
     background: var(--navy);
-    border-top: 1px solid rgba(200,220,240,0.05);
+    padding-block: clamp(120px, 18svh, 220px);
+    overflow: hidden;
   }
+  /* A single held point of warmth — the last thing before you close the book */
+  .pts-final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 70% at 50% 30%, rgba(196,168,98,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .pts-final-cta .frame { position: relative; z-index: 1; }
 
   .pts-final-cta__inner {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: clamp(40px, 7vw, 100px);
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+    gap: clamp(40px, 6vw, 64px);
   }
 
   .pts-final-cta__text {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: var(--s-5);
   }
 
@@ -1101,9 +1268,10 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-final-cta__actions {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: var(--s-4);
-    flex-shrink: 0;
   }
 
 
@@ -1138,6 +1306,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   @media (max-width: 900px) {
     .pts-guide__body { grid-template-columns: 1fr; }
     .pts-guide__photo-img { max-width: 200px; aspect-ratio: 3/4; }
+    .pts-guide__photo::after { display: none; }
   }
 
   @media (max-width: 780px) {
@@ -1150,14 +1319,10 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     .pts-guide__stats { grid-template-columns: repeat(3, 1fr); }
   }
 
-  @media (max-width: 760px) {
-    .pts-final-cta__inner { grid-template-columns: 1fr; }
-    .pts-final-cta__actions { flex-direction: row; flex-wrap: wrap; }
-  }
-
   @media (max-width: 560px) {
     .pts-cards { grid-template-columns: 1fr 1fr; }
     .pts-past-cards { grid-template-columns: 1fr; }
+    .pts-past-card:nth-child(2) { margin-top: 0; }
     .pts-guide__stats { grid-template-columns: 1fr 1fr; }
     .pts-hero__right { display: none; }
   }
