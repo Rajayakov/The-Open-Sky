@@ -125,7 +125,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
                 <div class="pts-hero__card-photo-fade" aria-hidden="true"></div>
                 <div class="pts-hero__card-badge">
                   <span class="pts-hero__card-badge-dot">●</span>
-                  <span>4 places remaining</span>
+                  <span>6 places remaining</span>
                 </div>
               </div>
 
@@ -134,7 +134,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
                 <h2 class="pts-hero__card-title">{openJourney.name}</h2>
                 <p class="pts-hero__card-tagline">The Abode of Shiva</p>
                 <div class="pts-hero__card-meta">
-                  <span>September 20–30</span>
+                  <span class="pts-hero__card-meta-date">September 20–30</span>
                   <span class="pts-hero__card-dot">·</span>
                   <span>Max 6 people</span>
                 </div>
@@ -412,6 +412,26 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     --gold-hover: #B8983A;
     --bone:       #F0EBE0;
     --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.40'/%3E%3C/svg%3E");
+
+    /* ── Alpine Mist — atmospheric depth scale ─────────
+       Reads bottom → top: deep warm-black → charcoal blue
+       → alpine blue → cold mountain haze → dissolves into
+       the Hero photograph. One continuous descent, never
+       separate colored blocks — see section backgrounds. */
+    --alp-haze:      #243A57;
+    --alp-blue:      #1B2738;
+    --alp-blue-mix:  #1F3147;
+    --alp-charcoal:  #10151D;
+    --alp-char-mix:  #151E2A;
+    --alp-black:     #0A0D11;
+    --alp-black-mix: #0D1117;
+
+    /* The only two light sources on the page: a cold point
+       upper-right, a softer ambient glow upper-left. Extremely
+       low opacity — felt as depth, never consciously seen. */
+    --alp-light:
+      radial-gradient(ellipse 65% 55% at 84% 6%,  rgb(var(--sky-rgb) / 0.05) 0%, transparent 65%),
+      radial-gradient(ellipse 78% 62% at 8% 10%,  rgb(var(--sky-rgb) / 0.03) 0%, transparent 72%);
   }
 
   /* ─── SHARED BUTTONS ──────────────────────────────── */
@@ -441,20 +461,23 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     background: var(--gold);
     border-color: var(--gold);
     color: var(--deep);
+    box-shadow: 0 4px 22px rgba(196,168,98,0.28);
   }
   .pts-btn--gold:hover {
     background: var(--gold-hover);
     border-color: var(--gold-hover);
+    box-shadow: 0 6px 28px rgba(196,168,98,0.38);
     transform: translateY(-1px);
   }
 
   .pts-btn--ghost {
-    background: transparent;
-    border-color: rgba(200,220,240,0.20);
-    color: rgba(200,220,240,0.75);
+    background: rgba(196,168,98,0.07);
+    border-color: rgba(196,168,98,0.45);
+    color: rgba(247,242,232,0.88);
   }
   .pts-btn--ghost:hover {
-    border-color: rgba(200,220,240,0.45);
+    background: rgba(196,168,98,0.14);
+    border-color: rgba(196,168,98,0.78);
     color: var(--bone);
     transform: translateY(-1px);
   }
@@ -566,6 +589,8 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     display: flex;
     flex-direction: column;
     gap: var(--s-7);
+    /* Let the title breathe higher into the landscape — card stays put */
+    transform: translateY(-36px);
   }
 
   .pts-hero__hed {
@@ -576,28 +601,31 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-hero__title {
     font-family: var(--display);
-    font-weight: 300;
-    /* Slightly pulled back — landscape stays primary */
+    font-weight: 650;
+    /* Monumental, not pulled back — the title is the anchor now */
     font-size: clamp(48px, 8vw, 110px);
     line-height: 0.92;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
     text-wrap: balance;
-    /* Subtle text shadow for depth against mountain */
-    text-shadow: 0 2px 40px rgba(4,7,14,0.55);
+    /* Carved, not printed — a tight contact shadow plus a soft ambient one */
+    text-shadow:
+      0 1px 1px rgba(4,7,14,0.60),
+      0 4px 28px rgba(4,7,14,0.55);
   }
 
   .pts-hero__byline {
     font-family: var(--serif);
     font-style: italic;
-    font-weight: 300;
-    font-size: clamp(14px, 1.2vw, 17px);
-    color: rgba(196,168,98,0.65);
+    font-weight: 500;
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: rgba(228,196,132,0.92);
     margin: 0;
     letter-spacing: 0.03em;
     font-optical-sizing: auto;
+    text-shadow: 0 1px 14px rgba(4,7,14,0.45);
   }
 
   .pts-hero__btn {
@@ -612,14 +640,17 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     text-transform: uppercase;
     padding: 16px clamp(28px, 4vw, 48px);
     border-radius: var(--r-pill);
-    border: 1px solid rgba(200,220,240,0.20);
-    color: rgba(200,220,240,0.75);
-    background: transparent;
+    border: 1.5px solid rgba(196,168,98,0.55);
+    color: rgba(247,242,232,0.95);
+    background: rgba(196,168,98,0.10);
+    box-shadow: 0 0 32px rgba(196,168,98,0.16), inset 0 1px 0 rgba(247,242,232,0.08);
     transition: all 350ms var(--ease);
   }
   .pts-hero__btn:hover {
-    border-color: rgba(200,220,240,0.50);
+    border-color: rgba(196,168,98,0.85);
+    background: rgba(196,168,98,0.18);
     color: var(--bone);
+    box-shadow: 0 0 44px rgba(196,168,98,0.26), inset 0 1px 0 rgba(247,242,232,0.10);
     transform: translateY(-1px);
   }
 
@@ -635,12 +666,12 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     display: flex;
     flex-direction: column;
     background: linear-gradient(155deg,
-      rgba(247,242,232,0.14) 0%,
-      rgba(247,242,232,0.08) 55%,
-      rgba(196,168,98,0.07) 100%
+      rgba(247,242,232,0.24) 0%,
+      rgba(247,242,232,0.15) 55%,
+      rgba(196,168,98,0.13) 100%
     );
-    backdrop-filter: blur(28px) saturate(1.5);
-    -webkit-backdrop-filter: blur(28px) saturate(1.5);
+    backdrop-filter: blur(32px) saturate(1.5);
+    -webkit-backdrop-filter: blur(32px) saturate(1.5);
     border: 1px solid rgba(196,168,98,0.22);
     border-radius: 20px;
     box-shadow:
@@ -683,7 +714,12 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-hero__card-photo-fade {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(6,10,18,0.95) 0%, rgba(6,10,18,0.2) 50%, transparent 100%);
+    background: linear-gradient(to top,
+      rgba(4,6,12,0.98) 0%,
+      rgba(4,6,12,0.55) 42%,
+      rgba(4,6,12,0.10) 78%,
+      transparent 100%
+    );
   }
 
   .pts-hero__card-badge {
@@ -781,9 +817,15 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     flex-wrap: wrap;
     gap: 6px var(--s-3);
     font-family: var(--sans);
-    font-size: 12px;
-    color: rgba(247,242,232,0.45);
-    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: rgba(247,242,232,0.70);
+    margin-top: 10px;
+  }
+
+  .pts-hero__card-meta-date {
+    color: rgba(230,200,140,0.95);
   }
 
   .pts-hero__card-dot { opacity: 0.28; }
@@ -824,18 +866,26 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-divider-phrase {
     position: relative;
     padding-block: clamp(48px, 7svh, 80px);
-    background: var(--deep);
+    background: linear-gradient(180deg, var(--alp-haze) 0%, var(--alp-blue-mix) 100%);
     overflow: hidden;
   }
 
-  /* Night sky as material — two faint held points of light, nothing more */
+  /* Night sky as material — the shared cold light, nothing more */
   .pts-divider-phrase::before {
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 40% 60% at 12% 20%, rgba(180,200,230,0.05) 0%, transparent 60%),
-      radial-gradient(ellipse 30% 50% at 88% 80%, rgba(196,168,98,0.045) 0%, transparent 60%);
+    background: var(--alp-light);
+  }
+  .pts-divider-phrase::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.025;
+    pointer-events: none;
   }
   .pts-divider-phrase .frame { position: relative; z-index: 1; }
 
@@ -858,18 +908,15 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-schedule {
     position: relative;
-    background: linear-gradient(180deg, var(--deep) 0%, #241D22 22%, #2A2320 55%, #241E1C 100%);
+    background: linear-gradient(180deg, var(--alp-blue-mix) 0%, var(--alp-blue) 100%);
     overflow: hidden;
   }
-  /* Mineral surface — cold slate catching one warm edge, not a flat fill */
+  /* Cold mineral surface — the shared light, nothing warm breaking in */
   .pts-schedule::before {
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 70% 55% at 12% 8%, rgba(196,160,100,0.09) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 92% 30%, rgba(90,100,130,0.08) 0%, transparent 62%),
-      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(60,52,70,0.14) 0%, transparent 65%);
+    background: var(--alp-light);
     pointer-events: none;
   }
   .pts-schedule::after {
@@ -879,7 +926,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     background-image: var(--grain);
     background-size: 200px 200px;
     mix-blend-mode: overlay;
-    opacity: 0.05;
+    opacity: 0.025;
     pointer-events: none;
   }
   .pts-schedule .frame { position: relative; z-index: 1; }
@@ -947,18 +994,25 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-past {
     position: relative;
-    background: linear-gradient(180deg, #241E1C 0%, #16191E 30%, var(--deep) 60%, var(--deep) 100%);
+    background: linear-gradient(180deg, var(--alp-blue) 0%, var(--alp-char-mix) 100%);
     overflow: hidden;
   }
-  /* Fog and cold slate — diffuse, no edges */
+  /* Fog and cold slate — diffuse, no edges, the shared light only */
   .pts-past::before {
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 60% 45% at 85% 10%, rgba(140,165,195,0.07) 0%, transparent 65%),
-      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(140,165,195,0.05) 0%, transparent 65%),
-      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(70,60,90,0.06) 0%, transparent 60%);
+    background: var(--alp-light);
+    pointer-events: none;
+  }
+  .pts-past::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.025;
     pointer-events: none;
   }
   .pts-past .frame { position: relative; z-index: 1; }
@@ -1055,20 +1109,27 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
      04. TESTIMONIALS — compact editorial cards
      ══════════════════════════════════════════════════ */
 
-  /* Navy separates testimonials from guide (both on --deep) */
+  /* Continues the same descent — no separate colored block */
   .pts-tst {
     position: relative;
-    background: linear-gradient(180deg, #241E1C 0%, #1A1F27 30%, var(--navy) 60%, var(--navy) 100%);
+    background: linear-gradient(180deg, var(--alp-char-mix) 0%, var(--alp-charcoal) 100%);
     overflow: hidden;
   }
   .pts-tst::before {
     content: '';
     position: absolute;
     inset: 0;
+    background: var(--alp-light);
+    pointer-events: none;
+  }
+  .pts-tst::after {
+    content: '';
+    position: absolute;
+    inset: 0;
     background-image: var(--grain);
     background-size: 200px 200px;
     mix-blend-mode: overlay;
-    opacity: 0.035;
+    opacity: 0.025;
     pointer-events: none;
   }
   .pts-tst .frame { position: relative; z-index: 1; }
@@ -1150,17 +1211,15 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-guide {
     position: relative;
-    background: linear-gradient(180deg, var(--deep) 0%, #241D22 20%, #2A2320 55%, #241E1C 100%);
+    background: linear-gradient(180deg, var(--alp-charcoal) 0%, var(--alp-black-mix) 100%);
     overflow: hidden;
   }
-  /* Warm shadow, aged wood — light gathers around him, not the frame */
+  /* Cold shadow — light gathers quietly, not the frame */
   .pts-guide::before {
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 55% 65% at 22% 45%, rgba(196,160,100,0.10) 0%, transparent 62%),
-      radial-gradient(ellipse 50% 55% at 85% 15%, rgba(80,90,120,0.07) 0%, transparent 60%);
+    background: var(--alp-light);
     pointer-events: none;
   }
   .pts-guide::after {
@@ -1170,7 +1229,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     background-image: var(--grain);
     background-size: 200px 200px;
     mix-blend-mode: overlay;
-    opacity: 0.045;
+    opacity: 0.025;
     pointer-events: none;
   }
   .pts-guide .frame { position: relative; z-index: 1; }
@@ -1290,16 +1349,26 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-final-cta {
     position: relative;
-    background: var(--navy);
+    background: linear-gradient(180deg, var(--alp-black-mix) 0%, var(--alp-black) 100%);
     padding-block: clamp(120px, 18svh, 220px);
     overflow: hidden;
   }
-  /* A single held point of warmth — the last thing before you close the book */
+  /* The last of the shared light before the book closes */
   .pts-final-cta::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 50% 70% at 50% 30%, rgba(196,168,98,0.07) 0%, transparent 65%);
+    background: var(--alp-light);
+    pointer-events: none;
+  }
+  .pts-final-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.025;
     pointer-events: none;
   }
   .pts-final-cta .frame { position: relative; z-index: 1; }
