@@ -11,6 +11,7 @@ const upcoming = [
     terrain: 'Tibet',
     date: 'September 20',
     duration: '10 Days',
+    groupSize: 'Max 6 people',
     status: 'open' as const,
     bg: 'linear-gradient(160deg, #A8C0D8 0%, #4A6888 45%, #1A2C40 100%)',
     heroImage: '/images/mountains/kailash-featured.jpg',
@@ -21,6 +22,7 @@ const upcoming = [
     terrain: 'India',
     date: 'November',
     duration: '7 Days',
+    groupSize: 'Max 8 people',
     status: 'open' as const,
     bg: 'linear-gradient(160deg, #D4A87A 0%, #8C5A3A 50%, #3A1E12 100%)',
     heroImage: '/images/mountains/arunachala-featured.jpg',
@@ -29,10 +31,12 @@ const upcoming = [
     slug: null as string | null,
     name: 'Annapurna',
     terrain: 'Nepal',
-    date: 'May 2027',
+    date: '15–30 May 2027',
     duration: 'TBA',
+    groupSize: 'Max 10 people',
     status: 'soon' as const,
     bg: 'linear-gradient(160deg, #B8C8D0 0%, #6080A0 45%, #1E3048 100%)',
+    heroImage: '/images/mountains/card-3.jpg',
   },
 ];
 
@@ -193,10 +197,9 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
                 )}
               </div>
               <div class="pts-hero__card-body">
-                {j.terrain && <span class="pts-hero__card-terrain">{j.terrain}</span>}
                 <h3 class="pts-hero__card-title">{j.name}</h3>
                 {j.date && (
-                  <div class="pts-hero__card-meta">
+                  <div class="pts-hero__card-dates">
                     <span>{j.date}</span>
                     {j.duration && j.duration !== 'TBA' && (
                       <>
@@ -206,14 +209,25 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
                     )}
                   </div>
                 )}
-                {j.slug && (
-                  <>
-                    <div class="pts-hero__card-divider"></div>
-                    <div class="pts-hero__card-actions">
-                      <a href={`/mountains/${j.slug}`} class="pts-btn pts-btn--gold">View Journey</a>
-                      <a href={`/connect?source=mountains_schedule_${j.slug}`} class="pts-btn pts-btn--ghost">Apply Now</a>
-                    </div>
-                  </>
+                <div class="pts-hero__card-facts">
+                  {j.terrain && <span class="pts-hero__card-terrain">{j.terrain}</span>}
+                  {j.groupSize && (
+                    <>
+                      <span class="pts-hero__card-dot">·</span>
+                      <span class="pts-hero__card-capacity">{j.groupSize}</span>
+                    </>
+                  )}
+                </div>
+                <div class="pts-hero__card-divider"></div>
+                {j.slug ? (
+                  <div class="pts-hero__card-actions">
+                    <a href={`/mountains/${j.slug}`} class="pts-btn pts-btn--gold">View Journey</a>
+                    <a href={`/connect?source=mountains_schedule_${j.slug}`} class="pts-btn pts-btn--ghost">Apply Now</a>
+                  </div>
+                ) : (
+                  <div class="pts-hero__card-actions">
+                    <span class="pts-btn pts-btn--ghost pts-btn--disabled">Coming Soon</span>
+                  </div>
                 )}
               </div>
             </div>
@@ -436,19 +450,19 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-btn--ghost {
     background: transparent;
-    border-color: rgba(200,220,240,0.28);
-    color: rgba(200,220,240,0.80);
+    border-color: rgba(200,220,240,0.20);
+    color: rgba(200,220,240,0.75);
   }
   .pts-btn--ghost:hover {
-    border-color: rgba(200,220,240,0.55);
+    border-color: rgba(200,220,240,0.45);
     color: var(--bone);
     transform: translateY(-1px);
   }
 
   .pts-btn--ghost-sm {
     background: transparent;
-    border-color: rgba(200,220,240,0.25);
-    color: rgba(200,220,240,0.65);
+    border-color: rgba(200,220,240,0.18);
+    color: rgba(200,220,240,0.60);
     padding: 13px 26px;
     font-size: 10px;
     font-family: var(--mark);
@@ -705,19 +719,20 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(247,242,232,0.5);
-    display: block;
+    color: rgba(247,242,232,0.42);
     position: relative;
     z-index: 2;
   }
 
+  /* Confident editorial serif — a headline, not a caption */
   .pts-hero__card-title {
     font-family: var(--display);
-    font-size: 42px;
-    font-weight: 200;
-    line-height: 1;
+    font-size: 36px;
+    font-weight: 560;
+    letter-spacing: -0.012em;
+    line-height: 1.02;
     color: var(--bone);
-    margin: 4px 0;
+    margin: 0;
     font-optical-sizing: auto;
   }
 
@@ -729,6 +744,36 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     margin: 0;
     font-optical-sizing: auto;
   }
+
+  /* Dates — the first thing the eye should catch after the title */
+  .pts-hero__card-dates {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px var(--s-3);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(230,200,140,0.92);
+    margin-top: 8px;
+  }
+
+  /* Location + capacity — present, quieter than the dates */
+  .pts-hero__card-facts {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px var(--s-3);
+    font-family: var(--mark);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(247,242,232,0.42);
+    margin-top: 10px;
+  }
+
+  .pts-hero__card-capacity { color: rgba(247,242,232,0.42); }
 
   .pts-hero__card-meta {
     display: flex;
@@ -744,8 +789,17 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-hero__card-dot { opacity: 0.28; }
 
   .pts-hero__card-divider {
-    border-top: 1px solid rgba(247,242,232,0.12);
-    margin: 14px 0 16px;
+    border-top: 1px solid rgba(247,242,232,0.09);
+    margin: 16px 0 16px;
+  }
+
+  .pts-cards .pts-hero__card-divider { margin-top: auto; }
+
+  .pts-btn--disabled {
+    background: transparent;
+    border-color: rgba(200,220,240,0.14);
+    color: rgba(200,220,240,0.38);
+    cursor: default;
   }
 
   .pts-hero__card-actions {
@@ -804,15 +858,18 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-schedule {
     position: relative;
-    background: linear-gradient(180deg, var(--deep) 0%, var(--atm-mtn) 24%, var(--atm-mtn) 100%);
+    background: linear-gradient(180deg, var(--deep) 0%, #241D22 22%, #2A2320 55%, #241E1C 100%);
     overflow: hidden;
   }
-  /* Warm stone, catching low light from one side */
+  /* Mineral surface — cold slate catching one warm edge, not a flat fill */
   .pts-schedule::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 70% 55% at 12% 8%, rgba(196,160,100,0.10) 0%, transparent 60%);
+    background:
+      radial-gradient(ellipse 70% 55% at 12% 8%, rgba(196,160,100,0.09) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 92% 30%, rgba(90,100,130,0.08) 0%, transparent 62%),
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(60,52,70,0.14) 0%, transparent 65%);
     pointer-events: none;
   }
   .pts-schedule::after {
@@ -843,23 +900,39 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(16px, 2.5vw, 24px);
-    align-items: start;
+    align-items: stretch;
   }
 
-  /* Hero card is fixed-width for its Hero column; here it fills the grid cell */
+  /* Hero card is fixed-width for its Hero column; here it fills the grid cell.
+     Equal heights, equal rhythm — no staggered cards. */
   .pts-cards .pts-hero__card {
     width: 100%;
-    transition: transform 650ms var(--ease-slow), box-shadow 650ms var(--ease-slow);
+    height: 100%;
+    transition: box-shadow 650ms var(--ease-slow);
   }
-  /* Comes toward you, doesn't bounce */
+  .pts-cards .pts-hero__card-body {
+    flex: 1;
+  }
+  /* Presence, not motion — the card doesn't move, the light on it does */
   .pts-cards .pts-hero__card:hover {
-    transform: scale(1.016);
     box-shadow:
       0 36px 90px rgba(10,6,2,0.5),
       inset 0 1px 0 rgba(247,242,232,0.16),
       inset 0 0 0 1px rgba(196,168,98,0.08);
   }
+  .pts-cards .pts-hero__card:hover .pts-hero__card-photo img {
+    filter: brightness(1.06) contrast(1.03) saturate(1.06);
+  }
+  .pts-cards .pts-hero__card:hover .pts-hero__card-photo-fade {
+    opacity: 0.85;
+  }
   .pts-cards .pts-hero__card-photo { height: 280px; }
+  .pts-cards .pts-hero__card-photo img {
+    transition: filter 650ms var(--ease-slow);
+  }
+  .pts-cards .pts-hero__card-photo-fade {
+    transition: opacity 650ms var(--ease-slow);
+  }
 
   .pts-card--soon {
     opacity: 0.45;
@@ -874,17 +947,18 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-past {
     position: relative;
-    background: linear-gradient(180deg, var(--atm-mtn) 0%, var(--deep) 24%, var(--deep) 100%);
+    background: linear-gradient(180deg, #241E1C 0%, #16191E 30%, var(--deep) 60%, var(--deep) 100%);
     overflow: hidden;
   }
-  /* Fog — diffuse, no edges */
+  /* Fog and cold slate — diffuse, no edges */
   .pts-past::before {
     content: '';
     position: absolute;
     inset: 0;
     background:
       radial-gradient(ellipse 60% 45% at 85% 10%, rgba(140,165,195,0.07) 0%, transparent 65%),
-      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(140,165,195,0.05) 0%, transparent 65%);
+      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(140,165,195,0.05) 0%, transparent 65%),
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(70,60,90,0.06) 0%, transparent 60%);
     pointer-events: none;
   }
   .pts-past .frame { position: relative; z-index: 1; }
@@ -923,11 +997,13 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     background: rgba(247,242,232,0.03);
     border: 1px solid rgba(247,242,232,0.07);
     box-shadow: 0 20px 60px rgba(0,0,0,0.16);
-    transition: transform 650ms var(--ease-slow), box-shadow 650ms var(--ease-slow);
+    transition: box-shadow 650ms var(--ease-slow);
   }
   .pts-past-card:hover {
-    transform: scale(1.012);
     box-shadow: 0 26px 72px rgba(0,0,0,0.22);
+  }
+  .pts-past-card:hover .pts-past-card__img {
+    filter: brightness(1.06) contrast(1.03) saturate(1.05);
   }
   /* A quiet offset — two photographs laid down, not a grid */
   .pts-past-card:nth-child(2) { margin-top: clamp(28px, 4vw, 48px); }
@@ -935,6 +1011,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   .pts-past-card__img {
     aspect-ratio: 3/2;
     overflow: hidden;
+    transition: filter 650ms var(--ease-slow);
   }
 
   .pts-past-card__info {
@@ -981,7 +1058,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   /* Navy separates testimonials from guide (both on --deep) */
   .pts-tst {
     position: relative;
-    background: linear-gradient(180deg, var(--atm-mtn) 0%, var(--navy) 24%, var(--navy) 100%);
+    background: linear-gradient(180deg, #241E1C 0%, #1A1F27 30%, var(--navy) 60%, var(--navy) 100%);
     overflow: hidden;
   }
   .pts-tst::before {
@@ -1008,7 +1085,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     margin: 0;
     padding: clamp(28px, 3.5vw, 40px) 0 0;
     border: none;
-    border-top: 1px solid rgba(247,242,232,0.12);
+    border-top: 1px solid rgba(247,242,232,0.09);
     border-radius: 0;
     background: transparent;
     display: flex;
@@ -1073,7 +1150,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-guide {
     position: relative;
-    background: linear-gradient(180deg, var(--deep) 0%, var(--atm-mtn) 24%, var(--atm-mtn) 100%);
+    background: linear-gradient(180deg, var(--deep) 0%, #241D22 20%, #2A2320 55%, #241E1C 100%);
     overflow: hidden;
   }
   /* Warm shadow, aged wood — light gathers around him, not the frame */
@@ -1081,7 +1158,9 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 55% 65% at 22% 45%, rgba(196,160,100,0.10) 0%, transparent 62%);
+    background:
+      radial-gradient(ellipse 55% 65% at 22% 45%, rgba(196,160,100,0.10) 0%, transparent 62%),
+      radial-gradient(ellipse 50% 55% at 85% 15%, rgba(80,90,120,0.07) 0%, transparent 60%);
     pointer-events: none;
   }
   .pts-guide::after {
@@ -1159,8 +1238,8 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     grid-template-columns: repeat(3, 1fr);
     gap: var(--s-5);
     padding: var(--s-6) 0;
-    border-top: 1px solid rgba(200,220,240,0.08);
-    border-bottom: 1px solid rgba(200,220,240,0.08);
+    border-top: 1px solid rgba(200,220,240,0.06);
+    border-bottom: 1px solid rgba(200,220,240,0.06);
   }
 
   .pts-guide__stat { display: flex; flex-direction: column; gap: var(--s-2); }
