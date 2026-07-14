@@ -3,82 +3,14 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import { getFeaturedExpedition, getOtherUpcoming } from '../data/mountains';
 
-const upcoming = [
-  {
-    slug: 'kailash-2026',
-    name: 'Kailash',
-    terrain: 'Tibet',
-    date: 'September 20',
-    duration: '10 Days',
-    groupSize: 'Max 6 people',
-    status: 'open' as const,
-    bg: 'linear-gradient(160deg, #A8C0D8 0%, #4A6888 45%, #1A2C40 100%)',
-    heroImage: '/images/mountains/kailash-featured.jpg',
-  },
-  {
-    slug: 'arunachala-2026',
-    name: 'Arunachala',
-    terrain: 'India',
-    date: 'November',
-    duration: '7 Days',
-    groupSize: 'Max 8 people',
-    status: 'open' as const,
-    bg: 'linear-gradient(160deg, #D4A87A 0%, #8C5A3A 50%, #3A1E12 100%)',
-    heroImage: '/images/mountains/arunachala-featured.jpg',
-  },
-  {
-    slug: null as string | null,
-    name: 'Annapurna',
-    terrain: 'Nepal',
-    date: '15–30 May 2027',
-    duration: 'TBA',
-    groupSize: 'Max 10 people',
-    status: 'soon' as const,
-    bg: 'linear-gradient(160deg, #B8C8D0 0%, #6080A0 45%, #1E3048 100%)',
-    heroImage: '/images/mountains/card-3.jpg',
-  },
-];
-
-const past = [
-  {
-    name: 'Mardi Himal',
-    terrain: 'Nepal',
-    year: '2025',
-    participants: '12 participants',
-    bg: 'linear-gradient(160deg, #7898B8 0%, #3A5878 50%, #18283A 100%)',
-  },
-  {
-    name: 'Himalayas',
-    terrain: 'India',
-    year: '2024',
-    participants: null as string | null,
-    bg: 'linear-gradient(160deg, #A0B4C8 0%, #506880 50%, #1E2C3A 100%)',
-  },
-];
-
-const testimonials = [
-  {
-    quote: 'I returned quieter. More certain of what matters. The mountain doesn\'t explain itself — and neither does the change.',
-    name: 'Elena K.',
-    location: 'Moscow',
-    journey: 'Mardi Himal 2025',
-  },
-  {
-    quote: 'Yakov holds the space without filling it. That quality is rare. The mountains do the work — he ensures you can receive it.',
-    name: 'David M.',
-    location: 'Berlin',
-    journey: 'Georgian Highlands 2024',
-  },
-  {
-    quote: 'Not transformed in any dramatic way — clarified. Like something blurry for years finally came into focus.',
-    name: 'Maria T.',
-    location: 'Tbilisi',
-    journey: 'Pontic Alps 2024',
-  },
-];
-
-const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ?? null;
+/* Single source of truth: Hero Card and the Featured Expedition section
+   below both render this exact same object. Nothing here is hardcoded —
+   getFeaturedExpedition() picks the nearest open departure automatically,
+   so the featured destination changes on its own as dates pass. */
+const featured = getFeaturedExpedition();
+const upcoming = getOtherUpcoming(featured);
 ---
 
 <Base
@@ -103,6 +35,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
         decoding="async"
       />
       <div class="pts-hero__overlay" aria-hidden="true"></div>
+      <div class="pts-hero__grain" aria-hidden="true"></div>
       <div class="pts-hero__inner frame">
         <div class="pts-hero__left">
           <div class="pts-hero__hed">
@@ -112,36 +45,35 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
           <a href="#schedule" class="pts-hero__btn reveal d3">Explore Journeys</a>
         </div>
 
-        {openJourney && (
+        {featured && (
           <div class="pts-hero__right">
             <div class="pts-hero__card reveal d3">
               <div class="pts-hero__card-photo">
                 <img
-                  src="/images/mountains/kailash-featured.jpg"
-                  alt="Mount Kailash, Tibet — sacred pilgrimage destination"
+                  src={featured.cardImage ?? featured.heroImage}
+                  alt={`${featured.title}, ${featured.terrain} — sacred pilgrimage destination`}
                   loading="eager"
                   decoding="async"
                 />
                 <div class="pts-hero__card-photo-fade" aria-hidden="true"></div>
                 <div class="pts-hero__card-badge">
-                  <span class="pts-hero__card-badge-dot">●</span>
-                  <span>6 places remaining</span>
+                  <span>{featured.status === 'upcoming' ? 'Open now' : featured.status}</span>
                 </div>
               </div>
 
               <div class="pts-hero__card-body">
-                <span class="pts-hero__card-terrain">Tibet · 6,638m · 10 Days</span>
-                <h2 class="pts-hero__card-title">{openJourney.name}</h2>
-                <p class="pts-hero__card-tagline">The Abode of Shiva</p>
+                <span class="pts-hero__card-terrain">{featured.terrain} · {featured.duration}</span>
+                <h2 class="pts-hero__card-title">{featured.title}</h2>
+                {featured.tagline && <p class="pts-hero__card-tagline">{featured.tagline}</p>}
                 <div class="pts-hero__card-meta">
-                  <span class="pts-hero__card-meta-date">September 20–30</span>
+                  <span class="pts-hero__card-meta-date">{featured.date}</span>
                   <span class="pts-hero__card-dot">·</span>
-                  <span>Max 6 people</span>
+                  <span>{featured.groupSize}</span>
                 </div>
                 <div class="pts-hero__card-divider"></div>
                 <div class="pts-hero__card-actions">
-                  <a href={`/mountains/${openJourney.slug!}`} class="pts-btn pts-btn--gold">View Journey</a>
-                  <a href="/connect?source=mountains_hub_kailash_apply" class="pts-btn pts-btn--ghost">Apply Now</a>
+                  <a href={`/mountains/${featured.slug}`} class="pts-btn pts-btn--gold">View Journey</a>
+                  <a href={`/connect?source=mountains_hub_${featured.slug}_apply`} class="pts-btn pts-btn--ghost">Apply Now</a>
                 </div>
               </div>
             </div>
@@ -152,21 +84,37 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
 
     <!-- ══════════════════════════════════════════
-         05. DIVIDER — СУТЬ ФОРМАТА
+         02. FEATURED EXPEDITION
          ══════════════════════════════════════════ -->
 
-    <div class="pts-divider-phrase">
-      <div class="frame">
-        <p class="pts-divider-phrase__text reveal">
-          This is not tourism. It is an encounter with places that have shaped
-          the inner life of humanity for centuries.
-        </p>
-      </div>
-    </div>
+    {featured && (
+      <section class="pts-featured" aria-label={`Featured expedition: ${featured.title}`}>
+        <img
+          class="pts-featured__bg"
+          src={featured.heroImage}
+          alt={`${featured.title}, ${featured.terrain}`}
+          loading="lazy"
+          decoding="async"
+        />
+        <div class="pts-featured__overlay" aria-hidden="true"></div>
+        <div class="pts-featured__grain" aria-hidden="true"></div>
+        <div class="pts-featured__inner frame">
+          <span class="t-label t-label--gold reveal">Featured Expedition</span>
+          <h2 class="pts-featured__title reveal d1">{featured.title}</h2>
+          {featured.tagline && <p class="pts-featured__tagline reveal d2">{featured.tagline}</p>}
+          <p class="pts-featured__meta reveal d2">
+            {featured.date} <span class="pts-featured__dot">·</span> {featured.groupSize}
+          </p>
+          <a href={`/mountains/${featured.slug}`} class="pts-featured__link reveal d3">
+            Enter the Journey
+          </a>
+        </div>
+      </section>
+    )}
 
 
     <!-- ══════════════════════════════════════════
-         04. РАСПИСАНИЕ — ВСЕ ВЫЕЗДЫ
+         03. UPCOMING EXPEDITIONS
          ══════════════════════════════════════════ -->
 
     <section class="pts-schedule section" id="schedule" aria-label="Upcoming expeditions">
@@ -176,32 +124,17 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
         <div class="pts-cards">
           {upcoming.map((j, i) => (
-            <div class={`pts-hero__card reveal d${(i % 3) + 1}${j.status === 'soon' ? ' pts-card--soon' : ''}`}>
+            <div class={`pts-hero__card reveal d${(i % 3) + 1}`}>
               <div class="pts-hero__card-photo">
-                {j.heroImage ? (
-                  <img src={j.heroImage} alt={j.name} loading="lazy" decoding="async" />
-                ) : (
-                  <div style={`background: ${j.bg}; width:100%; height:100%;`}></div>
-                )}
+                <img src={j.cardImage ?? j.heroImage} alt={j.title} loading="lazy" decoding="async" />
                 <div class="pts-hero__card-photo-fade" aria-hidden="true"></div>
-                {j.status === 'open' && (
-                  <div class="pts-hero__card-badge">
-                    <span class="pts-hero__card-badge-dot">●</span>
-                    <span>Open now</span>
-                  </div>
-                )}
-                {j.status === 'soon' && (
-                  <div class="pts-hero__card-badge">
-                    <span>Coming Soon</span>
-                  </div>
-                )}
               </div>
               <div class="pts-hero__card-body">
-                <h3 class="pts-hero__card-title">{j.name}</h3>
+                <h3 class="pts-hero__card-title">{j.title}</h3>
                 {j.date && (
                   <div class="pts-hero__card-dates">
                     <span>{j.date}</span>
-                    {j.duration && j.duration !== 'TBA' && (
+                    {j.duration && (
                       <>
                         <span class="pts-hero__card-dot">·</span>
                         <span>{j.duration}</span>
@@ -219,16 +152,9 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
                   )}
                 </div>
                 <div class="pts-hero__card-divider"></div>
-                {j.slug ? (
-                  <div class="pts-hero__card-actions">
-                    <a href={`/mountains/${j.slug}`} class="pts-btn pts-btn--gold">View Journey</a>
-                    <a href={`/connect?source=mountains_schedule_${j.slug}`} class="pts-btn pts-btn--ghost">Apply Now</a>
-                  </div>
-                ) : (
-                  <div class="pts-hero__card-actions">
-                    <span class="pts-btn pts-btn--ghost pts-btn--disabled">Coming Soon</span>
-                  </div>
-                )}
+                <div class="pts-hero__card-actions pts-hero__card-actions--single">
+                  <a href={`/mountains/${j.slug}`} class="pts-btn pts-btn--ghost">View Journey</a>
+                </div>
               </div>
             </div>
           ))}
@@ -239,120 +165,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
 
     <!-- ══════════════════════════════════════════
-         06. ПРОШЛЫЕ ЭКСПЕДИЦИИ
-         ══════════════════════════════════════════ -->
-
-    <section class="pts-past section" aria-label="Past expeditions">
-      <div class="frame">
-
-        <div class="pts-past__header reveal">
-          <p class="pts-past__label t-label t-label--gold">Past Expeditions</p>
-          <h2 class="pts-past__title">Where we have been.</h2>
-        </div>
-
-        <div class="pts-past-cards">
-          {past.map((p, i) => (
-            <div class={`pts-past-card reveal d${i + 1}`}>
-              <div class="pts-past-card__img" style={`background: ${p.bg};`} role="img" aria-label={p.name}></div>
-              <div class="pts-past-card__info">
-                <span class="pts-past-card__region">{p.terrain}</span>
-                <h3 class="pts-past-card__name">{p.name}</h3>
-                <p class="pts-past-card__meta">
-                  {p.year}{p.participants ? ` · ${p.participants}` : ''}
-                </p>
-                <a href={`/connect?source=mountains_hub_past_${i + 1}`} class="pts-btn pts-btn--ghost-sm" style="margin-top: var(--s-4); text-align: center;">
-                  Photos &amp; Stories
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════
-         03. КТО ВЕДЁТ
-         ══════════════════════════════════════════ -->
-
-    <section class="pts-guide section" aria-label="About the guide">
-      <div class="frame">
-        <div class="pts-guide__body">
-
-          <div class="pts-guide__photo reveal">
-            <img
-              src="/images/portrait/yakov-flags.jpg"
-              alt="Yakov Rajuna"
-              class="pts-guide__photo-img"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-
-          <div class="pts-guide__content">
-            <span class="pts-guide__label t-label t-label--gold reveal">Your guide</span>
-            <h2 class="pts-guide__name reveal d1">Yakov Rajuna</h2>
-
-            <div class="pts-guide__stats reveal d2">
-              <div class="pts-guide__stat">
-                <span class="pts-guide__stat-n">20+</span>
-                <span class="pts-guide__stat-l">Years of practice</span>
-              </div>
-              <div class="pts-guide__stat">
-                <span class="pts-guide__stat-n">350+</span>
-                <span class="pts-guide__stat-l">Ceremonies led</span>
-              </div>
-              <div class="pts-guide__stat">
-                <span class="pts-guide__stat-n">3 500+</span>
-                <span class="pts-guide__stat-l">Participants</span>
-              </div>
-            </div>
-
-            <p class="pts-guide__roles reveal d2">
-              Guide · Healer · Teacher · Musician · Expedition leader
-            </p>
-
-            <p class="pts-guide__bio reveal d3">
-              Yakov has led groups into sacred terrain across Asia, the Caucasus and
-              Eastern Europe for two decades. Initiations in Peru and Brazil.
-              Each expedition is small, intentional, and led personally.
-            </p>
-
-            <a href="/about" class="pts-btn pts-btn--ghost-sm reveal d4">Learn More</a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════
-         04. ОТЗЫВЫ УЧАСТНИКОВ
-         ══════════════════════════════════════════ -->
-
-    <section class="pts-tst section" aria-label="Participant voices">
-      <div class="frame">
-
-        <div class="pts-tst__grid">
-          {testimonials.map((t, i) => (
-            <figure class={`pts-tst__card reveal d${i + 1}`}>
-              <span class="pts-tst__glyph" aria-hidden="true">"</span>
-              <blockquote class="pts-tst__quote">{t.quote}</blockquote>
-              <figcaption class="pts-tst__attr">
-                <span class="pts-tst__name">{t.name}</span>
-                <span class="pts-tst__meta">{t.location} · {t.journey}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════
-         08. ФИНАЛЬНЫЙ CTA
+         04. ФИНАЛЬНЫЙ CTA
          ══════════════════════════════════════════ -->
 
     <section class="pts-final-cta section" aria-label="Apply">
@@ -372,18 +185,9 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
           </div>
 
           <div class="pts-final-cta__actions reveal d2">
-            {openJourney ? (
-              <a href={`/mountains/${openJourney.slug!}`} class="pts-btn pts-btn--gold">
-                View {openJourney.name}
-              </a>
-            ) : (
-              <a
-                href="https://t.me/yakovrajuna"
-                class="pts-btn pts-btn--gold"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Join Telegram
+            {featured && (
+              <a href={`/mountains/${featured.slug}`} class="pts-btn pts-btn--gold">
+                View {featured.title}
               </a>
             )}
             <a href="/connect?source=mountains_hub_footer" class="pts-btn pts-btn--ghost">Write directly</a>
@@ -413,25 +217,13 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     --bone:       #F0EBE0;
     --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.40'/%3E%3C/svg%3E");
 
-    /* ── Alpine Mist — atmospheric depth scale ─────────
-       Reads bottom → top: deep warm-black → charcoal blue
-       → alpine blue → cold mountain haze → dissolves into
-       the Hero photograph. One continuous descent, never
-       separate colored blocks — see section backgrounds. */
+    /* ── Alpine Mist — flat material tones, one per section ────
+       Each section is its own honest, solid step — darker than
+       the one before it — not a blended gradient across the page. */
     --alp-haze:      #243A57;
     --alp-blue:      #1B2738;
     --alp-blue-mix:  #1F3147;
-    --alp-charcoal:  #10151D;
-    --alp-char-mix:  #151E2A;
-    --alp-black:     #0A0D11;
-    --alp-black-mix: #0D1117;
-
-    /* The only two light sources on the page: a cold point
-       upper-right, a softer ambient glow upper-left. Extremely
-       low opacity — felt as depth, never consciously seen. */
-    --alp-light:
-      radial-gradient(ellipse 65% 55% at 84% 6%,  rgb(var(--sky-rgb) / 0.05) 0%, transparent 65%),
-      radial-gradient(ellipse 78% 62% at 8% 10%,  rgb(var(--sky-rgb) / 0.03) 0%, transparent 72%);
+    --alp-black:     #100C08;
   }
 
   /* ─── SHARED BUTTONS ──────────────────────────────── */
@@ -458,27 +250,50 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   }
 
   .pts-btn--gold {
-    background: var(--gold);
+    /* Richer gold with a soft top highlight — tactile, not flat.
+       Inset bevel top/bottom reads as a cast, solid pill, not a flat tint. */
+    background: linear-gradient(180deg, rgba(255,240,205,0.32) 0%, transparent 45%), var(--gold);
+    border-width: 1.5px;
     border-color: var(--gold);
     color: var(--deep);
-    box-shadow: 0 4px 22px rgba(196,168,98,0.28);
+    box-shadow:
+      0 4px 22px rgba(196,168,98,0.28),
+      inset 0 1px 0 rgba(255,250,230,0.45),
+      inset 0 -2px 3px rgba(90,64,20,0.28);
+    transition:
+      background-color 450ms var(--ease-slow),
+      border-color 450ms var(--ease-slow),
+      box-shadow 450ms var(--ease-slow),
+      transform 450ms var(--ease-slow);
   }
   .pts-btn--gold:hover {
-    background: var(--gold-hover);
+    background: linear-gradient(180deg, rgba(255,240,205,0.22) 0%, transparent 45%), var(--gold-hover);
     border-color: var(--gold-hover);
-    box-shadow: 0 6px 28px rgba(196,168,98,0.38);
+    box-shadow:
+      0 8px 32px rgba(196,168,98,0.42),
+      inset 0 1px 0 rgba(255,250,230,0.40),
+      inset 0 -2px 3px rgba(90,64,20,0.32);
     transform: translateY(-1px);
   }
 
   .pts-btn--ghost {
     background: rgba(196,168,98,0.07);
-    border-color: rgba(196,168,98,0.45);
-    color: rgba(247,242,232,0.88);
+    border-width: 1.5px;
+    border-color: rgba(196,168,98,0.62);
+    color: rgba(247,242,232,0.94);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -1px 0 rgba(0,0,0,0.18);
+    transition:
+      background-color 350ms var(--ease),
+      border-color 350ms var(--ease),
+      color 350ms var(--ease),
+      box-shadow 350ms var(--ease),
+      transform 350ms var(--ease);
   }
   .pts-btn--ghost:hover {
     background: rgba(196,168,98,0.14);
-    border-color: rgba(196,168,98,0.78);
+    border-color: rgba(196,168,98,0.88);
     color: var(--bone);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), inset 0 -1px 0 rgba(0,0,0,0.18);
     transform: translateY(-1px);
   }
 
@@ -509,6 +324,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-hero {
     position: relative;
+    background: var(--alp-haze);
     height: 100svh;
     min-height: 640px;
     display: flex;
@@ -541,23 +357,20 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     position: absolute;
     inset: 0;
     background:
-      /* Soft atmospheric haze at the peaks — no hard edge, just thinning air */
-      linear-gradient(to bottom,
-        rgba(10,16,28,0.30) 0%,
-        rgba(10,16,28,0.08) 24%,
-        transparent 48%
-      ),
-      /* Natural shadow pooling toward the ground — gradual, not a wall */
+      /* Natural shadow pooling toward the ground — gradual, not a wall.
+         Fades out in step with the photograph's own mask below, so
+         nothing but the bare page tone is left once the photo is gone. */
       linear-gradient(to top,
-        rgba(6,9,16,0.86) 0%,
-        rgba(6,9,16,0.58) 20%,
-        rgba(6,9,16,0.30) 40%,
-        rgba(6,9,16,0.10) 60%,
-        transparent 80%
+        rgba(6,9,16,0.72) 0%,
+        rgba(6,9,16,0.46) 20%,
+        rgba(6,9,16,0.24) 38%,
+        rgba(6,9,16,0.08) 56%,
+        transparent 72%
       ),
-      /* Low warm glow behind the title — the last light still held in the valley */
-      radial-gradient(ellipse 58% 42% at 16% 90%,
-        rgba(160,118,54,0.14) 0%,
+      /* Low warm glow behind the title — the last light still held in the
+         valley, entirely above where the photograph dissolves */
+      radial-gradient(ellipse 50% 24% at 16% 66%,
+        rgba(160,118,54,0.13) 0%,
         transparent 62%
       ),
       /* Left panel — barely softens the text side */
@@ -573,13 +386,27 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
       );
   }
 
+  /* Tiny film grain — almost invisible, removes the "flat digital" read */
+  .pts-hero__grain {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: var(--grain);
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    /* Matched exactly to the Divider's own grain, so the air itself
+       doesn't change character at the boundary — one continuous room */
+    opacity: 0.025;
+  }
+
   .pts-hero__inner {
     position: relative;
     z-index: 2;
     display: grid;
     grid-template-columns: 1fr 360px;
     align-items: center;
-    gap: 40px;
+    gap: clamp(48px, 6vw, 88px);
     width: 100%;
     padding-right: clamp(24px, 4vw, 60px);
     padding-bottom: clamp(76px, 12svh, 136px);
@@ -589,8 +416,14 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     display: flex;
     flex-direction: column;
     gap: var(--s-7);
-    /* Let the title breathe higher into the landscape — card stays put */
-    transform: translateY(-36px);
+    /* Sit below the peaks, in the valley — card stays put */
+    transform: translateY(114px);
+  }
+
+  /* A touch of breathing room above the card — it no longer clings
+     to the Hero's top edge */
+  .pts-hero__right {
+    transform: translateY(36px);
   }
 
   .pts-hero__hed {
@@ -600,32 +433,40 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   }
 
   .pts-hero__title {
-    font-family: var(--display);
-    font-weight: 650;
-    /* Monumental, not pulled back — the title is the anchor now */
+    /* Fraunces at display optical size — wider, chunkier serifs than
+       Source Serif 4. Mountain monument, not fashion editorial. */
+    font-family: var(--serif);
+    font-weight: 600;
     font-size: clamp(48px, 8vw, 110px);
-    line-height: 0.92;
-    letter-spacing: -0.02em;
+    line-height: 0.90;
+    letter-spacing: -0.020em;
     color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
     text-wrap: balance;
-    /* Carved, not printed — a tight contact shadow plus a soft ambient one */
+    /* Wider footprint, same type size — a monument inscription is
+       carved slightly extended, not merely enlarged */
+    transform: scaleX(1.035);
+    transform-origin: left center;
+    /* Carved, not printed — a hairline highlight where light catches the
+       edge, a tight contact shadow beneath it, minimal ambient falloff.
+       Tighter tracking + tighter shadow reads as denser, heavier stone. */
     text-shadow:
-      0 1px 1px rgba(4,7,14,0.60),
-      0 4px 28px rgba(4,7,14,0.55);
+      0 -1px 0 rgba(255,242,214,0.09),
+      0 1.5px 2px rgba(4,7,14,0.78),
+      0 3px 10px rgba(4,7,14,0.45);
   }
 
   .pts-hero__byline {
     font-family: var(--serif);
     font-style: italic;
-    font-weight: 500;
+    font-weight: 600;
     font-size: clamp(16px, 1.4vw, 19px);
-    color: rgba(228,196,132,0.92);
+    color: rgba(238,208,146,0.97);
     margin: 0;
     letter-spacing: 0.03em;
     font-optical-sizing: auto;
-    text-shadow: 0 1px 14px rgba(4,7,14,0.45);
+    text-shadow: 0 1px 2px rgba(4,7,14,0.55), 0 2px 16px rgba(4,7,14,0.40);
   }
 
   .pts-hero__btn {
@@ -643,14 +484,20 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     border: 1.5px solid rgba(196,168,98,0.55);
     color: rgba(247,242,232,0.95);
     background: rgba(196,168,98,0.10);
-    box-shadow: 0 0 32px rgba(196,168,98,0.16), inset 0 1px 0 rgba(247,242,232,0.08);
+    box-shadow:
+      0 0 32px rgba(196,168,98,0.16),
+      inset 0 1px 0 rgba(247,242,232,0.08),
+      inset 0 -1px 0 rgba(0,0,0,0.20);
     transition: all 350ms var(--ease);
   }
   .pts-hero__btn:hover {
     border-color: rgba(196,168,98,0.85);
     background: rgba(196,168,98,0.18);
     color: var(--bone);
-    box-shadow: 0 0 44px rgba(196,168,98,0.26), inset 0 1px 0 rgba(247,242,232,0.10);
+    box-shadow:
+      0 0 44px rgba(196,168,98,0.26),
+      inset 0 1px 0 rgba(247,242,232,0.10),
+      inset 0 -1px 0 rgba(0,0,0,0.20);
     transform: translateY(-1px);
   }
 
@@ -665,18 +512,26 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
+    /* Cast bronze-black lacquer — solid and dense, not a pane of glass.
+       No blur-through: this object sits ON the page, opaque, the way
+       a lacquered box or a cast plaque would. */
     background: linear-gradient(155deg,
-      rgba(247,242,232,0.24) 0%,
-      rgba(247,242,232,0.15) 55%,
-      rgba(196,168,98,0.13) 100%
+      rgba(46,35,28,0.96) 0%,
+      rgba(26,20,16,0.97) 55%,
+      rgba(58,40,21,0.95) 100%
     );
-    backdrop-filter: blur(32px) saturate(1.5);
-    -webkit-backdrop-filter: blur(32px) saturate(1.5);
-    border: 1px solid rgba(196,168,98,0.22);
+    /* Material carries the edge, not a border — the frame is almost gone */
+    border: 1px solid rgba(196,168,98,0.14);
     border-radius: 20px;
+    /* Two-tier elevation — a tight contact shadow where it meets the air,
+       a soft far shadow for the object's real weight — plus a physical
+       bottom edge (thickness) beneath the top rim highlight, the way a
+       cast, lacquered object actually catches light on two sides */
     box-shadow:
-      0 28px 70px rgba(10,6,2,0.45),
-      inset 0 1px 0 rgba(247,242,232,0.16),
+      0 10px 20px rgba(4,2,1,0.32),
+      0 32px 80px rgba(8,5,2,0.5),
+      inset 0 1px 0 rgba(247,242,232,0.14),
+      inset 0 -1px 0 rgba(0,0,0,0.35),
       inset 0 0 0 1px rgba(196,168,98,0.06);
     overflow: hidden;
   }
@@ -689,7 +544,19 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     background-image: var(--grain);
     background-size: 200px 200px;
     mix-blend-mode: overlay;
-    opacity: 0.05;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* A single tight glint where light catches a polished, lacquered
+     corner — a micro-reflection, not a glass panel */
+  .pts-hero__card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 26% 16% at 12% 3%, rgba(255,250,235,0.07) 0%, transparent 70%);
+    mix-blend-mode: screen;
     pointer-events: none;
     z-index: 1;
   }
@@ -711,17 +578,20 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     border-radius: 20px 20px 0 0;
   }
 
+  /* The photo is the subject — darken only enough of the bottom edge
+     for the badge/title to sit on, never the image itself. */
   .pts-hero__card-photo-fade {
     position: absolute;
     inset: 0;
     background: linear-gradient(to top,
-      rgba(4,6,12,0.98) 0%,
-      rgba(4,6,12,0.55) 42%,
-      rgba(4,6,12,0.10) 78%,
-      transparent 100%
+      rgba(4,6,12,0.90) 0%,
+      rgba(4,6,12,0.50) 9%,
+      rgba(4,6,12,0.16) 18%,
+      transparent 28%
     );
   }
 
+  /* A small glass pill, not a flat label — same bevel language as the card */
   .pts-hero__card-badge {
     position: absolute;
     bottom: 12px;
@@ -729,7 +599,8 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     display: flex;
     align-items: center;
     gap: var(--s-3);
-    background: rgba(6,10,18,0.75);
+    /* Small cast plaque, not a glass chip — fully opaque */
+    background: rgba(8,11,17,0.94);
     border: 1px solid rgba(196,168,98,0.3);
     border-radius: 99px;
     padding: 5px 13px;
@@ -738,16 +609,18 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-size: 12px;
     letter-spacing: 0.02em;
     color: #C4A862;
+    box-shadow:
+      0 4px 12px rgba(0,0,0,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.10),
+      inset 0 -1px 0 rgba(0,0,0,0.30);
     z-index: 2;
   }
 
-  .pts-hero__card-badge-dot { font-size: 6px; color: var(--gold); }
-
   .pts-hero__card-body {
-    padding: 20px 22px 22px;
+    padding: 28px 28px 30px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
   }
 
   .pts-hero__card-terrain {
@@ -755,7 +628,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(247,242,232,0.42);
+    color: rgba(247,242,232,0.56);
     position: relative;
     z-index: 2;
   }
@@ -776,7 +649,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-family: var(--serif);
     font-style: italic;
     font-size: 14px;
-    color: rgba(196,168,98,0.85);
+    color: rgba(210,182,120,0.95);
     margin: 0;
     font-optical-sizing: auto;
   }
@@ -805,11 +678,11 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-size: 10px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(247,242,232,0.42);
+    color: rgba(247,242,232,0.56);
     margin-top: 10px;
   }
 
-  .pts-hero__card-capacity { color: rgba(247,242,232,0.42); }
+  .pts-hero__card-capacity { color: rgba(247,242,232,0.56); }
 
   .pts-hero__card-meta {
     display: flex;
@@ -820,7 +693,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.01em;
-    color: rgba(247,242,232,0.70);
+    color: rgba(247,242,232,0.82);
     margin-top: 10px;
   }
 
@@ -858,47 +731,147 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     padding: 12px 16px;
   }
 
+  /* Upcoming Expeditions: one quiet link, not a toolbar — editorial,
+     not a booking pair. The button no longer fills the row. */
+  .pts-hero__card-actions--single {
+    justify-content: flex-start;
+  }
+  .pts-hero__card-actions--single .pts-btn {
+    flex: none;
+    padding: 12px 26px;
+  }
+
 
   /* ══════════════════════════════════════════════════
-     03. DIVIDER PHRASE
+     02. FEATURED EXPEDITION — the first doorway,
+     a continuation of the Hero's own photographic language,
+     not a card, not a product.
      ══════════════════════════════════════════════════ */
 
-  .pts-divider-phrase {
+  .pts-featured {
     position: relative;
-    padding-block: clamp(48px, 7svh, 80px);
-    background: linear-gradient(180deg, var(--alp-haze) 0%, var(--alp-blue-mix) 100%);
+    height: clamp(560px, 78vh, 820px);
+    display: flex;
+    align-items: flex-end;
     overflow: hidden;
+    background: var(--alp-blue-mix);
   }
 
-  /* Night sky as material — the shared cold light, nothing more */
-  .pts-divider-phrase::before {
-    content: '';
+  .pts-featured__bg {
     position: absolute;
     inset: 0;
-    background: var(--alp-light);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 38%;
+    display: block;
+    filter: contrast(1.05) saturate(0.90) brightness(0.94);
   }
-  .pts-divider-phrase::after {
-    content: '';
+
+  .pts-featured__overlay {
     position: absolute;
     inset: 0;
+    background:
+      /* Shadow pooling for the text — gradual, not a wall */
+      linear-gradient(to top,
+        rgba(6,9,16,0.80) 0%,
+        rgba(6,9,16,0.52) 18%,
+        rgba(6,9,16,0.22) 38%,
+        transparent 58%
+      ),
+      /* Left panel — softens the text side only */
+      linear-gradient(100deg,
+        rgba(6,9,16,0.40) 0%,
+        rgba(6,9,16,0.14) 32%,
+        transparent 56%
+      );
+  }
+
+  .pts-featured__grain {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
     background-image: var(--grain);
     background-size: 200px 200px;
     mix-blend-mode: overlay;
     opacity: 0.025;
-    pointer-events: none;
   }
-  .pts-divider-phrase .frame { position: relative; z-index: 1; }
 
-  .pts-divider-phrase__text {
+  .pts-featured__inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-3);
+    padding-bottom: clamp(56px, 9svh, 104px);
+    max-width: 620px;
+  }
+
+  .pts-featured__title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 0.94;
+    letter-spacing: -0.018em;
+    color: var(--bone);
+    margin: var(--s-3) 0 0;
+    font-optical-sizing: auto;
+    text-shadow:
+      0 1px 1px rgba(4,7,14,0.65),
+      0 3px 18px rgba(4,7,14,0.45);
+  }
+
+  .pts-featured__tagline {
     font-family: var(--serif);
     font-style: italic;
-    font-weight: 300;
-    font-size: clamp(20px, 2.5vw, 32px);
-    line-height: 1.55;
-    color: rgba(247,242,232,0.55);
-    max-width: 52ch;
-    margin: 0;
+    font-size: clamp(15px, 1.4vw, 19px);
+    color: rgba(210,182,120,0.95);
+    margin: var(--s-2) 0 0;
     font-optical-sizing: auto;
+  }
+
+  .pts-featured__meta {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(247,242,232,0.72);
+    margin: var(--s-4) 0 0;
+  }
+
+  .pts-featured__dot { opacity: 0.4; margin: 0 2px; }
+
+  .pts-featured__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--s-6);
+    font-family: var(--mark);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    padding: 16px 34px;
+    border-radius: var(--r-pill);
+    border: 1.5px solid rgba(196,168,98,0.55);
+    color: rgba(247,242,232,0.95);
+    background: rgba(196,168,98,0.10);
+    box-shadow:
+      0 0 32px rgba(196,168,98,0.16),
+      inset 0 1px 0 rgba(247,242,232,0.08),
+      inset 0 -1px 0 rgba(0,0,0,0.20);
+    transition: all 350ms var(--ease);
+  }
+  .pts-featured__link:hover {
+    border-color: rgba(196,168,98,0.85);
+    background: rgba(196,168,98,0.18);
+    color: var(--bone);
+    box-shadow:
+      0 0 44px rgba(196,168,98,0.26),
+      inset 0 1px 0 rgba(247,242,232,0.10),
+      inset 0 -1px 0 rgba(0,0,0,0.20);
+    transform: translateY(-1px);
   }
 
 
@@ -908,25 +881,19 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-schedule {
     position: relative;
-    background: linear-gradient(180deg, var(--alp-blue-mix) 0%, var(--alp-blue) 100%);
+    /* Flat stone, not a blended gradient — its own material, its own step */
+    background: var(--alp-blue);
     overflow: hidden;
   }
-  /* Cold mineral surface — the shared light, nothing warm breaking in */
-  .pts-schedule::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--alp-light);
-    pointer-events: none;
-  }
+  /* Cold, dense stone — a tight, almost-polished grain */
   .pts-schedule::after {
     content: '';
     position: absolute;
     inset: 0;
     background-image: var(--grain);
-    background-size: 200px 200px;
+    background-size: 220px 220px;
     mix-blend-mode: overlay;
-    opacity: 0.025;
+    opacity: 0.018;
     pointer-events: none;
   }
   .pts-schedule .frame { position: relative; z-index: 1; }
@@ -945,7 +912,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   .pts-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: clamp(16px, 2.5vw, 24px);
     align-items: stretch;
   }
@@ -963,8 +930,10 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
   /* Presence, not motion — the card doesn't move, the light on it does */
   .pts-cards .pts-hero__card:hover {
     box-shadow:
+      0 12px 22px rgba(4,2,1,0.34),
       0 36px 90px rgba(10,6,2,0.5),
       inset 0 1px 0 rgba(247,242,232,0.16),
+      inset 0 -1px 0 rgba(0,0,0,0.35),
       inset 0 0 0 1px rgba(196,168,98,0.08);
   }
   .pts-cards .pts-hero__card:hover .pts-hero__card-photo img {
@@ -981,394 +950,26 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     transition: opacity 650ms var(--ease-slow);
   }
 
-  .pts-card--soon {
-    opacity: 0.45;
-    pointer-events: none;
-  }
-
-
-
   /* ══════════════════════════════════════════════════
-     06. PAST EXPEDITIONS
-     ══════════════════════════════════════════════════ */
-
-  .pts-past {
-    position: relative;
-    background: linear-gradient(180deg, var(--alp-blue) 0%, var(--alp-char-mix) 100%);
-    overflow: hidden;
-  }
-  /* Fog and cold slate — diffuse, no edges, the shared light only */
-  .pts-past::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--alp-light);
-    pointer-events: none;
-  }
-  .pts-past::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain);
-    background-size: 200px 200px;
-    mix-blend-mode: overlay;
-    opacity: 0.025;
-    pointer-events: none;
-  }
-  .pts-past .frame { position: relative; z-index: 1; }
-
-  .pts-past__header {
-    margin-bottom: clamp(48px, 7vw, 88px);
-  }
-
-  .pts-past__label {
-    display: block;
-    margin-bottom: var(--s-4);
-  }
-
-  .pts-past__title {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(36px, 5vw, 72px);
-    line-height: 1.0;
-    letter-spacing: -0.025em;
-    color: var(--bone);
-    margin: 0;
-    font-optical-sizing: auto;
-  }
-
-  .pts-past-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(28px, 5vw, 64px);
-  }
-
-  .pts-past-card {
-    display: flex;
-    flex-direction: column;
-    border-radius: 16px;
-    overflow: hidden;
-    background: rgba(247,242,232,0.03);
-    border: 1px solid rgba(247,242,232,0.07);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.16);
-    transition: box-shadow 650ms var(--ease-slow);
-  }
-  .pts-past-card:hover {
-    box-shadow: 0 26px 72px rgba(0,0,0,0.22);
-  }
-  .pts-past-card:hover .pts-past-card__img {
-    filter: brightness(1.06) contrast(1.03) saturate(1.05);
-  }
-  /* A quiet offset — two photographs laid down, not a grid */
-  .pts-past-card:nth-child(2) { margin-top: clamp(28px, 4vw, 48px); }
-
-  .pts-past-card__img {
-    aspect-ratio: 3/2;
-    overflow: hidden;
-    transition: filter 650ms var(--ease-slow);
-  }
-
-  .pts-past-card__info {
-    padding: clamp(18px, 2.5vw, 28px);
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-2);
-  }
-
-  .pts-past-card__region {
-    font-family: var(--mark);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.20em;
-    text-transform: uppercase;
-    color: var(--silver);
-    display: block;
-  }
-
-  .pts-past-card__name {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: clamp(20px, 2.5vw, 28px);
-    line-height: 1.1;
-    letter-spacing: -0.012em;
-    color: var(--bone);
-    margin: var(--s-1) 0 0;
-    font-optical-sizing: auto;
-  }
-
-  .pts-past-card__meta {
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 300;
-    color: rgba(200,220,240,0.35);
-    margin: 0;
-  }
-
-
-  /* ══════════════════════════════════════════════════
-     04. TESTIMONIALS — compact editorial cards
-     ══════════════════════════════════════════════════ */
-
-  /* Continues the same descent — no separate colored block */
-  .pts-tst {
-    position: relative;
-    background: linear-gradient(180deg, var(--alp-char-mix) 0%, var(--alp-charcoal) 100%);
-    overflow: hidden;
-  }
-  .pts-tst::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--alp-light);
-    pointer-events: none;
-  }
-  .pts-tst::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain);
-    background-size: 200px 200px;
-    mix-blend-mode: overlay;
-    opacity: 0.025;
-    pointer-events: none;
-  }
-  .pts-tst .frame { position: relative; z-index: 1; }
-
-  .pts-tst__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(32px, 5vw, 64px);
-    align-items: start;
-  }
-
-  /* A page, not a card — a hairline at the top is enough */
-  .pts-tst__card {
-    margin: 0;
-    padding: clamp(28px, 3.5vw, 40px) 0 0;
-    border: none;
-    border-top: 1px solid rgba(247,242,232,0.09);
-    border-radius: 0;
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-5);
-  }
-
-  .pts-tst__glyph {
-    font-family: var(--display);
-    font-size: 28px;
-    line-height: 0.7;
-    color: rgba(196,168,98,0.28);
-    display: block;
-    user-select: none;
-    font-optical-sizing: auto;
-  }
-
-  .pts-tst__quote {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 300;
-    /* Small — intimate, like a handwritten memory */
-    font-size: clamp(13px, 1.15vw, 15px);
-    line-height: 1.78;
-    color: rgba(247,242,232,0.70);
-    margin: 0;
-    padding: 0;
-    text-wrap: pretty;
-    font-optical-sizing: auto;
-  }
-
-  .pts-tst__attr {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-top: var(--s-4);
-    border-top: 1px solid rgba(200,220,240,0.06);
-    margin-top: auto;
-  }
-
-  .pts-tst__name {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 13px;
-    color: rgba(196,168,98,0.65);
-    line-height: 1.3;
-  }
-
-  .pts-tst__meta {
-    font-family: var(--mark);
-    font-size: 8px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgb(var(--sky-rgb) / 0.28);
-  }
-
-
-  /* ══════════════════════════════════════════════════
-     08. GUIDE
-     ══════════════════════════════════════════════════ */
-
-  .pts-guide {
-    position: relative;
-    background: linear-gradient(180deg, var(--alp-charcoal) 0%, var(--alp-black-mix) 100%);
-    overflow: hidden;
-  }
-  /* Cold shadow — light gathers quietly, not the frame */
-  .pts-guide::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--alp-light);
-    pointer-events: none;
-  }
-  .pts-guide::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: var(--grain);
-    background-size: 200px 200px;
-    mix-blend-mode: overlay;
-    opacity: 0.025;
-    pointer-events: none;
-  }
-  .pts-guide .frame { position: relative; z-index: 1; }
-
-  .pts-guide__body {
-    display: grid;
-    grid-template-columns: 360px 1fr;
-    gap: clamp(56px, 9vw, 140px);
-    align-items: center;
-  }
-
-  .pts-guide__photo {
-    position: relative;
-  }
-
-  /* A thread between the two of you, not a border */
-  .pts-guide__photo::after {
-    content: '';
-    position: absolute;
-    top: 10%;
-    bottom: 10%;
-    right: clamp(-70px, -4.5vw, -28px);
-    width: 1px;
-    background: linear-gradient(to bottom,
-      transparent,
-      rgba(196,168,98,0.4) 25%,
-      rgba(196,168,98,0.4) 75%,
-      transparent
-    );
-  }
-
-  .pts-guide__photo-img {
-    aspect-ratio: 2/3;
-    border-radius: 12px;
-    border: 1px solid rgba(247,242,232,0.10);
-    box-shadow: 0 24px 64px rgba(0,0,0,0.4);
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  .pts-guide__content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-7);
-  }
-
-  .pts-guide__label { display: block; }
-
-  .pts-guide__name {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(40px, 6vw, 88px);
-    line-height: 0.95;
-    letter-spacing: -0.025em;
-    color: var(--bone);
-    margin: 0;
-    font-optical-sizing: auto;
-  }
-
-  .pts-guide__stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-5);
-    padding: var(--s-6) 0;
-    border-top: 1px solid rgba(200,220,240,0.06);
-    border-bottom: 1px solid rgba(200,220,240,0.06);
-  }
-
-  .pts-guide__stat { display: flex; flex-direction: column; gap: var(--s-2); }
-
-  .pts-guide__stat-n {
-    font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(24px, 3vw, 42px);
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: var(--bone);
-    font-optical-sizing: auto;
-  }
-
-  .pts-guide__stat-l {
-    font-family: var(--mark);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(200,220,240,0.30);
-  }
-
-  .pts-guide__roles {
-    font-family: var(--mark);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: rgba(196,168,98,0.55);
-    margin: 0;
-  }
-
-  .pts-guide__bio {
-    font-family: var(--sans);
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 1.85;
-    color: rgb(var(--sky-rgb) / 0.70);
-    margin: 0;
-    max-width: 46ch;
-  }
-
-
-  /* ══════════════════════════════════════════════════
-     09. FINAL CTA
+     04. FINAL CTA
      ══════════════════════════════════════════════════ */
 
   .pts-final-cta {
     position: relative;
-    background: linear-gradient(180deg, var(--alp-black-mix) 0%, var(--alp-black) 100%);
+    /* Flat obsidian — the final, darkest step, no blended gradient */
+    background: var(--alp-black);
     padding-block: clamp(120px, 18svh, 220px);
     overflow: hidden;
   }
-  /* The last of the shared light before the book closes */
-  .pts-final-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--alp-light);
-    pointer-events: none;
-  }
+  /* Obsidian is dense and near-smooth — almost no grain at all */
   .pts-final-cta::after {
     content: '';
     position: absolute;
     inset: 0;
     background-image: var(--grain);
-    background-size: 200px 200px;
+    background-size: 280px 280px;
     mix-blend-mode: overlay;
-    opacity: 0.025;
+    opacity: 0.010;
     pointer-events: none;
   }
   .pts-final-cta .frame { position: relative; z-index: 1; }
@@ -1442,19 +1043,9 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
 
   /* ─── RESPONSIVE ──────────────────────────────────── */
 
-  @media (max-width: 1100px) {
-    .pts-cards { grid-template-columns: repeat(2, 1fr); }
-  }
-
   @media (max-width: 1024px) {
     .pts-hero__inner { grid-template-columns: 1fr 320px; }
     .pts-hero__card { width: 320px; }
-  }
-
-  @media (max-width: 900px) {
-    .pts-guide__body { grid-template-columns: 1fr; }
-    .pts-guide__photo-img { max-width: 200px; aspect-ratio: 3/4; }
-    .pts-guide__photo::after { display: none; }
   }
 
   @media (max-width: 780px) {
@@ -1462,16 +1053,7 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     .pts-hero__card { width: 100%; max-width: 400px; }
   }
 
-  @media (max-width: 768px) {
-    .pts-tst__grid { grid-template-columns: 1fr; }
-    .pts-guide__stats { grid-template-columns: repeat(3, 1fr); }
-  }
-
   @media (max-width: 560px) {
-    .pts-cards { grid-template-columns: 1fr 1fr; }
-    .pts-past-cards { grid-template-columns: 1fr; }
-    .pts-past-card:nth-child(2) { margin-top: 0; }
-    .pts-guide__stats { grid-template-columns: 1fr 1fr; }
     .pts-hero__right { display: none; }
   }
 
