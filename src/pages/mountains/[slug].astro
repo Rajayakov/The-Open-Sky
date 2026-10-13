@@ -2,19 +2,26 @@
 import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
-import { journeys, getJourney, pastExpeditions } from '../../data/mountains';
+import { journeys, getJourney, pastExpeditions, hasDeparted } from '../../data/mountains';
 import '../../styles/global.css';
 
 export function getStaticPaths() {
-  return journeys.map((j) => ({ params: { slug: j.slug } }));
+  // kailash-2026 has its own bespoke page (kailash-2026.astro), which takes
+  // priority — don't generate a duplicate route for it here.
+  return journeys
+    .filter((j) => j.slug !== 'kailash-2026')
+    .map((j) => ({ params: { slug: j.slug } }));
 }
 
 const { slug } = Astro.params;
 const journey = getJourney(slug!);
 if (!journey) return Astro.redirect('/mountains');
 
-const isUpcoming = journey.status === 'upcoming';
-const isSoon     = journey.status === 'soon';
+const isPast     = hasDeparted(journey);
+const isUpcoming = journey.status === 'upcoming' && !isPast;
+// Application state comes from the data (`badge`): 'soon' = not yet open.
+const isOpen     = isUpcoming && (journey.badge ?? 'open') === 'open';
+const isSoon     = isUpcoming && !isOpen;
 const isKailash  = journey.slug === 'kailash-2026';
 
 const pastTwo = pastExpeditions.slice(0, 2);
@@ -107,10 +114,9 @@ const klRecogQuestions = [
         </div>
         <h1 class="ej-hero__title reveal d2">{journey.title}</h1>
         {isUpcoming && (
-          <a href="#apply" class="btn btn--ghost-d ej-hero__cta reveal d3">Apply for this expedition</a>
-        )}
-        {isSoon && (
-          <span class="ej-hero__soon reveal d3">Dates to be announced</span>
+          <a href="#apply" class="btn btn--ghost-d ej-hero__cta reveal d3">
+            {isOpen ? 'Apply for this expedition' : 'Express interest'}
+          </a>
         )}
       </div>
     </section>
@@ -542,7 +548,7 @@ const klRecogQuestions = [
               <div class="kl-apply2__btns reveal d3">
                 <a href="/connect?from=kailash-2026" class="btn btn--warm">Apply for your place</a>
                 <a
-                  href="https://t.me/yakovrajuna"
+                  href="https://t.me/rajuna_yakov"
                   class="btn btn--ghost-d"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -569,12 +575,6 @@ const klRecogQuestions = [
             <div class="ej-about__text reveal">
               <span class="t-label t-label--warm">About This Journey</span>
               <h2 class="ej-section-heading">{journey.description}</h2>
-              <p class="t-body ej-about__body">
-                [Detailed description of the expedition — the landscape, the physical experience, the inner dimension. To be written.]
-              </p>
-              <p class="t-body ej-about__body">
-                [What makes this mountain significant. What participants can expect to encounter — physically, emotionally, and in terms of the group process.]
-              </p>
             </div>
             <div class="ej-about__sidebar reveal d2">
               <div class="ej-meta-panel">
@@ -602,168 +602,87 @@ const klRecogQuestions = [
           </div>
         </section>
 
-        <!-- 3. ROUTE -->
+        <!-- 3. ROUTE — only when a route is published -->
+        {(journey.structure ?? []).length > 0 && (
         <section class="ej-route section" aria-label="Route">
           <div class="frame">
             <span class="t-label t-label--warm reveal">The Route</span>
             <h2 class="ej-section-heading reveal d1">Day by day.</h2>
-            {(journey.structure ?? []).length > 0 ? (
-              <div class="ej-route__phases">
-                {(journey.structure ?? []).map((phase, i) => (
-                  <div class={`ej-route__phase reveal d${(i % 3) + 1}`}>
-                    <span class="t-label ej-route__phase-label">{phase.phase}</span>
-                    <p class="t-body ej-route__phase-body">{phase.description}</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div class="ej-placeholder reveal d1">
-                <p class="ej-placeholder__text">Route details to be announced.</p>
-              </div>
-            )}
-          </div>
-          <div class="ej-route__bg" aria-hidden="true"></div>
-        </section>
-
-        <!-- 4. HIGHLIGHTS -->
-        <section class="ej-highlights section frame" aria-label="Highlights">
-          <span class="t-label t-label--warm reveal">Highlights</span>
-          <h2 class="ej-section-heading reveal d1">What this journey offers.</h2>
-          <div class="ej-highlights__grid">
-            {[
-              { title: 'The Landscape', body: '[Description of the specific landscape and what it demands and offers.]' },
-              { title: 'The Group',     body: '[Small group dynamic — who comes, how the group works together, the intimacy that forms.]' },
-              { title: 'The Inner Work', body: '[The ceremonies, the silences, the conversations. What happens beyond the physical walking.]' },
-              { title: 'The Return',    body: '[What participants typically carry back. The integration that happens in the weeks that follow.]' },
-            ].map((item, i) => (
-              <div class={`ej-highlight reveal d${(i % 3) + 1}`}>
-                <h3 class="ej-highlight__title">{item.title}</h3>
-                <p class="t-body ej-highlight__body">{item.body}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <!-- 5. GALLERY -->
-        <section class="ej-gallery section frame" aria-label="Gallery">
-          <span class="t-label t-label--warm reveal">Gallery</span>
-          <h2 class="ej-section-heading reveal d1">In the field.</h2>
-          <div class="ej-gallery__grid">
-            {[
-              { ratio: 'landscape', label: 'Gallery · 01' },
-              { ratio: 'portrait',  label: 'Gallery · 02' },
-              { ratio: 'portrait',  label: 'Gallery · 03' },
-              { ratio: 'landscape', label: 'Gallery · 04' },
-              { ratio: 'landscape', label: 'Gallery · 05' },
-              { ratio: 'landscape', label: 'Gallery · 06' },
-            ].map((slot, i) => (
-              <div
-                class={`ej-gallery__slot ej-gallery__slot--${slot.ratio} reveal d${(i % 3) + 1}`}
-                style={`background: ${journey.bg}; opacity: ${0.6 + i * 0.05};`}
-                aria-hidden="true"
-                data-label={slot.label}
-              ></div>
-            ))}
-          </div>
-          <p class="ej-gallery__note reveal">Photos and video from this expedition will be published here.</p>
-        </section>
-
-        <!-- 6. TESTIMONIALS -->
-        <section class="ej-testimonials section" aria-label="Testimonials">
-          <div class="frame">
-            <span class="t-label t-label--warm reveal">From Participants</span>
-            <h2 class="ej-section-heading ej-section-heading--light reveal d1">What people say.</h2>
-            <div class="ej-testimonials__grid">
-              {[1, 2, 3].map((n, i) => (
-                <div class={`ej-testimonial reveal d${i + 1}`}>
-                  <blockquote class="ej-testimonial__quote">
-                    [Testimonial {n} — to be added after the expedition.]
-                  </blockquote>
-                  <cite class="ej-testimonial__author">
-                    <span class="ej-testimonial__name">Name Surname</span>
-                    <span class="ej-testimonial__detail">Country · Year</span>
-                  </cite>
+            <div class="ej-route__phases">
+              {(journey.structure ?? []).map((phase, i) => (
+                <div class={`ej-route__phase reveal d${(i % 3) + 1}`}>
+                  <span class="t-label ej-route__phase-label">{phase.phase}</span>
+                  <p class="t-body ej-route__phase-body">{phase.description}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div class="ej-testimonials__bg" aria-hidden="true"></div>
+          <div class="ej-route__bg" aria-hidden="true"></div>
         </section>
+        )}
 
-        <!-- 7. PRACTICAL INFORMATION -->
+        <!-- 7. PRACTICAL INFORMATION — only columns with published content -->
+        {((journey.included?.length ?? 0) > 0 || (journey.forWhom?.length ?? 0) > 0) && (
         <section class="ej-practical section frame" aria-label="Practical information">
           <span class="t-label t-label--warm reveal">Practical Information</span>
           <h2 class="ej-section-heading reveal d1">What's included.</h2>
           <div class="ej-practical__grid">
-            <div class="ej-practical__col reveal">
-              <h3 class="ej-practical__col-title">Included</h3>
-              <ul class="ej-practical__list">
-                {(journey.included ?? [
-                  'All accommodation on route',
-                  'All meals',
-                  'Guided group work',
-                  'Local transport',
-                  'Emergency equipment',
-                ]).map(item => (
-                  <li class="ej-practical__item">
-                    <span class="ej-practical__mark" aria-hidden="true">—</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div class="ej-practical__col reveal d2">
-              <h3 class="ej-practical__col-title">Not Included</h3>
-              <ul class="ej-practical__list">
-                {['International flights', 'Travel insurance (required)', 'Personal gear and equipment', 'Optional extensions'].map(item => (
-                  <li class="ej-practical__item">
-                    <span class="ej-practical__mark" aria-hidden="true">—</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div class="ej-practical__col reveal d3">
-              <h3 class="ej-practical__col-title">Who This Is For</h3>
-              <ul class="ej-practical__list">
-                {(journey.forWhom?.length
-                  ? journey.forWhom
-                  : ['People who are physically prepared for the terrain', 'Those drawn to the inner dimension of pilgrimage', 'People comfortable with uncertainty and remoteness']
-                ).map(item => (
-                  <li class="ej-practical__item">
-                    <span class="ej-practical__mark" aria-hidden="true">—</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {(journey.included?.length ?? 0) > 0 && (
+              <div class="ej-practical__col reveal">
+                <h3 class="ej-practical__col-title">Included</h3>
+                <ul class="ej-practical__list">
+                  {journey.included!.map(item => (
+                    <li class="ej-practical__item">
+                      <span class="ej-practical__mark" aria-hidden="true">—</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {(journey.forWhom?.length ?? 0) > 0 && (
+              <div class="ej-practical__col reveal d3">
+                <h3 class="ej-practical__col-title">Who This Is For</h3>
+                <ul class="ej-practical__list">
+                  {journey.forWhom!.map(item => (
+                    <li class="ej-practical__item">
+                      <span class="ej-practical__mark" aria-hidden="true">—</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </section>
+        )}
 
-        <!-- 8. APPLICATION CTA -->
+        <!-- 8. APPLICATION CTA — wording follows the real application state -->
         <section class="ej-apply section" id="apply" aria-label="Apply">
           <div class="frame">
             <div class="ej-apply__inner reveal">
               <span class="t-label ej-apply__label">
-                {isUpcoming ? 'Applications Open' : 'Stay Informed'}
+                {isOpen ? 'Applications Open' : isSoon ? 'Applications Not Yet Open' : 'Past Journey'}
               </span>
               <h2 class="ej-apply__heading">
-                {isUpcoming ? 'Write a short message.' : 'This expedition will be announced soon.'}
+                {isOpen ? 'Write a short message.' : isSoon ? 'Write to be told first.' : 'This journey has taken place.'}
               </h2>
               <p class="ej-apply__body">
-                {isUpcoming
+                {isOpen
                   ? `Tell me where you are and what you are looking for. Yakov responds personally to each message.`
-                  : `Join the Telegram channel to be notified when applications open for ${journey.title}.`}
+                  : isSoon
+                  ? `Applications for ${journey.title} have not opened yet. Send a short message, or follow the Telegram channel, and you will hear when they do.`
+                  : `Upcoming journeys are announced in the Telegram channel first.`}
               </p>
               <div class="ej-apply__actions">
                 {isUpcoming ? (
                   <>
                     <a href={`/connect?source=${journey.slug}_apply`} class="btn">Express interest</a>
-                    <a href="https://t.me/yakovrajuna" class="btn btn--ghost-d">Join Telegram</a>
+                    <a href="https://t.me/rajuna_yakov" class="btn btn--ghost-d">Join Telegram</a>
                   </>
                 ) : (
                   <>
-                    <a href="https://t.me/yakovrajuna" class="btn">Join Telegram</a>
+                    <a href="https://t.me/rajuna_yakov" class="btn">Join Telegram</a>
                     <a href="/mountains" class="btn btn--ghost-d">All expeditions</a>
                   </>
                 )}

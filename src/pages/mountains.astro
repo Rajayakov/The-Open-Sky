@@ -9,8 +9,9 @@ import { getFeaturedExpedition, getOtherUpcoming } from '../data/mountains';
    below both render this exact same object. Nothing here is hardcoded —
    getFeaturedExpedition() picks the nearest open departure automatically,
    so the featured destination changes on its own as dates pass. */
-const featured = getFeaturedExpedition();
-const upcoming = getOtherUpcoming(featured);
+const now = new Date();
+const featured = getFeaturedExpedition(now);
+const upcoming = getOtherUpcoming(featured, now);
 ---
 
 <Base
@@ -25,15 +26,16 @@ const upcoming = getOtherUpcoming(featured);
          ══════════════════════════════════════════ -->
 
     <section class="pts-hero" aria-label="Path of the Spirit">
-      <img
-        class="pts-hero__bg"
-        src="/images/mountains/hero.jpg"
-        alt=""
-        aria-hidden="true"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-      />
+      <div class="pts-hero__media" aria-hidden="true">
+        <img
+          class="pts-hero__bg"
+          src="/images/mountains/hero-graded.jpg"
+          alt=""
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
       <div class="pts-hero__overlay" aria-hidden="true"></div>
       <div class="pts-hero__grain" aria-hidden="true"></div>
       <div class="pts-hero__inner frame">
@@ -57,7 +59,7 @@ const upcoming = getOtherUpcoming(featured);
                 />
                 <div class="pts-hero__card-photo-fade" aria-hidden="true"></div>
                 <div class="pts-hero__card-badge">
-                  <span>{featured.status === 'upcoming' ? 'Open now' : featured.status}</span>
+                  <span>{(featured.badge ?? 'open') === 'open' ? 'Open now' : 'Coming Soon'}</span>
                 </div>
               </div>
 
@@ -73,7 +75,7 @@ const upcoming = getOtherUpcoming(featured);
                 <div class="pts-hero__card-divider"></div>
                 <div class="pts-hero__card-actions">
                   <a href={`/mountains/${featured.slug}`} class="pts-btn pts-btn--gold">View Journey</a>
-                  <a href={`/connect?source=mountains_hub_${featured.slug}_apply`} class="pts-btn pts-btn--ghost">Apply Now</a>
+                  <a href={`/connect?source=mountains_hub_${featured.slug}_apply`} class="pts-btn pts-btn--ghost">{(featured.badge ?? 'open') === 'open' ? 'Apply Now' : 'Enquire'}</a>
                 </div>
               </div>
             </div>
@@ -103,10 +105,11 @@ const upcoming = getOtherUpcoming(featured);
           <h2 class="pts-featured__title reveal d1">{featured.title}</h2>
           {featured.tagline && <p class="pts-featured__tagline reveal d2">{featured.tagline}</p>}
           <p class="pts-featured__meta reveal d2">
-            {featured.date} <span class="pts-featured__dot">·</span> {featured.groupSize}
+            {featured.date} <span class="pts-featured__dot">·</span> {featured.duration}
+            <span class="pts-featured__dot">·</span> {featured.groupSize}
           </p>
-          <a href={`/mountains/${featured.slug}`} class="pts-featured__link reveal d3">
-            Enter the Journey
+          <a href={`/mountains/${featured.slug}`} class="pts-btn pts-btn--gold reveal d3">
+            View Journey
           </a>
         </div>
       </section>
@@ -128,6 +131,16 @@ const upcoming = getOtherUpcoming(featured);
               <div class="pts-hero__card-photo">
                 <img src={j.cardImage ?? j.heroImage} alt={j.title} loading="lazy" decoding="async" />
                 <div class="pts-hero__card-photo-fade" aria-hidden="true"></div>
+                {(j.badge ?? 'open') === 'open' ? (
+                  <div class="pts-hero__card-badge">
+                    <span class="pts-hero__card-badge-dot">●</span>
+                    <span>Open now</span>
+                  </div>
+                ) : (
+                  <div class="pts-hero__card-badge">
+                    <span>Coming Soon</span>
+                  </div>
+                )}
               </div>
               <div class="pts-hero__card-body">
                 <h3 class="pts-hero__card-title">{j.title}</h3>
@@ -175,7 +188,7 @@ const upcoming = getOtherUpcoming(featured);
           <div class="pts-final-cta__text">
             <p class="t-label t-label--gold reveal">Ready to go</p>
             <h2 class="pts-final-cta__title reveal d1">
-              Max 6 people.<br />
+              {featured?.groupSize ?? 'Small groups'}.<br />
               <em>Each journey led personally.</em>
             </h2>
             <p class="pts-final-cta__sub reveal d2">
@@ -185,11 +198,9 @@ const upcoming = getOtherUpcoming(featured);
           </div>
 
           <div class="pts-final-cta__actions reveal d2">
-            {featured && (
-              <a href={`/mountains/${featured.slug}`} class="pts-btn pts-btn--gold">
-                View {featured.title}
-              </a>
-            )}
+            <a href="/connect?source=mountains_final_cta" class="pts-btn pts-btn--gold">
+              Apply Now
+            </a>
             <a href="/connect?source=mountains_hub_footer" class="pts-btn pts-btn--ghost">Write directly</a>
           </div>
 
@@ -332,6 +343,25 @@ const upcoming = getOtherUpcoming(featured);
     overflow: hidden;
   }
 
+  /* The cold-altitude colour grade (contrast 1.08, saturation 0.80,
+     brightness 0.92) is baked into hero-graded.jpg, so nothing filters the
+     moving layer at runtime — the image only translates/scales on the GPU.
+     (A live CSS filter re-processed the whole frame on every animation tick.) */
+  /* The site-wide fixed grain layer (Base.astro, z-index 200) sits over the
+     whole viewport. With a moving hero underneath, the browser has to
+     re-composite that full-screen layer on every frame — measured: with it,
+     frames drop (~5–10% over 33 ms); with it hidden, a perfect 60 fps even
+     while the hero drifts. This page already carries its own grain on the
+     hero and each section, so the global one is switched off here only. */
+  :global(.grain) { display: none; }
+
+  .pts-hero__media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  /* Static photograph — no motion. */
   .pts-hero__bg {
     position: absolute;
     inset: 0;
@@ -340,17 +370,6 @@ const upcoming = getOtherUpcoming(featured);
     object-fit: cover;
     object-position: center 32%;
     display: block;
-    /* Cold altitude: slightly desaturated + lifted contrast */
-    filter: contrast(1.08) saturate(0.80) brightness(0.92);
-    transform-origin: 50% 36%;
-    will-change: transform;
-    animation: ptsHeroBreathe 34s ease-in-out infinite alternate;
-  }
-
-  /* Not an animation — a breath. Barely perceptible drift, never a loop you can catch. */
-  @keyframes ptsHeroBreathe {
-    from { transform: scale(1.00) translate(0, 0); }
-    to   { transform: scale(1.028) translate(-7px, -9px); }
   }
 
   .pts-hero__overlay {
@@ -394,7 +413,6 @@ const upcoming = getOtherUpcoming(featured);
     pointer-events: none;
     background-image: var(--grain);
     background-size: 200px 200px;
-    mix-blend-mode: overlay;
     /* Matched exactly to the Divider's own grain, so the air itself
        doesn't change character at the boundary — one continuous room */
     opacity: 0.025;
@@ -616,6 +634,8 @@ const upcoming = getOtherUpcoming(featured);
     z-index: 2;
   }
 
+  .pts-hero__card-badge-dot { font-size: 6px; color: var(--gold); }
+
   .pts-hero__card-body {
     padding: 28px 28px 30px;
     display: flex;
@@ -810,11 +830,11 @@ const upcoming = getOtherUpcoming(featured);
   }
 
   .pts-featured__title {
-    font-family: var(--serif);
-    font-weight: 600;
+    font-family: var(--display);
+    font-weight: 200;
     font-size: clamp(40px, 6vw, 84px);
     line-height: 0.94;
-    letter-spacing: -0.018em;
+    letter-spacing: -0.025em;
     color: var(--bone);
     margin: var(--s-3) 0 0;
     font-optical-sizing: auto;
@@ -842,36 +862,10 @@ const upcoming = getOtherUpcoming(featured);
 
   .pts-featured__dot { opacity: 0.4; margin: 0 2px; }
 
-  .pts-featured__link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+  /* Reuses the shared .pts-btn--gold recipe (defined above) — only the
+     top margin is Featured-specific, to sit correctly under the meta line. */
+  .pts-featured__inner .pts-btn {
     margin-top: var(--s-6);
-    font-family: var(--mark);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.20em;
-    text-transform: uppercase;
-    padding: 16px 34px;
-    border-radius: var(--r-pill);
-    border: 1.5px solid rgba(196,168,98,0.55);
-    color: rgba(247,242,232,0.95);
-    background: rgba(196,168,98,0.10);
-    box-shadow:
-      0 0 32px rgba(196,168,98,0.16),
-      inset 0 1px 0 rgba(247,242,232,0.08),
-      inset 0 -1px 0 rgba(0,0,0,0.20);
-    transition: all 350ms var(--ease);
-  }
-  .pts-featured__link:hover {
-    border-color: rgba(196,168,98,0.85);
-    background: rgba(196,168,98,0.18);
-    color: var(--bone);
-    box-shadow:
-      0 0 44px rgba(196,168,98,0.26),
-      inset 0 1px 0 rgba(247,242,232,0.10),
-      inset 0 -1px 0 rgba(0,0,0,0.20);
-    transform: translateY(-1px);
   }
 
 
@@ -881,8 +875,12 @@ const upcoming = getOtherUpcoming(featured);
 
   .pts-schedule {
     position: relative;
-    /* Flat stone, not a blended gradient — its own material, its own step */
-    background: var(--alp-blue);
+    /* Onyx stone texture, tinted to the section's own tone —
+       a real material photograph, not a decorative gradient */
+    background:
+      linear-gradient(rgba(27,39,56,0.55), rgba(27,39,56,0.55)),
+      url('/images/mountains/schedule-texture-onyx.webp') center / cover no-repeat;
+    background-color: var(--alp-blue);
     overflow: hidden;
   }
   /* Cold, dense stone — a tight, almost-polished grain */
@@ -926,6 +924,12 @@ const upcoming = getOtherUpcoming(featured);
   }
   .pts-cards .pts-hero__card-body {
     flex: 1;
+  }
+  /* Schedule-card badges read top-left — distinct from the Hero Card's
+     bottom-left placement, which stays as-is. */
+  .pts-cards .pts-hero__card-badge {
+    top: 12px;
+    bottom: auto;
   }
   /* Presence, not motion — the card doesn't move, the light on it does */
   .pts-cards .pts-hero__card:hover {

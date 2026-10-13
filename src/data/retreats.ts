@@ -1,9 +1,13 @@
+import { isUpcomingDate } from './dates';
+
 export interface Retreat {
   slug: string;
   title: string;
   atmosphere: string;
   description: string;
   date: string;
+  /** ISO date or month (YYYY-MM) — drives upcoming/past; `date` is display only. */
+  startDate: string;
   location: string;
   duration: string;
   groupSize: string;
@@ -18,83 +22,13 @@ export interface Retreat {
 
 export const retreats: Retreat[] = [
   {
-    slug: 'mountain-autumn-2026',
-    title: 'Five days in the mountains',
-    atmosphere: 'High terrain, small group, real conversations.',
-    description:
-      'A retreat built around walking, ceremony, and the kind of honest exchange that only happens when people are tired enough to stop performing. Set in the Georgian Greater Caucasus.',
-    date: 'September 2026',
-    location: 'Kazbegi, Georgia',
-    duration: '5 Days · 4 Nights',
-    groupSize: '6–10 people',
-    format: 'Expedition · Ceremony · Group',
-    featured: true,
-    bg: 'radial-gradient(ellipse 70% 60% at 35% 35%, rgba(255,228,175,0.65), transparent 60%), linear-gradient(160deg, #C19763 0%, #6B4F33 70%, #3A2A18 100%)',
-    structure: [
-      {
-        day: 'Day I',
-        description:
-          'Arrival. First dinner together. An opening ceremony to mark the beginning of something intentional.',
-      },
-      {
-        day: 'Day II',
-        description:
-          'A long walk into the mountain. Physical challenge as a way of getting past the social layer. Evening by fire.',
-      },
-      {
-        day: 'Day III',
-        description:
-          'The hardest day. A ceremony at altitude. Silence. Space for what needs to surface.',
-      },
-      {
-        day: 'Day IV',
-        description:
-          'Integration. Slower movement. Conversation in pairs and as a group. A meal prepared together.',
-      },
-      {
-        day: 'Day V',
-        description:
-          'A closing ceremony. Departure without rush. The long drive back feels different from the drive in.',
-      },
-    ],
-    forWhom: [
-      'People at a genuine crossroads in their life',
-      'Those who have tried therapy, coaching, or self-help and want something more embodied',
-      'People who can be physically active for several hours a day',
-      'Those who are willing to be honest, even when it is uncomfortable',
-    ],
-    included: [
-      'All accommodation (mountain guesthouses)',
-      'All meals — simple, nourishing, shared',
-      'All ceremonies and guided sessions',
-      'Transport from Tbilisi',
-      'Emergency mountain equipment',
-    ],
-    faq: [
-      {
-        question: 'Do I need mountaineering experience?',
-        answer:
-          'No. You need to be comfortable walking 4–6 hours per day on uneven terrain. Fitness matters more than technical skill.',
-      },
-      {
-        question: 'What kind of ceremony is involved?',
-        answer:
-          'Non-religious, non-dogmatic practices. Fire ceremony, breath work, and structured group process. Nothing will be asked of you that violates your personal beliefs.',
-      },
-      {
-        question: 'How is this different from a hiking trip?',
-        answer:
-          'The physical journey is a container for the inner one. We walk in order to arrive somewhere internally, not just geographically.',
-      },
-    ],
-  },
-  {
     slug: 'winter-stillness-2026',
     title: 'Four days of stillness',
     atmosphere: 'Winter. A house by a frozen lake. Silence as practice.',
     description:
       'A winter retreat focused on stillness, writing, and deliberate rest. For people who need to stop, not to be inspired.',
     date: 'February 2026',
+    startDate: '2026-02',
     location: 'Transcarpathia, Ukraine',
     duration: '4 Days · 3 Nights',
     groupSize: '5–8 people',
@@ -137,6 +71,7 @@ export const retreats: Retreat[] = [
     description:
       'Not a retreat — a ceremony. A single evening gathering around a fire on the summer solstice. No agenda except what the fire asks for.',
     date: 'June 2026',
+    startDate: '2026-06',
     location: 'Georgia (location shared on registration)',
     duration: '1 Evening',
     groupSize: '15–25 people',
@@ -167,6 +102,25 @@ export function getRetreat(slug: string): Retreat | undefined {
   return retreats.find((r) => r.slug === slug);
 }
 
-export function getFeaturedRetreat(): Retreat | undefined {
-  return retreats.find((r) => r.featured);
+export function getUpcomingRetreats(
+  referenceDate: Date = new Date(),
+  list: Retreat[] = retreats
+): Retreat[] {
+  return list
+    .filter((r) => isUpcomingDate(r.startDate, referenceDate))
+    .sort((a, b) => a.startDate.localeCompare(b.startDate));
+}
+
+export function getPastRetreats(
+  referenceDate: Date = new Date(),
+  list: Retreat[] = retreats
+): Retreat[] {
+  return list
+    .filter((r) => !isUpcomingDate(r.startDate, referenceDate))
+    .sort((a, b) => b.startDate.localeCompare(a.startDate));
+}
+
+/** The next retreat still ahead, or undefined when none is scheduled. */
+export function getNextRetreat(referenceDate: Date = new Date()): Retreat | undefined {
+  return getUpcomingRetreats(referenceDate)[0];
 }

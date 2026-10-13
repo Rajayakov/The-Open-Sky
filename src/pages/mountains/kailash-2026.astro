@@ -6,10 +6,15 @@ import { getJourney } from '../../data/mountains';
 import '../../styles/global.css';
 
 const journey = getJourney('kailash-2026')!;
+
+/* Single source of truth for the places-count mentioned in prose sentences
+   below (FAQ, apply section) — derived from journey.groupSize so it can
+   never drift out of sync with the structured data. */
+const groupCount = journey.groupSize?.match(/\d+/)?.[0] ?? '';
 ---
 
 <Base
-  title="Kailash 2026 — Sacred Expedition — The Open Sky"
+  title="Kailash 2027 — Sacred Expedition — The Open Sky"
   description="Ten days around Mount Kailash, Tibet. The kora at altitude through one of the most remote and revered landscapes on earth. Led by Yakov Rajuna."
 >
   <Nav />
@@ -19,11 +24,11 @@ const journey = getJourney('kailash-2026')!;
          1. HERO
          ══════════════════════════════════════════ -->
 
-    <section class="kl-hero" aria-label="Kailash 2026 expedition">
+    <section class="kl-hero" aria-label={`${journey.title} ${journey.dateShort} expedition`}>
       <img
         class="kl-hero__img"
-        src="/images/mountains/kailash-hero.jpg"
-        alt="Mount Kailash, Tibet"
+        src={journey.heroImage}
+        alt={`${journey.title}, ${journey.terrain}`}
         loading="eager"
         fetchpriority="high"
         decoding="async"
@@ -31,9 +36,18 @@ const journey = getJourney('kailash-2026')!;
       <div class="kl-hero__overlay" aria-hidden="true"></div>
 
       <div class="kl-hero__inner frame">
-        <h1 class="kl-hero__title reveal d1">Kailash</h1>
-        <p class="kl-hero__date reveal d2">Tibet · September 2026</p>
-        <a href="#apply" class="kl-hero__cta reveal d3">Apply for this expedition</a>
+        <div class="kl-hero__text">
+          <h1 class="kl-hero__title reveal d1">{journey.title}</h1>
+          {journey.tagline && <p class="kl-hero__subtitle reveal d2">{journey.tagline}</p>}
+          <div class="kl-hero__divider reveal d2" aria-hidden="true"></div>
+          <div class="kl-hero__meta reveal d2">
+            <p class="kl-hero__meta-line">{journey.terrain}</p>
+            <p class="kl-hero__meta-line">{journey.date}</p>
+            <p class="kl-hero__meta-line kl-hero__meta-line--gap">{journey.duration}</p>
+            <p class="kl-hero__meta-line">{journey.groupSize}</p>
+          </div>
+        </div>
+        <a href="#apply" class="kl-btn kl-btn--gold kl-hero__cta reveal d3">JOIN</a>
       </div>
     </section>
 
@@ -315,7 +329,7 @@ const journey = getJourney('kailash-2026')!;
             },
             {
               q: 'When should I confirm my place?',
-              a: 'Places for September 2026 are limited to six. The first step is a short conversation with Yakov. Write through the form below or via Telegram — he responds personally to each message.',
+              a: `Places for ${journey.date} are limited to ${groupCount}. The first step is a short conversation with Yakov. Write through the form below or via Telegram — he responds personally to each message.`,
             },
             {
               q: 'Is this a religious event?',
@@ -354,18 +368,18 @@ const journey = getJourney('kailash-2026')!;
           <h2 class="kl-apply__title reveal d1">Kailash.</h2>
           <p class="kl-apply__body reveal d2">
             Write a short message. Tell Yakov where you are and what you are looking for.
-            He responds personally. Places for September 2026 are limited to six.
+            He responds personally. Places for {journey.date} are limited to {groupCount}.
           </p>
           <div class="kl-apply__actions reveal d3">
-            <a href="/connect?source=kailash2026_apply" class="kl-apply__btn kl-apply__btn--gold">Express Interest</a>
+            <a href="/connect?source=kailash2026_apply" class="kl-btn kl-btn--gold">Express Interest</a>
             <a
-              href="https://t.me/yakovrajuna"
-              class="kl-apply__btn kl-apply__btn--ghost"
+              href="https://t.me/rajuna_yakov"
+              class="kl-btn kl-btn--ghost"
               rel="noopener noreferrer"
               target="_blank"
             >Telegram</a>
           </div>
-          <p class="kl-apply__meta reveal d4">6 places · September 20, 2026 · Investment on enquiry</p>
+          <p class="kl-apply__meta reveal d4">{groupCount} places · {journey.date} · Investment on enquiry</p>
           <a href="/mountains" class="kl-apply__back reveal d5">← All mountain expeditions</a>
         </div>
       </div>
@@ -386,7 +400,8 @@ const journey = getJourney('kailash-2026')!;
     --mid:      #14243A;
     --silver:   #6A8099;
     --sky:      #C8DCF0;
-    --gold:     #C4A862;
+    --gold:       #C4A862;
+    --gold-hover: #B8983A;
     --bone:     #F0EBE0;
     --ink:      #2C2A26;
     --midnight: #06101A;
@@ -477,56 +492,155 @@ const journey = getJourney('kailash-2026')!;
   .kl-hero__inner {
     position: relative;
     z-index: 2;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--s-6);
+    /* Optical rhythm, not one uniform gap — title, subtitle and meta
+       read as one carved unit; the CTA sits apart, on its own margin. */
+    gap: 0;
     /* Higher title — reveal more mountain */
     padding-bottom: clamp(130px, 22svh, 260px);
   }
 
+  /* Left-third editorial column — masthead, subtitle and journey facts
+     read as one carved unit, pinned to the frame's left edge. Sized to
+     the title's own width (not a hard 33% cut) so a single-word
+     headline never wraps; the CTA below is a separate, independently
+     centered element, not part of this column. */
+  .kl-hero__text {
+    align-self: flex-start;
+    width: fit-content;
+    max-width: min(620px, 48vw);
+  }
+
+  /* Monumental through restraint, not scale — a smaller ceiling, the
+     same light weight this page uses everywhere, and a carved edge
+     (a hairline of light, a tight contact shadow) instead of one flat
+     ambient blur, so the title reads as cut into the rock, not laid
+     over the photograph. */
   .kl-hero__title {
     font-family: var(--display);
     font-weight: 200;
-    font-size: clamp(80px, 14vw, 200px);
-    line-height: 0.86;
-    letter-spacing: -0.03em;
+    font-size: clamp(64px, 10vw, 148px);
+    line-height: 0.90;
+    letter-spacing: -0.025em;
     color: var(--bone);
     margin: 0;
     font-optical-sizing: auto;
-    text-shadow: 0 2px 64px rgba(4,7,14,0.38);
+    text-shadow:
+      0 -1px 0 rgba(255,242,214,0.07),
+      0 2px 4px rgba(4,7,14,0.55),
+      0 10px 48px rgba(4,7,14,0.35);
   }
 
-  .kl-hero__date {
+  /* The one-line kicker beneath a magazine masthead — italic serif,
+     warm gold, tight against the title it belongs to. */
+  .kl-hero__subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(16px, 1.6vw, 22px);
+    color: rgba(210,182,120,0.92);
+    margin: var(--s-3) 0 0;
+    font-optical-sizing: auto;
+    letter-spacing: 0.002em;
+  }
+
+  .kl-hero__divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(214,190,140,0.38);
+    margin: var(--s-4) 0 0;
+  }
+
+  .kl-hero__meta {
+    display: flex;
+    flex-direction: column;
+    margin: var(--s-4) 0 0;
+  }
+
+  .kl-hero__meta-line {
     font-family: var(--mark);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.30em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(196,168,98,0.58);
+    color: rgba(232,225,210,0.80);
     margin: 0;
+    line-height: 2;
   }
 
-  .kl-hero__cta {
+  .kl-hero__meta-line--gap { margin-top: var(--s-2); }
+
+  /* Independent focal point, not the text column's closing line —
+     its own generous margin separates it from the meta block above. */
+  .kl-btn.kl-hero__cta { align-self: center; margin-top: clamp(40px, 6vw, 72px); }
+
+
+  /* ══════════════════════════════════════════════
+     BUTTONS — one shared system, reused everywhere on
+     this page. Exactly the filled-gold recipe used on
+     the expedition cards (mountains.astro .pts-btn--gold),
+     not a page-local invention.
+     ══════════════════════════════════════════════ */
+
+  .kl-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     align-self: flex-start;
     font-family: var(--mark);
     font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
+    font-weight: 600;
+    letter-spacing: 0.20em;
     text-transform: uppercase;
     padding: 16px 40px;
     border-radius: var(--r-pill);
-    background: transparent;
-    border: 1px solid rgba(196,168,98,0.48);
-    color: rgba(196,168,98,0.84);
-    transition: background-color 350ms var(--ease), border-color 350ms var(--ease), box-shadow 350ms var(--ease), color 350ms var(--ease);
+    border: 1.5px solid transparent;
+    white-space: nowrap;
+    cursor: pointer;
   }
-  .kl-hero__cta:hover {
-    background: rgba(196,168,98,0.055);
-    border-color: rgba(196,168,98,0.80);
-    color: rgba(196,168,98,0.98);
-    box-shadow: 0 0 44px rgba(196,168,98,0.09), inset 0 0 20px rgba(196,168,98,0.025);
+
+  .kl-btn--gold {
+    background: linear-gradient(180deg, rgba(255,240,205,0.32) 0%, transparent 45%), var(--gold);
+    border-color: var(--gold);
+    color: var(--deep);
+    box-shadow:
+      0 4px 22px rgba(196,168,98,0.28),
+      inset 0 1px 0 rgba(255,250,230,0.45),
+      inset 0 -2px 3px rgba(90,64,20,0.28);
+    transition:
+      background-color 450ms var(--ease-slow),
+      border-color 450ms var(--ease-slow),
+      box-shadow 450ms var(--ease-slow),
+      transform 450ms var(--ease-slow);
+  }
+  .kl-btn--gold:hover {
+    background: linear-gradient(180deg, rgba(255,240,205,0.22) 0%, transparent 45%), var(--gold-hover);
+    border-color: var(--gold-hover);
+    box-shadow:
+      0 8px 32px rgba(196,168,98,0.42),
+      inset 0 1px 0 rgba(255,250,230,0.40),
+      inset 0 -2px 3px rgba(90,64,20,0.32);
+    transform: translateY(-1px);
+  }
+
+  .kl-btn--ghost {
+    background: rgba(196,168,98,0.07);
+    border-color: rgba(196,168,98,0.62);
+    color: rgba(247,242,232,0.94);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), inset 0 -1px 0 rgba(0,0,0,0.18);
+    transition:
+      background-color 350ms var(--ease),
+      border-color 350ms var(--ease),
+      color 350ms var(--ease),
+      box-shadow 350ms var(--ease),
+      transform 350ms var(--ease);
+  }
+  .kl-btn--ghost:hover {
+    background: rgba(196,168,98,0.13);
+    border-color: rgba(196,168,98,0.90);
+    transform: translateY(-1px);
   }
 
 
@@ -769,22 +883,23 @@ const journey = getJourney('kailash-2026')!;
     flex-direction: column;
     gap: var(--s-3);
     padding: clamp(20px, 2.5vw, 32px) 0;
+    border-top: 1px solid rgba(196,168,98,0.10);
   }
 
   .kl-route__meta-label {
     font-family: var(--mark);
-    font-size: 8px;
+    font-size: 9px;
     font-weight: 500;
-    letter-spacing: 0.20em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(200,220,240,0.28);
+    color: rgba(214,190,140,0.40);
   }
 
   .kl-route__meta-val {
     font-family: var(--serif);
     font-style: italic;
     font-size: 15px;
-    color: rgba(200,220,240,0.68);
+    color: rgba(232,220,200,0.78);
     line-height: 1.4;
   }
 
@@ -1182,44 +1297,6 @@ const journey = getJourney('kailash-2026')!;
     margin-top: var(--s-4);
   }
 
-  .kl-apply__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--mark);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    padding: 16px 40px;
-    border-radius: var(--r-pill);
-    border: 1px solid transparent;
-    transition: background-color 300ms var(--ease), border-color 300ms var(--ease), color 300ms var(--ease), box-shadow 300ms var(--ease);
-  }
-
-  .kl-apply__btn--gold {
-    background: transparent;
-    border-color: rgba(196,168,98,0.64);
-    color: rgba(196,168,98,0.92);
-    box-shadow: 0 0 28px rgba(196,168,98,0.05), inset 0 0 28px rgba(196,168,98,0.02);
-  }
-  .kl-apply__btn--gold:hover {
-    background: rgba(196,168,98,0.06);
-    border-color: rgba(196,168,98,0.88);
-    color: rgba(196,168,98,1.0);
-    box-shadow: 0 0 56px rgba(196,168,98,0.11), inset 0 0 20px rgba(196,168,98,0.03);
-  }
-
-  .kl-apply__btn--ghost {
-    background: transparent;
-    border-color: rgba(200,220,240,0.14);
-    color: rgba(200,220,240,0.44);
-  }
-  .kl-apply__btn--ghost:hover {
-    border-color: rgba(200,220,240,0.36);
-    color: rgba(200,220,240,0.80);
-  }
-
   .kl-apply__meta {
     font-family: var(--mark);
     font-size: 9px;
@@ -1247,6 +1324,11 @@ const journey = getJourney('kailash-2026')!;
      ══════════════════════════════════════════════ */
 
   @media (max-width: 768px) {
+
+    .kl-hero__text {
+      width: auto;
+      max-width: 100%;
+    }
 
     .kl-why2__row,
     .kl-route__phase {

@@ -1,269 +1,290 @@
 ---
+/* /programs — the single online program: Присутствие — Возвращение в центр
+   Structure-only first version: 13 sections, exact headings, development
+   placeholders instead of copy. Replace the `placeholder` strings (and the
+   [Placeholder] values in the details list) when the copywriting stage begins.
+   Hero and final CTA reuse PageHero / CTASection. */
 import PageLayout from '../layouts/PageLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CTASection from '../components/CTASection.astro';
-import QuoteBlock from '../components/QuoteBlock.astro';
-import { programs } from '../data/programs';
+import { getProgram } from '../data/programs';
+
+const program = getProgram('presence')!;
+const placeholder = '[Placeholder — section copy]';
+
+const weeks = [
+  { n: '1', title: 'Неделя 1 — Остановка хаоса' },
+  { n: '2', title: 'Неделя 2 — Сборка внимания' },
+  { n: '3', title: 'Неделя 3 — Стабилизация состояния' },
+  { n: '4', title: 'Неделя 4 — Интеграция в жизнь' },
+];
+
+/* Facts taken from the program metadata (4 weeks · 2 × 90 min · chat). */
+const support = [
+  { label: 'Продолжительность', value: '4 недели' },
+  { label: 'Встречи', value: '2 в неделю · 90 минут' },
+  { label: 'Поддержка', value: 'чат' },
+];
+const details = [
+  { label: 'Формат', value: 'Онлайн · 2 встречи в неделю по 90 минут · чат' },
+  { label: 'Продолжительность', value: '4 недели' },
+  { label: 'Дата старта', value: '[Placeholder — to be announced]' },
+  { label: 'Стоимость', value: '[Placeholder — to be announced]' },
+];
+const faq = [1, 2, 3].map((n) => ({ q: `[Placeholder — question ${n}]`, a: placeholder }));
 ---
 
 <PageLayout
-  title="Online Programs — The Open Sky"
-  description="Structured online programs for those who cannot travel. Built around the same principles as the in-person work."
+  title="Присутствие — Возвращение в центр — The Open Sky"
+  description={program.description}
 >
+  <div lang="ru" class="presence">
 
-  <PageHero
-    label="Online Programs"
-    title="The work,"
-    titleEm="wherever you are."
-    lede="Structured programs for those who cannot travel. Same principles, different container."
-    theme="program"
-  />
+    <!-- 1. HERO -->
+    <PageHero
+      label="Online Program"
+      title="Присутствие — "
+      titleEm="Возвращение в центр"
+      theme="program"
+    />
 
-  <!-- Intro -->
-  <section class="programs-intro section frame" aria-label="About online programs">
-    <div class="programs-intro__inner">
-      <div class="reveal">
-        <p class="t-lede" style="max-width: 52ch;">
-          These programs are not a substitute for in-person work. They are their own thing — built for people who need structure, companionship, and a real challenge, but cannot leave their lives for a week.
-        </p>
-        <p class="t-body" style="margin-top: var(--s-5); max-width: 50ch;">
-          Each program has a specific shape: a beginning, a middle, and an end. They are not open-ended courses or libraries of content. They are containers with edges, and the edges are part of the work.
-        </p>
+    <!-- 2. PROBLEM -->
+    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-problem">
+      <h2 id="pr-problem" class="pr-h2 reveal">Когда ты постоянно находишься у себя в голове</h2>
+      <p class="pr-ph t-body reveal d1">{placeholder}</p>
+    </section>
+
+    <!-- 3. PROGRAM GOAL -->
+    <section class="pr-section pr-section--b section" aria-labelledby="pr-goal">
+      <div class="frame">
+        <h2 id="pr-goal" class="pr-h2 reveal">От внутреннего хаоса — к ясности и опоре</h2>
+        <p class="pr-ph t-body reveal d1">{placeholder}</p>
       </div>
+    </section>
 
-      <div class="programs-intro__orb" aria-hidden="true"></div>
-    </div>
-  </section>
+    <!-- 4. APPROACH -->
+    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-approach">
+      <h2 id="pr-approach" class="pr-h2 reveal">Меньше техник. Больше присутствия.</h2>
+      <p class="pr-ph t-body reveal d1">{placeholder}</p>
+    </section>
 
-  <!-- Program list -->
-  <section class="programs-list section" aria-label="Available programs">
-    <div class="frame">
-      <span class="t-label t-label--warm reveal">Current programs</span>
+    <!-- 5. FOUR-WEEK JOURNEY -->
+    <section class="pr-section pr-section--b section" aria-labelledby="pr-journey">
+      <div class="frame">
+        <h2 id="pr-journey" class="pr-h2 reveal">Четыре недели возвращения к себе</h2>
+        <ol class="pr-weeks">
+          {weeks.map((w, i) => (
+            <li class={`pr-week reveal d${(i % 3) + 1}`}>
+              <span class="t-label pr-week__num" aria-hidden="true">{w.n}</span>
+              <h3 class="pr-h3">{w.title}</h3>
+              <p class="pr-ph t-body">{placeholder}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
 
-      <div class="programs-list__items">
-        {programs.map((p, i) => (
-          <div class={`programs-item reveal d${(i % 3) + 1}`}>
-            <div class="programs-item__header">
-              <span class="t-label programs-item__num">{String(i + 1).padStart(2, '0')}</span>
-              <span class={`programs-item__status programs-item__status--${p.status}`}>
-                {p.status === 'open' ? 'Open' : p.status === 'waitlist' ? 'Waitlist' : 'Closed'}
-              </span>
+    <!-- 6. PRACTICES -->
+    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-practices">
+      <h2 id="pr-practices" class="pr-h2 reveal">Простые инструменты для работы с вниманием</h2>
+      <p class="pr-ph t-body reveal d1">{placeholder}</p>
+    </section>
+
+    <!-- 7. FORMAT AND SUPPORT -->
+    <section class="pr-section pr-section--b section" aria-labelledby="pr-format">
+      <div class="frame">
+        <h2 id="pr-format" class="pr-h2 reveal">Четыре недели практики с поддержкой</h2>
+        <dl class="pr-facts reveal d1">
+          {support.map((f) => (
+            <div class="pr-facts__row">
+              <dt class="t-label">{f.label}</dt>
+              <dd>{f.value}</dd>
             </div>
-            <h2 class="programs-item__title">{p.title}</h2>
-            <p class="t-body programs-item__body">{p.body}</p>
-            <div class="programs-item__meta">
-              <span class="programs-item__meta-row">
-                <span class="t-label">Duration</span>
-                <span class="programs-item__meta-val">{p.duration}</span>
-              </span>
-              <span class="programs-item__meta-row">
-                <span class="t-label">Format</span>
-                <span class="programs-item__meta-val">{p.format}</span>
-              </span>
-              <span class="programs-item__meta-row">
-                <span class="t-label">Group</span>
-                <span class="programs-item__meta-val">{p.groupSize}</span>
-              </span>
-            </div>
-            <div class="programs-item__cta">
-              <a href={`/programs/${p.slug}`} class="btn-text">Explore program</a>
-              {p.status !== 'closed' && (
-                <a href="/connect" class="btn btn--warm">Express interest</a>
-              )}
-            </div>
+          ))}
+        </dl>
+        <p class="pr-ph t-body reveal d2">{placeholder}</p>
+      </div>
+    </section>
+
+    <!-- 8. OUTCOMES -->
+    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-outcomes">
+      <h2 id="pr-outcomes" class="pr-h2 reveal">Что ты сможешь изменить в своей повседневной жизни</h2>
+      <p class="pr-ph t-body reveal d1">{placeholder}</p>
+    </section>
+
+    <!-- 9. ABOUT THE GUIDE — existing biography and portrait from /about -->
+    <section class="pr-section pr-section--b section" aria-labelledby="pr-guide">
+      <div class="frame pr-guide">
+        <img
+          class="pr-guide__img reveal"
+          src="/images/portrait/yakov-flags.jpg"
+          alt="Яков Раджуна"
+          loading="lazy"
+          decoding="async"
+        />
+        <div>
+          <h2 id="pr-guide" class="pr-h2 reveal">Яков Раджуна — путь присутствия и осознанности</h2>
+          <p class="t-body pr-guide__bio reveal d1" lang="en">
+            Yakov Rajuna has been leading groups in difficult terrain since 2010. He started as a trekking guide in the Caucasus, then spent years studying facilitation, ceremony, and group dynamics. The combination became his own — something that doesn't have a precise name, but that people who have experienced it recognise immediately.
+          </p>
+          <a href="/about" class="btn-text reveal d2">About Yakov</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. WHO THE PROGRAM IS FOR -->
+    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-for">
+      <h2 id="pr-for" class="pr-h2 reveal">Для тех, кто готов вернуться к осознанной жизни</h2>
+      <p class="pr-ph t-body reveal d1">{placeholder}</p>
+    </section>
+
+    <!-- 11. FAQ -->
+    <section class="pr-section pr-section--b section" aria-labelledby="pr-faq">
+      <div class="frame">
+        <h2 id="pr-faq" class="pr-h2 reveal">Что важно знать перед началом</h2>
+        <div class="pr-faq reveal d1">
+          {faq.map((item) => (
+            <details class="pr-faq__item">
+              <summary class="pr-faq__q">{item.q}</summary>
+              <p class="pr-ph t-body">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. PARTICIPATION DETAILS -->
+    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-details">
+      <h2 id="pr-details" class="pr-h2 reveal">Формат, продолжительность и стоимость</h2>
+      <dl class="pr-facts reveal d1">
+        {details.map((f) => (
+          <div class="pr-facts__row">
+            <dt class="t-label">{f.label}</dt>
+            <dd>{f.value}</dd>
           </div>
         ))}
-      </div>
-    </div>
-    <div class="programs-list__bg" aria-hidden="true"></div>
-  </section>
+      </dl>
+    </section>
 
-  <!-- How it works -->
-  <section class="programs-how section frame" aria-label="How programs work">
-    <span class="t-label t-label--warm reveal">How it works</span>
-    <div class="programs-how__grid">
-      {[
-        { step: '1', title: 'You apply', body: 'Send a short message about where you are and what you are looking for. No forms. Yakov reads each one.' },
-        { step: '2', title: 'A brief conversation', body: 'If the program seems like a fit, Yakov will reach out directly. The decision is mutual.' },
-        { step: '3', title: 'You join the cohort', body: 'You receive dates, structure, and access to the shared space. The program begins on a specific day.' },
-        { step: '4', title: 'You do the work', body: 'Sessions happen live. Practices happen between them. What you put in determines what you get out.' },
-      ].map((s, i) => (
-        <div class={`programs-how__step reveal d${i % 3 + 1}`}>
-          <span class="programs-how__step-num t-label">{s.step}</span>
-          <h3 class="programs-how__step-title">{s.title}</h3>
-          <p class="t-body">{s.body}</p>
-        </div>
-      ))}
-    </div>
-  </section>
+    <!-- 13. FINAL CTA -->
+    <CTASection
+      label="Online Program"
+      title="Начни возвращаться в центр."
+      primaryHref="/connect"
+      primarySource="program_presence_cta"
+      primaryLabel="[CTA — placeholder]"
+    />
 
-  <QuoteBlock
-    quote="The screen is not the obstacle. The willingness to be honest is. That is the same whether you are sitting by a fire or at your desk at home."
-    author="Yakov Rajuna"
-    centered
-  />
-
-  <CTASection
-    label="Interested in a program"
-    title="Send a short message."
-    body="Tell me which program interests you and where you are in your life right now. I will respond personally."
-    primaryHref="/connect"
-    primarySource="programs_hub_cta"
-    primaryLabel="Express interest"
-    secondaryHref="/retreats"
-    secondaryLabel="See live retreats"
-  />
-
+  </div>
 </PageLayout>
 
 <style>
-  .programs-intro {
-    position: relative;
-    background: var(--pg-prg-bg);
-    overflow: hidden;
-  }
-  .programs-intro__inner {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: var(--s-8);
-    align-items: center;
-  }
-  .programs-intro__orb {
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: var(--orb);
-    opacity: 0.18;
-    flex-shrink: 0;
-  }
+  .presence { background: var(--pg-prg-bg); }
 
-  .programs-list {
-    position: relative;
-    background: var(--pg-prg-bg-alt);
-    overflow: hidden;
-  }
-  .programs-list__bg {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 60% at 90% 10%, rgba(180,155,90,0.09), transparent 60%);
-    pointer-events: none;
-  }
-  .programs-list__items {
-    position: relative; z-index: 1;
-    margin-top: var(--s-7);
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border: 1px solid var(--rule);
-    border-radius: var(--r-2);
-    overflow: hidden;
-  }
+  .pr-section--a { background: var(--pg-prg-bg); }
+  .pr-section--b { background: var(--pg-prg-bg-alt); }
 
-  .programs-item {
-    background: var(--pg-prg-bg);
-    padding: var(--s-7) var(--s-7);
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-5);
-  }
-  .programs-item:last-child { border-bottom: none; }
-
-  .programs-item__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-4);
-  }
-  .programs-item__num { color: var(--honey); }
-
-  .programs-item__status {
-    font-family: var(--mark);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: var(--r-pill);
-  }
-  .programs-item__status--open {
-    background: rgba(166,124,77,0.12);
-    color: var(--honey);
-  }
-  .programs-item__status--closed {
-    background: rgba(139,130,117,0.12);
-    color: var(--mist);
-  }
-  .programs-item__status--waitlist {
-    background: rgba(166,124,77,0.08);
-    color: var(--honey);
-  }
-
-  .programs-item__title {
+  .pr-h2 {
     font-family: var(--serif);
     font-weight: 400;
-    font-size: clamp(26px, 3vw, 40px);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-size: clamp(28px, 3.6vw, 48px);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    color: var(--pg-prg-fg);
+    margin: 0;
+    max-width: 24ch;
+    text-wrap: balance;
+  }
+  .pr-h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 1.8vw, 22px);
+    line-height: 1.25;
     color: var(--pg-prg-fg);
     margin: 0;
   }
-  .programs-item__body { max-width: 60ch; margin: 0; }
-
-  .programs-item__meta {
-    display: flex;
-    gap: var(--s-7);
-    flex-wrap: wrap;
-    padding-top: var(--s-5);
-    border-top: 1px solid var(--rule-thin);
-  }
-  .programs-item__meta-row {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-2);
-  }
-  .programs-item__meta-val {
-    font-family: var(--serif);
+  .pr-ph {
+    margin: var(--s-6) 0 0;
+    color: var(--pg-prg-mute);
     font-style: italic;
-    font-size: 16px;
-    color: var(--fg-soft);
-  }
-  .programs-item__cta {
-    display: flex;
-    align-items: center;
-    gap: var(--s-5);
-    padding-top: var(--s-2);
-    flex-wrap: wrap;
   }
 
-  .programs-how { background: var(--pg-prg-bg); }
-  .programs-how__grid {
+  /* Four weeks — one connected sequence */
+  .pr-weeks {
+    list-style: none;
+    margin: var(--s-7) 0 0;
+    padding: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--s-6);
-    margin-top: var(--s-7);
+    border: 1px solid rgba(28,26,22,0.10);
+    border-radius: var(--r-2);
+    overflow: hidden;
   }
-  .programs-how__step-num {
-    color: var(--honey);
-    display: block;
-    margin-bottom: var(--s-3);
+  .pr-week {
+    padding: var(--s-6);
+    background: var(--pg-prg-bg);
+    border-right: 1px solid rgba(28,26,22,0.10);
   }
-  .programs-how__step-title {
+  .pr-week:last-child { border-right: none; }
+  .pr-week__num { color: var(--honey); display: block; margin-bottom: var(--s-3); }
+  .pr-week .pr-ph { margin-top: var(--s-4); }
+
+  /* Facts list (format & support / participation details) */
+  .pr-facts {
+    margin: var(--s-7) 0 0;
+    max-width: 640px;
+    border-top: 1px solid rgba(28,26,22,0.10);
+  }
+  .pr-facts__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s-4);
+    padding: var(--s-4) 0;
+    border-bottom: 1px solid rgba(28,26,22,0.07);
+  }
+  .pr-facts dd {
+    margin: 0;
     font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(18px, 1.8vw, 24px);
-    line-height: 1.2;
-    color: var(--earth);
-    margin: 0 0 var(--s-3);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--pg-prg-fg);
+    text-align: right;
   }
 
-  @media (max-width: 900px) {
-    .programs-intro__inner { grid-template-columns: 1fr; }
-    .programs-intro__orb { display: none; }
-    .programs-how__grid { grid-template-columns: 1fr 1fr; }
-    .programs-item { padding: var(--s-6); }
+  /* Guide */
+  .pr-guide {
+    display: grid;
+    grid-template-columns: minmax(200px, 320px) 1fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: start;
   }
-  @media (max-width: 560px) {
-    .programs-how__grid { grid-template-columns: 1fr; }
-    .programs-item__meta { gap: var(--s-5); }
+  .pr-guide__img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--r-2);
+  }
+  .pr-guide__bio { margin: var(--s-6) 0 var(--s-5); max-width: 52ch; }
+
+  /* FAQ */
+  .pr-faq { margin-top: var(--s-7); max-width: 720px; border-top: 1px solid rgba(28,26,22,0.10); }
+  .pr-faq__item { border-bottom: 1px solid rgba(28,26,22,0.07); padding: var(--s-4) 0; }
+  .pr-faq__q { cursor: pointer; font-family: var(--serif); font-size: 18px; color: var(--pg-prg-fg); }
+  .pr-faq__q:focus-visible { outline: 2px solid var(--honey); outline-offset: 4px; }
+
+  @media (max-width: 900px) {
+    .pr-weeks { grid-template-columns: 1fr 1fr; }
+    .pr-week:nth-child(2) { border-right: none; }
+    .pr-week:nth-child(-n+2) { border-bottom: 1px solid rgba(28,26,22,0.10); }
+  }
+  @media (max-width: 600px) {
+    .pr-weeks { grid-template-columns: 1fr; }
+    .pr-week { border-right: none; border-bottom: 1px solid rgba(28,26,22,0.10); }
+    .pr-week:last-child { border-bottom: none; }
+    .pr-guide { grid-template-columns: 1fr; }
+    .pr-guide__img { max-width: 320px; }
+    .pr-facts__row { flex-direction: column; gap: var(--s-2); }
+    .pr-facts dd { text-align: left; }
   }
 </style>

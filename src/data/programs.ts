@@ -1,3 +1,5 @@
+import { isUpcomingDate } from './dates';
+
 export interface Program {
   slug: string;
   title: string;
@@ -5,9 +7,21 @@ export interface Program {
   description: string;
   date: string;
   dateShort: string;
+  /** ISO start day. Omitted for rolling enrollment (always current). */
+  startDate?: string;
   duration: string;
   format: string;
-  groupSize: string;
+  /** Omitted until the real limit is confirmed — rows that show it are hidden. */
+  groupSize?: string;
+  /** Replaces the default Open/Closed/Waitlist label on the hub when the real
+   *  application state differs from those three. */
+  statusLabel?: string;
+  /** Cover photo for announcement cards. */
+  cardImage?: string;
+  /** Where this program lives, when not the default /programs/<slug>. */
+  href?: string;
+  /** false = kept in the data but not shown on the hub, homepage or in selectors. */
+  listed?: boolean;
   status: 'open' | 'closed' | 'waitlist';
   body: string;
   structure: { phase: string; description: string }[];
@@ -16,11 +30,30 @@ export interface Program {
 
 export const programs: Program[] = [
   {
+    slug: 'presence',
+    href: '/programs',
+    cardImage: '/images/portrait/yakov-flags.jpg',
+    title: 'Присутствие',
+    subtitle: 'Возвращение в центр',
+    description: 'Четырёхнедельная онлайн-программа практики внимания и присутствия.',
+    date: 'Dates to be announced',
+    dateShort: 'Dates TBA',
+    duration: '4 weeks',
+    format: '2 meetings per week · 90 min · chat support',
+    statusLabel: 'Dates to be announced',
+    status: 'open',
+    body: 'Четырёхнедельная онлайн-программа практики внимания и присутствия.',
+    structure: [],
+    forWhom: [],
+  },
+  {
     slug: 'inner-cartography-cohort-4',
+    listed: false,
     title: 'Inner Cartography',
     subtitle: 'Cohort 4',
     description: 'An eight-week structured journey through the terrain of identity, purpose, and direction. Live sessions with Yakov, guided practices, intimate cohort.',
     date: 'June 5, 2026',
+    startDate: '2026-06-05',
     dateShort: 'Jun 5, 2026',
     duration: '8 weeks',
     format: 'Live cohort · 12 participants',
@@ -41,10 +74,12 @@ export const programs: Program[] = [
   },
   {
     slug: 'fire-season-cohort-2',
+    listed: false,
     title: 'The Fire Season',
     subtitle: 'Cohort 2',
     description: 'A twelve-week intensive for people in the middle of a genuine life transition. Combines live sessions, written practice, and one private exchange with Yakov each month.',
     date: 'September 8, 2026',
+    startDate: '2026-09-08',
     dateShort: 'Sep 8, 2026',
     duration: '12 weeks',
     format: 'Cohort · 8 participants',
@@ -64,6 +99,7 @@ export const programs: Program[] = [
   },
   {
     slug: 'roots-and-direction-open',
+    listed: false,
     title: 'Roots & Direction',
     subtitle: 'Open enrollment',
     description: 'A six-week introductory program for those new to this kind of work. Pre-recorded teachings, weekly live Q&A, open enrollment.',
@@ -87,10 +123,42 @@ export const programs: Program[] = [
   },
 ];
 
+/** Programs shown on the hub and homepage. */
+export const listedPrograms: Program[] = programs.filter((p) => p.listed !== false);
+
 export function getProgram(slug: string): Program | undefined {
   return programs.find((p) => p.slug === slug);
 }
 
-export function getNextOpenProgram(): Program | undefined {
-  return programs.find((p) => p.status === 'open' && p.date !== 'Rolling enrollment');
+/** A program is current while its start day is ahead, or always when
+ *  enrollment is rolling (no `startDate`). */
+export function isCurrentProgram(p: Program, referenceDate: Date = new Date()): boolean {
+  return !p.startDate || isUpcomingDate(p.startDate, referenceDate);
+}
+
+export function getCurrentPrograms(
+  referenceDate: Date = new Date(),
+  list: Program[] = listedPrograms
+): Program[] {
+  return list.filter((p) => isCurrentProgram(p, referenceDate));
+}
+
+export function getPastPrograms(
+  referenceDate: Date = new Date(),
+  list: Program[] = listedPrograms
+): Program[] {
+  return list.filter((p) => !isCurrentProgram(p, referenceDate));
+}
+
+/** The program to promote: the soonest dated open/waitlist cohort still
+ *  ahead, otherwise a rolling-enrollment one. Undefined when none. */
+export function getNextOpenProgram(
+  referenceDate: Date = new Date(),
+  list: Program[] = listedPrograms
+): Program | undefined {
+  const open = getCurrentPrograms(referenceDate, list).filter((p) => p.status !== 'closed');
+  const dated = open
+    .filter((p) => p.startDate)
+    .sort((a, b) => a.startDate!.localeCompare(b.startDate!));
+  return dated[0] ?? open.find((p) => !p.startDate);
 }

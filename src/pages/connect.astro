@@ -48,7 +48,7 @@ import PageHero from '../components/PageHero.astro';
           <p class="t-body connect-channel__body">
             The community channel — where upcoming retreats, programs, live events, and new music are announced first. Over 340 people.
           </p>
-          <a href="https://t.me/yakovrajuna" class="btn btn--outline connect-channel__btn">Join the channel</a>
+          <a href="https://t.me/rajuna_yakov" class="btn btn--outline connect-channel__btn">Join the channel</a>
         </div>
 
         <div class="connect-channel">
@@ -59,7 +59,7 @@ import PageHero from '../components/PageHero.astro';
           <p class="t-body connect-channel__body">
             Live sessions, field recordings, and conversations from retreats. Updated occasionally.
           </p>
-          <a href="https://youtube.com/@yakovrajuna" class="btn btn--outline connect-channel__btn">Watch</a>
+          <a href="https://www.youtube.com/@yakovrajuna" class="btn btn--outline connect-channel__btn">Watch</a>
         </div>
 
         <div class="connect-channel">
@@ -70,10 +70,37 @@ import PageHero from '../components/PageHero.astro';
           <p class="t-body connect-channel__body">
             Images from the field — mountains, retreats, the spaces between. Minimal posting.
           </p>
-          <a href="https://instagram.com/yakovrajuna" class="btn btn--outline connect-channel__btn">Follow</a>
+          <a href="https://www.instagram.com/yakov_rajuna" class="btn btn--outline connect-channel__btn">Follow</a>
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- Live widgets: latest YouTube uploads + Instagram profile -->
+  <section class="connect-widgets section frame" aria-label="YouTube and Instagram">
+    <span class="t-label t-label--warm reveal">Follow along</span>
+    <div class="connect-widgets__grid">
+      <div class="connect-widget connect-widget--yt reveal d1">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/videoseries?list=UUXwdMOct6wuOeSn4QrffrxA"
+          title="YouTube — Yakov Rajuna: latest videos"
+          loading="lazy"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+        <a href="https://www.youtube.com/@yakovrajuna" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Open YouTube channel</a>
+      </div>
+      <div class="connect-widget connect-widget--ig reveal d2">
+        <iframe
+          src="https://www.instagram.com/yakov_rajuna/embed"
+          title="Instagram — @yakov_rajuna"
+          loading="lazy"
+          scrolling="no"
+        ></iframe>
+        <a href="https://www.instagram.com/yakov_rajuna" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Open Instagram profile</a>
+      </div>
     </div>
   </section>
 
@@ -218,6 +245,28 @@ import PageHero from '../components/PageHero.astro';
   }
   .connect-channel__body { margin: 0; }
   .connect-channel__btn { align-self: flex-start; }
+
+  .connect-widgets { background: var(--pg-con-bg); }
+  .connect-widgets__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 4vw, 56px);
+    margin-top: var(--s-6);
+    align-items: start;
+  }
+  .connect-widget { display: flex; flex-direction: column; gap: var(--s-4); align-items: flex-start; }
+  .connect-widget iframe {
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-radius: var(--r-2);
+    background: var(--paper);
+  }
+  .connect-widget--yt iframe { aspect-ratio: 16 / 9; }
+  /* Instagram's profile embed renders a fixed-width (~250px) card, so the frame hugs it. */
+  .connect-widget--ig iframe { width: 100%; max-width: 250px; height: 520px; }
+  @media (max-width: 860px) {
+    .connect-widgets__grid { grid-template-columns: 1fr; }
+  }
 
   .connect-guide {
     position: relative;

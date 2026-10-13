@@ -9,14 +9,18 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lighthouse": "lighthouse --chrome-flags=\"--headless\" --only-categories=performance,accessibility,seo,best-practices --quiet --output=json --output-path=stdout"
   },
   "dependencies": {
     "astro": "^7.0.1"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@playwright/test": "^1.61.0",
     "@types/node": "^26.0.0",
-    "shadcn": "^4.11.0"
+    "lighthouse": "^13.5.0",
+    "shadcn": "^4.11.0",
+    "typescript": "^6.0.3"
   }
 }

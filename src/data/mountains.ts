@@ -2,6 +2,8 @@
    Mountains data — expeditions and journeys
    ───────────────────────────────────────────────────── */
 
+import { isUpcomingDate } from './dates';
+
 /* ── Detailed journey (powers slug pages) ──────────── */
 
 export interface MountainJourney {
@@ -26,8 +28,19 @@ export interface MountainJourney {
   /** Short evocative line shown under the title on the Hero Card and the
    *  Featured Expedition section (e.g. "The Abode of Shiva"). */
   tagline?: string;
-  /** ISO date (YYYY-MM-DD) — the only thing getFeaturedExpedition() sorts by. */
+  /** Booking-state badge shown on the Schedule cards ("Open now" /
+   *  "Coming Soon"). Deliberately separate from `status`, which drives
+   *  list membership (getFeaturedExpedition/getOtherUpcoming both require
+   *  status === 'upcoming') — a journey can be upcoming-and-listed while
+   *  its dates or booking are still being finalised. Defaults to 'open'
+   *  when omitted. */
+  badge?: 'open' | 'soon';
+  /** ISO date (YYYY-MM-DD), confirmed departures only — what the selectors sort by.
+   *  Leave unset while the exact day is unconfirmed. */
   departureDate?: string;
+  /** ISO month (YYYY-MM) — used only when the exact day is unconfirmed. Keeps
+   *  the journey listed until that month ends; never makes it featured. */
+  departureMonth?: string;
   structure?: { phase: string; description: string }[];
   forWhom?: string[];
   included?: string[];
@@ -40,20 +53,20 @@ export const journeys: MountainJourney[] = [
     terrain: 'Tibet',
     description:
       'Ten days around Mount Kailash — the sacred axis of the world. A kora at altitude through one of the most remote landscapes on earth.',
-    date: 'September 20, 2026',
-    dateShort: 'Sep 20, 2026',
+    date: 'September 2027',
+    dateShort: 'Sep 2027',
     location: 'Tibet',
     duration: '10 days · 9 nights',
     altitude: '4,800–5,600m',
-    groupSize: 'Max 6 people',
+    groupSize: 'Max 15 people',
     difficulty: 'Demanding',
     status: 'upcoming',
     upcoming: true,
     bg: 'linear-gradient(160deg, #A8C0D8 0%, #4A6888 45%, #1A2C40 100%)',
-    heroImage: '/images/mountains/kailash-hero.jpg',
+    heroImage: '/images/mountains/kailash-hero-sunset.jpg',
     cardImage: '/images/mountains/kailash-featured.jpg',
     tagline: 'The Abode of Shiva',
-    departureDate: '2026-09-20',
+    departureMonth: '2027-09',
     structure: [
       { phase: 'Days I–II', description: 'Arrival and acclimatisation. Lhasa or Kathmandu. First group gathering.' },
       { phase: 'Days III–IV', description: 'Transfer to the mountain. First encounter with Kailash. Preparation.' },
@@ -80,8 +93,8 @@ export const journeys: MountainJourney[] = [
     terrain: 'Tamil Nadu, India',
     description:
       'A pilgrimage to Arunachala — the sacred mountain of southern India, embodiment of Shiva as pure light. Girivalam, silence, and inner fire.',
-    date: 'November 2026',
-    dateShort: 'Nov 2026',
+    date: 'November 2027',
+    dateShort: 'Nov 2027',
     location: 'Tiruvannamalai, India',
     duration: '7 days · 6 nights',
     altitude: '800m',
@@ -92,7 +105,8 @@ export const journeys: MountainJourney[] = [
     bg: 'linear-gradient(160deg, #D4A87A 0%, #8C5A3A 50%, #3A1E12 100%)',
     heroImage: '/images/mountains/arunachala-featured.jpg',
     tagline: 'The Mountain of Fire',
-    departureDate: '2026-11-01',
+    badge: 'open',
+    departureMonth: '2027-11',
     structure: [
       { phase: 'Days I–II', description: 'Arrival. First encounter with the mountain. Setting intention.' },
       { phase: 'Days III–V', description: 'Daily girivalam — circumambulation of the mountain. Early morning walks. Evening silence.' },
@@ -115,75 +129,20 @@ export const journeys: MountainJourney[] = [
     title: 'Annapurna',
     terrain: 'Nepal',
     description:
-      'A multi-day traverse through the Annapurna massif — one of the world\'s most dramatic mountain landscapes. A living mountain: cloud, breath, and movement, not a static summit.',
-    date: '15–30 May 2027',
-    dateShort: 'May 15, 2027',
-    location: 'Annapurna Sanctuary, Nepal',
-    duration: '16 days · 15 nights',
-    altitude: '1,700–4,130m',
-    groupSize: 'Max 10 people',
-    difficulty: 'Moderate–Demanding',
+      'A fourteen-day pilgrimage to Muktinath through the Annapurna region — one of the world\'s most dramatic mountain landscapes. A living mountain: cloud, breath, and movement, not a static summit.',
+    date: '25 March 2027',
+    dateShort: 'Mar 25, 2027',
+    location: 'Annapurna, Nepal',
+    duration: '14 days',
+    altitude: 'Up to 3,800m',
+    groupSize: 'Max 8 people',
     status: 'upcoming',
     upcoming: true,
     bg: 'linear-gradient(160deg, #B8C8D0 0%, #6080A0 45%, #1E3048 100%)',
     heroImage: '/images/mountains/card-3.jpg',
     tagline: 'The Living Mountain',
-    departureDate: '2027-05-15',
-    structure: [
-      { phase: 'Days I–II', description: 'Arrival in Pokhara. Gear check and acclimatisation briefing. First group gathering by the lake.' },
-      { phase: 'Days III–VII', description: 'Ascent through rhododendron forest and terraced villages into high alpine terrain. Daily walking, 5–7 hours.' },
-      { phase: 'Days VIII–X', description: 'The Sanctuary — a natural amphitheatre of peaks above 7,000m. Rest days, ceremony, and silence at altitude.' },
-      { phase: 'Days XI–XV', description: 'Descent by a different route. Changing forest, changing air. Integration begins on the way down.' },
-      { phase: 'Day XVI', description: 'Return to Pokhara. Closing circle. Departure.' },
-    ],
-    forWhom: [
-      'People physically prepared for 5–7 hours of daily walking over two weeks',
-      'Those drawn to a living, breathing landscape rather than a single summit push',
-      'People comfortable with changing weather, cloud, and long unstructured days',
-    ],
-    included: [
-      'All permits (ACAP + TIMS)',
-      'Teahouse and lodge accommodation throughout',
-      'All meals on route',
-      'Guided ceremonies and group process',
-      'Local trekking crew and porters',
-      'Ground transport between Pokhara and the trailhead',
-    ],
-  },
-  {
-    slug: 'georgian-highlands-september-2026',
-    title: 'Georgian Highlands',
-    terrain: 'Greater Caucasus',
-    description:
-      'A seven-day traverse through the Greater Caucasus. Physical exertion as a doorway to interior terrain. Small group, high altitude, real conditions.',
-    date: 'September 14–20, 2026',
-    dateShort: 'Sep 14–20, 2026',
-    location: 'Kazbegi region, Georgia',
-    duration: '7 days · 6 nights',
-    altitude: '2,400–3,500m',
-    groupSize: 'Max 8 people',
-    difficulty: 'Demanding',
-    status: 'past',
-    upcoming: false,
-    bg: 'linear-gradient(160deg, #C8D0C8 0%, #8A9688 50%, #3A4035 100%)',
-    structure: [
-      { phase: 'Day I', description: 'Arrival in Tbilisi. Transfer to the mountains. First evening together.' },
-      { phase: 'Days II–IV', description: 'Walking 5–7 hours daily. High terrain, changing weather. Evening conversations by fire.' },
-      { phase: 'Day V', description: 'The hardest day. A ceremony at altitude. Silence and solitude.' },
-      { phase: 'Days VI–VII', description: 'Descent. Integration. Return to Tbilisi at your own pace.' },
-    ],
-    forWhom: [
-      'People physically fit enough to walk 5–7 hours per day on rough terrain',
-      'Those who need interior movement as much as exterior challenge',
-      'People comfortable with discomfort, uncertainty, and genuine exertion',
-    ],
-    included: [
-      'Mountain guesthouse accommodation',
-      'All meals on the route',
-      'Guided ceremonies and group process',
-      'Transport from Tbilisi and back',
-      'Emergency mountain equipment',
-    ],
+    badge: 'soon',
+    departureDate: '2027-03-25',
   },
   {
     slug: 'pontic-alps-july-2026',
@@ -266,29 +225,59 @@ export function getJourney(slug: string): MountainJourney | undefined {
   return journeys.find((j) => j.slug === slug);
 }
 
-export function getNextJourney(): MountainJourney | undefined {
-  return journeys.find((j) => j.status === 'upcoming');
+/** Open (status 'upcoming'), still ahead of the reference date. A confirmed
+ *  `departureDate` is used when present, otherwise `departureMonth`; a journey
+ *  with neither is treated as undated and stays listed. */
+export function isListedUpcoming(j: MountainJourney, referenceDate: Date = new Date()): boolean {
+  if (j.status !== 'upcoming') return false;
+  const when = j.departureDate ?? j.departureMonth;
+  return !when || isUpcomingDate(when, referenceDate);
+}
+
+/** True when the journey is over: marked past, or its date has gone by. */
+export function hasDeparted(j: MountainJourney, referenceDate: Date = new Date()): boolean {
+  return j.status === 'past' || !isListedUpcoming(j, referenceDate);
+}
+
+/** Eligible to be *featured*: open, with a confirmed exact departure day that
+ *  is not in the past. Month-only dates are never featured (never invent a day). */
+export function isUpcomingWithDate(
+  j: MountainJourney,
+  referenceDate: Date = new Date()
+): j is MountainJourney & { departureDate: string } {
+  return j.status === 'upcoming' && !!j.departureDate && isUpcomingDate(j.departureDate, referenceDate);
 }
 
 /** The single source of truth for "which expedition is featured right now" —
- *  the nearest open-for-applications departure, sorted automatically by
- *  date. Never hardcode a destination; this is what both the Hero Card and
- *  the Featured Expedition section on /mountains consume. */
-export function getFeaturedExpedition(referenceDate: Date = new Date()): MountainJourney | null {
-  const open = journeys.filter(
-    (j): j is MountainJourney & { departureDate: string } =>
-      j.status === 'upcoming' && !!j.departureDate
-  );
-  const upcoming = open.filter((j) => new Date(j.departureDate) >= referenceDate);
-  const pool = upcoming.length > 0 ? upcoming : open;
+ *  the earliest future confirmed `departureDate` among eligible journeys.
+ *  Consumed by the homepage featured card and the Mountains page. Returns
+ *  null when nothing qualifies (it never falls back to a past journey). */
+export function getFeaturedExpedition(
+  referenceDate: Date = new Date(),
+  list: MountainJourney[] = journeys
+): MountainJourney | null {
   return (
-    [...pool].sort(
-      (a, b) => new Date(a.departureDate).getTime() - new Date(b.departureDate).getTime()
-    )[0] ?? null
+    list
+      .filter((j) => isUpcomingWithDate(j, referenceDate))
+      .sort((a, b) => a.departureDate.localeCompare(b.departureDate))[0] ?? null
   );
 }
 
-/** Every open expedition except the currently featured one. */
-export function getOtherUpcoming(featured: MountainJourney | null): MountainJourney[] {
-  return journeys.filter((j) => j.status === 'upcoming' && j.slug !== featured?.slug);
+/** Every other upcoming expedition, soonest first (undated/month-only ones
+ *  sort by their month, then fully undated last). Past ones are excluded. */
+export function getOtherUpcoming(
+  featured: MountainJourney | null,
+  referenceDate: Date = new Date(),
+  list: MountainJourney[] = journeys
+): MountainJourney[] {
+  const key = (j: MountainJourney) => j.departureDate ?? j.departureMonth;
+  return list
+    .filter((j) => j.slug !== featured?.slug && isListedUpcoming(j, referenceDate))
+    .sort((a, b) => {
+      const ka = key(a);
+      const kb = key(b);
+      if (!ka) return 1;
+      if (!kb) return -1;
+      return ka.localeCompare(kb);
+    });
 }
