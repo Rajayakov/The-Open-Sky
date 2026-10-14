@@ -8,8 +8,10 @@ const upcoming = [
   {
     slug: 'kailash-2026',
     name: 'Kailash',
+    tagline: 'The Abode of Shiva',
     terrain: 'Tibet',
     date: 'September 20',
+    sortDate: '2026-09-20',
     duration: '10 Days',
     groupSize: 'Max 6 people',
     status: 'open' as const,
@@ -19,8 +21,10 @@ const upcoming = [
   {
     slug: 'arunachala-2026',
     name: 'Arunachala',
+    tagline: 'The Sacred Fire',
     terrain: 'India',
     date: 'November',
+    sortDate: '2026-11-01',
     duration: '7 Days',
     groupSize: 'Max 8 people',
     status: 'open' as const,
@@ -30,8 +34,10 @@ const upcoming = [
   {
     slug: 'annapurna-2027' as string | null,
     name: 'Annapurna',
+    tagline: 'The Living Mountain',
     terrain: 'Nepal',
     date: 'March 28, 2027',
+    sortDate: '2027-03-28',
     duration: '14–20 Days',
     groupSize: 'Up to 15 people',
     status: 'open' as const,
@@ -78,7 +84,15 @@ const testimonials = [
   },
 ];
 
-const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ?? null;
+// Карточки в "Where we go next" — строго по датам, ближайшая первой.
+upcoming.sort((a, b) => a.sortDate.localeCompare(b.sortDate));
+
+// Featured — ближайшая открытая экспедиция с подтверждённой датой.
+// Annapurna (28 марта 2027) — единственная с точной датой сейчас;
+// Kailash/Arunachala — приблизительные даты без года, уточнить у Якова перед тем как включать их в featured-ротацию.
+const openJourney = upcoming.find(j => j.slug === 'annapurna-2027')
+  ?? upcoming.find(j => j.status === 'open' && j.slug != null)
+  ?? null;
 ---
 
 <Base
@@ -117,31 +131,31 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
             <div class="pts-hero__card reveal d3">
               <div class="pts-hero__card-photo">
                 <img
-                  src="/images/mountains/kailash-featured.jpg"
-                  alt="Mount Kailash, Tibet — sacred pilgrimage destination"
+                  src={openJourney.heroImage}
+                  alt={`${openJourney.name}, ${openJourney.terrain} — sacred pilgrimage destination`}
                   loading="eager"
                   decoding="async"
                 />
                 <div class="pts-hero__card-photo-fade" aria-hidden="true"></div>
                 <div class="pts-hero__card-badge">
                   <span class="pts-hero__card-badge-dot">●</span>
-                  <span>6 places remaining</span>
+                  <span>Open for applications</span>
                 </div>
               </div>
 
               <div class="pts-hero__card-body">
-                <span class="pts-hero__card-terrain">Tibet · 6,638m · 10 Days</span>
+                <span class="pts-hero__card-terrain">{openJourney.terrain} · {openJourney.duration}</span>
                 <h2 class="pts-hero__card-title">{openJourney.name}</h2>
-                <p class="pts-hero__card-tagline">The Abode of Shiva</p>
+                <p class="pts-hero__card-tagline">{openJourney.tagline}</p>
                 <div class="pts-hero__card-meta">
-                  <span class="pts-hero__card-meta-date">September 20–30</span>
+                  <span class="pts-hero__card-meta-date">{openJourney.date}</span>
                   <span class="pts-hero__card-dot">·</span>
-                  <span>Max 6 people</span>
+                  <span>{openJourney.groupSize}</span>
                 </div>
                 <div class="pts-hero__card-divider"></div>
                 <div class="pts-hero__card-actions">
                   <a href={`/mountains/${openJourney.slug!}`} class="pts-btn pts-btn--gold">View Journey</a>
-                  <a href="/connect?source=mountains_hub_kailash_apply" class="pts-btn pts-btn--ghost">Apply Now</a>
+                  <a href={`/connect?source=mountains_hub_${openJourney.slug}_apply`} class="pts-btn pts-btn--ghost">Apply Now</a>
                 </div>
               </div>
             </div>
@@ -526,16 +540,8 @@ const openJourney = upcoming.find(j => j.status === 'open' && j.slug != null) ??
     display: block;
     /* Cold altitude: slightly desaturated + lifted contrast */
     filter: contrast(1.08) saturate(0.80) brightness(0.92);
-    transform-origin: 50% 36%;
-    will-change: transform;
-    animation: ptsHeroBreathe 34s ease-in-out infinite alternate;
   }
 
-  /* Not an animation — a breath. Barely perceptible drift, never a loop you can catch. */
-  @keyframes ptsHeroBreathe {
-    from { transform: scale(1.00) translate(0, 0); }
-    to   { transform: scale(1.028) translate(-7px, -9px); }
-  }
 
   .pts-hero__overlay {
     position: absolute;
