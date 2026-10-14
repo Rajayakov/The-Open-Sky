@@ -103,8 +103,8 @@ export const journeys: MountainJourney[] = [
     terrain: 'Nepal',
     description:
       'Annapurna Circuit to sacred Muktinath — a pilgrimage of initiation across Thorong La (5,416m). Fourteen days on foot, then an optional six-day deepening in Muktinath.',
-    date: 'March 27 – April 15, 2027',
-    dateShort: 'Mar 27, 2027',
+    date: 'March 28 – April 16, 2027',
+    dateShort: 'Mar 28, 2027',
     location: 'Annapurna Circuit, Nepal',
     duration: '14 days · optional +6',
     altitude: '820–5,416m',
@@ -217,7 +217,7 @@ export const upcomingExpeditions: UpcomingExpedition[] = [
   {
     slug: 'annapurna-2027',
     name: 'Annapurna',
-    date: 'March 27',
+    date: 'March 28',
     duration: '14–20 Days',
     location: 'Nepal',
     status: 'upcoming',
