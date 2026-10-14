@@ -10,10 +10,10 @@ const upcoming = [
     name: 'Kailash',
     tagline: 'The Abode of Shiva',
     terrain: 'Tibet',
-    date: 'September 20',
-    sortDate: '2026-09-20',
+    date: 'September 20, 2027',
+    sortDate: '2027-09-20',
     duration: '10 Days',
-    groupSize: 'Max 6 people',
+    groupSize: 'Up to 15 people',
     status: 'open' as const,
     bg: 'linear-gradient(160deg, #A8C0D8 0%, #4A6888 45%, #1A2C40 100%)',
     heroImage: '/images/mountains/kailash-featured.jpg',
@@ -23,10 +23,10 @@ const upcoming = [
     name: 'Arunachala',
     tagline: 'The Sacred Fire',
     terrain: 'India',
-    date: 'November',
-    sortDate: '2026-11-01',
+    date: 'November 2027',
+    sortDate: '2027-11-01',
     duration: '7 Days',
-    groupSize: 'Max 8 people',
+    groupSize: 'Up to 15 people',
     status: 'open' as const,
     bg: 'linear-gradient(160deg, #D4A87A 0%, #8C5A3A 50%, #3A1E12 100%)',
     heroImage: '/images/mountains/arunachala-featured.jpg',
@@ -87,11 +87,11 @@ const testimonials = [
 // Карточки в "Where we go next" — строго по датам, ближайшая первой.
 upcoming.sort((a, b) => a.sortDate.localeCompare(b.sortDate));
 
-// Featured — ближайшая открытая экспедиция с подтверждённой датой.
-// Annapurna (28 марта 2027) — единственная с точной датой сейчас;
-// Kailash/Arunachala — приблизительные даты без года, уточнить у Якова перед тем как включать их в featured-ротацию.
-const openJourney = upcoming.find(j => j.slug === 'annapurna-2027')
-  ?? upcoming.find(j => j.status === 'open' && j.slug != null)
+// Featured-баннер после херо — автоматически ближайшая открытая экспедиция
+// по дате (тот же принцип, что и в карточках ниже и на главной).
+const today = new Date().toISOString().slice(0, 10);
+const openJourney = upcoming.find(j => j.status === 'open' && j.sortDate >= today)
+  ?? upcoming.find(j => j.status === 'open')
   ?? null;
 ---
 
@@ -376,7 +376,7 @@ const openJourney = upcoming.find(j => j.slug === 'annapurna-2027')
           <div class="pts-final-cta__text">
             <p class="t-label t-label--gold reveal">Ready to go</p>
             <h2 class="pts-final-cta__title reveal d1">
-              Max 6 people.<br />
+              Up to 15 people.<br />
               <em>Each journey led personally.</em>
             </h2>
             <p class="pts-final-cta__sub reveal d2">
