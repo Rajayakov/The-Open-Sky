@@ -280,8 +280,8 @@ const marks = [
             <svg viewBox={`0 0 ${W} ${H}`} class="an-chart__svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
               <defs>
                 <linearGradient id="anArea" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#C4A862" stop-opacity="0.28" />
-                  <stop offset="100%" stop-color="#C4A862" stop-opacity="0.01" />
+                  <stop offset="0%" stop-color="#C9B57A" stop-opacity="0.28" />
+                  <stop offset="100%" stop-color="#C9B57A" stop-opacity="0.01" />
                 </linearGradient>
               </defs>
               {[1000, 3000, 5000].map(a => (
@@ -314,25 +314,27 @@ const marks = [
           </div>
         </div>
 
-        <h3 class="an-h3 reveal">Программа по дням</h3>
-        <ol class="an-days">
-          {days.map((d, i) => (
-            <li class={`an-day reveal${d.peak ? ' an-day--peak' : ''}`}>
-              <div class="an-day__when">
-                <span class="an-day__n">День {i + 1}</span>
-                <span class="an-day__date">{d.date}</span>
-              </div>
-              <div class="an-day__body">
-                <h4 class="an-day__place">{d.place}</h4>
-                <p class="an-day__meta">
-                  <span>{d.alt}</span>
-                  {d.meta && <span>{d.meta}</span>}
-                </p>
-                <p class="an-day__text">{d.text}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+        <details class="an-days-toggle reveal">
+          <summary class="an-days-toggle__s">Программа по дням — 14 дней, день за днём →</summary>
+          <ol class="an-days">
+            {days.map((d, i) => (
+              <li class={`an-day reveal${d.peak ? ' an-day--peak' : ''}`}>
+                <div class="an-day__when">
+                  <span class="an-day__n">День {i + 1}</span>
+                  <span class="an-day__date">{d.date}</span>
+                </div>
+                <div class="an-day__body">
+                  <h4 class="an-day__place">{d.place}</h4>
+                  <p class="an-day__meta">
+                    <span>{d.alt}</span>
+                    {d.meta && <span>{d.meta}</span>}
+                  </p>
+                  <p class="an-day__text">{d.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </details>
 
         <div class="an-cta-inline reveal">
           <a href={TG} class="an-btn an-btn--ghost" target="_blank" rel="noopener noreferrer">Обсудить участие</a>
@@ -439,7 +441,7 @@ const marks = [
         </div>
 
         <div class="an-cta-inline reveal">
-          <a href={TG} class="an-btn an-btn--gold" target="_blank" rel="noopener noreferrer">Занять место в группе</a>
+          <a href={TG} class="an-btn an-btn--gold" target="_blank" rel="noopener noreferrer">Подать заявку</a>
         </div>
       </div>
     </section>
@@ -501,10 +503,9 @@ const marks = [
           <h2 class="an-apply__title reveal d2">Аннапурна.</h2>
           <p class="an-apply__body reveal d3">Дух Гималаев ждёт. Напиши Якову коротко: где ты сейчас и что ищешь. Он отвечает лично, затем — видеозвонок.</p>
           <div class="an-apply__actions reveal d4">
-            <a href={TG} class="an-btn an-btn--gold" target="_blank" rel="noopener noreferrer">Telegram · t.me/Rajuna_Yakov</a>
-            <a href={WA} class="an-btn an-btn--ghost" target="_blank" rel="noopener noreferrer">WhatsApp · +66 97 952 5054</a>
-            <a href={IG} class="an-btn an-btn--ghost" target="_blank" rel="noopener noreferrer">Instagram · @yakov_rajuna</a>
+            <a href={TG} class="an-btn an-btn--gold" target="_blank" rel="noopener noreferrer">Подать заявку</a>
           </div>
+          <p class="an-apply__alt reveal d4">или WhatsApp · <a href={WA} target="_blank" rel="noopener noreferrer">+66 97 952 5054</a> · Instagram · <a href={IG} target="_blank" rel="noopener noreferrer">@yakov_rajuna</a></p>
           <p class="an-apply__meta reveal d5">до 15 человек · 28 марта – 16 апреля 2027</p>
           <a href="/mountains" class="an-apply__back reveal">← Все горные путешествия</a>
         </div>
@@ -517,28 +518,28 @@ const marks = [
 
 <style>
 
-  /* ─── Палитра (семейство Kailash) ─────────────── */
+  /* ─── Палитра (собственный регистр Annapurna: камень / туман / утренний свет) ─── */
 
   .an {
-    --deep:   #080E18;
-    --dusk:   #091422;
-    --navy:   #0D1929;
-    --mid:    #14243A;
-    --gold:   #C4A862;
-    --bone:   #F0EBE0;
-    --abyss:  #040912;
-    --txt:    rgba(214,228,242,0.74);
-    --txt-2:  rgba(200,220,240,0.58);
-    --line:   rgba(200,220,240,0.10);
+    --deep:   #0A120C;
+    --dusk:   #0C1710;
+    --navy:   #142015;
+    --mid:    #1E2E20;
+    --gold:   #C9B57A;
+    --bone:   #E7EDE2;
+    --abyss:  #070C08;
+    --txt:    rgba(222,232,218,0.74);
+    --txt-2:  rgba(210,224,208,0.58);
+    --line:   rgba(210,224,208,0.10);
     /* Cyrillic-safe stacks: Fraunces and Syne have no Cyrillic */
     --ru-serif: var(--display);
     --ru-label: var(--sans);
   }
 
-  :global(.nav:not(.nav--scrolled) .nav__link)         { color: rgba(200,220,240,0.72); }
-  :global(.nav:not(.nav--scrolled) .nav__link--connect) { color: rgba(196,168,98,0.88); }
-  :global(.nav:not(.nav--scrolled) .nav__wordmark)     { color: rgba(200,220,240,0.18); pointer-events: none; }
-  :global(.nav:not(.nav--scrolled) .nav__social)       { color: rgba(200,220,240,0.55); }
+  :global(.nav:not(.nav--scrolled) .nav__link)         { color: rgba(210,224,208,0.72); }
+  :global(.nav:not(.nav--scrolled) .nav__link--connect) { color: rgba(201,181,121,0.88); }
+  :global(.nav:not(.nav--scrolled) .nav__wordmark)     { color: rgba(210,224,208,0.18); pointer-events: none; }
+  :global(.nav:not(.nav--scrolled) .nav__social)       { color: rgba(210,224,208,0.55); }
 
   /* ─── Общие элементы ──────────────────────────── */
 
@@ -548,7 +549,7 @@ const marks = [
     font-weight: 500;
     letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: rgba(196,168,98,0.72);
+    color: rgba(201,181,121,0.72);
     margin: 0 0 var(--s-5);
   }
 
@@ -603,25 +604,24 @@ const marks = [
     transition: background-color 320ms var(--ease), border-color 320ms var(--ease), color 320ms var(--ease), box-shadow 320ms var(--ease);
   }
   .an-btn--gold {
-    border-color: rgba(196,168,98,0.68);
-    color: rgba(214,190,120,0.98);
-    box-shadow: 0 0 28px rgba(196,168,98,0.06), inset 0 0 28px rgba(196,168,98,0.025);
+    background: rgba(201,181,121,0.10);
+    border-color: rgba(201,181,121,0.68);
+    color: rgba(216,201,148,0.98);
   }
   .an-btn--gold:hover {
-    background: rgba(196,168,98,0.08);
-    border-color: rgba(196,168,98,0.95);
-    box-shadow: 0 0 56px rgba(196,168,98,0.14);
+    background: rgba(201,181,121,0.18);
+    border-color: rgba(201,181,121,0.95);
   }
   .an-btn--ghost {
-    border-color: rgba(200,220,240,0.20);
-    color: rgba(214,228,242,0.72);
+    border-color: rgba(210,224,208,0.20);
+    color: rgba(222,232,218,0.72);
   }
   .an-btn--ghost:hover {
-    border-color: rgba(200,220,240,0.46);
-    color: rgba(240,235,224,0.98);
+    border-color: rgba(210,224,208,0.46);
+    color: rgba(232,238,228,0.98);
   }
   .an-btn:focus-visible, .an-faq__q:focus-visible, .an-apply__back:focus-visible {
-    outline: 1px solid rgba(196,168,98,0.9);
+    outline: 1px solid rgba(201,181,121,0.9);
     outline-offset: 4px;
   }
 
@@ -651,10 +651,12 @@ const marks = [
   }
   .an-hero__overlay {
     position: absolute; inset: 0; z-index: 1;
+    /* Атмосферная дымка, не чёрная плашка: верх темнее для читаемости заголовка,
+       низ — лёгкий туман, прозрачность не поднимается выше 0.6 */
     background:
-      linear-gradient(to bottom, rgba(4,8,16,0.42) 0%, rgba(4,8,16,0.06) 24%, transparent 46%),
-      linear-gradient(to top, rgba(4,9,18,0.98) 0%, rgba(4,9,18,0.82) 14%, rgba(4,9,18,0.42) 34%, rgba(4,9,18,0.08) 56%, transparent 74%),
-      linear-gradient(105deg, rgba(4,8,16,0.46) 0%, rgba(4,8,16,0.1) 34%, transparent 58%);
+      linear-gradient(to bottom, rgba(7,11,8,0.34) 0%, rgba(7,11,8,0.05) 22%, transparent 42%),
+      linear-gradient(to top, rgba(7,12,9,0.60) 0%, rgba(7,12,9,0.32) 16%, rgba(7,12,9,0.12) 32%, transparent 52%),
+      linear-gradient(105deg, rgba(7,11,8,0.22) 0%, transparent 46%);
   }
   .an-hero__inner {
     position: relative; z-index: 2;
@@ -663,7 +665,7 @@ const marks = [
     padding-top: 140px;
     padding-bottom: clamp(40px, 7svh, 80px);
   }
-  .an-hero__inner .an-kicker { margin: 0; color: rgba(214,190,120,0.9); }
+  .an-hero__inner .an-kicker { margin: 0; color: rgba(216,201,148,0.9); }
   .an-hero__title {
     font-family: var(--ru-serif);
     font-weight: 300;
@@ -672,7 +674,7 @@ const marks = [
     letter-spacing: -0.035em;
     color: var(--bone);
     margin: 0;
-    text-shadow: 0 2px 64px rgba(4,7,14,0.42);
+    text-shadow: 0 2px 64px rgba(7,11,8,0.42);
   }
   .an-hero__sub {
     font-family: var(--ru-serif);
@@ -680,7 +682,7 @@ const marks = [
     font-weight: 300;
     font-size: clamp(20px, 2.4vw, 32px);
     line-height: 1.4;
-    color: rgba(236,232,222,0.9);
+    color: rgba(230,236,226,0.9);
     margin: 0;
   }
   .an-hero__row {
@@ -691,7 +693,7 @@ const marks = [
   .an-hero__date {
     font-family: var(--ru-label);
     font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(214,228,242,0.78);
+    color: rgba(222,232,218,0.78);
     margin: 0;
   }
   .an-hero__facts {
@@ -707,21 +709,21 @@ const marks = [
   .an-hero__facts > div { display: flex; flex-direction: column; gap: 6px; }
   .an-hero__facts dt {
     font-family: var(--ru-label); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(200,220,240,0.55);
+    color: rgba(210,224,208,0.55);
   }
   .an-hero__facts dd {
     margin: 0;
     font-family: var(--ru-serif); font-style: italic; font-weight: 300;
     font-size: clamp(16px, 1.5vw, 20px);
-    color: rgba(240,235,224,0.95);
+    color: rgba(232,238,228,0.95);
   }
 
   /* ─── 2. Письмо ───────────────────────────────── */
 
   .an-letter {
     background:
-      radial-gradient(ellipse 55% 45% at 14% 62%, rgba(196,168,98,0.03) 0%, transparent 68%),
-      linear-gradient(to bottom, #040912 0%, var(--dusk) 100%);
+      radial-gradient(ellipse 55% 45% at 14% 62%, rgba(201,181,121,0.03) 0%, transparent 68%),
+      linear-gradient(to bottom, #070C08 0%, var(--dusk) 100%);
   }
   .an-letter__inner { max-width: 760px; }
   .an-letter__lead {
@@ -746,13 +748,13 @@ const marks = [
   }
   .an-letter__sig {
     font-family: var(--ru-serif); font-style: italic; font-weight: 300;
-    font-size: 19px; color: rgba(214,190,120,0.8);
+    font-size: 19px; color: rgba(216,201,148,0.8);
     margin: clamp(36px, 5vw, 56px) 0 0;
   }
   .an-quote {
     margin: clamp(80px, 12vw, 140px) 0 0;
     padding: 0 0 0 clamp(24px, 3vw, 40px);
-    border-left: 1px solid rgba(196,168,98,0.5);
+    border-left: 1px solid rgba(201,181,121,0.5);
   }
   .an-quote p {
     font-family: var(--ru-serif); font-style: italic; font-weight: 300;
@@ -767,7 +769,7 @@ const marks = [
   /* ─── 3. Намерение / строки ───────────────────── */
 
   .an-intent {
-    background: radial-gradient(ellipse 90% 50% at 50% 0%, rgba(20,48,90,0.22) 0%, transparent 62%),
+    background: radial-gradient(ellipse 90% 50% at 50% 0%, rgba(28,52,34,0.22) 0%, transparent 62%),
                 linear-gradient(to bottom, var(--dusk) 0%, var(--navy) 100%);
   }
   .an-rows { display: flex; flex-direction: column; }
@@ -782,7 +784,7 @@ const marks = [
   .an-row:last-child { border-bottom: 1px solid var(--line); }
   .an-row__t {
     font-family: var(--ru-serif); font-style: italic; font-weight: 300;
-    font-size: clamp(22px, 2.2vw, 30px); color: rgba(224,204,140,0.95); margin: 0;
+    font-size: clamp(22px, 2.2vw, 30px); color: rgba(222,214,166,0.95); margin: 0;
   }
   .an-row__b {
     font-family: var(--sans); font-weight: 300;
@@ -793,8 +795,8 @@ const marks = [
   /* ─── 4. Что получишь ─────────────────────────── */
 
   .an-gain {
-    background: radial-gradient(ellipse 80% 50% at 75% 10%, rgba(15,32,62,0.30) 0%, transparent 65%),
-                linear-gradient(to bottom, var(--navy) 0%, #0A1520 100%);
+    background: radial-gradient(ellipse 80% 50% at 75% 10%, rgba(22,40,26,0.30) 0%, transparent 65%),
+                linear-gradient(to bottom, var(--navy) 0%, #0E1811 100%);
   }
   .an-gain__list {
     list-style: none; margin: 0; padding: 0;
@@ -804,7 +806,7 @@ const marks = [
   .an-gain__item { display: grid; grid-template-columns: 44px 1fr; gap: var(--s-4); align-items: baseline; }
   .an-gain__n {
     font-family: var(--ru-label); font-size: 12px; letter-spacing: 0.14em;
-    color: rgba(196,168,98,0.7);
+    color: rgba(201,181,121,0.7);
   }
   .an-gain__t {
     font-family: var(--sans); font-weight: 300; font-size: 17px; line-height: 1.7;
@@ -814,7 +816,7 @@ const marks = [
   /* ─── 5. Практики ─────────────────────────────── */
 
   .an-prac {
-    background: linear-gradient(to bottom, #0A1520 0%, #07101A 100%);
+    background: linear-gradient(to bottom, #0E1811 0%, #0B140D 100%);
   }
   .an-prac__list { list-style: none; margin: 0; padding: 0; }
   .an-prac__item {
@@ -836,30 +838,46 @@ const marks = [
   /* ─── 6. Маршрут ──────────────────────────────── */
 
   .an-route {
-    background: radial-gradient(ellipse 80% 40% at 40% 100%, rgba(8,18,38,0.45) 0%, transparent 70%),
-                linear-gradient(to bottom, #07101A 0%, #06101A 100%);
+    background: radial-gradient(ellipse 80% 40% at 40% 100%, rgba(14,28,18,0.45) 0%, transparent 70%),
+                linear-gradient(to bottom, #0B140D 0%, #0A140C 100%);
   }
   .an-chart { margin-bottom: clamp(24px, 4vw, 48px); }
   .an-chart__t {
     font-family: var(--ru-label); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(196,168,98,0.72); margin: 0 0 var(--s-5);
+    color: rgba(201,181,121,0.72); margin: 0 0 var(--s-5);
   }
   .an-chart__t span { letter-spacing: 0.06em; text-transform: none; color: var(--txt-2); font-size: 13px; }
   .an-chart__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: var(--s-3); }
   .an-chart__svg { display: block; width: 100%; min-width: 720px; height: auto; }
-  .an-chart__grid { stroke: rgba(200,220,240,0.10); stroke-width: 1; stroke-dasharray: 3 6; }
-  .an-chart__ax   { font-family: var(--sans); font-size: 12px; fill: rgba(200,220,240,0.5); }
-  .an-chart__line { fill: none; stroke: #C4A862; stroke-width: 1.6; stroke-linejoin: round; }
-  .an-chart__pt   { fill: #06101A; stroke: #C4A862; stroke-width: 1.2; }
-  .an-chart__peak { fill: #E8D08A; stroke: rgba(232,208,138,0.28); stroke-width: 8; }
-  .an-chart__dash { stroke: rgba(232,208,138,0.5); stroke-width: 1; stroke-dasharray: 2 4; }
-  .an-chart__d    { font-family: var(--sans); font-size: 12px; fill: rgba(200,220,240,0.6); }
-  .an-chart__dl   { font-family: var(--ru-label); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; fill: rgba(200,220,240,0.42); }
-  .an-chart__lb   { font-family: var(--ru-serif); font-style: italic; font-size: 17px; fill: #F0EBE0; }
-  .an-chart__lv   { font-family: var(--sans); font-size: 13px; fill: rgba(232,208,138,0.95); }
-  .an-chart__ln   { font-family: var(--sans); font-size: 13px; fill: rgba(214,228,242,0.82); }
+  .an-chart__grid { stroke: rgba(210,224,208,0.10); stroke-width: 1; stroke-dasharray: 3 6; }
+  .an-chart__ax   { font-family: var(--sans); font-size: 12px; fill: rgba(210,224,208,0.5); }
+  .an-chart__line { fill: none; stroke: #C9B57A; stroke-width: 1.6; stroke-linejoin: round; }
+  .an-chart__pt   { fill: #0A140C; stroke: #C9B57A; stroke-width: 1.2; }
+  .an-chart__peak { fill: #E6D9A0; stroke: rgba(228,218,172,0.28); stroke-width: 8; }
+  .an-chart__dash { stroke: rgba(228,218,172,0.5); stroke-width: 1; stroke-dasharray: 2 4; }
+  .an-chart__d    { font-family: var(--sans); font-size: 12px; fill: rgba(210,224,208,0.6); }
+  .an-chart__dl   { font-family: var(--ru-label); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; fill: rgba(210,224,208,0.42); }
+  .an-chart__lb   { font-family: var(--ru-serif); font-style: italic; font-size: 17px; fill: #E7EDE2; }
+  .an-chart__lv   { font-family: var(--sans); font-size: 13px; fill: rgba(228,218,172,0.95); }
+  .an-chart__ln   { font-family: var(--sans); font-size: 13px; fill: rgba(222,232,218,0.82); }
 
-  .an-days { list-style: none; margin: 0; padding: 0; }
+  .an-days-toggle { margin-top: clamp(40px, 6vw, 72px); }
+  .an-days-toggle__s {
+    list-style: none; cursor: pointer; position: relative;
+    padding: 20px 48px 20px 0;
+    font-family: var(--ru-label); font-size: 13px; letter-spacing: 0.08em; text-transform: none;
+    color: rgba(201,181,121,0.88); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    transition: color 240ms;
+  }
+  .an-days-toggle__s::-webkit-details-marker { display: none; }
+  .an-days-toggle__s::marker { display: none; }
+  .an-days-toggle[open] .an-days-toggle__s::after { transform: rotate(45deg); }
+  .an-days-toggle__s::after {
+    content: '+'; position: absolute; right: 4px; top: 16px;
+    font-family: var(--sans); font-weight: 200; font-size: 24px; color: rgba(201,181,121,0.8);
+    transition: transform 320ms var(--ease);
+  }
+  .an-days { list-style: none; margin: clamp(32px, 5vw, 56px) 0 0; padding: 0; }
   .an-day {
     display: grid;
     grid-template-columns: 170px 1fr;
@@ -871,7 +889,7 @@ const marks = [
   .an-day__when { display: flex; flex-direction: column; gap: 4px; }
   .an-day__n {
     font-family: var(--ru-label); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(200,220,240,0.55);
+    color: rgba(210,224,208,0.55);
   }
   .an-day__date {
     font-family: var(--ru-serif); font-style: italic; font-weight: 300;
@@ -885,20 +903,20 @@ const marks = [
   .an-day__meta {
     display: flex; flex-wrap: wrap; gap: 6px 20px;
     font-family: var(--ru-label); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: rgba(196,168,98,0.82); margin: 0 0 12px;
+    color: rgba(201,181,121,0.82); margin: 0 0 12px;
   }
   .an-day__text {
     font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.75;
     color: var(--txt); margin: 0; max-width: 60ch; text-wrap: pretty;
   }
-  .an-day--peak .an-day__date { color: #E8D08A; }
-  .an-day--peak { background: linear-gradient(90deg, rgba(196,168,98,0.05), transparent 70%); }
+  .an-day--peak .an-day__date { color: #E6D9A0; }
+  .an-day--peak { background: linear-gradient(90deg, rgba(201,181,121,0.05), transparent 70%); }
 
   /* ─── 7. Углублённая ──────────────────────────── */
 
   .an-deep {
-    background: radial-gradient(ellipse 70% 50% at 20% 0%, rgba(196,168,98,0.05) 0%, transparent 60%),
-                linear-gradient(to bottom, #06101A 0%, #081218 100%);
+    background: radial-gradient(ellipse 70% 50% at 20% 0%, rgba(201,181,121,0.05) 0%, transparent 60%),
+                linear-gradient(to bottom, #0A140C 0%, #0C150E 100%);
   }
   .an-deep .an-kicker { margin-bottom: var(--s-5); }
   .an-deep__list { list-style: none; margin: 0; padding: 0; }
@@ -909,7 +927,7 @@ const marks = [
     border-top: 1px solid var(--line);
   }
   .an-deep__item:last-child { border-bottom: 1px solid var(--line); }
-  .an-deep__d { font-family: var(--ru-serif); font-style: italic; font-weight: 300; font-size: 22px; color: rgba(224,204,140,0.95); }
+  .an-deep__d { font-family: var(--ru-serif); font-style: italic; font-weight: 300; font-size: 22px; color: rgba(222,214,166,0.95); }
   .an-deep__t { font-family: var(--ru-serif); font-weight: 300; font-size: clamp(20px, 2.2vw, 28px); color: var(--bone); line-height: 1.3; }
   .an-deep__s { font-family: var(--sans); font-weight: 300; font-size: 15px; color: var(--txt-2); text-align: right; }
   .an-place { margin-top: clamp(56px, 8vw, 96px); max-width: 56ch; }
@@ -918,8 +936,8 @@ const marks = [
   /* ─── 8. Проводник ────────────────────────────── */
 
   .an-guide {
-    background: radial-gradient(ellipse 110% 60% at 0% 50%, rgba(10,25,52,0.40) 0%, transparent 62%),
-                linear-gradient(to bottom, #081218 0%, var(--navy) 100%);
+    background: radial-gradient(ellipse 110% 60% at 0% 50%, rgba(16,32,20,0.40) 0%, transparent 62%),
+                linear-gradient(to bottom, #0C150E 0%, var(--navy) 100%);
   }
   .an-guide__body { display: grid; grid-template-columns: minmax(260px, 380px) 1fr; gap: clamp(48px, 9vw, 140px); align-items: start; }
   .an-guide__photo img {
@@ -940,19 +958,19 @@ const marks = [
   }
   .an-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5); padding-block: var(--s-5); border-block: 1px solid var(--line); }
   .an-stat { display: flex; flex-direction: column; gap: 6px; }
-  .an-stat__n { font-family: var(--ru-serif); font-weight: 300; font-size: clamp(32px, 4vw, 56px); line-height: 1; color: #E8D08A; letter-spacing: -0.02em; }
+  .an-stat__n { font-family: var(--ru-serif); font-weight: 300; font-size: clamp(32px, 4vw, 56px); line-height: 1; color: #E6D9A0; letter-spacing: -0.02em; }
   .an-stat__l { font-family: var(--sans); font-size: 14px; line-height: 1.4; color: var(--txt-2); }
   .an-guide__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s-3); }
   .an-guide__list li {
     position: relative; padding-left: 24px;
     font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.65; color: var(--txt);
   }
-  .an-guide__list li::before { content: ''; position: absolute; left: 0; top: 0.78em; width: 10px; height: 1px; background: rgba(196,168,98,0.8); }
+  .an-guide__list li::before { content: ''; position: absolute; left: 0; top: 0.78em; width: 10px; height: 1px; background: rgba(201,181,121,0.8); }
 
   /* ─── 9. Безопасность ─────────────────────────── */
 
   .an-safe {
-    background: linear-gradient(to bottom, var(--navy) 0%, #0A1520 100%);
+    background: linear-gradient(to bottom, var(--navy) 0%, #0E1811 100%);
   }
   .an-must { margin-top: clamp(56px, 8vw, 96px); max-width: 64ch; }
   .an-must ul, .an-terms ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s-4); }
@@ -960,13 +978,13 @@ const marks = [
     position: relative; padding-left: 24px;
     font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.7; color: var(--txt);
   }
-  .an-must li::before, .an-terms li::before { content: ''; position: absolute; left: 0; top: 0.85em; width: 10px; height: 1px; background: rgba(196,168,98,0.8); }
+  .an-must li::before, .an-terms li::before { content: ''; position: absolute; left: 0; top: 0.85em; width: 10px; height: 1px; background: rgba(201,181,121,0.8); }
 
   /* ─── 10. Цены ────────────────────────────────── */
 
   .an-price {
-    background: radial-gradient(ellipse 75% 50% at 50% 0%, rgba(196,168,98,0.05) 0%, transparent 60%),
-                linear-gradient(to bottom, #0A1520 0%, #07101A 100%);
+    background: radial-gradient(ellipse 75% 50% at 50% 0%, rgba(201,181,121,0.05) 0%, transparent 60%),
+                linear-gradient(to bottom, #0E1811 0%, #0B140D 100%);
   }
   .an-plans {
     display: grid; grid-template-columns: repeat(3, 1fr);
@@ -978,10 +996,10 @@ const marks = [
     padding: clamp(32px, 4vw, 56px) clamp(20px, 2.6vw, 40px);
   }
   .an-plan + .an-plan { border-left: 1px solid var(--line); }
-  .an-plan--best { background: linear-gradient(to bottom, rgba(196,168,98,0.07), rgba(196,168,98,0.01)); }
+  .an-plan--best { background: linear-gradient(to bottom, rgba(201,181,121,0.07), rgba(201,181,121,0.01)); }
   .an-plan__flag {
     font-family: var(--ru-label); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: #E8D08A; margin: 0 0 var(--s-2);
+    color: #E6D9A0; margin: 0 0 var(--s-2);
   }
   .an-plan__name { font-family: var(--ru-serif); font-weight: 300; font-size: clamp(22px, 2.2vw, 30px); color: var(--bone); margin: 0; line-height: 1.2; }
   .an-plan__span { font-family: var(--ru-label); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--txt-2); margin: 0; line-height: 1.6; }
@@ -989,7 +1007,7 @@ const marks = [
     font-family: var(--ru-serif); font-weight: 300; font-size: clamp(48px, 5.4vw, 80px);
     line-height: 1; letter-spacing: -0.03em; color: var(--bone); margin: var(--s-5) 0 var(--s-3);
   }
-  .an-plan--best .an-plan__price { color: #E8D08A; }
+  .an-plan--best .an-plan__price { color: #E6D9A0; }
   .an-plan__note { font-family: var(--sans); font-weight: 300; font-size: 15px; line-height: 1.65; color: var(--txt); margin: 0; }
 
   .an-ref { margin-top: clamp(56px, 8vw, 96px); max-width: 60ch; }
@@ -998,7 +1016,7 @@ const marks = [
 
   /* ─── 11. Что входит ──────────────────────────── */
 
-  .an-incl { background: linear-gradient(to bottom, #07101A 0%, #081218 100%); }
+  .an-incl { background: linear-gradient(to bottom, #0B140D 0%, #0C150E 100%); }
   .an-incl__cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 8vw, 120px); align-items: start; }
   .an-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
   .an-list li {
@@ -1012,7 +1030,7 @@ const marks = [
 
   /* ─── 12. FAQ ─────────────────────────────────── */
 
-  .an-faq { background: linear-gradient(to bottom, #081218 0%, var(--navy) 100%); }
+  .an-faq { background: linear-gradient(to bottom, #0C150E 0%, var(--navy) 100%); }
   .an-faq__list { max-width: 860px; }
   .an-faq__item { border-top: 1px solid var(--line); }
   .an-faq__item:last-child { border-bottom: 1px solid var(--line); }
@@ -1026,11 +1044,11 @@ const marks = [
   .an-faq__q::marker { display: none; }
   .an-faq__q::after {
     content: '+'; position: absolute; right: 4px; top: 22px;
-    font-family: var(--sans); font-weight: 200; font-size: 28px; color: rgba(196,168,98,0.8);
+    font-family: var(--sans); font-weight: 200; font-size: 28px; color: rgba(201,181,121,0.8);
     transition: transform 320ms var(--ease);
   }
   .an-faq__item[open] .an-faq__q::after { transform: rotate(45deg); }
-  .an-faq__q:hover { color: #E8D08A; }
+  .an-faq__q:hover { color: #E6D9A0; }
   .an-faq__a {
     font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.8; color: var(--txt);
     margin: 0 0 28px; max-width: 64ch;
@@ -1039,23 +1057,25 @@ const marks = [
   /* ─── 13. Заявка ──────────────────────────────── */
 
   .an-apply {
-    background: radial-gradient(ellipse 75% 60% at 50% 10%, rgba(196,168,98,0.07) 0%, transparent 54%),
+    background: radial-gradient(ellipse 75% 60% at 50% 10%, rgba(201,181,121,0.07) 0%, transparent 54%),
                 linear-gradient(to bottom, var(--navy) 0%, var(--abyss) 100%);
     padding-block: clamp(140px, 24svh, 280px) !important;
   }
   .an-apply__inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--s-5); }
-  .an-apply__q { font-family: var(--ru-serif); font-style: italic; font-weight: 300; font-size: clamp(19px, 2vw, 26px); color: rgba(224,204,140,0.95); margin: 0; }
+  .an-apply__q { font-family: var(--ru-serif); font-style: italic; font-weight: 300; font-size: clamp(19px, 2vw, 26px); color: rgba(222,214,166,0.95); margin: 0; }
   .an-apply__title {
     font-family: var(--ru-serif); font-weight: 300;
     font-size: clamp(52px, 12vw, 180px); line-height: 0.92; letter-spacing: -0.04em;
     color: var(--bone); margin: 0;
-    text-shadow: 0 0 180px rgba(196,168,98,0.1), 0 2px 80px rgba(2,5,10,0.5);
   }
   .an-apply__body { font-family: var(--sans); font-weight: 300; font-size: 17px; line-height: 1.75; color: var(--txt); margin: 0; max-width: 46ch; text-wrap: pretty; }
   .an-apply__actions { display: flex; flex-wrap: wrap; gap: var(--s-4); justify-content: center; margin-top: var(--s-4); }
-  .an-apply__meta { font-family: var(--ru-label); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(200,220,240,0.5); margin: 0; }
-  .an-apply__back { font-family: var(--ru-label); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(160,190,225,0.6); margin-top: var(--s-3); transition: color 280ms; }
-  .an-apply__back:hover { color: rgba(200,225,250,0.95); }
+  .an-apply__alt { font-family: var(--ru-label); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(210,224,208,0.45); margin: var(--s-3) 0 0; }
+  .an-apply__alt a { color: rgba(210,224,208,0.7); text-decoration: none; border-bottom: 1px solid rgba(210,224,208,0.25); transition: color 280ms, border-color 280ms; }
+  .an-apply__alt a:hover { color: rgba(230,236,226,0.95); border-color: rgba(230,236,226,0.5); }
+  .an-apply__meta { font-family: var(--ru-label); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(210,224,208,0.5); margin: 0; }
+  .an-apply__back { font-family: var(--ru-label); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(176,196,166,0.6); margin-top: var(--s-3); transition: color 280ms; }
+  .an-apply__back:hover { color: rgba(214,228,210,0.95); }
 
   /* ─── Адаптив ─────────────────────────────────── */
 
