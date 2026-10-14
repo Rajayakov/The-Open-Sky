@@ -1,16 +1,20 @@
 ---
-import { getFeaturedRetreat } from '../data/retreats';
-import { getNextJourney } from '../data/mountains';
+import { getNextRetreat } from '../data/retreats';
+import { getFeaturedExpedition } from '../data/mountains';
 import { getNextOpenProgram } from '../data/programs';
 
-const retreat = getFeaturedRetreat();
-const journey = getNextJourney();
+// Live Retreats block is hidden on the homepage for now (the /retreats page stays live).
+// Flip to true to bring the block back.
+const showRetreats = false;
+const retreat = getNextRetreat();
+const journey = getFeaturedExpedition();
 const program = getNextOpenProgram();
 ---
 
 <section class="portals" aria-label="Experience worlds">
 
   <!-- Live Retreats -->
+  {showRetreats && (
   <article class="portal reveal" data-portal="retreats">
     <div class="frame">
       <div class="portal__meta">
@@ -39,6 +43,7 @@ const program = getNextOpenProgram();
       </div>
     </div>
   </article>
+  )}
 
   <!-- Mountains — flipped composition -->
   <article class="portal portal--flip reveal d2" data-portal="mountains">
@@ -94,7 +99,7 @@ const program = getNextOpenProgram();
               {program ? `${program.dateShort} · ${program.duration}` : 'Rolling enrollment available'}
             </span>
           </div>
-          <a href="/programs" class="portal__cta">Enter <span aria-hidden="true">→</span></a>
+          <a href={program?.href ?? (program ? `/programs/${program.slug}` : '/programs')} class="portal__cta">Enter <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import CTASection from '../../components/CTASection.astro';
 import QuoteBlock from '../../components/QuoteBlock.astro';
 import { retreats, getRetreat } from '../../data/retreats';
+import { isUpcomingDate } from '../../data/dates';
 
 export function getStaticPaths() {
   return retreats.map((r) => ({ params: { slug: r.slug } }));
@@ -12,6 +13,8 @@ const { slug } = Astro.params;
 const retreat = getRetreat(slug);
 
 if (!retreat) return Astro.redirect('/retreats');
+
+const isPast = !isUpcomingDate(retreat.startDate);
 ---
 
 <PageLayout
@@ -170,12 +173,14 @@ if (!retreat) return Astro.redirect('/retreats');
 
   <CTASection
     dark
-    label="Reserve your place"
-    title="This retreat fills quickly."
-    body="Send a short message to express interest. Yakov reviews each application personally."
-    primaryHref="/connect"
-    primarySource={`retreat_${retreat.slug}_cta`}
-    primaryLabel="Express interest"
+    label={isPast ? 'This retreat has taken place' : 'Reserve your place'}
+    title={isPast ? 'Be told when the next one opens.' : 'This retreat fills quickly.'}
+    body={isPast
+      ? 'Retreat announcements are shared in the Telegram channel first.'
+      : 'Send a short message to express interest. Yakov reviews each application personally.'}
+    primaryHref={isPast ? 'https://t.me/rajuna_yakov' : '/connect'}
+    primarySource={isPast ? undefined : `retreat_${retreat.slug}_cta`}
+    primaryLabel={isPast ? 'Join Telegram' : 'Express interest'}
     secondaryHref="/retreats"
     secondaryLabel="See all retreats"
   />

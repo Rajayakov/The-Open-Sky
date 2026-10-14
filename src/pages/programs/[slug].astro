@@ -2,17 +2,22 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import CTASection from '../../components/CTASection.astro';
-import { programs, getProgram } from '../../data/programs';
+import { programs, getProgram, isCurrentProgram } from '../../data/programs';
 
 export function getStaticPaths() {
-  return programs.map((p) => ({ params: { slug: p.slug } }));
+  // presence has its own bespoke page (presence.astro), which takes priority.
+  return programs
+    .filter((p) => p.slug !== 'presence')
+    .map((p) => ({ params: { slug: p.slug } }));
 }
 
 const { slug } = Astro.params;
 const program = getProgram(slug!);
 if (!program) return Astro.redirect('/programs');
 
-const statusLabel = {
+const isPast = !isCurrentProgram(program);
+const isClosed = isPast || program.status === 'closed';
+const statusLabel = isPast ? 'Past cohort' : {
   open: 'Open for applications',
   closed: 'Closed — next cohort TBA',
   waitlist: 'Join waitlist',
@@ -39,21 +44,21 @@ const statusLabel = {
         <p class="t-lede" style="max-width: 52ch;">{program.body}</p>
       </div>
       <div class="pg-overview__meta reveal d2">
-        <div class={`pg-overview__status pg-overview__status--${program.status}`}>
+        <div class={`pg-overview__status pg-overview__status--${isClosed ? 'closed' : program.status}`}>
           {statusLabel}
         </div>
         {[
           { label: 'Start date', value: program.date },
           { label: 'Duration',   value: program.duration },
           { label: 'Format',     value: program.format },
-          { label: 'Group size', value: program.groupSize },
+          ...(program.groupSize ? [{ label: 'Group size', value: program.groupSize }] : []),
         ].map(item => (
           <div class="pg-overview__meta-row">
             <span class="t-label">{item.label}</span>
             <span class="pg-overview__meta-val">{item.value}</span>
           </div>
         ))}
-        {program.status !== 'closed' && (
+        {!isClosed && (
           <div class="pg-overview__cta">
             <a href={`/connect?source=program_${program.slug}_overview`} class="btn btn--warm">
               {program.status === 'waitlist' ? 'Join waitlist' : 'Apply now'}
@@ -94,14 +99,14 @@ const statusLabel = {
   </section>
 
   <CTASection
-    label={program.status !== 'closed' ? 'Ready to apply' : 'Stay informed'}
-    title={program.status !== 'closed' ? 'Write a short message.' : 'Be the first to know.'}
-    body={program.status !== 'closed'
+    label={!isClosed ? 'Ready to apply' : 'Stay informed'}
+    title={!isClosed ? 'Write a short message.' : 'Be the first to know.'}
+    body={!isClosed
       ? 'Tell me which program interests you and where you are in your life right now. Yakov reads each message personally.'
       : 'Join the Telegram channel to hear about the next cohort before applications open.'}
-    primaryHref={program.status !== 'closed' ? '/connect' : 'https://t.me/yakovrajuna'}
-    primarySource={program.status !== 'closed' ? `program_${program.slug}_cta` : undefined}
-    primaryLabel={program.status !== 'closed' ? 'Apply now' : 'Join Telegram'}
+    primaryHref={!isClosed ? '/connect' : 'https://t.me/rajuna_yakov'}
+    primarySource={!isClosed ? `program_${program.slug}_cta` : undefined}
+    primaryLabel={!isClosed ? 'Apply now' : 'Join Telegram'}
     secondaryHref="/programs"
     secondaryLabel="All programs"
   />

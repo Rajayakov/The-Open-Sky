@@ -3,7 +3,13 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import RetreatCard from '../../components/RetreatCard.astro';
 import CTASection from '../../components/CTASection.astro';
-import { retreats } from '../../data/retreats';
+import { getUpcomingRetreats, getPastRetreats } from '../../data/retreats';
+
+const now = new Date();
+const groups = [
+  { label: 'Upcoming', items: getUpcomingRetreats(now) },
+  { label: 'Past retreats', items: getPastRetreats(now) },
+].filter((g) => g.items.length > 0);
 ---
 
 <PageLayout
@@ -19,31 +25,38 @@ import { retreats } from '../../data/retreats';
     theme="retreat"
   />
 
-  <!-- Filter hint (structure for future filtering) -->
-  <section class="retreats-list section frame" aria-label="Retreats">
-    <div class="retreats-list__controls reveal">
-      <span class="t-label t-label--warm">Upcoming</span>
-      <div class="retreats-list__filter-row">
-        <span class="t-small retreats-list__count">{retreats.length} retreats</span>
-      </div>
-    </div>
-
-    <div class="retreats-list__grid">
-      {retreats.map((retreat, i) => (
-        <div class={`reveal d${(i % 3) + 1}`}>
-          <RetreatCard
-            title={retreat.title}
-            atmosphere={retreat.atmosphere}
-            date={retreat.date}
-            location={retreat.location}
-            duration={retreat.duration}
-            href={`/retreats/${retreat.slug}`}
-            bg={retreat.bg}
-          />
+  <!-- Retreat list: upcoming first, past ones kept as a quiet archive -->
+  {getUpcomingRetreats(now).length === 0 && (
+    <section class="retreats-list section frame" aria-label="Retreats">
+      <p class="t-body">No retreats are scheduled at the moment. Write to be told when the next one opens.</p>
+    </section>
+  )}
+  {groups.map((group) => (
+    <section class="retreats-list section frame" aria-label={group.label}>
+      <div class="retreats-list__controls reveal">
+        <span class="t-label t-label--warm">{group.label}</span>
+        <div class="retreats-list__filter-row">
+          <span class="t-small retreats-list__count">{group.items.length} {group.items.length === 1 ? 'retreat' : 'retreats'}</span>
         </div>
-      ))}
-    </div>
-  </section>
+      </div>
+
+      <div class="retreats-list__grid">
+        {group.items.map((retreat, i) => (
+          <div class={`reveal d${(i % 3) + 1}`}>
+            <RetreatCard
+              title={retreat.title}
+              atmosphere={retreat.atmosphere}
+              date={retreat.date}
+              location={retreat.location}
+              duration={retreat.duration}
+              href={`/retreats/${retreat.slug}`}
+              bg={retreat.bg}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  ))}
 
   <!-- Philosophy block -->
   <section class="retreats-why section" aria-label="Why these retreats">

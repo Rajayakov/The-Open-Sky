@@ -2,17 +2,15 @@
 export interface Props {
   title?: string;
   description?: string;
-  lang?: string;
 }
 const {
-  lang = 'en',
   title = 'The Open Sky — by Yakov Rajuna',
   description = 'Retreats in sacred landscapes. Mountain journeys. Online programs. Personal mentorship. An ecosystem of transformational experiences founded by Yakov Rajuna.',
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

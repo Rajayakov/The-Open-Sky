@@ -2,6 +2,8 @@
    Mountains data — expeditions and journeys
    ───────────────────────────────────────────────────── */
 
+import { isUpcomingDate } from './dates';
+
 /* ── Detailed journey (powers slug pages) ──────────── */
 
 export interface MountainJourney {
@@ -20,6 +22,24 @@ export interface MountainJourney {
   upcoming: boolean;
   bg: string;
   heroImage?: string;
+  /** Tighter crop for the small floating Hero Card / Upcoming card thumbnails.
+   *  Falls back to heroImage when a destination has no separate crop. */
+  cardImage?: string;
+  /** Short evocative line shown under the title on the Hero Card and the
+   *  Featured Expedition section (e.g. "The Abode of Shiva"). */
+  tagline?: string;
+  /** Booking-state badge shown on the Schedule cards ("Open now" /
+   *  "Coming Soon"). Deliberately separate from `status`, which drives
+   *  list membership — a journey can be upcoming-and-listed while its
+   *  dates or booking are still being finalised. Defaults to 'open'
+   *  when omitted. */
+  badge?: 'open' | 'soon';
+  /** ISO date (YYYY-MM-DD), confirmed departures only — what the selectors
+   *  sort by. Leave unset while the exact day is unconfirmed. */
+  departureDate?: string;
+  /** ISO month (YYYY-MM) — used only when the exact day is unconfirmed. Keeps
+   *  the journey listed until that month ends; never makes it featured. */
+  departureMonth?: string;
   structure?: { phase: string; description: string }[];
   forWhom?: string[];
   included?: string[];
@@ -41,6 +61,7 @@ export const journeys: MountainJourney[] = [
     difficulty: 'Demanding',
     status: 'upcoming',
     upcoming: true,
+    departureDate: '2026-09-20',
     bg: 'linear-gradient(160deg, #A8C0D8 0%, #4A6888 45%, #1A2C40 100%)',
     heroImage: '/images/mountains/kailash-hero.jpg',
     structure: [
@@ -78,6 +99,7 @@ export const journeys: MountainJourney[] = [
     difficulty: 'Accessible',
     status: 'upcoming',
     upcoming: false,
+    departureMonth: '2026-11',
     bg: 'linear-gradient(160deg, #D4A87A 0%, #8C5A3A 50%, #3A1E12 100%)',
     heroImage: '/images/mountains/arunachala-featured.jpg',
     structure: [
@@ -112,6 +134,7 @@ export const journeys: MountainJourney[] = [
     difficulty: 'Demanding',
     status: 'upcoming',
     upcoming: false,
+    departureDate: '2027-03-28',
     heroImage: '/images/mountains/annapurna-hero.jpg',
     bg: 'linear-gradient(160deg, #B8C8D0 0%, #6080A0 45%, #1E3048 100%)',
   },
@@ -274,4 +297,61 @@ export function getJourney(slug: string): MountainJourney | undefined {
 
 export function getNextJourney(): MountainJourney | undefined {
   return journeys.find((j) => j.status === 'upcoming');
+}
+
+/** Open (status 'upcoming'), still ahead of the reference date. A confirmed
+ *  `departureDate` is used when present, otherwise `departureMonth`; a journey
+ *  with neither is treated as undated and stays listed. */
+export function isListedUpcoming(j: MountainJourney, referenceDate: Date = new Date()): boolean {
+  if (j.status !== 'upcoming') return false;
+  const when = j.departureDate ?? j.departureMonth;
+  return !when || isUpcomingDate(when, referenceDate);
+}
+
+/** True when the journey is over: marked past, or its date has gone by. */
+export function hasDeparted(j: MountainJourney, referenceDate: Date = new Date()): boolean {
+  return j.status === 'past' || !isListedUpcoming(j, referenceDate);
+}
+
+/** Eligible to be *featured*: open, with a confirmed exact departure day that
+ *  is not in the past. Month-only dates are never featured (never invent a day). */
+export function isUpcomingWithDate(
+  j: MountainJourney,
+  referenceDate: Date = new Date()
+): j is MountainJourney & { departureDate: string } {
+  return j.status === 'upcoming' && !!j.departureDate && isUpcomingDate(j.departureDate, referenceDate);
+}
+
+/** The single source of truth for "which expedition is featured right now" —
+ *  the earliest future confirmed `departureDate` among eligible journeys.
+ *  Consumed by the homepage featured card and the Mountains page. Returns
+ *  null when nothing qualifies (it never falls back to a past journey). */
+export function getFeaturedExpedition(
+  referenceDate: Date = new Date(),
+  list: MountainJourney[] = journeys
+): MountainJourney | null {
+  return (
+    list
+      .filter((j) => isUpcomingWithDate(j, referenceDate))
+      .sort((a, b) => a.departureDate.localeCompare(b.departureDate))[0] ?? null
+  );
+}
+
+/** Every other upcoming expedition, soonest first (undated/month-only ones
+ *  sort by their month, then fully undated last). Past ones are excluded. */
+export function getOtherUpcoming(
+  featured: MountainJourney | null,
+  referenceDate: Date = new Date(),
+  list: MountainJourney[] = journeys
+): MountainJourney[] {
+  const key = (j: MountainJourney) => j.departureDate ?? j.departureMonth;
+  return list
+    .filter((j) => j.slug !== featured?.slug && isListedUpcoming(j, referenceDate))
+    .sort((a, b) => {
+      const ka = key(a);
+      const kb = key(b);
+      if (!ka) return 1;
+      if (!kb) return -1;
+      return ka.localeCompare(kb);
+    });
 }

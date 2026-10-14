@@ -1,11 +1,15 @@
 ---
-import { getFeaturedRetreat } from '../data/retreats';
-import { getNextJourney } from '../data/mountains';
+import { getFeaturedExpedition, getOtherUpcoming } from '../data/mountains';
 import { getNextOpenProgram } from '../data/programs';
 
-const retreat = getFeaturedRetreat();
-const journey = getNextJourney();
-const program = getNextOpenProgram();
+const now = new Date();
+const featured = getFeaturedExpedition(now);
+const journey = getOtherUpcoming(featured, now)[0];
+
+// Announcement cards always show the event's cover photo; the gradient is only a fallback.
+const cover = (image: string | undefined, fallback: string, position = 'center') =>
+  image ? `url('${image}') ${position} / cover no-repeat` : fallback;
+const program = getNextOpenProgram(now);
 ---
 
 <section class="upcoming" aria-label="Upcoming experiences">
@@ -18,20 +22,25 @@ const program = getNextOpenProgram();
 
     <div class="upcoming__grid">
 
-      <!-- Featured retreat — dominant card -->
-      {retreat && (
-        <a href={`/retreats/${retreat.slug}`} class="upcard upcard--hero reveal d1">
-          <div class="upcard__bg" style={`background: ${retreat.bg}`}></div>
+      <!-- Featured expedition — dominant card (nearest upcoming departure) -->
+      {featured && (
+        <a href={`/mountains/${featured.slug}`} class="upcard upcard--hero reveal d1">
+          <div
+            class="upcard__bg"
+            style={`background: ${cover(featured.cardImage ?? featured.heroImage, featured.bg)}`}
+          ></div>
           <div class="upcard__overlay" aria-hidden="true"></div>
           <div class="upcard__inner">
             <div class="upcard__tags">
-              <span class="upcard__tag">{retreat.location}</span>
-              <span class="upcard__tag">{retreat.date}</span>
+              <span class="upcard__tag">{featured.location}</span>
+              <span class="upcard__tag">{featured.date}</span>
+              <span class="upcard__tag">{featured.duration}</span>
             </div>
             <div class="upcard__foot">
-              <span class="upcard__cat">Live Retreat</span>
-              <h3 class="upcard__title">{retreat.title}</h3>
-              <span class="upcard__cta">View retreat <span aria-hidden="true">→</span></span>
+              <span class="upcard__cat">Mountain Journey</span>
+              <h3 class="upcard__title">{featured.title}</h3>
+              <p class="upcard__summary">{featured.description}</p>
+              <span class="upcard__cta">View journey <span aria-hidden="true">→</span></span>
             </div>
           </div>
         </a>
@@ -42,7 +51,7 @@ const program = getNextOpenProgram();
         <!-- Mountain journey -->
         {journey && (
           <a href={`/mountains/${journey.slug}`} class="upcard upcard--side reveal d2">
-            <div class="upcard__bg" style={`background: ${journey.bg}`}></div>
+            <div class="upcard__bg" style={`background: ${cover(journey.cardImage ?? journey.heroImage, journey.bg)}`}></div>
             <div class="upcard__overlay" aria-hidden="true"></div>
             <div class="upcard__inner">
               <div class="upcard__tags">
@@ -60,8 +69,8 @@ const program = getNextOpenProgram();
 
         <!-- Online program -->
         {program && (
-          <a href={`/programs/${program.slug}`} class="upcard upcard--side reveal d3">
-            <div class="upcard__bg" style={{ background: 'linear-gradient(135deg, #C8A878 0%, #8A6438 50%, #4A2C12 100%)' }}></div>
+          <a href={program.href ?? `/programs/${program.slug}`} class="upcard upcard--side reveal d3">
+            <div class="upcard__bg" style={`background: ${cover(program.cardImage, 'linear-gradient(135deg, #C8A878 0%, #8A6438 50%, #4A2C12 100%)', 'center 25%')}`}></div>
             <div class="upcard__overlay" aria-hidden="true"></div>
             <div class="upcard__inner">
               <div class="upcard__tags">
@@ -208,6 +217,15 @@ const program = getNextOpenProgram();
     color: rgba(248, 238, 215, 0.96);
     margin: 0;
     font-optical-sizing: auto;
+  }
+
+  .upcard__summary {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(248, 238, 215, 0.78);
+    margin: 0;
+    max-width: 46ch;
   }
 
   .upcard--side .upcard__title { font-size: clamp(16px, 1.9vw, 24px); }
