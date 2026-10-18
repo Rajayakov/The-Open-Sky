@@ -56,6 +56,8 @@ li::marker{color:var(--gold-ink)}
 .hero-body{padding-top:clamp(7rem,26vw,18rem);padding-bottom:clamp(2.5rem,6vw,4rem)}
 .hero h1{font-size:clamp(2.9rem,10.6vw,6.6rem);line-height:1.02;letter-spacing:.04em;text-transform:uppercase}
 .hero h1 span{display:block;color:var(--gold-soft)}
+.hero h1,.hero .sub{text-shadow:0 1px 14px rgba(11,26,51,.55)}
+@media(max-width:700px){.hero::after{background:linear-gradient(to bottom,rgba(11,26,51,.55) 0%,rgba(11,26,51,.5) 30%,rgba(11,26,51,.7) 55%,var(--navy) 95%)}}
 .hero .sub{font-family:var(--serif);font-style:italic;font-size:clamp(1.2rem,2.8vw,1.7rem);color:var(--gold-soft);margin:.9rem 0 2.2rem}
 .dates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 2rem;max-width:44rem}
 .dates>div{border-top:2px solid var(--gold);padding-top:.7rem}
@@ -307,7 +309,7 @@ li::marker{color:var(--gold-ink)}
         <p>Spring is a beautiful time to walk here. The hillsides glow with rhododendrons, the national flower of Nepal, and the snow peaks stand sharp and bright against a deep blue sky. The days are warm in the sun, the nights are cold and quiet, and the high ridges still wear their winter snow.</p>
         <p>Muktinath is sacred to both Hindus and Buddhists, and its name is often translated as &lsquo;Lord of Liberation&rsquo;. Water from 108 springs pours from the rock, a small flame burns beside the water, and all five elements are said to meet in this one place.</p>
       </div>
-      <img class="ph" src="img/letter-statue.jpg" alt="A golden seated statue under a richly painted canopy, with prayer wheels and snow mountains behind" width="1000" height="1567" style="object-position:50% 62%">
+      <img class="ph" src="img/letter-statue.jpg" alt="A golden seated statue under a richly painted canopy, with prayer wheels and snow mountains behind" width="1000" height="1567" style="object-position:50% 62%" loading="lazy" decoding="async">
     </div>
     <div class="quote">
       <div class="q">A pilgrimage is simply a walk with a purpose.</div>
@@ -325,19 +327,19 @@ li::marker{color:var(--gold-ink)}
     </div>
   </div>
   <div class="gal" tabindex="0" role="region" aria-label="Photos from the trail. Swipe or scroll sideways to see more.">
-      <figure style="--ar:1000/1778"><img src="img/trek-prayer-flags.jpg" alt="Prayer flags in front of a snow peak under a deep blue sky" width="1000" height="1778"><figcaption>Prayer flags and a snow peak</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="img/trek-gorge-village.jpg" alt="A village in a river gorge below snow mountains" width="1000" height="1778"><figcaption>A village in the gorge</figcaption></figure>
-      <figure style="--ar:735/907"><img src="img/trek-hikers.jpg" alt="Two trekkers with poles walking a mountain path, with a huge snow face behind them" width="735" height="907"><figcaption>Walking the trail</figcaption></figure>
-      <figure style="--ar:1600/900"><img src="img/trek-valley.jpg" alt="A wide valley with a river and fields, and a snow peak in the distance" width="1600" height="900"><figcaption>The valley opens toward the mountains</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="img/trek-golden-hills.jpg" alt="Snow peaks rising above golden brown hills" width="1000" height="1778"><figcaption>Snow peaks above golden hills</figcaption></figure>
-      <figure style="--ar:1600/1200"><img src="img/trek-meadow.jpg" alt="A green meadow with wildflowers and a horse, with cloud-covered mountains behind" width="1600" height="1200"><figcaption>A green meadow in the valley</figcaption></figure>
-      <figure style="--ar:1000/1494"><img src="img/trek-south-peak.jpg" alt="A snow peak glowing in warm light above dark trees, with a bird on a bare branch" width="1000" height="1494"><figcaption>A snow peak in the evening light</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="img/trek-river-braid.jpg" alt="A river braiding through a wide valley with the sun above the ridge" width="1000" height="1778"><figcaption>The river braids through the valley</figcaption></figure>
-      <figure style="--ar:1600/1200"><img src="img/trek-terraces.jpg" alt="Terraced fields in warm evening sun, with the sun breaking through clouds" width="1600" height="1200"><figcaption>Terraced fields in the evening sun</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="img/trek-prayer-wheels.jpg" alt="Copper prayer wheels with prayer flags and snow mountains behind" width="1000" height="1778"><figcaption>Copper prayer wheels</figcaption></figure>      <figure style="--ar:1200/798"><img src="img/trek-snow-face.jpg" alt="A huge wall of snow and ice under a deep blue sky" width="1200" height="798"><figcaption>A wall of snow and ice</figcaption></figure>
-      <figure style="--ar:1000/1500"><img src="img/trek-windy-peak.jpg" alt="Wind blowing snow off a high summit ridge" width="1000" height="1500"><figcaption>Wind on the summit ridge</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="img/trek-cliff-village.jpg" alt="A village with yellow trees at the edge of a cliff, with brown hills and snow peaks beyond" width="1000" height="1778"><figcaption>A village at the cliff edge</figcaption></figure>
-      <figure style="--ar:736/1104"><img src="img/trek-fishtail.jpg" alt="Colorful prayer flags below a sharp white peak, with a lodge in the snow" width="736" height="1104"><figcaption>Prayer flags below a sharp white peak</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="img/trek-prayer-flags.jpg" alt="Prayer flags in front of a snow peak under a deep blue sky" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Prayer flags and a snow peak</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="img/trek-gorge-village.jpg" alt="A village in a river gorge below snow mountains" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>A village in the gorge</figcaption></figure>
+      <figure style="--ar:735/907"><img src="img/trek-hikers.jpg" alt="Two trekkers with poles walking a mountain path, with a huge snow face behind them" width="735" height="907" loading="lazy" decoding="async"><figcaption>Walking the trail</figcaption></figure>
+      <figure style="--ar:1600/900"><img src="img/trek-valley.jpg" alt="A wide valley with a river and fields, and a snow peak in the distance" width="1600" height="900" loading="lazy" decoding="async"><figcaption>The valley opens toward the mountains</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="img/trek-golden-hills.jpg" alt="Snow peaks rising above golden brown hills" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Snow peaks above golden hills</figcaption></figure>
+      <figure style="--ar:1600/1200"><img src="img/trek-meadow.jpg" alt="A green meadow with wildflowers and a horse, with cloud-covered mountains behind" width="1600" height="1200" loading="lazy" decoding="async"><figcaption>A green meadow in the valley</figcaption></figure>
+      <figure style="--ar:1000/1494"><img src="img/trek-south-peak.jpg" alt="A snow peak glowing in warm light above dark trees, with a bird on a bare branch" width="1000" height="1494" loading="lazy" decoding="async"><figcaption>A snow peak in the evening light</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="img/trek-river-braid.jpg" alt="A river braiding through a wide valley with the sun above the ridge" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>The river braids through the valley</figcaption></figure>
+      <figure style="--ar:1600/1200"><img src="img/trek-terraces.jpg" alt="Terraced fields in warm evening sun, with the sun breaking through clouds" width="1600" height="1200" loading="lazy" decoding="async"><figcaption>Terraced fields in the evening sun</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="img/trek-prayer-wheels.jpg" alt="Copper prayer wheels with prayer flags and snow mountains behind" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Copper prayer wheels</figcaption></figure>      <figure style="--ar:1200/798"><img src="img/trek-snow-face.jpg" alt="A huge wall of snow and ice under a deep blue sky" width="1200" height="798" loading="lazy" decoding="async"><figcaption>A wall of snow and ice</figcaption></figure>
+      <figure style="--ar:1000/1500"><img src="img/trek-windy-peak.jpg" alt="Wind blowing snow off a high summit ridge" width="1000" height="1500" loading="lazy" decoding="async"><figcaption>Wind on the summit ridge</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="img/trek-cliff-village.jpg" alt="A village with yellow trees at the edge of a cliff, with brown hills and snow peaks beyond" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>A village at the cliff edge</figcaption></figure>
+      <figure style="--ar:736/1104"><img src="img/trek-fishtail.jpg" alt="Colorful prayer flags below a sharp white peak, with a lodge in the snow" width="736" height="1104" loading="lazy" decoding="async"><figcaption>Prayer flags below a sharp white peak</figcaption></figure>
       <figure style="--ar:901/676"><img src="img/letter.jpg" alt="Evening light over a terraced valley in the Himalaya" width="901" height="676" loading="lazy"><figcaption>Evening light over a terraced valley</figcaption></figure>
       <figure style="--ar:788/1400"><img src="img/trail-hay-path.jpg" alt="A person carrying a big load of golden hay up a steep mountain path, with a stupa and prayer flags below" width="788" height="1400" loading="lazy"><figcaption>A load of hay on the mountain path</figcaption></figure>
       <figure style="--ar:1600/900"><img src="img/trail-autumn-village.jpg" alt="A white village among yellow autumn trees, with golden mountains and snow peaks behind" width="1600" height="900" loading="lazy"><figcaption>A village among autumn trees</figcaption></figure>
@@ -370,33 +372,33 @@ li::marker{color:var(--gold-ink)}
     <p><a class="btn alt" href="https://www.instagram.com/stories/highlights/17926169711588986/" target="_blank" rel="noopener">Watch the stories on Instagram</a></p>
   </div>
   <div class="gal" tabindex="0" role="region" aria-label="Photos from our last pilgrimage. Swipe or scroll sideways to see more.">
-      <figure style="--ar:1400/788"><img src="img/last-group-ridge.jpg" alt="A group of friends laughing and posing together on a sunny ridge above the clouds" width="1400" height="788"><figcaption>The whole group together</figcaption></figure>
+      <figure style="--ar:1400/788"><img src="img/last-group-ridge.jpg" alt="A group of friends laughing and posing together on a sunny ridge above the clouds" width="1400" height="788" loading="lazy" decoding="async"><figcaption>The whole group together</figcaption></figure>
       <figure style="--ar:1957/1100"><img src="img/last-group-range.jpg" alt="A group of trekkers posing together on a stone terrace with a huge snow range behind them" width="1957" height="1100" loading="lazy"><figcaption>The group with a snow range behind</figcaption></figure>
-      <figure style="--ar:1400/789"><img src="img/last-rain-group.jpg" alt="A group of trekkers in rain jackets and ponchos posing together on a wet road at the start of the trail" width="1400" height="789"><figcaption>Setting off in the rain</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="img/last-forest-pair.jpg" alt="Two trekkers smiling on a narrow path through green forest" width="788" height="1400"><figcaption>Together on the forest trail</figcaption></figure>
-      <figure style="--ar:1050/1400"><img src="img/last-mist.jpg" alt="Trekkers coming up a grassy path through thick mist and tall bare trees" width="1050" height="1400"><figcaption>Walking up into the mist</figcaption></figure>
-      <figure style="--ar:1400/1050"><img src="img/last-selfie-cloud.jpg" alt="Five smiling trekkers in a selfie with low cloud behind them" width="1400" height="1050"><figcaption>Happy faces in the clouds</figcaption></figure>
+      <figure style="--ar:1400/789"><img src="img/last-rain-group.jpg" alt="A group of trekkers in rain jackets and ponchos posing together on a wet road at the start of the trail" width="1400" height="789" loading="lazy" decoding="async"><figcaption>Setting off in the rain</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="img/last-forest-pair.jpg" alt="Two trekkers smiling on a narrow path through green forest" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Together on the forest trail</figcaption></figure>
+      <figure style="--ar:1050/1400"><img src="img/last-mist.jpg" alt="Trekkers coming up a grassy path through thick mist and tall bare trees" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>Walking up into the mist</figcaption></figure>
+      <figure style="--ar:1400/1050"><img src="img/last-selfie-cloud.jpg" alt="Five smiling trekkers in a selfie with low cloud behind them" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Happy faces in the clouds</figcaption></figure>
       <figure style="--ar:1956/1100"><img src="img/last-group-selfie.jpg" alt="A group selfie of trekkers smiling and waving on a hillside near blue-roofed lodges, with a forested mountain behind" width="1956" height="1100" loading="lazy"><figcaption>Everyone together at the lodge</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="img/last-mossy-steps.jpg" alt="A trekker in a yellow jacket standing on old mossy stone steps in the forest" width="788" height="1400"><figcaption>Old mossy stone steps</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="img/last-forest-path.jpg" alt="Trekkers walking down a path under old trees covered in moss" width="788" height="1400"><figcaption>Under the old moss trees</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="img/last-mossy-steps.jpg" alt="A trekker in a yellow jacket standing on old mossy stone steps in the forest" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Old mossy stone steps</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="img/last-forest-path.jpg" alt="Trekkers walking down a path under old trees covered in moss" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Under the old moss trees</figcaption></figure>
       <figure style="--ar:619/1100"><img src="img/last-river-gorge.jpg" alt="A river running through a deep green forest gorge, seen from a suspension bridge" width="619" height="1100" loading="lazy"><figcaption>A river gorge seen from the bridge</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="img/last-peak-walk.jpg" alt="A trekker in a yellow jacket walking along a grassy ridge toward a sharp snow peak, with prayer flags beside the path" width="788" height="1400"><figcaption>Walking toward the peak</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="img/last-peak-walk.jpg" alt="A trekker in a yellow jacket walking along a grassy ridge toward a sharp snow peak, with prayer flags beside the path" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Walking toward the peak</figcaption></figure>
       <figure style="--ar:619/1100"><img src="img/last-arms-open.jpg" alt="A trekker in a yellow jacket and wool hat standing with open arms on a mountain path, with a sharp snow peak behind" width="619" height="1100" loading="lazy"><figcaption>Heart open below the peak</figcaption></figure>
-      <figure style="--ar:1400/788"><img src="img/last-peak-selfie.jpg" alt="Two smiling trekkers in a selfie with a snow peak and the morning sun behind them" width="1400" height="788"><figcaption>Morning smiles below a snow peak</figcaption></figure>
+      <figure style="--ar:1400/788"><img src="img/last-peak-selfie.jpg" alt="Two smiling trekkers in a selfie with a snow peak and the morning sun behind them" width="1400" height="788" loading="lazy" decoding="async"><figcaption>Morning smiles below a snow peak</figcaption></figure>
       <figure style="--ar:619/1100"><img src="img/last-selfie-peak.jpg" alt="Two smiling trekkers in a selfie with a sharp snow peak behind them" width="619" height="1100" loading="lazy"><figcaption>Smiles below the peak</figcaption></figure>
-      <figure style="--ar:1400/786"><img src="img/last-peak-close.jpg" alt="A sharp snow peak seen close up under a deep blue sky" width="1400" height="786"><figcaption>A sharp peak in the morning light</figcaption></figure>
-      <figure style="--ar:812/458"><img src="img/last-ridge-two.jpg" alt="Two trekkers sitting on a ridge and waving, with a huge wall of snow mountains behind them" width="812" height="458"><figcaption>Resting on the ridge</figcaption></figure>
-      <figure style="--ar:1400/1050"><img src="img/last-selfie-friends.jpg" alt="Four friends smiling in a selfie on a rooftop above a misty mountain valley" width="1400" height="1050"><figcaption>Friends above the valley</figcaption></figure>
-      <figure style="--ar:1400/1050"><img src="img/last-sunset-wall.jpg" alt="A woman in an orange top standing on a stone wall looking back, with hills and clouds in evening light" width="1400" height="1050"><figcaption>Evening light on the hills</figcaption></figure>
-      <figure style="--ar:1400/788"><img src="img/last-group-flags.jpg" alt="A group of trekkers standing together in a courtyard under strings of prayer flags" width="1400" height="788"><figcaption>Under the prayer flags</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="img/last-three-trail.jpg" alt="Three trekkers in bright jackets standing together on a green hillside" width="788" height="1400"><figcaption>Three friends on the trail</figcaption></figure>
-      <figure style="--ar:1/1"><img src="img/last-terrace-peak.jpg" alt="Two people having tea at a table on a stone terrace, with a pointed snow peak behind them" width="780" height="780"><figcaption>Tea on the terrace</figcaption></figure>
-      <figure style="--ar:1/1"><img src="img/last-lodge-circle.jpg" alt="A group of trekkers sitting in a circle on cushions inside a lodge, smiling at the camera" width="960" height="960"><figcaption>Gathered together at the lodge</figcaption></figure>
-      <figure style="--ar:1050/1400"><img src="img/last-lodge-tea.jpg" alt="Guides and trekkers sitting around a table with a kettle inside a mountain lodge" width="1050" height="1400"><figcaption>Tea and a rest at the lodge</figcaption></figure>
-      <figure style="--ar:1050/1400"><img src="img/last-lodge-cup.jpg" alt="A trekker in a yellow jacket and wool hat holding a small cup of tea, with misty mountains behind" width="1050" height="1400"><figcaption>A warm cup with a view</figcaption></figure>
-      <figure style="--ar:1050/1400"><img src="img/last-lodge-rest.jpg" alt="A smiling woman in a green jacket sitting in a lodge window seat" width="1050" height="1400"><figcaption>A quiet moment at the lodge</figcaption></figure>
-      <figure style="--ar:1400/1050"><img src="img/last-bench-rest.jpg" alt="Three tired trekkers resting on a red bench below a painted mural of a snow peak" width="1400" height="1050"><figcaption>Tired and happy</figcaption></figure>
-      <figure style="--ar:1400/788"><img src="img/last-garden-group.jpg" alt="A group of friends posing together in a garden under strings of prayer flags" width="1400" height="788"><figcaption>All together in the garden</figcaption></figure>  </div>
+      <figure style="--ar:1400/786"><img src="img/last-peak-close.jpg" alt="A sharp snow peak seen close up under a deep blue sky" width="1400" height="786" loading="lazy" decoding="async"><figcaption>A sharp peak in the morning light</figcaption></figure>
+      <figure style="--ar:812/458"><img src="img/last-ridge-two.jpg" alt="Two trekkers sitting on a ridge and waving, with a huge wall of snow mountains behind them" width="812" height="458" loading="lazy" decoding="async"><figcaption>Resting on the ridge</figcaption></figure>
+      <figure style="--ar:1400/1050"><img src="img/last-selfie-friends.jpg" alt="Four friends smiling in a selfie on a rooftop above a misty mountain valley" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Friends above the valley</figcaption></figure>
+      <figure style="--ar:1400/1050"><img src="img/last-sunset-wall.jpg" alt="A woman in an orange top standing on a stone wall looking back, with hills and clouds in evening light" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Evening light on the hills</figcaption></figure>
+      <figure style="--ar:1400/788"><img src="img/last-group-flags.jpg" alt="A group of trekkers standing together in a courtyard under strings of prayer flags" width="1400" height="788" loading="lazy" decoding="async"><figcaption>Under the prayer flags</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="img/last-three-trail.jpg" alt="Three trekkers in bright jackets standing together on a green hillside" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Three friends on the trail</figcaption></figure>
+      <figure style="--ar:1/1"><img src="img/last-terrace-peak.jpg" alt="Two people having tea at a table on a stone terrace, with a pointed snow peak behind them" width="780" height="780" loading="lazy" decoding="async"><figcaption>Tea on the terrace</figcaption></figure>
+      <figure style="--ar:1/1"><img src="img/last-lodge-circle.jpg" alt="A group of trekkers sitting in a circle on cushions inside a lodge, smiling at the camera" width="960" height="960" loading="lazy" decoding="async"><figcaption>Gathered together at the lodge</figcaption></figure>
+      <figure style="--ar:1050/1400"><img src="img/last-lodge-tea.jpg" alt="Guides and trekkers sitting around a table with a kettle inside a mountain lodge" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>Tea and a rest at the lodge</figcaption></figure>
+      <figure style="--ar:1050/1400"><img src="img/last-lodge-cup.jpg" alt="A trekker in a yellow jacket and wool hat holding a small cup of tea, with misty mountains behind" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>A warm cup with a view</figcaption></figure>
+      <figure style="--ar:1050/1400"><img src="img/last-lodge-rest.jpg" alt="A smiling woman in a green jacket sitting in a lodge window seat" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>A quiet moment at the lodge</figcaption></figure>
+      <figure style="--ar:1400/1050"><img src="img/last-bench-rest.jpg" alt="Three tired trekkers resting on a red bench below a painted mural of a snow peak" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Tired and happy</figcaption></figure>
+      <figure style="--ar:1400/788"><img src="img/last-garden-group.jpg" alt="A group of friends posing together in a garden under strings of prayer flags" width="1400" height="788" loading="lazy" decoding="async"><figcaption>All together in the garden</figcaption></figure>  </div>
 </section>
 
 <section class="band sand" id="route">
@@ -468,7 +470,7 @@ li::marker{color:var(--gold-ink)}
   <div class="in">
     <h2 class="deep-title">Shamanic Immersion<span>April 11&ndash;16, 2027</span></h2>
     <div class="rule" style="margin-left:auto;margin-right:auto"></div>
-    <img class="deep-ph" src="img/immersion-title.jpg" alt="A snow-covered Himalayan peak above a mountain road" width="1440" height="1085" style="object-position:50% 15%">
+    <img class="deep-ph" src="img/immersion-title.jpg" alt="A snow-covered Himalayan peak above a mountain road" width="1440" height="1085" style="object-position:50% 15%" loading="lazy" decoding="async">
     <div class="deep-grid">
       <div>
         <p>After crossing Thorong La, the body has accomplished a great deal, and the mind often becomes quieter and more open. For those who feel called to continue the journey more deeply, we stay in Muktinath for six more days.</p>
@@ -540,7 +542,7 @@ li::marker{color:var(--gold-ink)}
     <h2>Yakov and Akari</h2>
     <div class="rule"></div>
     <div class="guide">
-      <img src="img/yakov.jpg" alt="Yakov Rajuna sitting with a frame drum" width="700" height="970">
+      <img src="img/yakov.jpg" alt="Yakov Rajuna sitting with a frame drum" width="700" height="970" loading="lazy" decoding="async">
       <div>
         <h3>Yakov Rajuna</h3>
         <div class="ds">Spiritual Mentor<span class="mp">·</span>Neo-Shaman<span class="mp">·</span>Meditation &amp; Qi Gong Teacher</div>
@@ -549,7 +551,7 @@ li::marker{color:var(--gold-ink)}
       </div>
     </div>
     <div class="guide">
-      <img src="img/akari.jpg" alt="Akari Tamura playing guitar under a tree" width="760" height="1095">
+      <img src="img/akari.jpg" alt="Akari Tamura playing guitar under a tree" width="760" height="1095" loading="lazy" decoding="async">
       <div>
         <h3>Akari Tamura</h3>
         <div class="ds">Kirtan artist<span class="mp">·</span>Musician<span class="mp">·</span>Teacher of voice, instrument and devotional living</div>
@@ -575,8 +577,8 @@ li::marker{color:var(--gold-ink)}
       <ul style="margin:0;color:var(--pale)"><li>Medical insurance covering helicopter evacuation up to 6,000 m (paid separately, about $100)</li><li>Normal or good physical condition and readiness for multi-day trekking</li><li>A short video call with us before you join</li></ul>
     </div>
     <div class="safe-ph">
-      <img class="p1" src="img/peak.jpg" alt="A trekker holding a flag on a snow peak" width="697" height="858">
-      <img class="p2" src="img/rocks.jpg" alt="A person standing on rocks with arms open, facing snow mountains" width="739" height="554">
+      <img class="p1" src="img/peak.jpg" alt="A trekker holding a flag on a snow peak" width="697" height="858" loading="lazy" decoding="async">
+      <img class="p2" src="img/rocks.jpg" alt="A person standing on rocks with arms open, facing snow mountains" width="739" height="554" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -639,7 +641,7 @@ li::marker{color:var(--gold-ink)}
 </main>
 
 <footer class="closing">
-  <img src="img/closing.jpg" alt="" width="1280" height="611">
+  <img src="img/closing.jpg" alt="" width="1280" height="611" loading="lazy" decoding="async">
   <div class="in">
     <p class="msg">We are so looking forward to journeying together and creating a once in a lifetime memory. In 2022 we walked to Mardi Himal as a group, and many of our friends told us afterwards that their lives truly changed. It is a priceless experience to share, and we are so happy to begin it with you. We look forward to each soul coming together in divine alignment and arrangement.</p>
     <p class="sign">With love, Yakov and Akari</p>
