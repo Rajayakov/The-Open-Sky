@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "annapurna-pilgrimage-2027.vercel.app" }],
+      "destination": "/mountains/annapurna-2027"
+    }
+  ]
+}
