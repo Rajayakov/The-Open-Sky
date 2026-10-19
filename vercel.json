@@ -38,7 +38,7 @@
       "has": [
         {
           "type": "host",
-          "value": "^(theopensky|the-open-sky|the-open-sky-rajuna)\\.vercel\\.app$|^the-open-sky-git-main-rajuna\\.vercel\\.app$|^the-open-sky-git-annapurna-landing-ru-akari-rajuna\\.vercel\\.app$"
+          "value": "^(theopensky|the-open-sky|the-open-sky-rajuna)\\.vercel\\.app$|^the-open-sky-git-main-rajuna\\.vercel\\.app$"
         }
       ],
       "destination": "/mountains/annapurna-2027",
