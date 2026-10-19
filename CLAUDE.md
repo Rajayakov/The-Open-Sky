@@ -60,7 +60,7 @@ Never choose: noise, trendiness, generic luxury, template aesthetics, overdesign
 
 ## Лендинг Аннапурны 2027 (`/mountains/annapurna-2027`)
 Отдельный статический лендинг, живёт вне дизайн-системы выше. Эти правила имеют приоритет для него.
-- Файл: `src/pages/mountains/annapurna-2027.html`, ассеты `public/annapurna-2027/`. Источник правды: HTML в репозитории. Прод: https://annapurna-pilgrimage-2027.vercel.app/mountains/annapurna-2027
+- Файл: `src/pages/mountains/annapurna-2027.html`, ассеты `public/annapurna-2027/`. Источник правды: HTML в репозитории. Прод: https://annapurna2027.vercel.app (старый адрес annapurna-pilgrimage-2027.vercel.app тоже работает)
 - Порядок выкладки, без исключений: правка в ветку `annapurna-landing-ru-akari` → дождаться деплоя → проверить превью → только потом в main (`git push origin HEAD:main`). Одним пушем в обе ветки не пушить.
 - Перед правкой: `git pull`. Автор коммита должен быть в команде Vercel.
 - Пути ассетов абсолютные: `/annapurna-2027/...`. Картинки только WebP (~q78, до 1600 px). Тот же файл не перезаписывать: кэш 7 дней, при замене давать новое имя. Шрифты в `public/annapurna-2027/fonts/` урезаны по символам, кэш год.

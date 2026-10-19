@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/", "has": [{ "type": "host", "value": "annapurna2027.vercel.app" }], "destination": "/mountains/annapurna-2027", "permanent": false },
     { "source": "/", "has": [{ "type": "host", "value": "annapurna-pilgrimage-2027.vercel.app" }], "destination": "/mountains/annapurna-2027", "permanent": false }
   ],
   "headers": [
