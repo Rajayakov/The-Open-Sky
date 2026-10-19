@@ -20,10 +20,13 @@
 <link rel="icon" href="/annapurna-2027/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/annapurna-2027/apple-touch-icon.png">
 <meta name="description" content="Паломничество к Аннапурне через перевал Торонг-Ла к священному Муктинатху. Непал, 28 марта — 16 апреля 2027.">
+<link rel="preload" as="image" href="/annapurna-2027/img/hero-m.webp" media="(max-width:700px)" fetchpriority="high">
+<link rel="preload" as="image" href="/annapurna-2027/img/hero.webp" media="(min-width:701px)" fetchpriority="high">
 <link rel="preload" href="/annapurna-2027/fonts/pt-serif-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/annapurna-2027/fonts/carlito-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/annapurna-2027/fonts/pt-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/annapurna-2027/fonts/carlito-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/annapurna-2027/fonts/pt-serif-cyrillic-400-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/annapurna-2027/fonts/pt-serif-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/annapurna-2027/fonts/carlito-cyrillic-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/annapurna-2027/fonts/carlito-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -76,7 +79,7 @@ li::marker{color:var(--gold-ink)}
 
 /* Hero */
 .hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;isolation:isolate}
-.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 15%;z-index:-2}
+.hero>picture{position:absolute;inset:0;z-index:-2}.hero>picture>img{width:100%;height:100%;object-fit:cover;object-position:50% 15%;display:block}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to bottom,rgba(11,26,51,.45) 0%,rgba(11,26,51,0) 24%,rgba(11,26,51,.6) 55%,var(--navy) 95%)}
 .nav{display:flex;flex-wrap:wrap;gap:.5rem 1.3rem;padding-top:1.3rem;font-size:1.05rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-shadow:0 1px 3px rgba(11,26,51,.5)}
 .nav a{text-decoration:none;padding:.2rem 0;border-bottom:1px solid transparent}
@@ -305,7 +308,7 @@ li::marker{color:var(--gold-ink)}
 </style>
 
 <header class="hero">
-  <img src="/annapurna-2027/img/hero.jpg" alt="Утреннее солнце над снежными вершинами хребта Аннапурна" width="2000" height="965">
+  <picture><source media="(max-width:700px)" srcset="/annapurna-2027/img/hero-m.webp"><img src="/annapurna-2027/img/hero.webp" alt="Утреннее солнце над снежными вершинами хребта Аннапурна" width="2000" height="965" fetchpriority="high" decoding="async"></picture>
   <div class="in">
     <nav class="nav" aria-label="Разделы страницы">
       <a href="#letter">Письмо</a><a href="#trail">Фото</a><a href="#route">Маршрут</a><a href="#days">Дни</a><a href="#deepening">Immersion</a><a href="#guides">Гиды</a><a href="#price">Стоимость</a><a href="#join">Участие</a>
@@ -339,7 +342,7 @@ li::marker{color:var(--gold-ink)}
         <p>Весна — прекрасное время для Гималаев. Склоны цветут рододендронами, национальным цветком Непала, а снежные вершины стоят чёткие и яркие на фоне глубокого синего неба. Днём на солнце тепло, ночи холодные и тихие, высокие хребты ещё укрыты зимним снегом.</p>
         <p>Муктинатх священен и для индуистов, и для буддистов. Его название часто переводят как «Господин освобождения». Здесь вода выходит из 108 источников, рядом с водой горит небольшое пламя, и считается, что в этом месте встречаются все пять стихий.</p>
       </div>
-      <img class="ph" src="/annapurna-2027/img/letter-statue.jpg" alt="Золотая сидящая статуя под богато расписным навесом, за ней молитвенные барабаны и снежные горы" width="1000" height="1567" style="object-position:50% 62%" loading="lazy" decoding="async">
+      <img class="ph" src="/annapurna-2027/img/letter-statue.webp" alt="Золотая сидящая статуя под богато расписным навесом, за ней молитвенные барабаны и снежные горы" width="1000" height="1567" style="object-position:50% 62%" loading="lazy" decoding="async">
     </div>
     <div class="quote">
       <div class="q">Паломничество — это просто путь с намерением.</div>
@@ -357,37 +360,37 @@ li::marker{color:var(--gold-ink)}
     </div>
   </div>
   <div class="gal" tabindex="0" role="region" aria-label="Фото с тропы. Листайте или прокручивайте вбок, чтобы увидеть больше.">
-      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-prayer-flags.jpg" alt="Молитвенные флаги на фоне снежной вершины под глубоким синим небом" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Молитвенные флаги и снежная вершина</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-gorge-village.jpg" alt="Деревня в речном ущелье под снежными горами" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Деревня в ущелье</figcaption></figure>
-      <figure style="--ar:735/907"><img src="/annapurna-2027/img/trek-hikers.jpg" alt="Двое треккеров с палками идут по горной тропе, за ними огромная снежная стена" width="735" height="907" loading="lazy" decoding="async"><figcaption>Идём по тропе</figcaption></figure>
-      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trek-valley.jpg" alt="Широкая долина с рекой и полями, вдали снежная вершина" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Долина открывается к горам</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-golden-hills.jpg" alt="Снежные вершины над золотисто-коричневыми холмами" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Снежные вершины над золотыми холмами</figcaption></figure>
-      <figure style="--ar:1600/1200"><img src="/annapurna-2027/img/trek-meadow.jpg" alt="Зелёный луг с полевыми цветами и лошадью, за ним горы в облаках" width="1600" height="1200" loading="lazy" decoding="async"><figcaption>Зелёный луг в долине</figcaption></figure>
-      <figure style="--ar:1000/1494"><img src="/annapurna-2027/img/trek-south-peak.jpg" alt="Снежная вершина в тёплом свете над тёмными деревьями, на голой ветке птица" width="1000" height="1494" loading="lazy" decoding="async"><figcaption>Снежная вершина в вечернем свете</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-river-braid.jpg" alt="Река, разбегающаяся рукавами по широкой долине, над хребтом солнце" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Река рукавами в долине</figcaption></figure>
-      <figure style="--ar:1600/1200"><img src="/annapurna-2027/img/trek-terraces.jpg" alt="Террасные поля в тёплом вечернем солнце, солнце пробивается сквозь облака" width="1600" height="1200" loading="lazy" decoding="async"><figcaption>Террасные поля в вечернем солнце</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-prayer-wheels.jpg" alt="Медные молитвенные барабаны с флагами, за ними снежные горы" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Медные молитвенные барабаны</figcaption></figure>      <figure style="--ar:1200/798"><img src="/annapurna-2027/img/trek-snow-face.jpg" alt="Огромная стена снега и льда под глубоким синим небом" width="1200" height="798" loading="lazy" decoding="async"><figcaption>Стена снега и льда</figcaption></figure>
-      <figure style="--ar:1000/1500"><img src="/annapurna-2027/img/trek-windy-peak.jpg" alt="Ветер сдувает снег с гребня высокой вершины" width="1000" height="1500" loading="lazy" decoding="async"><figcaption>Ветер на гребне вершины</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-cliff-village.jpg" alt="Деревня с жёлтыми деревьями на краю обрыва, дальше коричневые холмы и снежные вершины" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Деревня на краю обрыва</figcaption></figure>
-      <figure style="--ar:736/1104"><img src="/annapurna-2027/img/trek-fishtail.jpg" alt="Яркие молитвенные флаги под острой белой вершиной, внизу лодж в снегу" width="736" height="1104" loading="lazy" decoding="async"><figcaption>Молитвенные флаги под острой белой вершиной</figcaption></figure>
-      <figure style="--ar:901/676"><img src="/annapurna-2027/img/letter.jpg" alt="Вечерний свет над террасной долиной в Гималаях" width="901" height="676" loading="lazy"><figcaption>Вечерний свет над террасной долиной</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/trail-hay-path.jpg" alt="Человек несёт огромную вязанку золотистого сена по крутой горной тропе, внизу ступа и молитвенные флаги" width="788" height="1400" loading="lazy"><figcaption>Вязанка сена на горной тропе</figcaption></figure>
-      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-autumn-village.jpg" alt="Белая деревня среди жёлтых осенних деревьев, за ней золотые горы и снежные вершины" width="1600" height="900" loading="lazy"><figcaption>Деревня среди осенних деревьев</figcaption></figure>
-      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-heather-range.jpg" alt="Длинная белая горная гряда над долиной, на переднем плане ржаво-красный вереск" width="1600" height="900" loading="lazy"><figcaption>Снежные вершины над ржавым вереском</figcaption></figure>
-      <figure style="--ar:1085/818"><img src="/annapurna-2027/img/trail-dark-ridge.jpg" alt="Заснеженные вершины за тёмными хребтами, в долине зелёная полоса деревьев" width="1085" height="818" loading="lazy"><figcaption>Снежные вершины за тёмными хребтами</figcaption></figure>
-      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-red-cliffs.jpg" alt="Высокие красные и оранжевые скалы над зелёными полями и золотым кукурузным полем" width="1600" height="900" loading="lazy"><figcaption>Красные скалы над полями</figcaption></figure>
-      <figure style="--ar:1440/1085"><img src="/annapurna-2027/img/trail-snow-peak.jpg" alt="Огромная заснеженная вершина в чистом синем воздухе" width="1440" height="1085" loading="lazy"><figcaption>Снежная вершина в чистом воздухе</figcaption></figure>
-      <figure style="--ar:936/1170"><img src="/annapurna-2027/img/trail-climb-peak.jpg" alt="Треккеры поднимаются по травянистой тропе к острой снежной вершине" width="936" height="1170" loading="lazy"><figcaption>Поднимаемся к острой вершине</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/trail-mast-ridge.jpg" alt="Белая горная гряда над коричневыми холмами, на гребне небольшая мачта" width="788" height="1400" loading="lazy"><figcaption>Снежные вершины за хребтом</figcaption></figure>
-      <figure style="--ar:361/640"><img src="/annapurna-2027/img/trail-flags-village.jpg" alt="На переднем плане молитвенные флаги, на склоне ниже деревня под тёмной горой" width="361" height="640" loading="lazy"><figcaption>Молитвенные флаги над деревней</figcaption></figure>
-      <figure style="--ar:1600/1200"><img src="/annapurna-2027/img/trail-river-valley.jpg" alt="Речная долина и гравийная дорога, в конце долины снежная вершина" width="1600" height="1200" loading="lazy"><figcaption>Речная долина под снежной вершиной</figcaption></figure>
-      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-sunset-range.jpg" alt="Оранжевый закат за зубчатой белой горной грядой, впереди тёмные сосны" width="1600" height="900" loading="lazy"><figcaption>Закат за белой грядой</figcaption></figure>
-      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-golden-canyon.jpg" alt="Река рукавами между золотых скал, впереди снежные вершины в облаках" width="1600" height="900" loading="lazy"><figcaption>Река рукавами в золотом каньоне</figcaption></figure>
-      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-high-valley.jpg" alt="Деревня в высокой долине среди песчаных холмов, над ней снежные вершины" width="1600" height="900" loading="lazy"><figcaption>Деревня в высокой долине</figcaption></figure>
-      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-orchards-river.jpg" alt="Зелёные сады и поля вдоль широкой реки, снежная вершина и высокие скалы" width="1600" height="900" loading="lazy"><figcaption>Сады у реки</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/trail-canyon-peaks.jpg" alt="Узкий каньон под снежными вершинами в облаках" width="788" height="1400" loading="lazy"><figcaption>Каньон под вершинами</figcaption></figure>
-      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-folded-hills.jpg" alt="Складчатые коричневые холмы с извилистой дорогой, далеко позади длинная белая гряда" width="1600" height="900" loading="lazy"><figcaption>Складчатые холмы, вдали белая гряда</figcaption></figure>
-      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-valley-above.jpg" alt="Речная долина с зелёными полями, вид сверху, между золотых гор" width="1600" height="900" loading="lazy"><figcaption>Речная долина сверху</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-prayer-flags.webp" alt="Молитвенные флаги на фоне снежной вершины под глубоким синим небом" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Молитвенные флаги и снежная вершина</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-gorge-village.webp" alt="Деревня в речном ущелье под снежными горами" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Деревня в ущелье</figcaption></figure>
+      <figure style="--ar:735/907"><img src="/annapurna-2027/img/trek-hikers.webp" alt="Двое треккеров с палками идут по горной тропе, за ними огромная снежная стена" width="735" height="907" loading="lazy" decoding="async"><figcaption>Идём по тропе</figcaption></figure>
+      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trek-valley.webp" alt="Широкая долина с рекой и полями, вдали снежная вершина" width="1600" height="900" loading="lazy" decoding="async"><figcaption>Долина открывается к горам</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-golden-hills.webp" alt="Снежные вершины над золотисто-коричневыми холмами" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Снежные вершины над золотыми холмами</figcaption></figure>
+      <figure style="--ar:1600/1200"><img src="/annapurna-2027/img/trek-meadow.webp" alt="Зелёный луг с полевыми цветами и лошадью, за ним горы в облаках" width="1600" height="1200" loading="lazy" decoding="async"><figcaption>Зелёный луг в долине</figcaption></figure>
+      <figure style="--ar:1000/1494"><img src="/annapurna-2027/img/trek-south-peak.webp" alt="Снежная вершина в тёплом свете над тёмными деревьями, на голой ветке птица" width="1000" height="1494" loading="lazy" decoding="async"><figcaption>Снежная вершина в вечернем свете</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-river-braid.webp" alt="Река, разбегающаяся рукавами по широкой долине, над хребтом солнце" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Река рукавами в долине</figcaption></figure>
+      <figure style="--ar:1600/1200"><img src="/annapurna-2027/img/trek-terraces.webp" alt="Террасные поля в тёплом вечернем солнце, солнце пробивается сквозь облака" width="1600" height="1200" loading="lazy" decoding="async"><figcaption>Террасные поля в вечернем солнце</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-prayer-wheels.webp" alt="Медные молитвенные барабаны с флагами, за ними снежные горы" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Медные молитвенные барабаны</figcaption></figure>      <figure style="--ar:1200/798"><img src="/annapurna-2027/img/trek-snow-face.webp" alt="Огромная стена снега и льда под глубоким синим небом" width="1200" height="798" loading="lazy" decoding="async"><figcaption>Стена снега и льда</figcaption></figure>
+      <figure style="--ar:1000/1500"><img src="/annapurna-2027/img/trek-windy-peak.webp" alt="Ветер сдувает снег с гребня высокой вершины" width="1000" height="1500" loading="lazy" decoding="async"><figcaption>Ветер на гребне вершины</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-cliff-village.webp" alt="Деревня с жёлтыми деревьями на краю обрыва, дальше коричневые холмы и снежные вершины" width="1000" height="1778" loading="lazy" decoding="async"><figcaption>Деревня на краю обрыва</figcaption></figure>
+      <figure style="--ar:736/1104"><img src="/annapurna-2027/img/trek-fishtail.webp" alt="Яркие молитвенные флаги под острой белой вершиной, внизу лодж в снегу" width="736" height="1104" loading="lazy" decoding="async"><figcaption>Молитвенные флаги под острой белой вершиной</figcaption></figure>
+      <figure style="--ar:901/676"><img src="/annapurna-2027/img/letter.webp" alt="Вечерний свет над террасной долиной в Гималаях" width="901" height="676" loading="lazy"><figcaption>Вечерний свет над террасной долиной</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/trail-hay-path.webp" alt="Человек несёт огромную вязанку золотистого сена по крутой горной тропе, внизу ступа и молитвенные флаги" width="788" height="1400" loading="lazy"><figcaption>Вязанка сена на горной тропе</figcaption></figure>
+      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-autumn-village.webp" alt="Белая деревня среди жёлтых осенних деревьев, за ней золотые горы и снежные вершины" width="1600" height="900" loading="lazy"><figcaption>Деревня среди осенних деревьев</figcaption></figure>
+      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-heather-range.webp" alt="Длинная белая горная гряда над долиной, на переднем плане ржаво-красный вереск" width="1600" height="900" loading="lazy"><figcaption>Снежные вершины над ржавым вереском</figcaption></figure>
+      <figure style="--ar:1085/818"><img src="/annapurna-2027/img/trail-dark-ridge.webp" alt="Заснеженные вершины за тёмными хребтами, в долине зелёная полоса деревьев" width="1085" height="818" loading="lazy"><figcaption>Снежные вершины за тёмными хребтами</figcaption></figure>
+      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-red-cliffs.webp" alt="Высокие красные и оранжевые скалы над зелёными полями и золотым кукурузным полем" width="1600" height="900" loading="lazy"><figcaption>Красные скалы над полями</figcaption></figure>
+      <figure style="--ar:1440/1085"><img src="/annapurna-2027/img/trail-snow-peak.webp" alt="Огромная заснеженная вершина в чистом синем воздухе" width="1440" height="1085" loading="lazy"><figcaption>Снежная вершина в чистом воздухе</figcaption></figure>
+      <figure style="--ar:936/1170"><img src="/annapurna-2027/img/trail-climb-peak.webp" alt="Треккеры поднимаются по травянистой тропе к острой снежной вершине" width="936" height="1170" loading="lazy"><figcaption>Поднимаемся к острой вершине</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/trail-mast-ridge.webp" alt="Белая горная гряда над коричневыми холмами, на гребне небольшая мачта" width="788" height="1400" loading="lazy"><figcaption>Снежные вершины за хребтом</figcaption></figure>
+      <figure style="--ar:361/640"><img src="/annapurna-2027/img/trail-flags-village.webp" alt="На переднем плане молитвенные флаги, на склоне ниже деревня под тёмной горой" width="361" height="640" loading="lazy"><figcaption>Молитвенные флаги над деревней</figcaption></figure>
+      <figure style="--ar:1600/1200"><img src="/annapurna-2027/img/trail-river-valley.webp" alt="Речная долина и гравийная дорога, в конце долины снежная вершина" width="1600" height="1200" loading="lazy"><figcaption>Речная долина под снежной вершиной</figcaption></figure>
+      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-sunset-range.webp" alt="Оранжевый закат за зубчатой белой горной грядой, впереди тёмные сосны" width="1600" height="900" loading="lazy"><figcaption>Закат за белой грядой</figcaption></figure>
+      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-golden-canyon.webp" alt="Река рукавами между золотых скал, впереди снежные вершины в облаках" width="1600" height="900" loading="lazy"><figcaption>Река рукавами в золотом каньоне</figcaption></figure>
+      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-high-valley.webp" alt="Деревня в высокой долине среди песчаных холмов, над ней снежные вершины" width="1600" height="900" loading="lazy"><figcaption>Деревня в высокой долине</figcaption></figure>
+      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-orchards-river.webp" alt="Зелёные сады и поля вдоль широкой реки, снежная вершина и высокие скалы" width="1600" height="900" loading="lazy"><figcaption>Сады у реки</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/trail-canyon-peaks.webp" alt="Узкий каньон под снежными вершинами в облаках" width="788" height="1400" loading="lazy"><figcaption>Каньон под вершинами</figcaption></figure>
+      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-folded-hills.webp" alt="Складчатые коричневые холмы с извилистой дорогой, далеко позади длинная белая гряда" width="1600" height="900" loading="lazy"><figcaption>Складчатые холмы, вдали белая гряда</figcaption></figure>
+      <figure style="--ar:1600/900"><img src="/annapurna-2027/img/trail-valley-above.webp" alt="Речная долина с зелёными полями, вид сверху, между золотых гор" width="1600" height="900" loading="lazy"><figcaption>Речная долина сверху</figcaption></figure>
   </div>
 
   <div class="in gal-head gal-head-2" id="last">
@@ -402,33 +405,33 @@ li::marker{color:var(--gold-ink)}
     <p><a class="btn alt" href="https://www.instagram.com/stories/highlights/17926169711588986/" target="_blank" rel="noopener">Смотреть истории в Instagram</a></p>
   </div>
   <div class="gal" tabindex="0" role="region" aria-label="Фото с нашего прошлого паломничества. Листайте или прокручивайте вбок, чтобы увидеть больше.">
-      <figure style="--ar:1400/788"><img src="/annapurna-2027/img/last-group-ridge.jpg" alt="Друзья смеются и фотографируются вместе на солнечном гребне над облаками" width="1400" height="788" loading="lazy" decoding="async"><figcaption>Вся группа вместе</figcaption></figure>
-      <figure style="--ar:1957/1100"><img src="/annapurna-2027/img/last-group-range.jpg" alt="Группа треккеров позирует на каменной террасе, за ними огромный снежный хребет" width="1957" height="1100" loading="lazy"><figcaption>Группа на фоне снежного хребта</figcaption></figure>
-      <figure style="--ar:1400/789"><img src="/annapurna-2027/img/last-rain-group.jpg" alt="Группа треккеров в дождевиках и пончо позирует на мокрой дороге в начале тропы" width="1400" height="789" loading="lazy" decoding="async"><figcaption>Выходим под дождём</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/last-forest-pair.jpg" alt="Двое улыбающихся треккеров на узкой тропе в зелёном лесу" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Вместе на лесной тропе</figcaption></figure>
-      <figure style="--ar:1050/1400"><img src="/annapurna-2027/img/last-mist.jpg" alt="Треккеры поднимаются по травянистой тропе сквозь густой туман и высокие голые деревья" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>Поднимаемся в туман</figcaption></figure>
-      <figure style="--ar:1400/1050"><img src="/annapurna-2027/img/last-selfie-cloud.jpg" alt="Пятеро улыбающихся треккеров на селфи, позади низкие облака" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Счастливые лица в облаках</figcaption></figure>
-      <figure style="--ar:1956/1100"><img src="/annapurna-2027/img/last-group-selfie.jpg" alt="Групповое селфи: треккеры улыбаются и машут на склоне у лоджей с синими крышами, позади лесистая гора" width="1956" height="1100" loading="lazy"><figcaption>Все вместе в лодже</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/last-mossy-steps.jpg" alt="Треккер в жёлтой куртке стоит на старых замшелых каменных ступенях в лесу" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Старые замшелые каменные ступени</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/last-forest-path.jpg" alt="Треккеры спускаются по тропе под старыми деревьями, покрытыми мхом" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Под старыми мшистыми деревьями</figcaption></figure>
-      <figure style="--ar:619/1100"><img src="/annapurna-2027/img/last-river-gorge.jpg" alt="Река в глубоком зелёном лесном ущелье, вид с подвесного моста" width="619" height="1100" loading="lazy"><figcaption>Речное ущелье с моста</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/last-peak-walk.jpg" alt="Треккер в жёлтой куртке идёт по травянистому гребню к острой снежной вершине, у тропы молитвенные флаги" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Идём к вершине</figcaption></figure>
-      <figure style="--ar:619/1100"><img src="/annapurna-2027/img/last-arms-open.jpg" alt="Треккер в жёлтой куртке и шерстяной шапке стоит с раскрытыми руками на горной тропе, за ним острая снежная вершина" width="619" height="1100" loading="lazy"><figcaption>Сердце открыто под вершиной</figcaption></figure>
-      <figure style="--ar:1400/788"><img src="/annapurna-2027/img/last-peak-selfie.jpg" alt="Двое улыбающихся треккеров на селфи, позади снежная вершина и утреннее солнце" width="1400" height="788" loading="lazy" decoding="async"><figcaption>Утренние улыбки под снежной вершиной</figcaption></figure>
-      <figure style="--ar:619/1100"><img src="/annapurna-2027/img/last-selfie-peak.jpg" alt="Двое улыбающихся треккеров на селфи, позади острая снежная вершина" width="619" height="1100" loading="lazy"><figcaption>Улыбки под вершиной</figcaption></figure>
-      <figure style="--ar:1400/786"><img src="/annapurna-2027/img/last-peak-close.jpg" alt="Острая снежная вершина вблизи под глубоким синим небом" width="1400" height="786" loading="lazy" decoding="async"><figcaption>Острая вершина в утреннем свете</figcaption></figure>
-      <figure style="--ar:812/458"><img src="/annapurna-2027/img/last-ridge-two.jpg" alt="Двое треккеров сидят на гребне и машут, за ними огромная стена снежных гор" width="812" height="458" loading="lazy" decoding="async"><figcaption>Отдых на гребне</figcaption></figure>
-      <figure style="--ar:1400/1050"><img src="/annapurna-2027/img/last-selfie-friends.jpg" alt="Четверо друзей улыбаются на селфи на крыше над туманной горной долиной" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Друзья над долиной</figcaption></figure>
-      <figure style="--ar:1400/1050"><img src="/annapurna-2027/img/last-sunset-wall.jpg" alt="Женщина в оранжевом топе стоит на каменной стене и оглядывается, позади холмы и облака в вечернем свете" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Вечерний свет на холмах</figcaption></figure>
-      <figure style="--ar:1400/788"><img src="/annapurna-2027/img/last-group-flags.jpg" alt="Группа треккеров стоит во дворе под гирляндами молитвенных флагов" width="1400" height="788" loading="lazy" decoding="async"><figcaption>Под молитвенными флагами</figcaption></figure>
-      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/last-three-trail.jpg" alt="Трое треккеров в ярких куртках стоят вместе на зелёном склоне" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Трое друзей на тропе</figcaption></figure>
-      <figure style="--ar:1/1"><img src="/annapurna-2027/img/last-terrace-peak.jpg" alt="Двое пьют чай за столом на каменной террасе, за ними острая снежная вершина" width="780" height="780" loading="lazy" decoding="async"><figcaption>Чай на террасе</figcaption></figure>
-      <figure style="--ar:1/1"><img src="/annapurna-2027/img/last-lodge-circle.jpg" alt="Группа треккеров сидит кругом на подушках в лодже и улыбается в камеру" width="960" height="960" loading="lazy" decoding="async"><figcaption>Собрались вместе в лодже</figcaption></figure>
-      <figure style="--ar:1050/1400"><img src="/annapurna-2027/img/last-lodge-tea.jpg" alt="Гиды и треккеры сидят за столом с чайником в горном лодже" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>Чай и отдых в лодже</figcaption></figure>
-      <figure style="--ar:1050/1400"><img src="/annapurna-2027/img/last-lodge-cup.jpg" alt="Треккер в жёлтой куртке и шерстяной шапке держит маленькую чашку чая, позади туманные горы" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>Тёплая чашка с видом</figcaption></figure>
-      <figure style="--ar:1050/1400"><img src="/annapurna-2027/img/last-lodge-rest.jpg" alt="Улыбающаяся женщина в зелёной куртке сидит на подоконнике в лодже" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>Тихий момент в лодже</figcaption></figure>
-      <figure style="--ar:1400/1050"><img src="/annapurna-2027/img/last-bench-rest.jpg" alt="Трое уставших треккеров отдыхают на красной скамье под расписной фреской со снежной вершиной" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Усталые и счастливые</figcaption></figure>
-      <figure style="--ar:1400/788"><img src="/annapurna-2027/img/last-garden-group.jpg" alt="Друзья позируют вместе в саду под гирляндами молитвенных флагов" width="1400" height="788" loading="lazy" decoding="async"><figcaption>Все вместе в саду</figcaption></figure>  </div>
+      <figure style="--ar:1400/788"><img src="/annapurna-2027/img/last-group-ridge.webp" alt="Друзья смеются и фотографируются вместе на солнечном гребне над облаками" width="1400" height="788" loading="lazy" decoding="async"><figcaption>Вся группа вместе</figcaption></figure>
+      <figure style="--ar:1957/1100"><img src="/annapurna-2027/img/last-group-range.webp" alt="Группа треккеров позирует на каменной террасе, за ними огромный снежный хребет" width="1957" height="1100" loading="lazy"><figcaption>Группа на фоне снежного хребта</figcaption></figure>
+      <figure style="--ar:1400/789"><img src="/annapurna-2027/img/last-rain-group.webp" alt="Группа треккеров в дождевиках и пончо позирует на мокрой дороге в начале тропы" width="1400" height="789" loading="lazy" decoding="async"><figcaption>Выходим под дождём</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/last-forest-pair.webp" alt="Двое улыбающихся треккеров на узкой тропе в зелёном лесу" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Вместе на лесной тропе</figcaption></figure>
+      <figure style="--ar:1050/1400"><img src="/annapurna-2027/img/last-mist.webp" alt="Треккеры поднимаются по травянистой тропе сквозь густой туман и высокие голые деревья" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>Поднимаемся в туман</figcaption></figure>
+      <figure style="--ar:1400/1050"><img src="/annapurna-2027/img/last-selfie-cloud.webp" alt="Пятеро улыбающихся треккеров на селфи, позади низкие облака" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Счастливые лица в облаках</figcaption></figure>
+      <figure style="--ar:1956/1100"><img src="/annapurna-2027/img/last-group-selfie.webp" alt="Групповое селфи: треккеры улыбаются и машут на склоне у лоджей с синими крышами, позади лесистая гора" width="1956" height="1100" loading="lazy"><figcaption>Все вместе в лодже</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/last-mossy-steps.webp" alt="Треккер в жёлтой куртке стоит на старых замшелых каменных ступенях в лесу" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Старые замшелые каменные ступени</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/last-forest-path.webp" alt="Треккеры спускаются по тропе под старыми деревьями, покрытыми мхом" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Под старыми мшистыми деревьями</figcaption></figure>
+      <figure style="--ar:619/1100"><img src="/annapurna-2027/img/last-river-gorge.webp" alt="Река в глубоком зелёном лесном ущелье, вид с подвесного моста" width="619" height="1100" loading="lazy"><figcaption>Речное ущелье с моста</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/last-peak-walk.webp" alt="Треккер в жёлтой куртке идёт по травянистому гребню к острой снежной вершине, у тропы молитвенные флаги" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Идём к вершине</figcaption></figure>
+      <figure style="--ar:619/1100"><img src="/annapurna-2027/img/last-arms-open.webp" alt="Треккер в жёлтой куртке и шерстяной шапке стоит с раскрытыми руками на горной тропе, за ним острая снежная вершина" width="619" height="1100" loading="lazy"><figcaption>Сердце открыто под вершиной</figcaption></figure>
+      <figure style="--ar:1400/788"><img src="/annapurna-2027/img/last-peak-selfie.webp" alt="Двое улыбающихся треккеров на селфи, позади снежная вершина и утреннее солнце" width="1400" height="788" loading="lazy" decoding="async"><figcaption>Утренние улыбки под снежной вершиной</figcaption></figure>
+      <figure style="--ar:619/1100"><img src="/annapurna-2027/img/last-selfie-peak.webp" alt="Двое улыбающихся треккеров на селфи, позади острая снежная вершина" width="619" height="1100" loading="lazy"><figcaption>Улыбки под вершиной</figcaption></figure>
+      <figure style="--ar:1400/786"><img src="/annapurna-2027/img/last-peak-close.webp" alt="Острая снежная вершина вблизи под глубоким синим небом" width="1400" height="786" loading="lazy" decoding="async"><figcaption>Острая вершина в утреннем свете</figcaption></figure>
+      <figure style="--ar:812/458"><img src="/annapurna-2027/img/last-ridge-two.webp" alt="Двое треккеров сидят на гребне и машут, за ними огромная стена снежных гор" width="812" height="458" loading="lazy" decoding="async"><figcaption>Отдых на гребне</figcaption></figure>
+      <figure style="--ar:1400/1050"><img src="/annapurna-2027/img/last-selfie-friends.webp" alt="Четверо друзей улыбаются на селфи на крыше над туманной горной долиной" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Друзья над долиной</figcaption></figure>
+      <figure style="--ar:1400/1050"><img src="/annapurna-2027/img/last-sunset-wall.webp" alt="Женщина в оранжевом топе стоит на каменной стене и оглядывается, позади холмы и облака в вечернем свете" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Вечерний свет на холмах</figcaption></figure>
+      <figure style="--ar:1400/788"><img src="/annapurna-2027/img/last-group-flags.webp" alt="Группа треккеров стоит во дворе под гирляндами молитвенных флагов" width="1400" height="788" loading="lazy" decoding="async"><figcaption>Под молитвенными флагами</figcaption></figure>
+      <figure style="--ar:788/1400"><img src="/annapurna-2027/img/last-three-trail.webp" alt="Трое треккеров в ярких куртках стоят вместе на зелёном склоне" width="788" height="1400" loading="lazy" decoding="async"><figcaption>Трое друзей на тропе</figcaption></figure>
+      <figure style="--ar:1/1"><img src="/annapurna-2027/img/last-terrace-peak.webp" alt="Двое пьют чай за столом на каменной террасе, за ними острая снежная вершина" width="780" height="780" loading="lazy" decoding="async"><figcaption>Чай на террасе</figcaption></figure>
+      <figure style="--ar:1/1"><img src="/annapurna-2027/img/last-lodge-circle.webp" alt="Группа треккеров сидит кругом на подушках в лодже и улыбается в камеру" width="960" height="960" loading="lazy" decoding="async"><figcaption>Собрались вместе в лодже</figcaption></figure>
+      <figure style="--ar:1050/1400"><img src="/annapurna-2027/img/last-lodge-tea.webp" alt="Гиды и треккеры сидят за столом с чайником в горном лодже" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>Чай и отдых в лодже</figcaption></figure>
+      <figure style="--ar:1050/1400"><img src="/annapurna-2027/img/last-lodge-cup.webp" alt="Треккер в жёлтой куртке и шерстяной шапке держит маленькую чашку чая, позади туманные горы" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>Тёплая чашка с видом</figcaption></figure>
+      <figure style="--ar:1050/1400"><img src="/annapurna-2027/img/last-lodge-rest.webp" alt="Улыбающаяся женщина в зелёной куртке сидит на подоконнике в лодже" width="1050" height="1400" loading="lazy" decoding="async"><figcaption>Тихий момент в лодже</figcaption></figure>
+      <figure style="--ar:1400/1050"><img src="/annapurna-2027/img/last-bench-rest.webp" alt="Трое уставших треккеров отдыхают на красной скамье под расписной фреской со снежной вершиной" width="1400" height="1050" loading="lazy" decoding="async"><figcaption>Усталые и счастливые</figcaption></figure>
+      <figure style="--ar:1400/788"><img src="/annapurna-2027/img/last-garden-group.webp" alt="Друзья позируют вместе в саду под гирляндами молитвенных флагов" width="1400" height="788" loading="lazy" decoding="async"><figcaption>Все вместе в саду</figcaption></figure>  </div>
 </section>
 
 <section class="band sand" id="route">
@@ -500,7 +503,7 @@ li::marker{color:var(--gold-ink)}
   <div class="in">
     <h2 class="deep-title">Shamanic Immersion<span>11–16 апреля 2027</span></h2>
     <div class="rule" style="margin-left:auto;margin-right:auto"></div>
-    <img class="deep-ph" src="/annapurna-2027/img/immersion-title.jpg" alt="Заснеженная гималайская вершина над горной дорогой" width="1440" height="1085" style="object-position:50% 15%" loading="lazy" decoding="async">
+    <img class="deep-ph" src="/annapurna-2027/img/immersion-title.webp" alt="Заснеженная гималайская вершина над горной дорогой" width="1440" height="1085" style="object-position:50% 15%" loading="lazy" decoding="async">
     <div class="deep-grid">
       <div>
         <p>После перехода через Торонг-Ла начинается новый этап пути — шесть дней глубокого духовного погружения в Муктинатхе, священном месте силы в Гималаях.</p>
@@ -532,21 +535,21 @@ li::marker{color:var(--gold-ink)}
     </div>
   </div>
   <div class="gal" tabindex="0" role="region" aria-label="Фото из Муктинатха и гор. Листайте или прокручивайте вбок, чтобы увидеть больше.">
-      <figure style="--ar:702/1100"><img src="/annapurna-2027/img/imm-statue.jpg" alt="Золотая сидящая статуя под богато расписным навесом, вокруг молитвенные барабаны" width="702" height="1100" loading="lazy"><figcaption>Золотая статуя под расписным навесом</figcaption></figure>
-      <figure style="--ar:1327/1000"><img src="/annapurna-2027/img/imm-monastery-wide.jpg" alt="Красный монастырь с белой ступой среди жёлтых осенних деревьев, позади сухие горы" width="1327" height="1000" loading="lazy"><figcaption>Монастырь среди осенних деревьев</figcaption></figure>
-      <figure style="--ar:1778/1000"><img src="/annapurna-2027/img/imm-cham.jpg" alt="Танцоры в масках и ярких костюмах во дворе монастыря, вокруг зрители" width="1778" height="1000" loading="lazy"><figcaption>Танцоры в масках во дворе монастыря</figcaption></figure>
-      <figure style="--ar:825/1100"><img src="/annapurna-2027/img/imm-fossil.jpg" alt="Рука держит окаменелую раковину" width="825" height="1100" loading="lazy"><figcaption>Окаменелая раковина в ладони</figcaption></figure>
-      <figure style="--ar:1778/1000"><img src="/annapurna-2027/img/imm-panorama.jpg" alt="Широкий горный пейзаж: золотые осенние холмы и снежный хребет под глубоким синим небом" width="1778" height="1000" loading="lazy"><figcaption>Осенние краски и снежный хребет</figcaption></figure>
-      <figure style="--ar:880/1100"><img src="/annapurna-2027/img/imm-river.jpg" alt="Река рукавами в широкой горной долине, выше проходит грунтовая дорога" width="880" height="1100" loading="lazy"><figcaption>Река рукавами под горами</figcaption></figure>
-      <figure style="--ar:825/1100"><img src="/annapurna-2027/img/imm-monastery-tall.jpg" alt="Монастырь и белая ступа в тёплом утреннем свете под сухим горным склоном" width="825" height="1100" loading="lazy"><figcaption>Монастырь и ступа в утреннем свете</figcaption></figure>
-      <figure style="--ar:619/1100"><img src="/annapurna-2027/img/imm-spiral.jpg" alt="Большой рельеф в форме спиральной раковины на тёмной стене над двумя оранжевыми креслами" width="619" height="1100" loading="lazy"><figcaption>Рельеф-спираль в тёмной комнате</figcaption></figure>
-      <figure style="--ar:1280/960"><img src="/annapurna-2027/img/imm-snow-peaks.jpg" alt="Заснеженные вершины сквозь ветви деревьев под чистым синим небом" width="1280" height="960" loading="lazy"><figcaption>Снежные вершины на чистом небе</figcaption></figure>
-      <figure style="--ar:1280/960"><img src="/annapurna-2027/img/imm-sunrise.jpg" alt="Восход над тёмным хребтом, слева снежная вершина" width="1280" height="960" loading="lazy"><figcaption>Восход за снежной вершиной</figcaption></figure>
-      <figure style="--ar:640/361"><img src="/annapurna-2027/img/imm-ridge.jpg" alt="Человек в жёлтой куртке на гребне, красные флаги и снежная вершина позади" width="640" height="361" loading="lazy"><figcaption>На гребне под снежной вершиной</figcaption></figure>
-      <figure style="--ar:699/969"><img src="/annapurna-2027/img/yakov.jpg" alt="Яков Раджуна с шаманским бубном и поющими чашами перед церемонией" width="699" height="969" loading="lazy"><figcaption>Яков перед церемонией</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-prayer-wheels.jpg" alt="Молитвенные барабаны и флаги в Муктинатхе" width="1000" height="1778" loading="lazy"><figcaption>Молитвенные барабаны и флаги</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-golden-hills.jpg" alt="Золотые холмы над долиной Кали-Гандаки" width="1000" height="1778" loading="lazy"><figcaption>Снежные вершины над золотыми холмами</figcaption></figure>
-      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-cliff-village.jpg" alt="Деревня под размытыми ветром и водой скалами" width="1000" height="1778" loading="lazy"><figcaption>Деревня под размытыми скалами</figcaption></figure>
+      <figure style="--ar:702/1100"><img src="/annapurna-2027/img/imm-statue.webp" alt="Золотая сидящая статуя под богато расписным навесом, вокруг молитвенные барабаны" width="702" height="1100" loading="lazy"><figcaption>Золотая статуя под расписным навесом</figcaption></figure>
+      <figure style="--ar:1327/1000"><img src="/annapurna-2027/img/imm-monastery-wide.webp" alt="Красный монастырь с белой ступой среди жёлтых осенних деревьев, позади сухие горы" width="1327" height="1000" loading="lazy"><figcaption>Монастырь среди осенних деревьев</figcaption></figure>
+      <figure style="--ar:1778/1000"><img src="/annapurna-2027/img/imm-cham.webp" alt="Танцоры в масках и ярких костюмах во дворе монастыря, вокруг зрители" width="1778" height="1000" loading="lazy"><figcaption>Танцоры в масках во дворе монастыря</figcaption></figure>
+      <figure style="--ar:825/1100"><img src="/annapurna-2027/img/imm-fossil.webp" alt="Рука держит окаменелую раковину" width="825" height="1100" loading="lazy"><figcaption>Окаменелая раковина в ладони</figcaption></figure>
+      <figure style="--ar:1778/1000"><img src="/annapurna-2027/img/imm-panorama.webp" alt="Широкий горный пейзаж: золотые осенние холмы и снежный хребет под глубоким синим небом" width="1778" height="1000" loading="lazy"><figcaption>Осенние краски и снежный хребет</figcaption></figure>
+      <figure style="--ar:880/1100"><img src="/annapurna-2027/img/imm-river.webp" alt="Река рукавами в широкой горной долине, выше проходит грунтовая дорога" width="880" height="1100" loading="lazy"><figcaption>Река рукавами под горами</figcaption></figure>
+      <figure style="--ar:825/1100"><img src="/annapurna-2027/img/imm-monastery-tall.webp" alt="Монастырь и белая ступа в тёплом утреннем свете под сухим горным склоном" width="825" height="1100" loading="lazy"><figcaption>Монастырь и ступа в утреннем свете</figcaption></figure>
+      <figure style="--ar:619/1100"><img src="/annapurna-2027/img/imm-spiral.webp" alt="Большой рельеф в форме спиральной раковины на тёмной стене над двумя оранжевыми креслами" width="619" height="1100" loading="lazy"><figcaption>Рельеф-спираль в тёмной комнате</figcaption></figure>
+      <figure style="--ar:1280/960"><img src="/annapurna-2027/img/imm-snow-peaks.webp" alt="Заснеженные вершины сквозь ветви деревьев под чистым синим небом" width="1280" height="960" loading="lazy"><figcaption>Снежные вершины на чистом небе</figcaption></figure>
+      <figure style="--ar:1280/960"><img src="/annapurna-2027/img/imm-sunrise.webp" alt="Восход над тёмным хребтом, слева снежная вершина" width="1280" height="960" loading="lazy"><figcaption>Восход за снежной вершиной</figcaption></figure>
+      <figure style="--ar:640/361"><img src="/annapurna-2027/img/imm-ridge.webp" alt="Человек в жёлтой куртке на гребне, красные флаги и снежная вершина позади" width="640" height="361" loading="lazy"><figcaption>На гребне под снежной вершиной</figcaption></figure>
+      <figure style="--ar:699/969"><img src="/annapurna-2027/img/yakov.webp" alt="Яков Раджуна с шаманским бубном и поющими чашами перед церемонией" width="699" height="969" loading="lazy"><figcaption>Яков перед церемонией</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-prayer-wheels.webp" alt="Молитвенные барабаны и флаги в Муктинатхе" width="1000" height="1778" loading="lazy"><figcaption>Молитвенные барабаны и флаги</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-golden-hills.webp" alt="Золотые холмы над долиной Кали-Гандаки" width="1000" height="1778" loading="lazy"><figcaption>Снежные вершины над золотыми холмами</figcaption></figure>
+      <figure style="--ar:1000/1778"><img src="/annapurna-2027/img/trek-cliff-village.webp" alt="Деревня под размытыми ветром и водой скалами" width="1000" height="1778" loading="lazy"><figcaption>Деревня под размытыми скалами</figcaption></figure>
   </div>
   <div class="in gal-head" style="margin-top:3.5rem">
     <div><h3 class="deep-h3" style="margin:0">Место для Церемоний и Жизни</h3></div>
@@ -556,17 +559,17 @@ li::marker{color:var(--gold-ink)}
     </div>
   </div>
   <div class="gal" tabindex="0" role="region" aria-label="Фото отеля в Муктинатхе. Листайте или прокручивайте вбок, чтобы увидеть больше.">
-      <figure style="--ar:1333/1000"><img src="/annapurna-2027/img/hot-exterior.jpg" alt="Жёлтое здание отеля с молитвенными флагами на крыше под скалистой горой, припорошенной инеем" width="1333" height="1000" loading="lazy"><figcaption>Отель под заиндевевшей горой</figcaption></figure>
-      <figure style="--ar:1346/900"><img src="/annapurna-2027/img/hot-hall.jpg" alt="Светлый зал с деревянным полом, циновками, подушками и высокими окнами с льняными шторами" width="1346" height="900" loading="lazy"><figcaption>Большой зал с деревянным полом и циновками</figcaption></figure>
-      <figure style="--ar:1280/960"><img src="/annapurna-2027/img/hot-courtyard.jpg" alt="Солнечный двор с каменной мостовой, жёлтое здание и горы позади" width="1280" height="960" loading="lazy"><figcaption>Двор с видом на горы</figcaption></figure>
-      <figure style="--ar:1360/1020"><img src="/annapurna-2027/img/hot-view-peak.jpg" alt="Заснеженные вершины в розовом утреннем свете и линзовидное облако над ними, на переднем плане каменное здание и молитвенные флаги" width="1360" height="1020" loading="lazy"><figcaption>Утренний свет на вершинах</figcaption></figure>
-      <figure style="--ar:1360/906"><img src="/annapurna-2027/img/hot-gompa.jpg" alt="Монастырь с золотыми оленями и колесом дхармы на крыше, за ним коричневые холмы и снежный хребет" width="1360" height="906" loading="lazy"><figcaption>Монастырь над долиной</figcaption></figure>
-      <figure style="--ar:751/1000"><img src="/annapurna-2027/img/hot-sunroom.jpg" alt="Солнечный уголок с подушками на полу, растениями и окном с видом на горы" width="751" height="1000" loading="lazy"><figcaption>Солнечный уголок с подушками</figcaption></figure>
-      <figure style="--ar:750/1000"><img src="/annapurna-2027/img/hot-tea.jpg" alt="Гостиная с низким столиком, термосом, стаканами для чая и вазой с фруктами под потолком из брёвен" width="750" height="1000" loading="lazy"><figcaption>Гостиная с чаем и фруктами</figcaption></figure>
-      <figure style="--ar:1280/856"><img src="/annapurna-2027/img/hot-lounge.jpg" alt="Лаунж с низкими столиками, сиденьями на полу и большими окнами под потолком из брёвен" width="1280" height="856" loading="lazy"><figcaption>Лаунж с сиденьями на полу</figcaption></figure>
-      <figure style="--ar:750/1000"><img src="/annapurna-2027/img/hot-room-flags.jpg" alt="Синяя гостевая комната с двумя кроватями, красной парчой над головой и молитвенными флагами" width="750" height="1000" loading="lazy"><figcaption>Гостевая комната с молитвенными флагами</figcaption></figure>
-      <figure style="--ar:750/1000"><img src="/annapurna-2027/img/hot-room.jpg" alt="Гостевая комната с двумя кроватями, окном и оранжевой парчой на стене" width="750" height="1000" loading="lazy"><figcaption>Двухместная гостевая комната</figcaption></figure>
-      <figure style="--ar:750/1000"><img src="/annapurna-2027/img/hot-breakfast.jpg" alt="Тарелка с завтраком: блины, каша, джем, арбуз и помидоры" width="750" height="1000" loading="lazy"><figcaption>Завтрак в отеле</figcaption></figure>
+      <figure style="--ar:1333/1000"><img src="/annapurna-2027/img/hot-exterior.webp" alt="Жёлтое здание отеля с молитвенными флагами на крыше под скалистой горой, припорошенной инеем" width="1333" height="1000" loading="lazy"><figcaption>Отель под заиндевевшей горой</figcaption></figure>
+      <figure style="--ar:1346/900"><img src="/annapurna-2027/img/hot-hall.webp" alt="Светлый зал с деревянным полом, циновками, подушками и высокими окнами с льняными шторами" width="1346" height="900" loading="lazy"><figcaption>Большой зал с деревянным полом и циновками</figcaption></figure>
+      <figure style="--ar:1280/960"><img src="/annapurna-2027/img/hot-courtyard.webp" alt="Солнечный двор с каменной мостовой, жёлтое здание и горы позади" width="1280" height="960" loading="lazy"><figcaption>Двор с видом на горы</figcaption></figure>
+      <figure style="--ar:1360/1020"><img src="/annapurna-2027/img/hot-view-peak.webp" alt="Заснеженные вершины в розовом утреннем свете и линзовидное облако над ними, на переднем плане каменное здание и молитвенные флаги" width="1360" height="1020" loading="lazy"><figcaption>Утренний свет на вершинах</figcaption></figure>
+      <figure style="--ar:1360/906"><img src="/annapurna-2027/img/hot-gompa.webp" alt="Монастырь с золотыми оленями и колесом дхармы на крыше, за ним коричневые холмы и снежный хребет" width="1360" height="906" loading="lazy"><figcaption>Монастырь над долиной</figcaption></figure>
+      <figure style="--ar:751/1000"><img src="/annapurna-2027/img/hot-sunroom.webp" alt="Солнечный уголок с подушками на полу, растениями и окном с видом на горы" width="751" height="1000" loading="lazy"><figcaption>Солнечный уголок с подушками</figcaption></figure>
+      <figure style="--ar:750/1000"><img src="/annapurna-2027/img/hot-tea.webp" alt="Гостиная с низким столиком, термосом, стаканами для чая и вазой с фруктами под потолком из брёвен" width="750" height="1000" loading="lazy"><figcaption>Гостиная с чаем и фруктами</figcaption></figure>
+      <figure style="--ar:1280/856"><img src="/annapurna-2027/img/hot-lounge.webp" alt="Лаунж с низкими столиками, сиденьями на полу и большими окнами под потолком из брёвен" width="1280" height="856" loading="lazy"><figcaption>Лаунж с сиденьями на полу</figcaption></figure>
+      <figure style="--ar:750/1000"><img src="/annapurna-2027/img/hot-room-flags.webp" alt="Синяя гостевая комната с двумя кроватями, красной парчой над головой и молитвенными флагами" width="750" height="1000" loading="lazy"><figcaption>Гостевая комната с молитвенными флагами</figcaption></figure>
+      <figure style="--ar:750/1000"><img src="/annapurna-2027/img/hot-room.webp" alt="Гостевая комната с двумя кроватями, окном и оранжевой парчой на стене" width="750" height="1000" loading="lazy"><figcaption>Двухместная гостевая комната</figcaption></figure>
+      <figure style="--ar:750/1000"><img src="/annapurna-2027/img/hot-breakfast.webp" alt="Тарелка с завтраком: блины, каша, джем, арбуз и помидоры" width="750" height="1000" loading="lazy"><figcaption>Завтрак в отеле</figcaption></figure>
   </div>
 </section>
 
@@ -575,7 +578,7 @@ li::marker{color:var(--gold-ink)}
     <h2>Яков и Акари</h2>
     <div class="rule"></div>
     <div class="guide">
-      <img src="/annapurna-2027/img/yakov.jpg" alt="Яков Раджуна сидит с рамочным бубном" width="700" height="970" loading="lazy" decoding="async">
+      <img src="/annapurna-2027/img/yakov.webp" alt="Яков Раджуна сидит с рамочным бубном" width="700" height="970" loading="lazy" decoding="async">
       <div>
         <h3>Яков Раджуна</h3>
         <div class="ds">Духовный наставник<span class="mp">·</span><wbr>Нео‑шаман<span class="mp">·</span><wbr>Учитель медитации и цигун</div>
@@ -584,7 +587,7 @@ li::marker{color:var(--gold-ink)}
       </div>
     </div>
     <div class="guide">
-      <img src="/annapurna-2027/img/akari.jpg" alt="Акари Тамура играет на гитаре под деревом" width="760" height="1095" loading="lazy" decoding="async">
+      <img src="/annapurna-2027/img/akari.webp" alt="Акари Тамура играет на гитаре под деревом" width="760" height="1095" loading="lazy" decoding="async">
       <div>
         <h3>Акари Тамура</h3>
         <div class="ds">Ведущая Киртанов<span class="mp">·</span><wbr>Музыкант<span class="mp">·</span><wbr>Преподаватель вокала и игры на музыкальных инструментах<span class="mp">·</span><wbr>Практик бхакти</div>
@@ -610,8 +613,8 @@ li::marker{color:var(--gold-ink)}
       <ul style="margin:0;color:var(--pale)"><li>Медицинская страховка с покрытием вертолётной эвакуации с высоты до 6 000 м (оплачивается отдельно, около $100)</li><li>Нормальная или хорошая физическая форма и готовность к многодневному треку</li><li>Короткий видеозвонок с нами перед записью</li></ul>
     </div>
     <div class="safe-ph">
-      <img class="p1" src="/annapurna-2027/img/peak.jpg" alt="Треккер держит флаг на снежной вершине" width="697" height="858" loading="lazy" decoding="async">
-      <img class="p2" src="/annapurna-2027/img/rocks.jpg" alt="Человек стоит на камнях с раскрытыми руками лицом к снежным горам" width="739" height="554" loading="lazy" decoding="async">
+      <img class="p1" src="/annapurna-2027/img/peak.webp" alt="Треккер держит флаг на снежной вершине" width="697" height="858" loading="lazy" decoding="async">
+      <img class="p2" src="/annapurna-2027/img/rocks.webp" alt="Человек стоит на камнях с раскрытыми руками лицом к снежным горам" width="739" height="554" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -674,7 +677,7 @@ li::marker{color:var(--gold-ink)}
 </main>
 
 <footer class="closing">
-  <img src="/annapurna-2027/img/closing.jpg" alt="" width="1280" height="611" loading="lazy" decoding="async">
+  <img src="/annapurna-2027/img/closing.webp" alt="" width="1280" height="611" loading="lazy" decoding="async">
   <div class="in">
     <p class="msg">Мы очень ждём совместного путешествия и воспоминаний на всю жизнь. В 2022 году мы вместе прошли к Mardi Himal, и многие друзья потом говорили нам, что их жизнь по-настоящему изменилась. Этот опыт бесценен, и мы счастливы начать его с вами. Мы ждём каждую душу, которая придёт в божественном созвучии и порядке.</p>
     <p class="sign">С любовью, Яков и Акари</p>
