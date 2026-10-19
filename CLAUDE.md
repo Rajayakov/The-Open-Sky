@@ -57,3 +57,18 @@ Quiet, intimate, elegant quotes. Minimal styling. Under each product category.
 ## When Uncertain
 Choose: restraint, silence, atmosphere, simplicity, depth, rhythm.
 Never choose: noise, trendiness, generic luxury, template aesthetics, overdesign.
+
+## Лендинг Аннапурны 2027 (`/mountains/annapurna-2027`)
+Отдельный статический лендинг, живёт вне дизайн-системы выше. Эти правила имеют приоритет для него.
+- Файл: `src/pages/mountains/annapurna-2027.html`, ассеты `public/annapurna-2027/`. Источник правды: HTML в репозитории. Прод: https://annapurna-pilgrimage-2027.vercel.app/mountains/annapurna-2027
+- Порядок выкладки, без исключений: правка в ветку `annapurna-landing-ru-akari` → дождаться деплоя → проверить превью → только потом в main (`git push origin HEAD:main`). Одним пушем в обе ветки не пушить.
+- Перед правкой: `git pull`. Автор коммита должен быть в команде Vercel.
+- Пути ассетов абсолютные: `/annapurna-2027/...`. Картинки только WebP (~q78, до 1600 px). Тот же файл не перезаписывать: кэш 7 дней, при замене давать новое имя. Шрифты в `public/annapurna-2027/fonts/` урезаны по символам, кэш год.
+- Проверка перед выкладкой: `npm run build && npm run qa` (оверфлоу 300–1000 px, 404, Lighthouse mobile и desktop). Должно быть: оверфлоу нет, mobile perf ≥ 95, LCP ≤ 2 с. Нужен Chromium: `CHROME_PATH=/путь/к/chrome npm run qa` или `npx playwright install chromium`.
+- Telegram кэширует превью ссылки: после правки og добавлять `?v=N` или чистить в @WebpageBot. og-картинка `public/annapurna-2027/img/og.jpg` остаётся JPG.
+- Форма регистрации: Google Форма (ссылка в HTML). В описании формы строку про видеозвонок не трогать (решение Якова).
+- Решено: группа до 15 человек; «300+ ретритов», «22+ года», «3 000+ человек»; Immersion 10–15 апреля, 6 ночей; название «Паломничество к Аннапурне 2027»; hero-заголовок на английском.
+- Правка текста и цифр на странице: сначала сверить с `claude/annapurna-ru-landing-handoff.md` (проект «The Open Sky»), не менять решённое без команды Якова.
+
+## Формат отчёта Якову
+До 10 строк, по-русски, без воды: что сделано, что сломано, что нужно от него. Подробности только по запросу. Файлы целиком и длинные страницы не читать: искать по ним (`grep`). Скриншоты только для проверки вёрстки.
