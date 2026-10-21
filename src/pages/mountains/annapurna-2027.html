@@ -18,6 +18,9 @@
 <meta name="twitter:title" content="Священное Паломничество к Аннапурне и Муктинатху">
 <meta name="twitter:description" content="28 марта — 16 апреля 2027. С Яковом Раджуной и Акари Тамура.">
 <link rel="canonical" href="https://theopensky.vercel.app/mountains/annapurna-2027">
+<link rel="alternate" hreflang="ru" href="https://theopensky.vercel.app/mountains/annapurna-2027">
+<link rel="alternate" hreflang="en" href="https://theopensky.vercel.app/mountains/annapurna-2027-en">
+<link rel="alternate" hreflang="x-default" href="https://theopensky.vercel.app/mountains/annapurna-2027-en">
 <link rel="icon" href="/annapurna-2027/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/annapurna-2027/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/annapurna-2027/apple-touch-icon.png">
@@ -308,8 +311,25 @@ li::marker{color:var(--gold-ink)}
 }
 @media (max-width:600px){.chart-d{display:none}.chart-m{display:block}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.day{transition:none}}
+
+/* Language switch */
+@view-transition{navigation:auto}
+.lang{view-transition-name:lang;position:fixed;top:max(.75rem,env(safe-area-inset-top));right:max(.75rem,env(safe-area-inset-right));z-index:60;display:flex;gap:2px;padding:3px;border-radius:999px;background:rgba(11,26,51,.66);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(214,180,106,.4);font:700 .85rem/1 var(--sans);letter-spacing:.14em;box-shadow:0 2px 14px rgba(11,26,51,.25)}
+.lang a{color:var(--pale);text-decoration:none;padding:.8rem .95rem;border-radius:999px;min-width:2.9rem;text-align:center;transition:background .25s,color .25s}
+.lang a:hover{color:#fff}
+.lang a[aria-current]{background:var(--gold);color:var(--navy);pointer-events:none}
+.lang a:focus-visible{outline:2px solid var(--gold-soft);outline-offset:2px}
+@media (max-width:1180px){.nav{padding-right:7.5rem}}
+.lang-tip{position:fixed;left:50%;width:max-content;bottom:max(1rem,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:.9rem;max-width:min(30rem,calc(100vw - 2rem));padding:.75rem .8rem .75rem 1.1rem;border-radius:999px;background:var(--navy);color:var(--pale);border:1px solid rgba(214,180,106,.45);box-shadow:0 8px 30px rgba(11,26,51,.35);font:1rem/1.3 var(--sans);animation:lang-tip-in .5s ease both}
+.lang-tip a{flex:none;background:var(--gold);color:var(--navy);font-weight:700;text-decoration:none;padding:.55rem 1rem;border-radius:999px}
+.lang-tip button{flex:none;appearance:none;border:0;background:transparent;color:var(--mist);font:inherit;font-size:1.4rem;line-height:1;padding:.3rem .5rem;cursor:pointer}
+.lang-tip button:hover{color:#fff}
+@keyframes lang-tip-in{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (max-width:520px){.nav{padding-right:0;padding-top:3.6rem}.lang-tip{border-radius:1.2rem}}
+@media (prefers-reduced-motion:reduce){.lang-tip{animation:none}@view-transition{navigation:none}}
 </style>
 
+<div class="lang" role="group" aria-label="Язык страницы"><a href="/mountains/annapurna-2027" hreflang="ru" lang="ru" data-lang="ru" aria-current="page">RU</a><a href="/mountains/annapurna-2027-en" hreflang="en" lang="en" data-lang="en">EN</a></div>
 <header class="hero">
   <picture><source media="(max-width:700px)" srcset="/annapurna-2027/img/hero-m.webp"><img src="/annapurna-2027/img/hero.webp" alt="Утреннее солнце над снежными вершинами хребта Аннапурна" width="2000" height="965" fetchpriority="high" decoding="async"></picture>
   <div class="in">
@@ -744,6 +764,39 @@ li::marker{color:var(--gold-ink)}
 })();
 </script>
 
+<script>
+(function(){
+  var KEY='ap27-lang', CUR='ru';
+  var MAP={deepening:'immersion',immersion:'deepening'};
+  function get(){try{return localStorage.getItem(KEY)}catch(e){return null}}
+  function put(v){try{localStorage.setItem(KEY,v)}catch(e){}}
+  function sectionId(){
+    if(window.scrollY<240) return '';
+    var y=window.innerHeight*.35, cur='', els=document.querySelectorAll('section[id],#last');
+    for(var i=0;i<els.length;i++){ if(els[i].getBoundingClientRect().top<=y) cur=els[i].id; }
+    return cur;
+  }
+  function target(a){
+    var id=sectionId(); if(id&&MAP[id]) id=MAP[id];
+    return a.getAttribute('href').split('#')[0]+(id?'#'+id:'');
+  }
+  document.querySelectorAll('.lang a').forEach(function(a){
+    a.addEventListener('click',function(){ put(a.getAttribute('data-lang')); a.setAttribute('href',target(a)); });
+  });
+  try{
+    if(get()) return;
+    var l=(navigator.languages&&navigator.languages[0])||navigator.language||'';
+    var ruish=/^(ru|uk|be|kk|ky|tg)/i.test(l);
+    if(!l|| (CUR==='ru')===ruish) return;
+    var t=document.createElement('div');
+    t.className='lang-tip'; t.setAttribute('role','status');
+    t.innerHTML='<span>This page is also available in English.</span><a href="/mountains/annapurna-2027-en" hreflang="en">English</a><button type="button" aria-label="Close">\u00d7</button>';
+    t.querySelector('a').addEventListener('click',function(){ put('en'); this.setAttribute('href',target(this)); });
+    t.querySelector('button').addEventListener('click',function(){ put(CUR); t.remove(); });
+    document.body.appendChild(t);
+  }catch(e){}
+})();
+</script>
 <script>
 window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};
 window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};

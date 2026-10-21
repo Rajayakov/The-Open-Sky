@@ -59,6 +59,8 @@ Choose: restraint, silence, atmosphere, simplicity, depth, rhythm.
 Never choose: noise, trendiness, generic luxury, template aesthetics, overdesign.
 
 ## Лендинг Аннапурны 2027 (`/mountains/annapurna-2027`)
+
+- Две языковые версии: RU `src/pages/mountains/annapurna-2027.html`, EN `src/pages/mountains/annapurna-2027-en.html` (ассеты EN в `public/annapurna-2027/en/`, форма EN: forms.gle/H42fu7KS5q3yNHiJ6). Переключатель RU/EN (`.lang`) и подсказка языка (`.lang-tip`, только по языку браузера, без автоперенаправления) продублированы в обеих страницах: править синхронно. Корень `/` на прод-хостах по заголовку Accept-Language уходит на EN, если язык не русский/украинский/белорусский/казахский (правило в `vercel.json`). Текст правится в двух файлах отдельно.
 Отдельный статический лендинг, живёт вне дизайн-системы выше. Эти правила имеют приоритет для него.
 - Файл: `src/pages/mountains/annapurna-2027.html`, ассеты `public/annapurna-2027/`. Источник правды: HTML в репозитории. Прод: https://theopensky.vercel.app/mountains/annapurna-2027 (annapurna2027 и annapurna-pilgrimage-2027 редиректят сюда). На продакшен-доменах открыт только лендинг: остальные страницы сайта редиректят на него (правило в `vercel.json`), сайт в разработке
 - Порядок выкладки, без исключений: правка в ветку `annapurna-landing-ru-akari` → дождаться деплоя → проверить превью → только потом в main (`git push origin HEAD:main`). Одним пушем в обе ветки не пушить.

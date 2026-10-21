@@ -5,6 +5,22 @@
       "has": [
         {
           "type": "host",
+          "value": "^(theopensky|the-open-sky|the-open-sky-rajuna|annapurna2027|annapurna-pilgrimage-2027)\\.vercel\\.app$|^the-open-sky-git-main-rajuna\\.vercel\\.app$"
+        },
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "^(?!ru|uk|be|kk|ky|tg).+"
+        }
+      ],
+      "destination": "https://theopensky.vercel.app/mountains/annapurna-2027-en",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
           "value": "annapurna-pilgrimage-2027.vercel.app"
         }
       ],
