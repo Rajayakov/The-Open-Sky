@@ -96,10 +96,10 @@ li::marker{color:var(--gold-ink)}
 .btn.alt{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
 .btn.alt:hover{border-color:var(--gold);color:var(--gold-soft)}
 .eb-note{color:var(--gold-soft);font-size:1rem}
-.who{margin:clamp(2.6rem,5.5vw,4rem) 0 0;text-align:center;font-family:var(--serif);color:var(--gold)}
-.who::before{content:"";display:block;width:5.5rem;height:2px;background:var(--gold);margin:0 auto 1.3rem}
-.who .with{display:block;font-style:italic;font-size:clamp(1.1rem,2.3vw,1.4rem);color:var(--gold-soft);margin-bottom:.1rem}
-.who .nm{display:block;font-size:clamp(2rem,5.6vw,3.6rem);line-height:1.12;letter-spacing:.04em;text-wrap:balance;text-shadow:0 1px 3px rgba(11,26,51,.55),0 2px 22px rgba(11,26,51,.65)}
+.who{margin:clamp(2.6rem,5.5vw,4rem) 0 0;text-align:center;font-family:var(--serif);color:var(--gold);font-size:clamp(2rem,5.6vw,3.6rem);line-height:1.2;letter-spacing:.04em;text-wrap:balance;text-shadow:0 1px 3px rgba(11,26,51,.55),0 2px 22px rgba(11,26,51,.65)}
+.who::before{content:"";display:block;width:clamp(11rem,34vw,24rem);height:2px;background:linear-gradient(90deg,transparent,var(--gold) 18%,var(--gold) 82%,transparent);margin:0 auto 1.6rem}
+.who .with{font-style:normal;color:inherit;margin-right:.28em}
+.who .nm{}
 
 /* Photo gallery: a sideways filmstrip. Swipe or scroll on touch, arrow buttons on desktop. */
 .gal-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.8rem}
