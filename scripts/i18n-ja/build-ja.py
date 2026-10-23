@@ -97,7 +97,7 @@ def build_ja():
     tr = {}
     for m in re.finditer(r'^\[([A-Z]+-\d{3})\]\s*(?:\[(?:alt|aria)\]\s*)?(.*)$', open(sys.argv[1], encoding='utf-8').read(), re.M):
         tr[m.group(1)] = m.group(2).strip()
-    OVER = {'HERO-021': 'とともに', 'ROUTE-018': '日目', 'ROUTE-075': '日目'}  # правки к присланному переводу
+    OVER = {'GUIDES-002': '雲に囲まれた石のベンチでギターを弾くYakov Rajuna', 'HERO-021': 'とともに', 'ROUTE-018': '日目', 'ROUTE-075': '日目'}  # правки к присланному переводу
     tr.update(OVER)
     miss = [i for i in mp if i not in tr and not i.startswith('UI')]
     assert not miss, f'нет перевода: {miss}'
@@ -172,7 +172,8 @@ def build_ja():
             elif l['kind'] == 'meta':
                 m = re.search(r'<meta (?:property|name)="' + re.escape(l['loc']['key']) + r'" content="(.*?)"', EN)
                 edits.append((m.start(1), m.end(1), html.escape(tr[i], quote=True)))
-    bad = [(i, expect[i], hits.get(i, 0)) for i in expect if hits.get(i, 0) != expect[i]]
+    UNUSED = {'IMMERSION-055', 'IMMERSION-056'}  # фото Yakov с бубном убрано из галереи (EN и RU); ID остаются в карте, чтобы не сдвигать нумерацию перевода
+    bad = [(i, expect[i], hits.get(i, 0)) for i in expect if hits.get(i, 0) != expect[i] and i not in UNUSED]
     for b in bad: print('ВСТАВКА?', b)
     out = EN
     for a, b, t in sorted(edits, reverse=True): out = out[:a] + t + out[b:]
