@@ -1,5 +1,5 @@
 // QA лендинга Аннапурны: npm run qa  (после npm run build)
-// Проверяет обе версии (RU и EN): оверфлоу 300–1920 px, битые картинки/404, Lighthouse mobile+desktop (локально, с brotli).
+// Проверяет три версии (RU, EN и JA): оверфлоу 300–1920 px, битые картинки/404, Lighthouse mobile+desktop (локально, с brotli).
 // Печатает короткий итог. Подробности: --verbose
 // Если Chromium Playwright не установлен: CHROME_PATH=/путь/к/chrome npm run qa  (или npx playwright install chromium)
 import http from 'node:http';
@@ -13,7 +13,7 @@ import { chromium } from '@playwright/test';
 
 const ROOT = path.resolve('dist');
 const PORT = 4401;
-const PAGES = [['RU', '/mountains/annapurna-2027/'], ['EN', '/mountains/annapurna-2027-en/']];
+const PAGES = [['RU', '/mountains/annapurna-2027/'], ['EN', '/mountains/annapurna-2027-en/'], ['JA', '/mountains/annapurna-2027-ja/']];
 const verbose = process.argv.includes('--verbose');
 const MT = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.ico': 'image/x-icon' };
 

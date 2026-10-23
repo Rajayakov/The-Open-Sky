@@ -1,0 +1,12 @@
+/* Japanese */
+html:lang(ja){--serif:'Caladea','Noto Serif JP','Hiragino Mincho ProN','Yu Mincho',serif;--sans:'Carlito','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic UI','Yu Gothic',Meiryo,'Noto Sans CJK JP','Noto Sans JP',sans-serif}
+html:lang(ja) *{font-style:normal!important;font-synthesis:none}
+html:lang(ja) body{font-size:1.05rem;line-height:1.95;line-break:strict;word-break:auto-phrase;overflow-wrap:break-word}
+html:lang(ja) h2,html:lang(ja) h3{line-height:1.4;letter-spacing:.04em}
+html:lang(ja) :is(.kicker,.dates b,.day .dn small,.facts dt,.closing .sign,.foot,.deep-title span,.nav){text-transform:none;letter-spacing:.08em}
+html:lang(ja) .hero .sub{font-size:clamp(1.1rem,2.6vw,1.5rem);line-height:1.6;letter-spacing:.06em}
+html:lang(ja) .day .dn{display:flex;flex-direction:column-reverse;justify-content:flex-end;align-items:flex-start}
+html:lang(ja) :is(.note b,.pc .amt,.join-line,.join-q,.closing .msg,.quote .q,.day .dn b,.day .pl,.stats b,.dp .a,.dp .b,.facts dd,.guide .ds,.deep-h3,.navy .quote p){line-height:1.5}
+html:lang(ja) .who{letter-spacing:.06em}
+html:lang(ja) .who .with{margin-right:0;margin-left:.28em;font-size:.6em}
+@media (max-width:360px){html:lang(ja) .gal-head{gap:.5rem}html:lang(ja) .gal-btn{width:2.6rem;height:2.6rem}html:lang(ja) .gal-nav{gap:.4rem}}
