@@ -1,0 +1,5063 @@
+{
+"META-001": {
+"locs": [
+{
+"kind": "title",
+"loc": {
+"tag": "title"
+}
+},
+{
+"kind": "meta",
+"loc": {
+"key": "og:site_name"
+}
+}
+],
+"orig": "Annapurna Pilgrimage 2027"
+},
+"META-002": {
+"locs": [
+{
+"kind": "meta",
+"loc": {
+"key": "og:title"
+}
+},
+{
+"kind": "meta",
+"loc": {
+"key": "twitter:title"
+}
+}
+],
+"orig": "Sacred Pilgrimage to Annapurna and Muktinath"
+},
+"META-003": {
+"locs": [
+{
+"kind": "meta",
+"loc": {
+"key": "og:description"
+}
+},
+{
+"kind": "meta",
+"loc": {
+"key": "twitter:description"
+}
+}
+],
+"orig": "March 28 – April 16, 2027. With Yakov Rajuna and Akari Tamura."
+},
+"META-004": {
+"locs": [
+{
+"kind": "meta",
+"loc": {
+"key": "og:image:alt"
+}
+}
+],
+"orig": "Prayer flags in the wind against the snow peaks of the Annapurna range"
+},
+"META-005": {
+"locs": [
+{
+"kind": "meta",
+"loc": {
+"key": "description"
+}
+}
+],
+"orig": "A sacred trek across the Himalayas from Pokhara over Thorong La to Muktinath. Nepal, March 28 to April 16, 2027, with Yakov Rajuna and Akari Tamura."
+},
+"HERO-001": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 38,
+"attr": "alt"
+}
+}
+],
+"orig": "Morning sun above the snow peaks of the Annapurna range"
+},
+"HERO-002": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 40,
+"attr": "aria-label"
+}
+}
+],
+"orig": "Page sections"
+},
+"HERO-003": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 42
+}
+}
+],
+"orig": "Letter"
+},
+"HERO-004": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 43
+}
+}
+],
+"orig": "Photos"
+},
+"HERO-005": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 44
+}
+}
+],
+"orig": "Route"
+},
+"HERO-006": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 45
+}
+}
+],
+"orig": "Days"
+},
+"HERO-007": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 46
+}
+}
+],
+"orig": "Immersion"
+},
+"HERO-008": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 47
+}
+}
+],
+"orig": "Guides"
+},
+"HERO-009": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 48
+}
+}
+],
+"orig": "Price"
+},
+"HERO-010": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 49
+}
+}
+],
+"orig": "Join"
+},
+"HERO-011": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 56
+}
+}
+],
+"orig": "A Sacred Trek Across the Himalayas to Muktinath"
+},
+"HERO-012": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 59
+}
+}
+],
+"orig": "Main program"
+},
+"HERO-013": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 60
+}
+}
+],
+"orig": "March 28 to April 10, 2027"
+},
+"HERO-014": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 61
+}
+}
+],
+"orig": "Annapurna Circuit, 14 days"
+},
+"HERO-015": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 63
+}
+}
+],
+"orig": "Shamanic Immersion"
+},
+"HERO-016": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 64
+}
+}
+],
+"orig": "April 11 to 16, 2027"
+},
+"HERO-017": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 65
+}
+}
+],
+"orig": "Muktinath retreat, 6 days"
+},
+"HERO-018": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 69
+}
+}
+],
+"orig": "Register now"
+},
+"HERO-019": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 71
+}
+}
+],
+"orig": "See the route"
+},
+"HERO-020": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 73
+}
+}
+],
+"orig": "Early bird prices until 31 December 2026"
+},
+"HERO-021": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 76
+}
+}
+],
+"orig": "with"
+},
+"HERO-022": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 77
+}
+}
+],
+"orig": "Yakov Rajuna and Akari Tamura"
+},
+"LETTER-001": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 87
+}
+}
+],
+"orig": "Dear friends,"
+},
+"LETTER-002": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 90
+}
+}
+],
+"orig": "In 2022 we walked in the Himalaya with a group of soul seekers from all around the world, and we felt it clearly: the mountains themselves are a sacred medicine. We are going back to receive a message, guidance and the blessings of the Himalayas. We warmly invite you to come with us on this journey, one that can touch you deeply in heart, mind and soul."
+},
+"LETTER-003": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 92
+}
+}
+],
+"orig": "In spring 2027 we will walk the Annapurna Circuit together, from Pokhara over the Thorong La pass to Muktinath, a holy place that pilgrims have walked to for centuries. The route winds through the sacred peaks of Annapurna, the Goddess of Abundance. It is a fourteen-day program with nine days of walking. We go as a small group with a mountain guide and porters, and there is time every day for prayer, singing, sharing and deep inner listening."
+},
+"LETTER-004": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 94
+}
+}
+],
+"orig": "Spring is a beautiful time to walk here. The hillsides glow with rhododendrons, the national flower of Nepal, and the snow peaks stand sharp and bright against a deep blue sky. The days are warm in the sun, the nights are cold and quiet, and the high ridges still wear their winter snow."
+},
+"LETTER-005": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 96
+}
+}
+],
+"orig": "Muktinath is sacred to both Hindus and Buddhists, and its name is often translated as ‘Lord of Liberation’. Water from 108 springs pours from the rock, a small flame burns beside the water, and all five elements are said to meet in this one place."
+},
+"LETTER-006": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 80,
+"attr": "alt"
+}
+}
+],
+"orig": "A golden seated statue under a richly painted canopy, with prayer wheels and snow mountains behind"
+},
+"LETTER-007": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 102
+}
+}
+],
+"orig": "A pilgrimage is simply a walk with a purpose."
+},
+"LETTER-008": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 104
+}
+}
+],
+"orig": "Some people come with a question. Some come to put something heavy down. Some just love the mountains and want to share them with kind company. All of that is welcome, and you do not need to follow any particular tradition to join us."
+},
+"TRAIL-001": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 111
+}
+}
+],
+"orig": "On the trail"
+},
+"TRAIL-002": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 90,
+"attr": "aria-label"
+}
+},
+{
+"kind": "attr",
+"loc": {
+"el": 198,
+"attr": "aria-label"
+}
+}
+],
+"orig": "Previous photos"
+},
+"TRAIL-003": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 93,
+"attr": "aria-label"
+}
+},
+{
+"kind": "attr",
+"loc": {
+"el": 201,
+"attr": "aria-label"
+}
+}
+],
+"orig": "Next photos"
+},
+"TRAIL-004": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 96,
+"attr": "aria-label"
+}
+}
+],
+"orig": "Photos from the trail. Swipe or scroll sideways to see more."
+},
+"TRAIL-005": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 98,
+"attr": "alt"
+}
+}
+],
+"orig": "Prayer flags in front of a snow peak under a deep blue sky"
+},
+"TRAIL-006": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 119
+}
+}
+],
+"orig": "Prayer flags and a snow peak"
+},
+"TRAIL-007": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 101,
+"attr": "alt"
+}
+}
+],
+"orig": "A village in a river gorge below snow mountains"
+},
+"TRAIL-008": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 121
+}
+}
+],
+"orig": "A village in the gorge"
+},
+"TRAIL-009": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 104,
+"attr": "alt"
+}
+}
+],
+"orig": "Two trekkers with poles walking a mountain path, with a huge snow face behind them"
+},
+"TRAIL-010": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 123
+}
+}
+],
+"orig": "Walking the trail"
+},
+"TRAIL-011": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 107,
+"attr": "alt"
+}
+}
+],
+"orig": "A wide valley with a river and fields, and a snow peak in the distance"
+},
+"TRAIL-012": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 125
+}
+}
+],
+"orig": "The valley opens toward the mountains"
+},
+"TRAIL-013": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 110,
+"attr": "alt"
+}
+}
+],
+"orig": "Snow peaks rising above golden brown hills"
+},
+"TRAIL-014": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 127
+}
+}
+],
+"orig": "Snow peaks above golden hills"
+},
+"TRAIL-015": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 113,
+"attr": "alt"
+}
+}
+],
+"orig": "A green meadow with wildflowers and a horse, with cloud-covered mountains behind"
+},
+"TRAIL-016": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 129
+}
+}
+],
+"orig": "A green meadow in the valley"
+},
+"TRAIL-017": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 116,
+"attr": "alt"
+}
+}
+],
+"orig": "A snow peak glowing in warm light above dark trees, with a bird on a bare branch"
+},
+"TRAIL-018": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 131
+}
+}
+],
+"orig": "A snow peak in the evening light"
+},
+"TRAIL-019": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 119,
+"attr": "alt"
+}
+}
+],
+"orig": "A river braiding through a wide valley with the sun above the ridge"
+},
+"TRAIL-020": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 133
+}
+}
+],
+"orig": "The river braids through the valley"
+},
+"TRAIL-021": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 122,
+"attr": "alt"
+}
+}
+],
+"orig": "Terraced fields in warm evening sun, with the sun breaking through clouds"
+},
+"TRAIL-022": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 135
+}
+}
+],
+"orig": "Terraced fields in the evening sun"
+},
+"TRAIL-023": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 125,
+"attr": "alt"
+}
+}
+],
+"orig": "Copper prayer wheels with prayer flags and snow mountains behind"
+},
+"TRAIL-024": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 137
+}
+}
+],
+"orig": "Copper prayer wheels"
+},
+"TRAIL-025": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 128,
+"attr": "alt"
+}
+}
+],
+"orig": "A huge wall of snow and ice under a deep blue sky"
+},
+"TRAIL-026": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 139
+}
+}
+],
+"orig": "A wall of snow and ice"
+},
+"TRAIL-027": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 131,
+"attr": "alt"
+}
+}
+],
+"orig": "Wind blowing snow off a high summit ridge"
+},
+"TRAIL-028": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 141
+}
+}
+],
+"orig": "Wind on the summit ridge"
+},
+"TRAIL-029": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 134,
+"attr": "alt"
+}
+}
+],
+"orig": "A village with yellow trees at the edge of a cliff, with brown hills and snow peaks beyond"
+},
+"TRAIL-030": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 143
+}
+}
+],
+"orig": "A village at the cliff edge"
+},
+"TRAIL-031": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 137,
+"attr": "alt"
+}
+}
+],
+"orig": "Colorful prayer flags below a sharp white peak, with a lodge in the snow"
+},
+"TRAIL-032": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 145
+}
+}
+],
+"orig": "Prayer flags below a sharp white peak"
+},
+"TRAIL-033": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 140,
+"attr": "alt"
+}
+}
+],
+"orig": "Evening light over a terraced valley in the Himalaya"
+},
+"TRAIL-034": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 147
+}
+}
+],
+"orig": "Evening light over a terraced valley"
+},
+"TRAIL-035": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 143,
+"attr": "alt"
+}
+}
+],
+"orig": "A person carrying a big load of golden hay up a steep mountain path, with a stupa and prayer flags below"
+},
+"TRAIL-036": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 149
+}
+}
+],
+"orig": "A load of hay on the mountain path"
+},
+"TRAIL-037": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 146,
+"attr": "alt"
+}
+}
+],
+"orig": "A white village among yellow autumn trees, with golden mountains and snow peaks behind"
+},
+"TRAIL-038": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 151
+}
+}
+],
+"orig": "A village among autumn trees"
+},
+"TRAIL-039": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 149,
+"attr": "alt"
+}
+}
+],
+"orig": "A long white mountain range above a valley, with rust-red heather in the foreground"
+},
+"TRAIL-040": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 153
+}
+}
+],
+"orig": "Snow peaks above rust-red heather"
+},
+"TRAIL-041": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 152,
+"attr": "alt"
+}
+}
+],
+"orig": "Snow-covered peaks behind dark ridges, with a green strip of trees in the valley"
+},
+"TRAIL-042": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 155
+}
+}
+],
+"orig": "Snow peaks behind dark ridges"
+},
+"TRAIL-043": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 155,
+"attr": "alt"
+}
+}
+],
+"orig": "Tall red and orange cliffs above green fields and a golden cornfield"
+},
+"TRAIL-044": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 157
+}
+}
+],
+"orig": "Red cliffs above the fields"
+},
+"TRAIL-045": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 158,
+"attr": "alt"
+}
+}
+],
+"orig": "A large snow-covered peak in clear blue air"
+},
+"TRAIL-046": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 159
+}
+}
+],
+"orig": "A snow peak in clear air"
+},
+"TRAIL-047": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 161,
+"attr": "alt"
+}
+}
+],
+"orig": "Trekkers climbing a grassy path toward a sharp snow peak"
+},
+"TRAIL-048": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 161
+}
+}
+],
+"orig": "Climbing toward a sharp peak"
+},
+"TRAIL-049": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 164,
+"attr": "alt"
+}
+}
+],
+"orig": "A white mountain range above brown hills, with a small mast on the ridge"
+},
+"TRAIL-050": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 163
+}
+}
+],
+"orig": "Snow peaks beyond the ridge"
+},
+"TRAIL-051": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 167,
+"attr": "alt"
+}
+}
+],
+"orig": "Prayer flags in the foreground and a village on the slope below a dark mountain"
+},
+"TRAIL-052": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 165
+}
+}
+],
+"orig": "Prayer flags above the village"
+},
+"TRAIL-053": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 170,
+"attr": "alt"
+}
+}
+],
+"orig": "A river valley and a gravel track, with a snow peak at the end of the valley"
+},
+"TRAIL-054": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 167
+}
+}
+],
+"orig": "A river valley below a snow peak"
+},
+"TRAIL-055": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 173,
+"attr": "alt"
+}
+}
+],
+"orig": "An orange sunset behind a jagged white mountain range, with dark pines in front"
+},
+"TRAIL-056": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 169
+}
+}
+],
+"orig": "Sunset behind the white range"
+},
+"TRAIL-057": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 176,
+"attr": "alt"
+}
+}
+],
+"orig": "A braided river between golden cliffs, with snow peaks under clouds ahead"
+},
+"TRAIL-058": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 171
+}
+}
+],
+"orig": "A braided river in a golden canyon"
+},
+"TRAIL-059": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 179,
+"attr": "alt"
+}
+}
+],
+"orig": "A village in a high valley with sandy hills, and snow peaks above"
+},
+"TRAIL-060": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 173
+}
+}
+],
+"orig": "A village in a high valley"
+},
+"TRAIL-061": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 182,
+"attr": "alt"
+}
+}
+],
+"orig": "Green orchards and fields along a wide river, with a snow peak and tall cliffs"
+},
+"TRAIL-062": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 175
+}
+}
+],
+"orig": "Orchards beside the river"
+},
+"TRAIL-063": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 185,
+"attr": "alt"
+}
+}
+],
+"orig": "A narrow canyon below cloud-covered snow peaks"
+},
+"TRAIL-064": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 177
+}
+}
+],
+"orig": "A canyon below the peaks"
+},
+"TRAIL-065": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 188,
+"attr": "alt"
+}
+}
+],
+"orig": "Folded brown hills with a winding road, and a long white range far behind"
+},
+"TRAIL-066": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 179
+}
+}
+],
+"orig": "Folded hills, a white range beyond"
+},
+"TRAIL-067": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 191,
+"attr": "alt"
+}
+}
+],
+"orig": "A river valley with green fields seen from above, between golden mountains"
+},
+"TRAIL-068": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 181
+}
+}
+],
+"orig": "A river valley from above"
+},
+"TRAIL-069": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 185
+}
+}
+],
+"orig": "Our last pilgrimage"
+},
+"TRAIL-070": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 193
+}
+}
+],
+"orig": "A few moments from the walk we shared last time. You can also watch the stories from that journey on Instagram."
+},
+"TRAIL-071": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 195
+}
+}
+],
+"orig": "Watch the stories on Instagram"
+},
+"TRAIL-072": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 208,
+"attr": "aria-label"
+}
+}
+],
+"orig": "Photos from our last pilgrimage. Swipe or scroll sideways to see more."
+},
+"TRAIL-073": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 210,
+"attr": "alt"
+}
+}
+],
+"orig": "A group of friends laughing and posing together on a sunny ridge above the clouds"
+},
+"TRAIL-074": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 199
+}
+}
+],
+"orig": "The whole group together"
+},
+"TRAIL-075": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 213,
+"attr": "alt"
+}
+}
+],
+"orig": "A group of trekkers posing together on a stone terrace with a huge snow range behind them"
+},
+"TRAIL-076": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 201
+}
+}
+],
+"orig": "The group with a snow range behind"
+},
+"TRAIL-077": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 216,
+"attr": "alt"
+}
+}
+],
+"orig": "A group of trekkers in rain jackets and ponchos posing together on a wet road at the start of the trail"
+},
+"TRAIL-078": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 203
+}
+}
+],
+"orig": "Setting off in the rain"
+},
+"TRAIL-079": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 219,
+"attr": "alt"
+}
+}
+],
+"orig": "Two trekkers smiling on a narrow path through green forest"
+},
+"TRAIL-080": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 205
+}
+}
+],
+"orig": "Together on the forest trail"
+},
+"TRAIL-081": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 222,
+"attr": "alt"
+}
+}
+],
+"orig": "Trekkers coming up a grassy path through thick mist and tall bare trees"
+},
+"TRAIL-082": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 207
+}
+}
+],
+"orig": "Walking up into the mist"
+},
+"TRAIL-083": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 225,
+"attr": "alt"
+}
+}
+],
+"orig": "Five smiling trekkers in a selfie with low cloud behind them"
+},
+"TRAIL-084": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 209
+}
+}
+],
+"orig": "Happy faces in the clouds"
+},
+"TRAIL-085": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 228,
+"attr": "alt"
+}
+}
+],
+"orig": "A group selfie of trekkers smiling and waving on a hillside near blue-roofed lodges, with a forested mountain behind"
+},
+"TRAIL-086": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 211
+}
+}
+],
+"orig": "Everyone together at the lodge"
+},
+"TRAIL-087": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 231,
+"attr": "alt"
+}
+}
+],
+"orig": "A trekker in a yellow jacket standing on old mossy stone steps in the forest"
+},
+"TRAIL-088": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 213
+}
+}
+],
+"orig": "Old mossy stone steps"
+},
+"TRAIL-089": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 234,
+"attr": "alt"
+}
+}
+],
+"orig": "Trekkers walking down a path under old trees covered in moss"
+},
+"TRAIL-090": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 215
+}
+}
+],
+"orig": "Under the old moss trees"
+},
+"TRAIL-091": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 237,
+"attr": "alt"
+}
+}
+],
+"orig": "A river running through a deep green forest gorge, seen from a suspension bridge"
+},
+"TRAIL-092": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 217
+}
+}
+],
+"orig": "A river gorge seen from the bridge"
+},
+"TRAIL-093": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 240,
+"attr": "alt"
+}
+}
+],
+"orig": "A trekker in a yellow jacket walking along a grassy ridge toward a sharp snow peak, with prayer flags beside the path"
+},
+"TRAIL-094": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 219
+}
+}
+],
+"orig": "Walking toward the peak"
+},
+"TRAIL-095": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 243,
+"attr": "alt"
+}
+}
+],
+"orig": "A trekker in a yellow jacket and wool hat standing with open arms on a mountain path, with a sharp snow peak behind"
+},
+"TRAIL-096": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 221
+}
+}
+],
+"orig": "Heart open below the peak"
+},
+"TRAIL-097": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 246,
+"attr": "alt"
+}
+}
+],
+"orig": "Two smiling trekkers in a selfie with a snow peak and the morning sun behind them"
+},
+"TRAIL-098": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 223
+}
+}
+],
+"orig": "Morning smiles below a snow peak"
+},
+"TRAIL-099": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 249,
+"attr": "alt"
+}
+}
+],
+"orig": "Two smiling trekkers in a selfie with a sharp snow peak behind them"
+},
+"TRAIL-100": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 225
+}
+}
+],
+"orig": "Smiles below the peak"
+},
+"TRAIL-101": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 252,
+"attr": "alt"
+}
+}
+],
+"orig": "A sharp snow peak seen close up under a deep blue sky"
+},
+"TRAIL-102": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 227
+}
+}
+],
+"orig": "A sharp peak in the morning light"
+},
+"TRAIL-103": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 255,
+"attr": "alt"
+}
+}
+],
+"orig": "Two trekkers sitting on a ridge and waving, with a huge wall of snow mountains behind them"
+},
+"TRAIL-104": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 229
+}
+}
+],
+"orig": "Resting on the ridge"
+},
+"TRAIL-105": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 258,
+"attr": "alt"
+}
+}
+],
+"orig": "Four friends smiling in a selfie on a rooftop above a misty mountain valley"
+},
+"TRAIL-106": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 231
+}
+}
+],
+"orig": "Friends above the valley"
+},
+"TRAIL-107": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 261,
+"attr": "alt"
+}
+}
+],
+"orig": "A woman in an orange top standing on a stone wall looking back, with hills and clouds in evening light"
+},
+"TRAIL-108": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 233
+}
+}
+],
+"orig": "Evening light on the hills"
+},
+"TRAIL-109": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 264,
+"attr": "alt"
+}
+}
+],
+"orig": "A group of trekkers standing together in a courtyard under strings of prayer flags"
+},
+"TRAIL-110": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 235
+}
+}
+],
+"orig": "Under the prayer flags"
+},
+"TRAIL-111": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 267,
+"attr": "alt"
+}
+}
+],
+"orig": "Three trekkers in bright jackets standing together on a green hillside"
+},
+"TRAIL-112": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 237
+}
+}
+],
+"orig": "Three friends on the trail"
+},
+"TRAIL-113": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 270,
+"attr": "alt"
+}
+}
+],
+"orig": "Two people having tea at a table on a stone terrace, with a pointed snow peak behind them"
+},
+"TRAIL-114": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 239
+}
+}
+],
+"orig": "Tea on the terrace"
+},
+"TRAIL-115": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 273,
+"attr": "alt"
+}
+}
+],
+"orig": "A group of trekkers sitting in a circle on cushions inside a lodge, smiling at the camera"
+},
+"TRAIL-116": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 241
+}
+}
+],
+"orig": "Gathered together at the lodge"
+},
+"TRAIL-117": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 276,
+"attr": "alt"
+}
+}
+],
+"orig": "Guides and trekkers sitting around a table with a kettle inside a mountain lodge"
+},
+"TRAIL-118": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 243
+}
+}
+],
+"orig": "Tea and a rest at the lodge"
+},
+"TRAIL-119": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 279,
+"attr": "alt"
+}
+}
+],
+"orig": "A trekker in a yellow jacket and wool hat holding a small cup of tea, with misty mountains behind"
+},
+"TRAIL-120": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 245
+}
+}
+],
+"orig": "A warm cup with a view"
+},
+"TRAIL-121": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 282,
+"attr": "alt"
+}
+}
+],
+"orig": "A smiling woman in a green jacket sitting in a lodge window seat"
+},
+"TRAIL-122": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 247
+}
+}
+],
+"orig": "A quiet moment at the lodge"
+},
+"TRAIL-123": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 285,
+"attr": "alt"
+}
+}
+],
+"orig": "Three tired trekkers resting on a red bench below a painted mural of a snow peak"
+},
+"TRAIL-124": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 249
+}
+}
+],
+"orig": "Tired and happy"
+},
+"TRAIL-125": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 288,
+"attr": "alt"
+}
+}
+],
+"orig": "A group of friends posing together in a garden under strings of prayer flags"
+},
+"TRAIL-126": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 251
+}
+}
+],
+"orig": "All together in the garden"
+},
+"ROUTE-001": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 257
+}
+}
+],
+"orig": "The route"
+},
+"ROUTE-002": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 260
+}
+}
+],
+"orig": "Annapurna Circuit and Tilicho Lake. We start in Pokhara, drive into the mountains, walk over the Thorong La pass and arrive in Muktinath."
+},
+"ROUTE-003": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 297,
+"attr": "aria-label"
+}
+}
+],
+"orig": "Sketch map of the route from Pokhara through Chame, Manang and Tilicho Lake, over Thorong La to Muktinath"
+},
+"ROUTE-004": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 302
+}
+}
+],
+"orig": "Start and finish"
+},
+"ROUTE-005": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 303
+}
+}
+],
+"orig": "Pokhara, ~820 m"
+},
+"ROUTE-006": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 305
+}
+}
+],
+"orig": "Highest point"
+},
+"ROUTE-007": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 306
+}
+}
+],
+"orig": "Thorong La, 5,416 m"
+},
+"ROUTE-008": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 308
+}
+}
+],
+"orig": "Destination"
+},
+"ROUTE-009": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 309
+}
+}
+],
+"orig": "Muktinath, ~3,800 m"
+},
+"ROUTE-010": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 313
+}
+}
+],
+"orig": "On foot"
+},
+"ROUTE-011": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 315
+}
+}
+],
+"orig": "By jeep, on day 3 and day 14"
+},
+"ROUTE-012": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 317
+}
+}
+],
+"orig": "Number of the day we arrive"
+},
+"ROUTE-013": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 320
+}
+}
+],
+"orig": "A sketch of the route, not to scale."
+},
+"ROUTE-014": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 325
+}
+}
+],
+"orig": "How high we sleep"
+},
+"ROUTE-015": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 327
+}
+}
+],
+"orig": "Overnight altitude in meters, with the highest point of each day marked."
+},
+"ROUTE-016": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 451,
+"attr": "aria-label"
+}
+},
+{
+"kind": "attr",
+"loc": {
+"el": 503,
+"attr": "aria-label"
+}
+}
+],
+"orig": "Overnight altitude by day, rising from 820 m in Pokhara to 4,600 m at Thorong Phedi, with the pass at 5,416 m on day 12, then back down"
+},
+"ROUTE-017": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 395
+}
+}
+],
+"orig": "Itinerary"
+},
+"ROUTE-018": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 398
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 404
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 410
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 416
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 422
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 428
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 434
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 440
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 446
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 452
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 458
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 464
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 470
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 476
+}
+}
+],
+"orig": "Day"
+},
+"ROUTE-019": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 400
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 406
+}
+},
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+269,
+334,
+344,
+366,
+376
+]
+}
+}
+],
+"orig": "Pokhara"
+},
+"ROUTE-020": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 401
+}
+}
+],
+"orig": "Mar 28 · ~820 m"
+},
+"ROUTE-021": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 402
+}
+}
+],
+"orig": "Arrive in Pokhara and check in at the hotel in your own time. Overnight at the hotel."
+},
+"ROUTE-022": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 407
+}
+}
+],
+"orig": "Mar 29 · ~820 m"
+},
+"ROUTE-023": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 408
+}
+}
+],
+"orig": "Group introductions, an opening talk and a safety briefing. Gear shopping and renting, permits and paperwork. Sharing circle. Overnight at the hotel."
+},
+"ROUTE-024": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 412
+}
+}
+],
+"orig": "Pokhara to Chame"
+},
+"ROUTE-025": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 413
+}
+}
+],
+"orig": "Mar 30 · ~2,670 m · 8–9 h"
+},
+"ROUTE-026": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 414
+}
+}
+],
+"orig": "Our journey begins. A day of driving on mountain roads. In the evening we soak in the hot springs of Chame, then hold our opening circle with intention setting, meditation and prayer."
+},
+"ROUTE-027": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 418
+}
+}
+],
+"orig": "Chame to Upper Pisang"
+},
+"ROUTE-028": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 419
+}
+}
+],
+"orig": "Mar 31 · ~3,300 m · 5–6 h"
+},
+"ROUTE-029": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 420
+}
+}
+],
+"orig": "Walking through forest, with views of Annapurna II."
+},
+"ROUTE-030": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 424
+}
+}
+],
+"orig": "Upper Pisang to Manang"
+},
+"ROUTE-031": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 425
+}
+}
+],
+"orig": "Apr 1 · 3,519 m · 5–6 h"
+},
+"ROUTE-032": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 426
+}
+}
+],
+"orig": "The upper trail, with wide views of the whole Annapurna range."
+},
+"ROUTE-033": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 430
+}
+}
+],
+"orig": "Manang, rest day"
+},
+"ROUTE-034": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 431
+}
+}
+],
+"orig": "Apr 2 · 3,519 m · 3–4 h"
+},
+"ROUTE-035": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 432
+}
+}
+],
+"orig": "A hike above the village to help the body adjust, then back to Manang for the night."
+},
+"ROUTE-036": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 436
+}
+}
+],
+"orig": "Manang to Khangsar"
+},
+"ROUTE-037": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 437
+}
+}
+],
+"orig": "Apr 3 · 3,734 m · 4–5 h"
+},
+"ROUTE-038": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 438
+}
+}
+],
+"orig": "Walking toward the Tilicho valley."
+},
+"ROUTE-039": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 442
+}
+}
+],
+"orig": "Khangsar to Tilicho Base Camp"
+},
+"ROUTE-040": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 443
+}
+}
+],
+"orig": "Apr 4 · ~4,140 m · 5–6 h"
+},
+"ROUTE-041": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 444
+}
+}
+],
+"orig": "Crossing scree slopes."
+},
+"ROUTE-042": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 448
+}
+}
+],
+"orig": "Tilicho Lake to Shri Kharka"
+},
+"ROUTE-043": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 449
+}
+}
+],
+"orig": "Apr 5 · ~4,080 m · peak 4,920 m · 6–8 h"
+},
+"ROUTE-044": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 450
+}
+}
+],
+"orig": "A morning climb to one of the highest lakes in the world. Overnight in Shri Kharka (~4,080 m)."
+},
+"ROUTE-045": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 454
+}
+}
+],
+"orig": "Shri Kharka to Yak Kharka"
+},
+"ROUTE-046": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 455
+}
+}
+],
+"orig": "Apr 6 · ~4,110 m · 4–5 h"
+},
+"ROUTE-047": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 456
+}
+}
+],
+"orig": "Little altitude gain. Walking toward the pass."
+},
+"ROUTE-048": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 460
+}
+}
+],
+"orig": "Yak Kharka to Thorong Phedi"
+},
+"ROUTE-049": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 461
+}
+}
+],
+"orig": "Apr 7 · ~4,600 m · 3–4 h"
+},
+"ROUTE-050": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 462
+}
+}
+],
+"orig": "Our last camp before the pass. Rest and preparation."
+},
+"ROUTE-051": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 466
+}
+}
+],
+"orig": "Thorong La to Muktinath"
+},
+"ROUTE-052": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 467
+}
+}
+],
+"orig": "Apr 8 · ~3,800 m · peak 5,416 m · 8–9 h"
+},
+"ROUTE-053": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 468
+}
+}
+],
+"orig": "The crossing of the pass, the highest and fullest day of the journey. We sleep in Muktinath (~3,800 m), and the high-altitude banya (Russian sauna) is waiting."
+},
+"ROUTE-054": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 472
+}
+}
+],
+"orig": "Muktinath, day at the temple"
+},
+"ROUTE-055": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 473
+}
+}
+],
+"orig": "Apr 9 · ~3,800 m"
+},
+"ROUTE-056": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 474
+}
+}
+],
+"orig": "The Muktinath temple, sacred to Hindus and Buddhists, the 108 springs, and the Gumba Samba and Jwala Mai temples. We rest, share, and close our circle with prayer."
+},
+"ROUTE-057": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 478
+}
+}
+],
+"orig": "Muktinath to Pokhara"
+},
+"ROUTE-058": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 479
+}
+}
+],
+"orig": "Apr 10 · ~820 m · 6–8 h or ~20 min"
+},
+"ROUTE-059": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 480
+}
+}
+],
+"orig": "Back by jeep via Jomsom, or by a short flight. Those joining Shamanic Immersion stay in Muktinath."
+},
+"ROUTE-060": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+265
+]
+}
+}
+],
+"orig": "Annapurna I"
+},
+"ROUTE-061": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+267
+]
+}
+}
+],
+"orig": "Annapurna II"
+},
+"ROUTE-062": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+270
+]
+}
+}
+],
+"orig": "820 m · start and finish"
+},
+"ROUTE-063": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+271
+]
+}
+}
+],
+"orig": "Chame"
+},
+"ROUTE-064": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+273
+]
+}
+}
+],
+"orig": "Upper Pisang"
+},
+"ROUTE-065": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+274,
+336,
+368
+]
+}
+}
+],
+"orig": "Manang"
+},
+"ROUTE-066": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+276
+]
+}
+}
+],
+"orig": "Khangsar"
+},
+"ROUTE-067": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+277
+]
+}
+}
+],
+"orig": "Shri Kharka"
+},
+"ROUTE-068": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+278
+]
+}
+}
+],
+"orig": "Tilicho Base Camp"
+},
+"ROUTE-069": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+279
+]
+}
+}
+],
+"orig": "Yak Kharka"
+},
+"ROUTE-070": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+280
+]
+}
+}
+],
+"orig": "Thorong Phedi"
+},
+"ROUTE-071": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+281,
+342,
+374
+]
+}
+}
+],
+"orig": "Muktinath"
+},
+"ROUTE-072": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+283
+]
+}
+}
+],
+"orig": "Jomsom"
+},
+"ROUTE-073": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+284,
+338,
+370
+]
+}
+}
+],
+"orig": "Tilicho Lake"
+},
+"ROUTE-074": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+286,
+340,
+372
+]
+}
+}
+],
+"orig": "Thorong La"
+},
+"ROUTE-075": {
+"locs": [
+{
+"kind": "svgtext",
+"loc": {
+"nodes": [
+360,
+392
+]
+}
+}
+],
+"orig": "DAY"
+},
+"DAYS-001": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 487
+}
+}
+],
+"orig": "What each day looks like"
+},
+"DAYS-002": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 491
+}
+}
+],
+"orig": "Morning qigong"
+},
+"DAYS-003": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 492
+}
+}
+],
+"orig": "Gentle movement and breathing to wake up the body for the day of walking."
+},
+"DAYS-004": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 494
+}
+}
+],
+"orig": "Walking"
+},
+"DAYS-005": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 495
+}
+}
+],
+"orig": "At your own rhythm, sometimes talking, sometimes in silence."
+},
+"DAYS-006": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 497
+}
+}
+],
+"orig": "Ritual, prayer and meditation"
+},
+"DAYS-007": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 498
+}
+}
+],
+"orig": "At special places along the trail we pause for short moments of ritual, prayer and meditation, to arrive in the place and listen inside."
+},
+"DAYS-008": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 500
+}
+}
+],
+"orig": "Intention setting"
+},
+"DAYS-009": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 501
+}
+}
+],
+"orig": "At the start, each person sets an intention. It can be a question, a wish or a prayer. We return to it on the pass and again in Muktinath."
+},
+"DAYS-010": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 503
+}
+}
+],
+"orig": "Songs and chanting"
+},
+"DAYS-011": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 504
+}
+}
+],
+"orig": "Kirtan and mantra, song circles, heart songs and medicine songs. We both sing, on our own and together, and you are invited to sing with us."
+},
+"DAYS-012": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 506
+}
+}
+],
+"orig": "Heart sharing circle"
+},
+"DAYS-013": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 507
+}
+}
+],
+"orig": "Every evening we gather to listen to each other and share from the heart."
+},
+"IMMERSION-001": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 514
+}
+}
+],
+"orig": "Shamanic Immersion"
+},
+"IMMERSION-002": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 515
+}
+}
+],
+"orig": "April 11–16, 2027"
+},
+"IMMERSION-003": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 697,
+"attr": "alt"
+}
+}
+],
+"orig": "A snow-covered Himalayan peak above a mountain road"
+},
+"IMMERSION-004": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 521
+}
+}
+],
+"orig": "After crossing Thorong La, the body has accomplished a great deal, and the mind often becomes quieter and more open. For those who feel called to continue the journey more deeply, we stay in Muktinath for six more days."
+},
+"IMMERSION-005": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 523
+}
+}
+],
+"orig": "The pace slows down, giving us space to rest, integrate the experience of the mountains, and turn inward. Our days include meditation and silence, energy and body practices, intention work, and two plant medicine ceremonies guided by Yakov."
+},
+"IMMERSION-006": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 525
+}
+}
+],
+"orig": "Between practices, there is time to recover, share experiences, and simply be together. This is an opportunity to deepen your connection with yourself, listen more closely to what is unfolding within, and allow the journey to settle into your life."
+},
+"IMMERSION-007": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 528
+}
+}
+],
+"orig": "A Place to Rest and Restore"
+},
+"IMMERSION-008": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 530
+}
+}
+],
+"orig": "Throughout the six-day immersion, we stay in a comfortable hotel in Muktinath, with good food, hot showers, a dedicated ceremony hall, and a traditional Russian sauna at high altitude."
+},
+"IMMERSION-009": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 532
+}
+}
+],
+"orig": "The setting allows us to step away from the demands of the trail, restore our energy, and give the inner journey the time and attention it deserves."
+},
+"IMMERSION-010": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 537
+}
+}
+],
+"orig": "Our Six Days Together"
+},
+"IMMERSION-011": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 539
+}
+}
+],
+"orig": "April 11"
+},
+"IMMERSION-012": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 540
+}
+}
+],
+"orig": "Rest & Intention"
+},
+"IMMERSION-013": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 541
+}
+}
+],
+"orig": "A gentle day to recover after the trek, settle into Muktinath, and reconnect with the intention that brought us here."
+},
+"IMMERSION-014": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 543
+}
+}
+],
+"orig": "April 12"
+},
+"IMMERSION-015": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 544
+}
+}
+],
+"orig": "Ayahuasca Ceremony"
+},
+"IMMERSION-016": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 545
+}
+}
+],
+"orig": "A guided plant medicine ceremony held in a safe, supportive setting, with space for inner exploration and reflection."
+},
+"IMMERSION-017": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 547
+}
+}
+],
+"orig": "April 13"
+},
+"IMMERSION-018": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 548
+}
+}
+],
+"orig": "Integration & Rest"
+},
+"IMMERSION-019": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 549
+}
+}
+],
+"orig": "Time to share experiences, integrate what has unfolded, rest, and enjoy the traditional Russian sauna at high altitude."
+},
+"IMMERSION-020": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 551
+}
+}
+],
+"orig": "April 14"
+},
+"IMMERSION-021": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 552
+}
+}
+],
+"orig": "San Pedro Ceremony"
+},
+"IMMERSION-022": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 553
+}
+}
+],
+"orig": "A daytime ceremony with San Pedro in the Himalayan mountains, offering space for reflection, connection with nature, and inner exploration."
+},
+"IMMERSION-023": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 555
+}
+}
+],
+"orig": "April 15"
+},
+"IMMERSION-024": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 556
+}
+}
+],
+"orig": "Integration & Closing Circle"
+},
+"IMMERSION-025": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 557
+}
+}
+],
+"orig": "A day for sharing, integration, rest, and our closing circle, bringing the journey together before departure."
+},
+"IMMERSION-026": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 559
+}
+}
+],
+"orig": "April 16"
+},
+"IMMERSION-027": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 560
+}
+}
+],
+"orig": "Return Journey"
+},
+"IMMERSION-028": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 561
+}
+}
+],
+"orig": "A jeep transfer from Muktinath to Pokhara is included in Shamanic Immersion."
+},
+"IMMERSION-029": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 567
+}
+}
+],
+"orig": "In the mountains"
+},
+"IMMERSION-030": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 737,
+"attr": "aria-label"
+}
+},
+{
+"kind": "attr",
+"loc": {
+"el": 793,
+"attr": "aria-label"
+}
+}
+],
+"orig": "Previous photos"
+},
+"IMMERSION-031": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 740,
+"attr": "aria-label"
+}
+},
+{
+"kind": "attr",
+"loc": {
+"el": 796,
+"attr": "aria-label"
+}
+}
+],
+"orig": "Next photos"
+},
+"IMMERSION-032": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 743,
+"attr": "aria-label"
+}
+}
+],
+"orig": "Photos from Muktinath and the mountains. Swipe or scroll sideways to see more."
+},
+"IMMERSION-033": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 745,
+"attr": "alt"
+}
+}
+],
+"orig": "A golden seated statue under a richly painted canopy with prayer wheels around it"
+},
+"IMMERSION-034": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 575
+}
+}
+],
+"orig": "A golden statue under a painted canopy"
+},
+"IMMERSION-035": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 748,
+"attr": "alt"
+}
+}
+],
+"orig": "A red monastery with a white stupa among yellow autumn trees, with dry mountains behind"
+},
+"IMMERSION-036": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 577
+}
+}
+],
+"orig": "A monastery among autumn trees"
+},
+"IMMERSION-037": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 751,
+"attr": "alt"
+}
+}
+],
+"orig": "Masked dancers in colorful costumes in a monastery courtyard with spectators"
+},
+"IMMERSION-038": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 579
+}
+}
+],
+"orig": "Masked dancers in a monastery courtyard"
+},
+"IMMERSION-039": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 754,
+"attr": "alt"
+}
+}
+],
+"orig": "A hand holding a fossil shell"
+},
+"IMMERSION-040": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 581
+}
+}
+],
+"orig": "A fossil shell held in the hand"
+},
+"IMMERSION-041": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 757,
+"attr": "alt"
+}
+}
+],
+"orig": "A wide mountain landscape with golden autumn hills and a snow range under a deep blue sky"
+},
+"IMMERSION-042": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 583
+}
+}
+],
+"orig": "Autumn colors and a snow range"
+},
+"IMMERSION-043": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 760,
+"attr": "alt"
+}
+}
+],
+"orig": "A braided river in a wide mountain valley with a dirt road above it"
+},
+"IMMERSION-044": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 585
+}
+}
+],
+"orig": "A braided river below the mountains"
+},
+"IMMERSION-045": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 763,
+"attr": "alt"
+}
+}
+],
+"orig": "A monastery and white stupa in warm morning light under a dry mountain slope"
+},
+"IMMERSION-046": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 587
+}
+}
+],
+"orig": "Monastery and stupa in morning light"
+},
+"IMMERSION-047": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 766,
+"attr": "alt"
+}
+}
+],
+"orig": "A large spiral shell relief on a dark wall above two orange armchairs"
+},
+"IMMERSION-048": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 589
+}
+}
+],
+"orig": "A spiral shell relief in a dark room"
+},
+"IMMERSION-049": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 769,
+"attr": "alt"
+}
+}
+],
+"orig": "Snow-covered peaks seen through tree branches under a clear blue sky"
+},
+"IMMERSION-050": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 591
+}
+}
+],
+"orig": "Snow peaks against a clear sky"
+},
+"IMMERSION-051": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 772,
+"attr": "alt"
+}
+}
+],
+"orig": "Sunrise over a dark ridge with a snow peak on the left"
+},
+"IMMERSION-052": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 593
+}
+}
+],
+"orig": "Sunrise behind a snow peak"
+},
+"IMMERSION-053": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 775,
+"attr": "alt"
+}
+}
+],
+"orig": "A person in a yellow jacket on a ridge with red flags and a snow peak behind"
+},
+"IMMERSION-054": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 595
+}
+}
+],
+"orig": "On a ridge below a snow peak"
+},
+"IMMERSION-055": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 778,
+"attr": "alt"
+}
+}
+],
+"orig": "Yakov Rajuna with a shamanic drum and singing bowls before a ceremony"
+},
+"IMMERSION-056": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 597
+}
+}
+],
+"orig": "Yakov before a ceremony"
+},
+"IMMERSION-057": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 781,
+"attr": "alt"
+}
+}
+],
+"orig": "Prayer wheels and flags in Muktinath"
+},
+"IMMERSION-058": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 599
+}
+}
+],
+"orig": "Prayer wheels and flags"
+},
+"IMMERSION-059": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 784,
+"attr": "alt"
+}
+}
+],
+"orig": "Golden hills above the Kali Gandaki valley"
+},
+"IMMERSION-060": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 601
+}
+}
+],
+"orig": "Snow peaks above golden hills"
+},
+"IMMERSION-061": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 787,
+"attr": "alt"
+}
+}
+],
+"orig": "A village under eroded cliffs"
+},
+"IMMERSION-062": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 603
+}
+}
+],
+"orig": "A village under eroded cliffs"
+},
+"IMMERSION-063": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 607
+}
+}
+],
+"orig": "Where we stay"
+},
+"IMMERSION-064": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 799,
+"attr": "aria-label"
+}
+}
+],
+"orig": "Photos of the hotel in Muktinath. Swipe or scroll sideways to see more."
+},
+"IMMERSION-065": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 801,
+"attr": "alt"
+}
+}
+],
+"orig": "A yellow hotel building with prayer flags on the roof below a rocky mountain dusted with frost"
+},
+"IMMERSION-066": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 615
+}
+}
+],
+"orig": "The hotel below a frosted mountain"
+},
+"IMMERSION-067": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 804,
+"attr": "alt"
+}
+}
+],
+"orig": "A bright hall with wooden floors, floor mats, cushions and tall windows with linen curtains"
+},
+"IMMERSION-068": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 617
+}
+}
+],
+"orig": "A large hall with wooden floors and mats"
+},
+"IMMERSION-069": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 807,
+"attr": "alt"
+}
+}
+],
+"orig": "A sunny courtyard with stone paving, a yellow building and mountains behind"
+},
+"IMMERSION-070": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 619
+}
+}
+],
+"orig": "A courtyard with mountain views"
+},
+"IMMERSION-071": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 810,
+"attr": "alt"
+}
+}
+],
+"orig": "A sunny corner with floor cushions, plants and a window with a mountain view"
+},
+"IMMERSION-072": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 621
+}
+}
+],
+"orig": "A sunlit corner with floor cushions"
+},
+"IMMERSION-073": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 813,
+"attr": "alt"
+}
+}
+],
+"orig": "A sitting room with a low table, a thermos, tea glasses and a bowl of fruit under a log-beam ceiling"
+},
+"IMMERSION-074": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 623
+}
+}
+],
+"orig": "A sitting room with tea and fruit"
+},
+"IMMERSION-075": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 816,
+"attr": "alt"
+}
+}
+],
+"orig": "A lounge with low tables, floor seating and large windows under a log-beam ceiling"
+},
+"IMMERSION-076": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 625
+}
+}
+],
+"orig": "A lounge with floor seating"
+},
+"IMMERSION-077": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 819,
+"attr": "alt"
+}
+}
+],
+"orig": "A blue guest room with two beds, red brocade overhead and prayer flags"
+},
+"IMMERSION-078": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 627
+}
+}
+],
+"orig": "A guest room with prayer flags"
+},
+"IMMERSION-079": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 822,
+"attr": "alt"
+}
+}
+],
+"orig": "A guest room with two beds, a window and orange brocade on the wall"
+},
+"IMMERSION-080": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 629
+}
+}
+],
+"orig": "A twin guest room"
+},
+"IMMERSION-081": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 825,
+"attr": "alt"
+}
+}
+],
+"orig": "A breakfast plate with pancakes, porridge, jam, watermelon and tomatoes"
+},
+"IMMERSION-082": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 631
+}
+}
+],
+"orig": "Breakfast at the hotel"
+},
+"GUIDES-001": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 637
+}
+}
+],
+"orig": "Yakov and Akari"
+},
+"GUIDES-002": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 832,
+"attr": "alt"
+}
+}
+],
+"orig": "Yakov Rajuna sitting with a frame drum"
+},
+"GUIDES-003": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 643
+}
+}
+],
+"orig": "Yakov Rajuna"
+},
+"GUIDES-004": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 645
+}
+}
+],
+"orig": "Spiritual Mentor"
+},
+"GUIDES-005": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 647
+}
+}
+],
+"orig": "Neo-Shaman"
+},
+"GUIDES-006": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 649
+}
+}
+],
+"orig": "Meditation & Qi Gong Teacher"
+},
+"GUIDES-007": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 652
+}
+}
+],
+"orig": "years on the spiritual path"
+},
+"GUIDES-008": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 654
+}
+}
+],
+"orig": "retreats guided"
+},
+"GUIDES-009": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 656
+}
+}
+],
+"orig": "people accompanied on their journey"
+},
+"GUIDES-010": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 658
+}
+}
+],
+"orig": "Yakov is a healer, musician, and spiritual guide who helps people reconnect with themselves, find inner balance, and rediscover their true nature."
+},
+"GUIDES-011": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 659
+}
+}
+],
+"orig": "For over ten years, he has been holding plant medicine ceremonies, learning from shamanic traditions in Peru and Brazil, and exploring the wisdom of non-duality."
+},
+"GUIDES-012": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 660
+}
+}
+],
+"orig": "Through meditation, Qi Gong, music, and energy work, he creates a space for deep inner exploration, healing, and transformation."
+},
+"GUIDES-013": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 661
+}
+}
+],
+"orig": "His intention is simple: to help people open their hearts, reconnect with life, and find their way back to themselves."
+},
+"GUIDES-014": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 853,
+"attr": "alt"
+}
+}
+],
+"orig": "Akari Tamura playing guitar under a tree"
+},
+"GUIDES-015": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 668
+}
+}
+],
+"orig": "Akari Tamura"
+},
+"GUIDES-016": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 670
+}
+}
+],
+"orig": "Kirtan artist"
+},
+"GUIDES-017": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 672
+}
+}
+],
+"orig": "Musician"
+},
+"GUIDES-018": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 674
+}
+}
+],
+"orig": "Teacher of voice, instrument and devotional living"
+},
+"GUIDES-019": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 676
+}
+}
+],
+"orig": "Akari began classical piano at a very young age, plays several instruments, and has made music all her life. Since 2006 she has been studying yoga, spirituality and Bhakti, and she has been teaching since 2013. She has guided thousands of people around the world through concerts, workshops, retreats and trainings in Bali, Thailand, Japan, India and Europe, sharing kirtan, mantra, yoga and the practice of devotion. She is passionate about creating transformative experiences that help each of us realize our connection with the divine center. In 2022 she and Yakov created and walked a trekking retreat to Mardi Himal. On this pilgrimage she brings kirtan, mantra, music and prayer to the trail and evening circles."
+},
+"SAFETY-001": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 684
+}
+}
+],
+"orig": "Safety and organization"
+},
+"SAFETY-002": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 687
+}
+}
+],
+"orig": "The route is led by a professional mountain guide with long experience on high-altitude Himalayan treks. Everything is planned in advance, and our team takes care of the details. Once you sign up, we will send you the full list of what to bring and all the information you need to make this journey safe."
+},
+"SAFETY-003": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 690
+}
+}
+],
+"orig": "Guide and team"
+},
+"SAFETY-004": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 691
+}
+}
+],
+"orig": "A professional mountain guide. ACAP and TIMS permits are arranged in advance by the organizers."
+},
+"SAFETY-005": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 693
+}
+}
+],
+"orig": "Light all the way"
+},
+"SAFETY-006": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 694
+}
+}
+],
+"orig": "Porters carry your main bags for the entire trek. You carry only what you need for the day."
+},
+"SAFETY-007": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 696
+}
+}
+],
+"orig": "Medical"
+},
+"SAFETY-008": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 697
+}
+}
+],
+"orig": "A first-aid kit with altitude medication, including for altitude sickness, stays with the guide."
+},
+"SAFETY-009": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 699
+}
+}
+],
+"orig": "Built-in acclimatization"
+},
+"SAFETY-010": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 700
+}
+}
+],
+"orig": "A rest day in Manang and a gradual gain in height, with a helicopter emergency plan along the route."
+},
+"SAFETY-011": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 704
+}
+}
+],
+"orig": "Important for participants"
+},
+"SAFETY-012": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 706
+}
+}
+],
+"orig": "Medical insurance covering helicopter evacuation up to 6,000 m (paid separately, about $100)"
+},
+"SAFETY-013": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 707
+}
+}
+],
+"orig": "Normal or good physical condition and readiness for multi-day trekking"
+},
+"SAFETY-014": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 708
+}
+}
+],
+"orig": "A short video call with us before you join"
+},
+"SAFETY-015": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 885,
+"attr": "alt"
+}
+}
+],
+"orig": "A trekker holding a flag on a snow peak"
+},
+"SAFETY-016": {
+"locs": [
+{
+"kind": "attr",
+"loc": {
+"el": 886,
+"attr": "alt"
+}
+}
+],
+"orig": "A person standing on rocks with arms open, facing snow mountains"
+},
+"PRICE-001": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 719
+}
+}
+],
+"orig": "Price and what is included"
+},
+"PRICE-002": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 723
+}
+}
+],
+"orig": "Main program"
+},
+"PRICE-003": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 725
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 731
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 738
+}
+}
+],
+"orig": "Early bird until 31 December 2026"
+},
+"PRICE-004": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 726
+}
+}
+],
+"orig": "Then $2,440"
+},
+"PRICE-005": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 727
+}
+}
+],
+"orig": "14 days, March 28 to April 10"
+},
+"PRICE-006": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 729
+}
+}
+],
+"orig": "Shamanic Immersion"
+},
+"PRICE-007": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 732
+}
+}
+],
+"orig": "Then $1,300"
+},
+"PRICE-008": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 733
+}
+}
+],
+"orig": "6 days, April 11 to 16"
+},
+"PRICE-009": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 734
+}
+}
+],
+"orig": "2 plant medicine ceremonies"
+},
+"PRICE-010": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 736
+}
+}
+],
+"orig": "Full journey, recommended"
+},
+"PRICE-011": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 739
+}
+}
+],
+"orig": "Then $3,740"
+},
+"PRICE-012": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 740
+}
+}
+],
+"orig": "20 days, March 28 to April 16"
+},
+"PRICE-013": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 743
+}
+}
+],
+"orig": "Accommodation is included in every price"
+},
+"PRICE-014": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 744
+}
+}
+],
+"orig": "Every night of the program is covered: hotels in Pokhara and Muktinath, and lodges along the trek."
+},
+"PRICE-015": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 747
+}
+}
+],
+"orig": "Logistics"
+},
+"PRICE-016": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 748
+}
+}
+],
+"orig": "Trekking guide and porters for the entire route"
+},
+"PRICE-017": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 749
+}
+}
+],
+"orig": "All permits (ACAP and TIMS)"
+},
+"PRICE-018": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 750
+}
+}
+],
+"orig": "Jeep from Pokhara to Chame"
+},
+"PRICE-019": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 751
+}
+}
+],
+"orig": "Transfer from Muktinath to Pokhara for main program participants"
+},
+"PRICE-020": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 752
+}
+}
+],
+"orig": "Lodges along the whole route"
+},
+"PRICE-021": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 753
+}
+}
+],
+"orig": "2 nights with breakfast in Pokhara and 2 nights with breakfast in Muktinath"
+},
+"PRICE-022": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 754
+}
+}
+],
+"orig": "High-altitude banya (Russian sauna) in Muktinath"
+},
+"PRICE-023": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 755
+}
+}
+],
+"orig": "Shamanic Immersion: 6 nights with breakfast in a comfortable hotel"
+},
+"PRICE-024": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 756
+}
+}
+],
+"orig": "Shamanic Immersion: jeep from Muktinath to Pokhara on April 16"
+},
+"PRICE-025": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 758
+}
+}
+],
+"orig": "Practices"
+},
+"PRICE-026": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 759
+}
+}
+],
+"orig": "Morning qigong and breathing"
+},
+"PRICE-027": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 760
+}
+}
+],
+"orig": "Singing, chanting and prayer"
+},
+"PRICE-028": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 761
+}
+}
+],
+"orig": "Intention work"
+},
+"PRICE-029": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 762
+}
+}
+],
+"orig": "Short moments of ritual, prayer and meditation on the trail"
+},
+"PRICE-030": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 763
+}
+}
+],
+"orig": "Evening sharing circles and guidance"
+},
+"PRICE-031": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 764
+}
+}
+],
+"orig": "Shamanic Immersion: 2 plant medicine ceremonies (Ayahuasca and San Pedro), meditation and silence, energy and body practices, integration"
+},
+"PRICE-032": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 767
+}
+}
+],
+"orig": "Bring a friend."
+},
+"PRICE-033": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 768
+}
+}
+],
+"orig": "$100 off for every person who joins on your recommendation, while places are available."
+},
+"NOTINC-001": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 774
+}
+}
+],
+"orig": "Not included"
+},
+"NOTINC-002": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 777
+}
+}
+],
+"orig": "International flights to and from Nepal, to Pokhara or Kathmandu"
+},
+"NOTINC-003": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 778
+}
+}
+],
+"orig": "Your own way to Pokhara, by plane, jeep or bus"
+},
+"NOTINC-004": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 779
+}
+}
+],
+"orig": "Optional flight from Jomsom to Pokhara (about $100)"
+},
+"NOTINC-005": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 780
+}
+}
+],
+"orig": "Nepal visa for 30 days, US$50. We recommend applying online before you arrive"
+},
+"NOTINC-006": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 781
+}
+}
+],
+"orig": "Medical insurance (about $100)"
+},
+"NOTINC-007": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 782
+}
+}
+],
+"orig": "Meals, about $15 to 30 a day, except four breakfasts included in the main program and six breakfasts in Shamanic Immersion. All other meals are paid by each participant"
+},
+"NOTINC-008": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 783
+}
+}
+],
+"orig": "Personal expenses, such as drinking water and showers"
+},
+"NOTINC-009": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 784
+}
+}
+],
+"orig": "Trekking gear, such as proper clothing, shoes and poles. All of it can be rented in Pokhara"
+},
+"NOTINC-010": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 786
+}
+}
+],
+"orig": "Two 3x4 photos are also needed for the permits. We suggest arriving in Pokhara or Kathmandu one or two days before March 28."
+},
+"NOTINC-011": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 788
+}
+}
+],
+"orig": "If You’re Joining Shamanic Immersion Only"
+},
+"NOTINC-012": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 790
+}
+}
+],
+"orig": "You’ll need to arrange your own journey from Pokhara to Muktinath. Depending on availability, you can travel by bus, jeep, or plane. Our team will be happy to help you plan your route and arrange the most suitable transport."
+},
+"NOTINC-013": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 792
+}
+}
+],
+"orig": "April 16: A jeep transfer from Muktinath to Pokhara is included in the Shamanic Immersion price."
+},
+"JOIN-001": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 798
+}
+}
+],
+"orig": "How to join"
+},
+"JOIN-002": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 801
+}
+}
+],
+"orig": "A group of up to 15 people"
+},
+"JOIN-003": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 802
+}
+}
+],
+"orig": "Good physical fitness is needed, since the route asks for endurance even with porter support"
+},
+"JOIN-004": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 803
+}
+}
+],
+"orig": "We would love to meet you on a short video call before you join"
+},
+"JOIN-005": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 804
+}
+}
+],
+"orig": "Once you sign up, we will tell you exactly what to bring and prepare"
+},
+"JOIN-006": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 806
+}
+}
+],
+"orig": "To join, fill in the registration form."
+},
+"JOIN-007": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 808
+}
+}
+],
+"orig": "It takes about 10 minutes and is not a final booking. We will write to you to arrange a short video call."
+},
+"JOIN-008": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 810
+}
+}
+],
+"orig": "Open the registration form"
+},
+"JOIN-009": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 812
+}
+}
+],
+"orig": "Questions first? Write to one of us."
+},
+"JOIN-010": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 816
+}
+}
+],
+"orig": "Yakov"
+},
+"JOIN-011": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 818
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 831
+}
+}
+],
+"orig": "Telegram"
+},
+"JOIN-012": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 821
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 834
+}
+}
+],
+"orig": "WhatsApp"
+},
+"JOIN-013": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 824
+}
+},
+{
+"kind": "text",
+"loc": {
+"node": 837
+}
+}
+],
+"orig": "Instagram"
+},
+"JOIN-014": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 829
+}
+}
+],
+"orig": "Akari"
+},
+"CLOSING-001": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 848
+}
+}
+],
+"orig": "We are so looking forward to journeying together and creating a once in a lifetime memory. In 2022 we walked to Mardi Himal as a group, and many of our friends told us afterwards that their lives truly changed. It is a priceless experience to share, and we are so happy to begin it with you. We look forward to each soul coming together in divine alignment and arrangement."
+},
+"CLOSING-002": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 850
+}
+}
+],
+"orig": "With love, Yakov and Akari"
+},
+"CLOSING-003": {
+"locs": [
+{
+"kind": "text",
+"loc": {
+"node": 852
+}
+}
+],
+"orig": "Annapurna Pilgrimage, Nepal, March to April 2027"
+},
+"UI-001": {
+"locs": [
+{
+"kind": "ui"
+}
+]
+},
+"UI-002": {
+"locs": [
+{
+"kind": "ui"
+}
+]
+},
+"UI-003": {
+"locs": [
+{
+"kind": "ui"
+}
+]
+}
+}
