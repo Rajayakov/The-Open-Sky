@@ -1,290 +1,430 @@
 ---
-/* /programs — the single online program: Присутствие — Возвращение в центр
-   Structure-only first version: 13 sections, exact headings, development
-   placeholders instead of copy. Replace the `placeholder` strings (and the
-   [Placeholder] values in the details list) when the copywriting stage begins.
-   Hero and final CTA reuse PageHero / CTASection. */
 import PageLayout from '../layouts/PageLayout.astro';
-import PageHero from '../components/PageHero.astro';
-import CTASection from '../components/CTASection.astro';
-import { getProgram } from '../data/programs';
 
-const program = getProgram('presence')!;
-const placeholder = '[Placeholder — section copy]';
+/* Заглушки: подставить до запуска оплаты */
+/* /programs: единственная онлайн-программа, клуб «Присутствие» */
+const TRIBUTE_URL = '#tribute-link';
+const BOT_URL = '#bot-link';
+const CONTACT_URL = 'https://t.me/Rajuna_Yakov';
+const FOUNDERS_DATE = '30 ноября';
+const FOUNDERS_PRICE = '2 500';
+const MAIN_PRICE = '3 500';
 
 const weeks = [
-  { n: '1', title: 'Неделя 1 — Остановка хаоса' },
-  { n: '2', title: 'Неделя 2 — Сборка внимания' },
-  { n: '3', title: 'Неделя 3 — Стабилизация состояния' },
-  { n: '4', title: 'Неделя 4 — Интеграция в жизнь' },
+  ['Неделя 1', 'Остановка хаоса', 'Замедляемся и учимся замечать, что происходит внутри.'],
+  ['Неделя 2', 'Сборка внимания', 'Возвращаем внимание из мыслей в тело и дыхание.'],
+  ['Неделя 3', 'Стабилизация', 'Остаёмся в контакте с собой под нагрузкой.'],
+  ['Неделя 4', 'Интеграция', 'Переносим практику в работу, отношения и решения.'],
 ];
 
-/* Facts taken from the program metadata (4 weeks · 2 × 90 min · chat). */
-const support = [
-  { label: 'Продолжительность', value: '4 недели' },
-  { label: 'Встречи', value: '2 в неделю · 90 минут' },
-  { label: 'Поддержка', value: 'чат' },
+const inside = [
+  'Две живые практики в неделю. Пропустил, посмотришь в записи.',
+  'Аудио-практика каждое утро, около 10 минут.',
+  'Воскресное наставление: тема недели и ответы на вопросы.',
+  'Общий чат участников.',
+  'Архив всех практик.',
 ];
-const details = [
-  { label: 'Формат', value: 'Онлайн · 2 встречи в неделю по 90 минут · чат' },
-  { label: 'Продолжительность', value: '4 недели' },
-  { label: 'Дата старта', value: '[Placeholder — to be announced]' },
-  { label: 'Стоимость', value: '[Placeholder — to be announced]' },
+
+const changes = [
+  'Меньше внутреннего шума и автоматических реакций.',
+  'Больше ясности и устойчивости.',
+  'Ближе контакт с телом и своими состояниями.',
+  'Решения принимаешь спокойнее.',
+  'Появляется внутренний центр, к которому можно вернуться в любую погоду.',
 ];
-const faq = [1, 2, 3].map((n) => ({ q: `[Placeholder — question ${n}]`, a: placeholder }));
+
+const faq = [
+  ['Нужен ли опыт?', 'Нет. Практики простые, объясняю с нуля.'],
+  ['Сколько времени в день?', '10–20 минут.'],
+  ['Если пропущу живую практику?', 'Будет запись.'],
+  ['Как оплатить?', 'Кнопкой выше, через Tribute. Доступ в закрытый канал бот выдаст сразу.'],
+  ['Что будет с ценой, если я уйду и вернусь?', 'Подписка с перерывом идёт по основной цене.'],
+  ['Это терапия?', 'Нет. Практики не заменяют медицинскую или психологическую помощь.'],
+];
 ---
 
 <PageLayout
-  title="Присутствие — Возвращение в центр — The Open Sky"
-  description={program.description}
+  title="Присутствие. Возвращение в центр — The Open Sky"
+  description="Закрытый клуб в Telegram. Живые практики, ежедневная опора и наставления Якова Раджуны."
 >
-  <div lang="ru" class="presence">
-
-    <!-- 1. HERO -->
-    <PageHero
-      label="Online Program"
-      title="Присутствие — "
-      titleEm="Возвращение в центр"
-      theme="program"
-    />
-
-    <!-- 2. PROBLEM -->
-    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-problem">
-      <h2 id="pr-problem" class="pr-h2 reveal">Когда ты постоянно находишься у себя в голове</h2>
-      <p class="pr-ph t-body reveal d1">{placeholder}</p>
-    </section>
-
-    <!-- 3. PROGRAM GOAL -->
-    <section class="pr-section pr-section--b section" aria-labelledby="pr-goal">
-      <div class="frame">
-        <h2 id="pr-goal" class="pr-h2 reveal">От внутреннего хаоса — к ясности и опоре</h2>
-        <p class="pr-ph t-body reveal d1">{placeholder}</p>
+  <div class="pr">
+    <!-- 1. Первый экран -->
+    <section class="pr-hero">
+      <div class="pr-hero__orb" aria-hidden="true"></div>
+      <div class="frame pr-hero__in">
+        <span class="pr-label reveal">Закрытый клуб · Telegram</span>
+        <h1 class="pr-h1 reveal d1">Присутствие<em>Возвращение в центр</em></h1>
+        <p class="pr-lede reveal d2">
+          Живые практики, ежедневная опора и наставления Якова Раджуны.
+        </p>
+        <div class="reveal d3">
+          <a class="pr-btn" href={TRIBUTE_URL}>Войти в клуб. {FOUNDERS_PRICE} ₽ в месяц</a>
+          <p class="pr-note">Цена основателей до {FOUNDERS_DATE}. Потом {MAIN_PRICE} ₽.</p>
+        </div>
       </div>
     </section>
 
-    <!-- 4. APPROACH -->
-    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-approach">
-      <h2 id="pr-approach" class="pr-h2 reveal">Меньше техник. Больше присутствия.</h2>
-      <p class="pr-ph t-body reveal d1">{placeholder}</p>
+    <!-- 2–4. Боль, следствие, прояснение -->
+    <section class="pr-sec pr-sec--paper">
+      <div class="frame frame--sm">
+        <h2 class="pr-h2 reveal">Ты всё успеваешь. И почти ничего не чувствуешь.</h2>
+        <p class="pr-p reveal d1">
+          Голова не выключается. Решения принимаешь из напряжения. Вечером устал, а выдохнуть не получается.
+        </p>
+        <p class="pr-p pr-p--em reveal d2">Это не слабость. Это внимание, которое давно не с тобой.</p>
+      </div>
     </section>
 
-    <!-- 5. FOUR-WEEK JOURNEY -->
-    <section class="pr-section pr-section--b section" aria-labelledby="pr-journey">
-      <div class="frame">
-        <h2 id="pr-journey" class="pr-h2 reveal">Четыре недели возвращения к себе</h2>
+    <section class="pr-sec pr-sec--linen">
+      <div class="frame frame--sm">
+        <p class="pr-p reveal">
+          Реакции идут на автомате. Энергия уходит в шум. Работе и близким достаётся остаток.
+        </p>
+        <p class="pr-p reveal d1">Можно терпеть годами. Многие так и живут.</p>
+        <h2 class="pr-h2 pr-h2--gap reveal d2">Проблема не в жизни. Проблема в состоянии.</h2>
+        <p class="pr-p pr-p--em reveal d3">А состояние можно тренировать. Не знаниями. Опытом.</p>
+      </div>
+    </section>
+
+    <!-- 5. Как это работает -->
+    <section class="pr-sec pr-sec--sand">
+      <div class="frame frame--sm">
+        <span class="pr-label reveal">Как это работает</span>
+        <p class="pr-p pr-p--lg reveal d1">
+          Присутствие это способность оставаться в контакте с собой, телом и тем, что происходит сейчас, и не теряться в мыслях.
+        </p>
+        <p class="pr-p reveal d2">Клуб идёт четырёхнедельным кругом.</p>
         <ol class="pr-weeks">
-          {weeks.map((w, i) => (
-            <li class={`pr-week reveal d${(i % 3) + 1}`}>
-              <span class="t-label pr-week__num" aria-hidden="true">{w.n}</span>
-              <h3 class="pr-h3">{w.title}</h3>
-              <p class="pr-ph t-body">{placeholder}</p>
+          {weeks.map(([w, t, d], i) => (
+            <li class={`reveal d${Math.min(i + 1, 4)}`}>
+              <span class="pr-weeks__n">{w}</span>
+              <span class="pr-weeks__t">{t}</span>
+              <span class="pr-weeks__d">{d}</span>
             </li>
           ))}
         </ol>
+        <p class="pr-p pr-p--em reveal">Потом круг начинается заново, глубже.</p>
       </div>
     </section>
 
-    <!-- 6. PRACTICES -->
-    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-practices">
-      <h2 id="pr-practices" class="pr-h2 reveal">Простые инструменты для работы с вниманием</h2>
-      <p class="pr-ph t-body reveal d1">{placeholder}</p>
-    </section>
-
-    <!-- 7. FORMAT AND SUPPORT -->
-    <section class="pr-section pr-section--b section" aria-labelledby="pr-format">
-      <div class="frame">
-        <h2 id="pr-format" class="pr-h2 reveal">Четыре недели практики с поддержкой</h2>
-        <dl class="pr-facts reveal d1">
-          {support.map((f) => (
-            <div class="pr-facts__row">
-              <dt class="t-label">{f.label}</dt>
-              <dd>{f.value}</dd>
-            </div>
-          ))}
-        </dl>
-        <p class="pr-ph t-body reveal d2">{placeholder}</p>
+    <!-- 6–7. Внутри, что меняется -->
+    <section class="pr-sec pr-sec--amber">
+      <div class="frame frame--sm">
+        <span class="pr-label pr-label--l reveal">Что внутри</span>
+        <ul class="pr-list">
+          {inside.map((t, i) => <li class={`reveal d${Math.min(i + 1, 4)}`}>{t}</li>)}
+        </ul>
+        <span class="pr-label pr-label--l pr-label--gap reveal">Что меняется</span>
+        <ul class="pr-list">
+          {changes.map((t, i) => <li class={`reveal d${Math.min(i + 1, 4)}`}>{t}</li>)}
+        </ul>
       </div>
     </section>
 
-    <!-- 8. OUTCOMES -->
-    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-outcomes">
-      <h2 id="pr-outcomes" class="pr-h2 reveal">Что ты сможешь изменить в своей повседневной жизни</h2>
-      <p class="pr-ph t-body reveal d1">{placeholder}</p>
+    <!-- 8. Кто ведёт -->
+    <section class="pr-sec pr-sec--bronze">
+      <div class="frame frame--sm">
+        <span class="pr-label pr-label--l reveal">Кто ведёт</span>
+        <h2 class="pr-h2 pr-h2--l reveal d1">Яков Раджуна</h2>
+        <p class="pr-p pr-p--l reveal d2">
+          Больше 20 лет практики внимания, дыхания и цигун. 300+ проведённых ретритов, 3 000+ человек в работе. Ведёт практики в Таиланде, России и Индии.
+        </p>
+        <p class="pr-p pr-p--l pr-p--em reveal d3">
+          Я не обещаю новую версию тебя. Я помогаю убрать лишний шум и вернуться к себе.
+        </p>
+      </div>
     </section>
 
-    <!-- 9. ABOUT THE GUIDE — existing biography and portrait from /about -->
-    <section class="pr-section pr-section--b section" aria-labelledby="pr-guide">
-      <div class="frame pr-guide">
-        <img
-          class="pr-guide__img reveal"
-          src="/images/portrait/yakov-flags.jpg"
-          alt="Яков Раджуна"
-          loading="lazy"
-          decoding="async"
-        />
-        <div>
-          <h2 id="pr-guide" class="pr-h2 reveal">Яков Раджуна — путь присутствия и осознанности</h2>
-          <p class="t-body pr-guide__bio reveal d1" lang="en">
-            Yakov Rajuna has been leading groups in difficult terrain since 2010. He started as a trekking guide in the Caucasus, then spent years studying facilitation, ceremony, and group dynamics. The combination became his own — something that doesn't have a precise name, but that people who have experienced it recognise immediately.
-          </p>
-          <a href="/about" class="btn-text reveal d2">About Yakov</a>
+    <!-- 9. Сначала попробуй -->
+    <section class="pr-sec pr-sec--graphite">
+      <div class="frame frame--sm pr-center">
+        <span class="pr-label pr-label--l reveal">Сначала попробуй</span>
+        <h2 class="pr-h2 pr-h2--l reveal d1">Семь минут. Практика «Остановка хаоса».</h2>
+        <div class="reveal d2">
+          <a class="pr-btn pr-btn--ghost" href={BOT_URL}>Получить практику</a>
         </div>
       </div>
     </section>
 
-    <!-- 10. WHO THE PROGRAM IS FOR -->
-    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-for">
-      <h2 id="pr-for" class="pr-h2 reveal">Для тех, кто готов вернуться к осознанной жизни</h2>
-      <p class="pr-ph t-body reveal d1">{placeholder}</p>
-    </section>
-
-    <!-- 11. FAQ -->
-    <section class="pr-section pr-section--b section" aria-labelledby="pr-faq">
-      <div class="frame">
-        <h2 id="pr-faq" class="pr-h2 reveal">Что важно знать перед началом</h2>
-        <div class="pr-faq reveal d1">
-          {faq.map((item) => (
-            <details class="pr-faq__item">
-              <summary class="pr-faq__q">{item.q}</summary>
-              <p class="pr-ph t-body">{item.a}</p>
-            </details>
-          ))}
+    <!-- 10. Цена и вход -->
+    <section class="pr-sec pr-sec--void" id="vhod">
+      <div class="frame frame--sm pr-center">
+        <span class="pr-label pr-label--l reveal">Цена и вход</span>
+        <p class="pr-price reveal d1">{FOUNDERS_PRICE} ₽<span> в месяц</span></p>
+        <p class="pr-p pr-p--l reveal d2">
+          Цена основателей, если оформить подписку до {FOUNDERS_DATE}. Она закрепляется, пока подписка не прерывалась.
+        </p>
+        <p class="pr-p pr-p--l reveal d2">С 1 декабря: {MAIN_PRICE} ₽ в месяц.</p>
+        <p class="pr-p pr-p--l pr-p--em reveal d3">Места не ограничены. Меняется только цена.</p>
+        <div class="reveal d4">
+          <a class="pr-btn" href={TRIBUTE_URL}>Войти в клуб</a>
+          <p class="pr-note pr-note--l">Отмена в любой момент.</p>
         </div>
       </div>
     </section>
 
-    <!-- 12. PARTICIPATION DETAILS -->
-    <section class="pr-section pr-section--a section frame" aria-labelledby="pr-details">
-      <h2 id="pr-details" class="pr-h2 reveal">Формат, продолжительность и стоимость</h2>
-      <dl class="pr-facts reveal d1">
-        {details.map((f) => (
-          <div class="pr-facts__row">
-            <dt class="t-label">{f.label}</dt>
-            <dd>{f.value}</dd>
+    <!-- Вопросы -->
+    <section class="pr-sec pr-sec--void pr-faq">
+      <div class="frame frame--sm">
+        <span class="pr-label pr-label--l reveal">Вопросы</span>
+        {faq.map(([q, a]) => (
+          <div class="pr-faq__i reveal">
+            <h3>{q}</h3>
+            <p>{a}</p>
           </div>
         ))}
-      </dl>
+        <p class="pr-note pr-note--l reveal">
+          Остались вопросы: <a href={CONTACT_URL}>Telegram</a>
+        </p>
+      </div>
     </section>
-
-    <!-- 13. FINAL CTA -->
-    <CTASection
-      label="Online Program"
-      title="Начни возвращаться в центр."
-      primaryHref="/connect"
-      primarySource="program_presence_cta"
-      primaryLabel="[CTA — placeholder]"
-    />
-
   </div>
 </PageLayout>
 
 <style>
-  .presence { background: var(--pg-prg-bg); }
+  .pr {
+    --pr-serif: var(--display);
+    --pr-sans: var(--sans);
+  }
 
-  .pr-section--a { background: var(--pg-prg-bg); }
-  .pr-section--b { background: var(--pg-prg-bg-alt); }
+  /* Тексты на русском: Fraunces и Syne без кириллицы, поэтому Source Serif 4 и Inter Tight */
+  .pr-label {
+    font-family: var(--pr-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--honey);
+    display: block;
+    margin-bottom: var(--s-6);
+  }
+  .pr-label--l { color: rgba(232, 198, 138, 0.8); }
+  .pr-label--gap { margin-top: var(--s-10); }
+
+  .pr-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 92svh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(180deg, var(--bone) 0%, var(--paper) 100%);
+    padding-block: var(--s-10) var(--s-9);
+  }
+  .pr-hero__orb {
+    position: absolute;
+    right: -12vw;
+    top: -14vw;
+    width: 62vw;
+    height: 62vw;
+    max-width: 760px;
+    max-height: 760px;
+    border-radius: 50%;
+    background: var(--orb);
+    opacity: 0.4;
+    filter: blur(4px);
+  }
+  .pr-hero__in { position: relative; z-index: 1; }
+  .pr-h1 {
+    font-family: var(--pr-serif);
+    font-weight: 400;
+    font-size: clamp(48px, 9vw, 132px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    color: var(--earth);
+    margin-bottom: var(--s-7);
+  }
+  .pr-h1 em {
+    display: block;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.42em;
+    letter-spacing: -0.01em;
+    color: var(--honey);
+    margin-top: var(--s-4);
+  }
+  .pr-lede {
+    font-family: var(--pr-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(19px, 2vw, 28px);
+    line-height: 1.5;
+    color: var(--fg-soft);
+    max-width: 34ch;
+    margin-bottom: var(--s-8);
+  }
+
+  .pr-btn {
+    display: inline-block;
+    font-family: var(--pr-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bone);
+    background: var(--earth);
+    padding: 20px 36px;
+    border-radius: var(--r-pill);
+    text-decoration: none;
+    transition: background 0.5s ease, color 0.5s ease;
+  }
+  .pr-btn:hover { background: var(--ember); }
+  .pr-sec--void .pr-btn, .pr-btn--ghost {
+    background: transparent;
+    color: #E8C68A;
+    border: 1px solid rgba(232, 198, 138, 0.5);
+  }
+  .pr-sec--void .pr-btn:hover, .pr-btn--ghost:hover {
+    background: rgba(232, 198, 138, 0.12);
+    color: #F1D89C;
+  }
+  .pr-note {
+    font-family: var(--pr-sans);
+    font-size: 14px;
+    color: var(--fg-mute);
+    margin-top: var(--s-4);
+  }
+  .pr-note--l { color: rgba(250, 247, 240, 0.5); }
+  .pr-note a { color: #E8C68A; }
+
+  /* Главы: свет сверху, глубина снизу */
+  .pr-sec { padding-block: clamp(96px, 16svh, 200px); }
+  .pr-sec--paper { background: var(--paper); }
+  .pr-sec--linen { background: var(--linen); }
+  .pr-sec--sand { background: linear-gradient(180deg, var(--linen) 0%, #DCC08A 100%); }
+  .pr-sec--amber { background: linear-gradient(180deg, #8E6A3E 0%, #5A4128 100%); }
+  .pr-sec--bronze { background: linear-gradient(180deg, #5A4128 0%, #3A2D20 100%); }
+  .pr-sec--graphite { background: linear-gradient(180deg, #3A2D20 0%, #29241D 100%); }
+  .pr-sec--void { background: linear-gradient(180deg, #29241D 0%, var(--void) 100%); }
 
   .pr-h2 {
-    font-family: var(--serif);
+    font-family: var(--pr-serif);
     font-weight: 400;
-    font-size: clamp(28px, 3.6vw, 48px);
-    line-height: 1.12;
-    letter-spacing: -0.015em;
-    color: var(--pg-prg-fg);
-    margin: 0;
-    max-width: 24ch;
-    text-wrap: balance;
+    font-size: clamp(30px, 4.4vw, 62px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--earth);
+    margin-bottom: var(--s-7);
   }
-  .pr-h3 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(18px, 1.8vw, 22px);
-    line-height: 1.25;
-    color: var(--pg-prg-fg);
-    margin: 0;
-  }
-  .pr-ph {
-    margin: var(--s-6) 0 0;
-    color: var(--pg-prg-mute);
-    font-style: italic;
-  }
+  .pr-h2--gap { margin-top: var(--s-9); }
+  .pr-h2--l { color: #F3EBDA; }
 
-  /* Four weeks — one connected sequence */
+  .pr-p {
+    font-family: var(--pr-sans);
+    font-weight: 300;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.85;
+    color: var(--fg-soft);
+    margin-bottom: var(--s-5);
+    max-width: 52ch;
+  }
+  .pr-p--lg {
+    font-family: var(--pr-serif);
+    font-size: clamp(22px, 2.4vw, 34px);
+    line-height: 1.35;
+    color: var(--earth);
+    margin-bottom: var(--s-7);
+  }
+  .pr-p--em {
+    font-family: var(--pr-serif);
+    font-style: italic;
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.5;
+    color: var(--ember);
+  }
+  .pr-p--l { color: rgba(250, 247, 240, 0.82); }
+  .pr-p--l.pr-p--em { color: #E8C68A; }
+
   .pr-weeks {
     list-style: none;
-    margin: var(--s-7) 0 0;
+    margin: var(--s-8) 0;
     padding: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .pr-weeks li {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border: 1px solid rgba(28,26,22,0.10);
-    border-radius: var(--r-2);
-    overflow: hidden;
+    grid-template-columns: 110px 1fr;
+    gap: var(--s-1) var(--s-5);
+    padding: var(--s-6) 0;
+    border-bottom: 1px solid var(--rule);
   }
-  .pr-week {
-    padding: var(--s-6);
-    background: var(--pg-prg-bg);
-    border-right: 1px solid rgba(28,26,22,0.10);
+  .pr-weeks__n {
+    grid-row: span 2;
+    font-family: var(--pr-sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ember);
+    padding-top: 8px;
   }
-  .pr-week:last-child { border-right: none; }
-  .pr-week__num { color: var(--honey); display: block; margin-bottom: var(--s-3); }
-  .pr-week .pr-ph { margin-top: var(--s-4); }
+  .pr-weeks__t {
+    font-family: var(--pr-serif);
+    font-size: clamp(22px, 2.4vw, 32px);
+    color: var(--earth);
+  }
+  .pr-weeks__d {
+    font-family: var(--pr-sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--fg-soft);
+  }
 
-  /* Facts list (format & support / participation details) */
-  .pr-facts {
-    margin: var(--s-7) 0 0;
-    max-width: 640px;
-    border-top: 1px solid rgba(28,26,22,0.10);
-  }
-  .pr-facts__row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--s-4);
-    padding: var(--s-4) 0;
-    border-bottom: 1px solid rgba(28,26,22,0.07);
-  }
-  .pr-facts dd {
+  .pr-list {
+    list-style: none;
     margin: 0;
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 15px;
-    color: var(--pg-prg-fg);
-    text-align: right;
+    padding: 0;
+  }
+  .pr-list li {
+    font-family: var(--pr-serif);
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.35;
+    color: #F3EBDA;
+    padding: var(--s-5) 0;
+    border-bottom: 1px solid var(--rule-d);
   }
 
-  /* Guide */
-  .pr-guide {
-    display: grid;
-    grid-template-columns: minmax(200px, 320px) 1fr;
-    gap: clamp(32px, 6vw, 80px);
-    align-items: start;
+  .pr-center { text-align: left; }
+  .pr-price {
+    font-family: var(--pr-serif);
+    font-weight: 300;
+    font-size: clamp(64px, 11vw, 150px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #F1D89C;
+    margin-bottom: var(--s-6);
   }
-  .pr-guide__img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: var(--r-2);
+  .pr-price span {
+    font-size: 0.22em;
+    letter-spacing: 0;
+    color: rgba(250, 247, 240, 0.6);
+    margin-left: 0.4em;
   }
-  .pr-guide__bio { margin: var(--s-6) 0 var(--s-5); max-width: 52ch; }
+  .pr-center .pr-btn { margin-top: var(--s-6); }
 
-  /* FAQ */
-  .pr-faq { margin-top: var(--s-7); max-width: 720px; border-top: 1px solid rgba(28,26,22,0.10); }
-  .pr-faq__item { border-bottom: 1px solid rgba(28,26,22,0.07); padding: var(--s-4) 0; }
-  .pr-faq__q { cursor: pointer; font-family: var(--serif); font-size: 18px; color: var(--pg-prg-fg); }
-  .pr-faq__q:focus-visible { outline: 2px solid var(--honey); outline-offset: 4px; }
-
-  @media (max-width: 900px) {
-    .pr-weeks { grid-template-columns: 1fr 1fr; }
-    .pr-week:nth-child(2) { border-right: none; }
-    .pr-week:nth-child(-n+2) { border-bottom: 1px solid rgba(28,26,22,0.10); }
+  .pr-faq { padding-top: 0; }
+  .pr-faq__i {
+    padding: var(--s-6) 0;
+    border-bottom: 1px solid var(--rule-d);
   }
-  @media (max-width: 600px) {
-    .pr-weeks { grid-template-columns: 1fr; }
-    .pr-week { border-right: none; border-bottom: 1px solid rgba(28,26,22,0.10); }
-    .pr-week:last-child { border-bottom: none; }
-    .pr-guide { grid-template-columns: 1fr; }
-    .pr-guide__img { max-width: 320px; }
-    .pr-facts__row { flex-direction: column; gap: var(--s-2); }
-    .pr-facts dd { text-align: left; }
+  .pr-faq__i h3 {
+    font-family: var(--pr-serif);
+    font-weight: 400;
+    font-size: clamp(20px, 2vw, 26px);
+    color: #F3EBDA;
+    margin-bottom: var(--s-3);
+  }
+  .pr-faq__i p {
+    font-family: var(--pr-sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(250, 247, 240, 0.7);
+  }
+  .pr-faq .pr-note { margin-top: var(--s-7); }
+
+  @media (max-width: 640px) {
+    .pr-weeks li { grid-template-columns: 1fr; }
+    .pr-weeks__n { grid-row: auto; padding-top: 0; }
+    .pr-btn { padding: 18px 28px; font-size: 12px; }
   }
 </style>
