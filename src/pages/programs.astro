@@ -33,6 +33,13 @@ const changes = [
   'Появляется внутренний центр, к которому можно вернуться в любую погоду.',
 ];
 
+const steps = [
+  ['Оплата', 'Нажимаешь «Войти в клуб». Оплата картой через Tribute, внутри Telegram.'],
+  ['Бот', 'Бот сразу присылает доступ в закрытый канал и общий чат.'],
+  ['Первая практика', 'В канале лежит стартовая практика. Начинаешь с неё в тот же день.'],
+  ['Дальше круг', 'Живые практики дважды в неделю, аудио каждое утро, воскресное наставление.'],
+];
+
 const faq = [
   ['Нужен ли опыт?', 'Нет. Практики простые, объясняю с нуля.'],
   ['Сколько времени в день?', '10–20 минут.'],
@@ -46,6 +53,8 @@ const faq = [
 <PageLayout
   title="Присутствие. Возвращение в центр — The Open Sky"
   description="Закрытый клуб в Telegram. Живые практики, ежедневная опора и наставления Якова Раджуны."
+  noindex={false}
+  ogImage="/images/portrait/yakov-flags.jpg"
 >
   <div class="pr">
     <!-- 1. Первый экран -->
@@ -160,6 +169,22 @@ const faq = [
           <a class="pr-btn" href={TRIBUTE_URL}>Войти в клуб</a>
           <p class="pr-note pr-note--l">Отмена в любой момент.</p>
         </div>
+      </div>
+    </section>
+
+    <!-- Как войти -->
+    <section class="pr-sec pr-sec--void pr-steps">
+      <div class="frame frame--sm">
+        <span class="pr-label pr-label--l reveal">Как войти</span>
+        <ol class="pr-steps__l">
+          {steps.map(([t, d], i) => (
+            <li class="reveal">
+              <span class="pr-steps__n">{i + 1}</span>
+              <h3>{t}</h3>
+              <p>{d}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
 
@@ -400,6 +425,37 @@ const faq = [
     margin-left: 0.4em;
   }
   .pr-center .pr-btn { margin-top: var(--s-6); }
+
+  .pr-steps { padding-bottom: 0; }
+  .pr-steps__l { list-style: none; margin: 0; padding: 0; }
+  .pr-steps__l li {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    column-gap: var(--s-5);
+    padding: var(--s-6) 0;
+    border-bottom: 1px solid var(--rule-d);
+  }
+  .pr-steps__n {
+    grid-row: span 2;
+    font-family: var(--pr-serif);
+    font-size: 34px;
+    color: #E8C68A;
+    line-height: 1;
+  }
+  .pr-steps__l h3 {
+    font-family: var(--pr-serif);
+    font-weight: 400;
+    font-size: clamp(20px, 2vw, 26px);
+    color: #F3EBDA;
+    margin-bottom: var(--s-2);
+  }
+  .pr-steps__l p {
+    font-family: var(--pr-sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(250, 247, 240, 0.7);
+  }
 
   .pr-faq { padding-top: 0; }
   .pr-faq__i {

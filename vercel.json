@@ -77,7 +77,7 @@
       "permanent": false
     },
     {
-      "source": "/((?!mountains/annapurna-2027|annapurna-2027/|_vercel/|_astro/|favicon).*)",
+      "source": "/((?!mountains/annapurna-2027|annapurna-2027/|programs|images/|_vercel/|_astro/|favicon).*)",
       "has": [
         {
           "type": "host",

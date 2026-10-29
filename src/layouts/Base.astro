@@ -2,9 +2,13 @@
 export interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
+  ogImage?: string;
 }
 const {
   title = 'The Open Sky — by Yakov Rajuna',
+  noindex = true,
+  ogImage,
   description = 'Retreats in sacred landscapes. Mountain journeys. Online programs. Personal mentorship. An ecosystem of transformational experiences founded by Yakov Rajuna.',
 } = Astro.props;
 import Analytics from '@vercel/analytics/astro';
@@ -28,7 +32,11 @@ import SpeedInsights from '@vercel/speed-insights/astro';
     />
     <Analytics />
     <SpeedInsights />
-  <meta name="robots" content="noindex, nofollow" />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
   </head>
 
   <body>
