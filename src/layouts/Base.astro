@@ -2,9 +2,13 @@
 export interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
+  ogImage?: string;
 }
 const {
   title = 'The Open Sky — by Yakov Rajuna',
+  noindex = true,
+  ogImage,
   description = 'Retreats in sacred landscapes. Mountain journeys. Online programs. Personal mentorship. An ecosystem of transformational experiences founded by Yakov Rajuna.',
 } = Astro.props;
 import Analytics from '@vercel/analytics/astro';
@@ -18,6 +22,8 @@ import SpeedInsights from '@vercel/speed-insights/astro';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{title}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,7 +34,11 @@ import SpeedInsights from '@vercel/speed-insights/astro';
     />
     <Analytics />
     <SpeedInsights />
-  <meta name="robots" content="noindex, nofollow" />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
   </head>
 
   <body>

@@ -5,7 +5,7 @@
   <div class="nav__inner frame">
 
     <a href="/" class="nav__logo" aria-label="The Open Sky — home">
-      <span class="nav__wordmark">The Open Sky</span>
+      <img class="nav__wordmark" src="/brand/open-sky-logo.webp" width="700" height="313" alt="The Open Sky" decoding="async" />
     </a>
 
     <nav class="nav__links" aria-label="Primary">
@@ -152,20 +152,24 @@
     gap: var(--s-5);
   }
 
-  /* Wordmark */
-  .nav__wordmark {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 18px;
-    letter-spacing: -0.01em;
-    color: var(--earth);
-    line-height: 1;
-    font-optical-sizing: auto;
-    transition: color 300ms ease;
-    white-space: nowrap;
+  /* Wordmark (logo image, always on its own light plate so it never
+     reads darkened against a photo hero, with a soft gold glow) */
+  .nav__logo {
+    display: flex;
+    align-items: center;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(253, 250, 244, 0.97);
+    border: 1px solid rgba(214, 180, 106, 0.4);
+    box-shadow: 0 2px 16px rgba(46, 42, 36, 0.14), 0 0 22px rgba(214, 180, 106, 0.35);
+    transition: box-shadow 300ms ease;
   }
-  .nav__logo:hover .nav__wordmark { color: var(--honey); }
+  .nav__logo:hover { box-shadow: 0 2px 16px rgba(46, 42, 36, 0.14), 0 0 30px rgba(214, 180, 106, 0.55); }
+  .nav__wordmark {
+    display: block;
+    height: 26px;
+    width: auto;
+  }
 
   /* Nav links */
   .nav__links {

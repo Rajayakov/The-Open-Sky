@@ -7,11 +7,13 @@ import '../styles/global.css';
 export interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
+  ogImage?: string;
 }
-const { title, description } = Astro.props;
+const { title, description, noindex, ogImage } = Astro.props;
 ---
 
-<Base title={title} description={description}>
+<Base title={title} description={description} noindex={noindex} ogImage={ogImage}>
   <Nav />
   <main style="padding-top: 80px;">
     <slot />

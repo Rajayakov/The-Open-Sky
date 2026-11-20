@@ -11,7 +11,9 @@ const year = new Date().getFullYear();
 
     <!-- Brand column -->
     <div class="footer__brand">
-      <a href="/" class="footer__wordmark" aria-label="The Open Sky — home">The Open Sky</a>
+      <a href="/" class="footer__wordmark" aria-label="The Open Sky — home">
+        <img src="/brand/open-sky-logo.webp" width="700" height="313" alt="The Open Sky" decoding="async" />
+      </a>
       <p class="footer__tagline">
         For those who take<br />
         the inner life seriously.
@@ -97,22 +99,25 @@ const year = new Date().getFullYear();
     padding-bottom: clamp(48px, 8svh, 80px);
   }
 
-  /* Wordmark — Source Serif 4, ceremonial */
+  /* Wordmark — logo image on its own light plate, so it stays fully lit
+     against the dark footer instead of fading into it */
   .footer__wordmark {
-    font-family: var(--display);
-    font-style: normal;
-    font-weight: 500;
-    font-size: clamp(32px, 4.5vw, 60px);
-    font-optical-sizing: auto;
-    letter-spacing: -0.025em;
-    color: var(--bone);
-    line-height: 1;
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: rgba(253, 250, 244, 0.97);
+    border: 1px solid rgba(214, 180, 106, 0.4);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2), 0 0 28px rgba(214, 180, 106, 0.4);
     margin-bottom: var(--s-6);
-    font-optical-sizing: auto;
-    transition: color 280ms ease;
+    transition: box-shadow 280ms ease;
   }
-  .footer__wordmark:hover { color: var(--honey); }
+  .footer__wordmark:hover { box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2), 0 0 38px rgba(214, 180, 106, 0.6); }
+  .footer__wordmark img {
+    display: block;
+    height: clamp(28px, 3.6vw, 44px);
+    width: auto;
+  }
 
   .footer__tagline {
     font-family: var(--sans);

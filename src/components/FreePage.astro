@@ -39,7 +39,9 @@ const copy = {
       <img class="guide-hero__photo" src="https://himshiva.com/assets/hero-himalaya-C9X-BYvk.jpg" alt={lang === 'ru' ? 'Гималайские вершины и храм на рассвете' : 'Himalayan peaks and a temple at sunrise'} fetchpriority="high" />
       <div class="guide-hero__veil"></div>
       <header class="guide-top frame">
-        <a class="guide-wordmark" href="/" aria-label="The Open Sky home">THE OPEN SKY</a>
+        <a class="guide-logo" href="/" aria-label="The Open Sky home">
+          <img class="guide-wordmark" src="/brand/open-sky-logo.webp" width="420" height="187" alt="The Open Sky" decoding="async" />
+        </a>
         <span style="display:flex; gap: 18px; align-items:center;">
           <span class="guide-top__by">BY YAKOV RAJUNA</span>
           {lang === 'ru'
@@ -119,12 +121,23 @@ const copy = {
     justify-content: space-between;
     padding-top: 29px;
   }
+  /* Logo on its own light plate so it never reads darkened against the
+     photo hero, with a soft gold glow */
+  .guide-logo {
+    display: flex;
+    align-items: center;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(253, 250, 244, 0.97);
+    border: 1px solid rgba(214, 180, 106, 0.4);
+    box-shadow: 0 2px 16px rgba(46, 42, 36, 0.14), 0 0 22px rgba(214, 180, 106, 0.35);
+    transition: box-shadow 300ms ease;
+  }
+  .guide-logo:hover { box-shadow: 0 2px 16px rgba(46, 42, 36, 0.14), 0 0 30px rgba(214, 180, 106, 0.55); }
   .guide-wordmark {
-    font-family: var(--guide-sans);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .2em;
-    color: #47351f;
+    display: block;
+    height: 26px;
+    width: auto;
   }
   .guide-top__by {
     font-family: var(--guide-sans);
@@ -269,7 +282,7 @@ const copy = {
                   linear-gradient(0deg,rgba(73,48,23,.22),transparent 45%);
     }
     .guide-top { padding-top: 21px; }
-    .guide-wordmark { font-size: 10px; }
+    .guide-wordmark { height: 20px; }
     .guide-top__by { font-size: 7px; letter-spacing: .12em; }
     .guide-hero__content { padding-top: 52px; gap: 30px; }
     .guide-eyebrow { font-size: 8px; letter-spacing: .15em; margin-bottom: 21px; }
