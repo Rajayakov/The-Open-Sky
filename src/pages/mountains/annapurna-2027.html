@@ -315,6 +315,9 @@ li::marker{color:var(--gold-ink)}
 
 /* Language switch */
 @view-transition{navigation:auto}
+.brand{view-transition-name:brand;position:fixed;top:max(.75rem,env(safe-area-inset-top));left:max(.75rem,env(safe-area-inset-left));z-index:60;display:flex;align-items:center;padding:.55rem 1rem;border-radius:999px;background:rgba(253,250,244,.97);border:1px solid rgba(214,180,106,.45);box-shadow:0 2px 16px rgba(11,26,51,.18),0 0 26px rgba(214,180,106,.4);text-decoration:none}
+.brand img{display:block;height:26px;width:auto}
+@media (max-width:520px){.brand{padding:.4rem .75rem}.brand img{height:19px}}
 .lang{view-transition-name:lang;position:fixed;top:max(.75rem,env(safe-area-inset-top));right:max(.75rem,env(safe-area-inset-right));z-index:60;display:flex;gap:2px;padding:3px;border-radius:999px;background:rgba(11,26,51,.66);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(214,180,106,.4);font:700 .85rem/1 var(--sans);letter-spacing:.14em;box-shadow:0 2px 14px rgba(11,26,51,.25)}
 .lang a{color:var(--pale);text-decoration:none;padding:.8rem .95rem;border-radius:999px;min-width:2.9rem;text-align:center;transition:background .25s,color .25s}
 .lang a:hover{color:#fff}
@@ -332,6 +335,7 @@ li::marker{color:var(--gold-ink)}
 .lang a[lang=ja]{font-family:'JPLabel','Noto Sans JP','Hiragino Sans','Yu Gothic',sans-serif;letter-spacing:.04em}
 </style>
 
+<a href="/" class="brand" aria-label="Открытое небо — на главную"><img src="/annapurna-2027/img/open-sky-logo.webp" width="700" height="313" alt="The Open Sky" decoding="async"></a>
 <div class="lang" role="group" aria-label="Язык страницы"><a href="/mountains/annapurna-2027" hreflang="ru" lang="ru" data-lang="ru" aria-current="page">RU</a><a href="/mountains/annapurna-2027-en" hreflang="en" lang="en" data-lang="en">EN</a><a href="/mountains/annapurna-2027-ja" hreflang="ja" lang="ja" data-lang="ja">日本語</a></div>
 <header class="hero">
   <picture><source media="(max-width:700px)" srcset="/annapurna-2027/img/hero-m.webp"><img src="/annapurna-2027/img/hero.webp" alt="Утреннее солнце над снежными вершинами хребта Аннапурна" width="2000" height="965" fetchpriority="high" decoding="async"></picture>
