@@ -12,7 +12,8 @@ const year = new Date().getFullYear();
     <!-- Brand column -->
     <div class="footer__brand">
       <a href="/" class="footer__wordmark" aria-label="The Open Sky — home">
-        <img src="/brand/open-sky-logo.webp" width="700" height="313" alt="The Open Sky" decoding="async" />
+        <img class="footer__logo-icon" src="/brand/logo-icon.webp" width="498" height="300" alt="" decoding="async" />
+        <span class="footer__logo-text">The Open Sky</span>
       </a>
       <p class="footer__tagline">
         For those who take<br />
@@ -99,21 +100,31 @@ const year = new Date().getFullYear();
     padding-bottom: clamp(48px, 8svh, 80px);
   }
 
-  /* Wordmark — transparent logo image, no plate; a warm glow keeps it
-     lit against the dark footer instead of fading into it */
+  /* Wordmark — emblem icon with its own glow + white text, legible
+     straight against the dark footer */
   .footer__wordmark {
     display: inline-flex;
     align-items: center;
+    gap: clamp(10px, 1.4vw, 16px);
     margin-bottom: var(--s-6);
+    text-decoration: none;
   }
-  .footer__wordmark img {
+  .footer__logo-icon {
     display: block;
     height: clamp(32px, 4.2vw, 50px);
     width: auto;
     filter: drop-shadow(0 0 20px rgba(255, 205, 110, 0.5)) drop-shadow(0 0 40px rgba(255, 205, 110, 0.25));
     transition: filter 280ms ease;
   }
-  .footer__wordmark:hover img {
+  .footer__logo-text {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(18px, 2.2vw, 26px);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bone);
+  }
+  .footer__wordmark:hover .footer__logo-icon {
     filter: drop-shadow(0 0 24px rgba(255, 205, 110, 0.7)) drop-shadow(0 0 48px rgba(255, 205, 110, 0.4));
   }
 
