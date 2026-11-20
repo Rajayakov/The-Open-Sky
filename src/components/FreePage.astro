@@ -8,6 +8,7 @@ const { lang, slug } = Astro.props;
 const m = materials.materials.find((x) => x.slug === slug)!;
 const copy = {
   ru: {
+    brandName: 'Открытое небо',
     eyebrow: 'THE OPEN SKY · ЖИВОЕ ПОЛЕ ТРАНСФОРМАЦИИ',
     title: 'Путь к Себе',
     accent: 'начинается здесь',
@@ -20,6 +21,7 @@ const copy = {
     privacy: 'Твои данные останутся конфиденциальными. Подписка на письма — только по желанию.',
   },
   en: {
+    brandName: 'The Open Sky',
     eyebrow: 'THE OPEN SKY · THE LIVING FIELD OF TRANSFORMATION',
     title: 'The Path Back',
     accent: 'to Yourself',
@@ -40,7 +42,8 @@ const copy = {
       <div class="guide-hero__veil"></div>
       <header class="guide-top frame">
         <a class="guide-logo" href="/" aria-label="The Open Sky home">
-          <img class="guide-wordmark" src="/brand/open-sky-logo.webp" width="420" height="187" alt="The Open Sky" decoding="async" />
+          <img class="guide-logo-icon" src="/brand/logo-icon.webp" width="498" height="300" alt="" decoding="async" />
+          <span class="guide-wordmark">{copy.brandName}</span>
         </a>
         <span style="display:flex; gap: 18px; align-items:center;">
           <span class="guide-top__by">BY YAKOV RAJUNA</span>
@@ -121,20 +124,30 @@ const copy = {
     justify-content: space-between;
     padding-top: 29px;
   }
-  /* Transparent logo, no plate — a soft shadow + warm glow keep it
-     standing out against the photo hero */
+  /* Emblem icon (own glow) + white text — legible against the photo hero */
   .guide-logo {
     display: flex;
     align-items: center;
+    gap: 9px;
+    text-decoration: none;
   }
-  .guide-wordmark {
+  .guide-logo-icon {
     display: block;
-    height: 34px;
+    height: 30px;
     width: auto;
-    filter: drop-shadow(0 2px 10px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 16px rgba(255, 205, 110, 0.45));
+    filter: drop-shadow(0 2px 8px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 14px rgba(255, 205, 110, 0.45));
     transition: filter 300ms ease;
   }
-  .guide-logo:hover .guide-wordmark { filter: drop-shadow(0 2px 10px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 22px rgba(255, 205, 110, 0.65)); }
+  .guide-wordmark {
+    font-family: var(--guide-serif, var(--serif));
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bone, #F7F2E8);
+    text-shadow: 0 1px 6px rgba(20, 16, 12, 0.55), 0 0 14px rgba(20, 16, 12, 0.35);
+  }
+  .guide-logo:hover .guide-logo-icon { filter: drop-shadow(0 2px 8px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 20px rgba(255, 205, 110, 0.65)); }
   .guide-top__by {
     font-family: var(--guide-sans);
     font-size: 9px;
@@ -278,7 +291,7 @@ const copy = {
                   linear-gradient(0deg,rgba(73,48,23,.22),transparent 45%);
     }
     .guide-top { padding-top: 21px; }
-    .guide-wordmark { height: 26px; }
+    .guide-logo-icon { height: 24px; } .guide-wordmark { font-size: 12px; }
     .guide-top__by { font-size: 7px; letter-spacing: .12em; }
     .guide-hero__content { padding-top: 52px; gap: 30px; }
     .guide-eyebrow { font-size: 8px; letter-spacing: .15em; margin-bottom: 21px; }
