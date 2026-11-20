@@ -130,15 +130,17 @@ const T = {
 </script>
 
 <style>
-  .lead-form { max-width: 520px; margin: 0 auto; display: grid; gap: var(--s-5); }
+  .lead-form { max-width: 520px; margin: 0 auto; display: grid; gap: var(--s-5); min-width: 0; }
+  .lead-form > * { min-width: 0; }
+  .lead-form .t-label--warm { color: var(--ember); }
   .lead-form__title { font-family: var(--display); font-weight: 300; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--fg); margin: 0; }
   .lead-form__field { display: grid; gap: var(--s-2); font-family: var(--sans); color: var(--fg-soft); }
   .lead-form__field input[type="text"], .lead-form__field input[type="email"] {
-    font: inherit; padding: var(--s-3) var(--s-4); background: transparent; color: var(--fg);
+    font: inherit; width: 100%; min-width: 0; box-sizing: border-box; padding: var(--s-3) var(--s-4); background: transparent; color: var(--fg);
     border: 1px solid var(--rule); border-radius: var(--r-1);
   }
   .lead-form__field input:focus { outline: 1px solid var(--honey); border-color: var(--honey); }
-  .lead-form small { display: block; color: var(--fg-mute); font-size: 0.85em; margin-top: var(--s-1); }
+  .lead-form small { display: block; color: var(--fg-soft); font-size: 0.85em; margin-top: var(--s-1); }
   .lead-form__consent { display: flex; gap: var(--s-3); align-items: flex-start; font-family: var(--sans); color: var(--fg-soft); }
   .lead-form__consent input { margin-top: 5px; accent-color: var(--honey); }
   .lead-form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }

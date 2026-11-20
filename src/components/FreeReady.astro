@@ -25,7 +25,7 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
 ---
 
 <PageLayout title={`${T.title} — The Open Sky`}>
-  <section class="frame" style="padding-block: var(--s-10); text-align: center;"
+  <section class="frame" style="padding-block: var(--s-10); text-align: center; min-height: 70vh;"
            id="ready" data-slug={slug} data-lang={lang} data-open={T.open} data-soon={T.soon} data-error={T.error}>
     <h1 style="font-family: var(--display); font-weight: 300; font-size: clamp(2rem, 5vw, 3.4rem); color: var(--fg);" id="ready-title" hidden>{T.title}</h1>
     <p class="t-body" id="ready-name" style="margin: var(--s-5) auto; max-width: 44ch;" hidden></p>
