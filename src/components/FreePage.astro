@@ -1,18 +1,286 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import Base from '../layouts/Base.astro';
 import LeadForm from './LeadForm.astro';
 import materials from '../data/materials.json';
 
 export interface Props { lang: 'ru' | 'en'; slug: string; }
 const { lang, slug } = Astro.props;
 const m = materials.materials.find((x) => x.slug === slug)!;
+const copy = {
+  ru: {
+    eyebrow: 'THE OPEN SKY · ПУТЬ К СЕБЕ',
+    title: 'Путь к Себе',
+    accent: 'начинается здесь',
+    lead: 'Пространство для ясности, энергии и внутренней опоры.',
+    body: 'Я собрал этот материал, чтобы поделиться практиками, которые помогают замедлиться, вернуться в присутствие и восстановить контакт с собой. Без спешки. В своём ритме.',
+    note: 'Начни с малого. Дай себе пространство.',
+    formLabel: 'ТВОЙ ПЕРВЫЙ ШАГ',
+    footer: 'Yakov Rajuna',
+    features: ['Практики для повседневной жизни', 'В своём ритме, без спешки', 'Доступ к материалу на почте'],
+    privacy: 'Твои данные останутся конфиденциальными. Подписка на письма — только по желанию.',
+  },
+  en: {
+    eyebrow: 'THE OPEN SKY · A RETURN TO YOURSELF',
+    title: 'The Path Back',
+    accent: 'to Yourself',
+    lead: 'A space for clarity, energy and inner grounding.',
+    body: 'I’ve put together this guide to share practices that can help you slow down, return to the present moment and reconnect with yourself. No rush. At your own pace.',
+    note: 'Begin simply. Make room for yourself.',
+    formLabel: 'YOUR FIRST STEP',
+    footer: 'Yakov Rajuna',
+    features: ['Practices for everyday life', 'At your own pace, without rush', 'Your guide delivered by email'],
+    privacy: 'Your details stay private. Marketing emails are entirely optional.',
+  },
+}[lang];
 ---
+<Base title={`${m.title[lang]} — The Open Sky`} description={copy.lead}>
+  <main class="guide-page" lang={lang}>
+    <section class="guide-hero">
+      <img class="guide-hero__photo" src="https://himshiva.com/assets/hero-himalaya-C9X-BYvk.jpg" alt={lang === 'ru' ? 'Гималайские вершины и храм на рассвете' : 'Himalayan peaks and a temple at sunrise'} fetchpriority="high" />
+      <div class="guide-hero__veil"></div>
+      <header class="guide-top frame">
+        <a class="guide-wordmark" href="/" aria-label="The Open Sky home">THE OPEN SKY</a>
+        <span style="display:flex; gap: 18px; align-items:center;">
+          <span class="guide-top__by">BY YAKOV RAJUNA</span>
+          {lang === 'ru'
+            ? <a class="guide-top__by" href="/en/free" style="padding:10px 12px; margin-right:-12px; text-decoration:none;">EN</a>
+            : <a class="guide-top__by" href="/free?lang=ru" style="padding:10px 12px; margin-right:-12px; text-decoration:none;">RU</a>}
+        </span>
+      </header>
 
-<PageLayout title={`${m.title[lang]} — The Open Sky`}>
-  <section class="frame" style="padding-block: var(--s-10);">
-    <LeadForm lang={lang} slug={slug} />
-    <p class="t-label" style="text-align:center; margin-top: var(--s-6); opacity:.6;">
-      {lang === 'ru' ? <a href="/en/free">English</a> : <a href="/free?lang=ru">Русский</a>}
-    </p>
-  </section>
-</PageLayout>
+      <div class="guide-hero__content frame">
+        <div class="guide-copy">
+          <p class="guide-eyebrow"><span></span>{copy.eyebrow}</p>
+          <h1>{copy.title}<span>{copy.accent}</span></h1>
+          <p class="guide-lead">{copy.lead}</p>
+          <div class="guide-rule"></div>
+          <p class="guide-body">{copy.body}</p>
+          <p class="guide-note">{copy.note}</p>
+          <p class="guide-signature">{copy.footer}</p>
+        </div>
+
+        <aside class="guide-form-wrap" aria-label={copy.formLabel}>
+          <p class="guide-form-kicker">{copy.formLabel}</p>
+          <LeadForm lang={lang} slug={slug} />
+          <p class="guide-privacy">{copy.privacy}</p>
+        </aside>
+      </div>
+
+      <div class="guide-features frame">
+        {copy.features.map((feature, i) => (
+          <div class="guide-feature">
+            <span class="guide-feature__number">0{i + 1}</span>
+            <span>{feature}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .guide-page {
+    --guide-serif: "Fraunces", Georgia, serif;
+    --guide-sans: "DM Sans", Arial, sans-serif;
+    color: #34291d;
+    background: #f5efe4;
+  }
+  .guide-hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 100svh;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #e8d7b9;
+  }
+  .guide-hero__photo {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 48%;
+  }
+  .guide-hero__veil {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(248,239,220,.91) 0%, rgba(248,239,220,.84) 32%, rgba(248,239,220,.46) 57%, rgba(248,239,220,.10) 100%),
+      linear-gradient(0deg, rgba(73,48,23,.25), transparent 24%, transparent 78%, rgba(255,248,233,.18));
+  }
+  .guide-top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 29px;
+  }
+  .guide-wordmark {
+    font-family: var(--guide-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    color: #47351f;
+  }
+  .guide-top__by {
+    font-family: var(--guide-sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    color: rgba(71,53,31,.72);
+  }
+  .guide-hero__content {
+    flex: 1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0,1.08fr) minmax(340px,.72fr);
+    align-items: center;
+    gap: clamp(44px,7vw,108px);
+    padding-top: 54px;
+    padding-bottom: 48px;
+  }
+  .guide-copy { max-width: 680px; }
+  .guide-eyebrow, .guide-form-kicker {
+    font-family: var(--guide-sans);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+  .guide-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin: 0 0 27px;
+    color: #927044;
+  }
+  .guide-eyebrow span { width: 32px; height: 1px; background: #a9834f; }
+  .guide-copy h1 {
+    max-width: 720px;
+    margin: 0;
+    color: #3c2d1e;
+    font-family: var(--guide-serif);
+    font-size: clamp(64px,7.1vw,106px);
+    line-height: .99;
+    font-weight: 500;
+    letter-spacing: -.045em;
+    text-wrap: balance;
+  }
+  .guide-copy h1 span { display: block; color: #987348; }
+  .guide-lead {
+    max-width: 510px;
+    margin: 25px 0 0;
+    color: #57432d;
+    font-family: var(--guide-sans);
+    font-size: clamp(17px,1.55vw,22px);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .guide-rule { width: 52px; height: 1px; margin: 25px 0 17px; background: #a9834f; }
+  .guide-body {
+    max-width: 470px;
+    margin: 0;
+    color: rgba(63,48,31,.84);
+    font-family: var(--guide-sans);
+    font-size: 13px;
+    line-height: 1.85;
+    font-weight: 400;
+  }
+  .guide-note {
+    margin: 20px 0 0;
+    color: #8a673d;
+    font-family: var(--guide-sans);
+    font-size: 13px;
+    line-height: 1.6;
+    font-weight: 700;
+  }
+  .guide-signature {
+    margin: 24px 0 0;
+    color: rgba(63,48,31,.72);
+    font-family: var(--guide-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .guide-form-wrap {
+    width: 100%;
+    max-width: 430px;
+    justify-self: center;
+    padding: clamp(27px,3.2vw,40px);
+    background: rgba(250,247,239,.91);
+    border: 1px solid rgba(255,255,255,.82);
+    border-radius: 3px;
+    box-shadow: 0 24px 75px rgba(65,43,19,.16);
+    backdrop-filter: blur(12px);
+  }
+  .guide-form-kicker { margin: 0 0 22px; color: #987348; }
+  .guide-privacy {
+    margin: 15px 0 0;
+    color: #81725f;
+    font-family: var(--guide-sans);
+    font-size: 10px;
+    line-height: 1.65;
+  }
+  .guide-features {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 24px;
+    padding-top: 18px;
+    padding-bottom: 23px;
+    border-top: 1px solid rgba(91,67,39,.23);
+  }
+  .guide-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(67,50,30,.78);
+    font-family: var(--guide-sans);
+    font-size: 10px;
+    line-height: 1.45;
+    font-weight: 600;
+  }
+  .guide-feature__number {
+    color: #a07b4d;
+    font-family: var(--guide-serif);
+    font-size: 19px;
+    line-height: 1;
+  }
+  @media(max-width:900px) {
+    .guide-hero { min-height: 100svh; }
+    .guide-hero__veil {
+      background: linear-gradient(90deg,rgba(248,239,220,.91),rgba(248,239,220,.75) 66%,rgba(248,239,220,.36)),
+                  linear-gradient(0deg,rgba(73,48,23,.18),transparent 45%);
+    }
+    .guide-hero__content { grid-template-columns: 1fr; gap: 34px; padding-top: 58px; padding-bottom: 42px; }
+    .guide-copy { max-width: 700px; }
+    .guide-form-wrap { justify-self: start; max-width: 560px; }
+    .guide-features { margin-top: auto; }
+  }
+  @media(max-width:560px) {
+    .guide-hero__photo { object-position: 62% center; }
+    .guide-hero__veil {
+      background: linear-gradient(90deg,rgba(248,239,220,.94),rgba(248,239,220,.83) 72%,rgba(248,239,220,.58)),
+                  linear-gradient(0deg,rgba(73,48,23,.22),transparent 45%);
+    }
+    .guide-top { padding-top: 21px; }
+    .guide-wordmark { font-size: 10px; }
+    .guide-top__by { font-size: 7px; letter-spacing: .12em; }
+    .guide-hero__content { padding-top: 52px; gap: 30px; }
+    .guide-eyebrow { font-size: 8px; letter-spacing: .15em; margin-bottom: 21px; }
+    .guide-copy h1 { font-size: clamp(53px,13vw,75px); line-height: 1; }
+    .guide-lead { margin-top: 18px; font-size: 16px; }
+    .guide-body { font-size: 12px; line-height: 1.78; }
+    .guide-note { font-size: 12px; }
+    .guide-form-wrap { padding: 25px 20px; }
+    .guide-features { grid-template-columns: 1fr; gap: 11px; padding-top: 16px; padding-bottom: 19px; }
+    .guide-feature { font-size: 9px; }
+    .guide-feature__number { font-size: 16px; }
+  }
+  @media(prefers-reduced-motion:reduce) { .guide-page * { transition-duration:.01ms!important; } }
+</style>

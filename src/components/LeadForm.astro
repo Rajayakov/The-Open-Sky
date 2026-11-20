@@ -1,5 +1,4 @@
 ---
-// Форма бесплатного материала. Язык берётся из страницы, не из выбора посетителя.
 import materials from '../data/materials.json';
 
 export interface Props {
@@ -12,32 +11,32 @@ const material = materials.materials.find((m) => m.slug === slug);
 const T = {
   ru: {
     label: 'Бесплатный материал',
-    title: 'С теплом делюсь с тобой',
+    title: 'Начни с простого',
     email: 'Твой email',
     emailHelp: 'Например: name@mail.com',
-    name: 'Твоё имя',
-    nameHelp: 'Буду рад знать, как тебя зовут',
-    consent: 'Я хочу оставаться на связи с RAJUNA и получать письма с практиками, новыми материалами и приглашениями на ретриты и встречи.',
-    consentHelp: 'Это только по твоему желанию. Материал будет доступен тебе в любом случае.',
+    name: 'Как к тебе обращаться',
+    nameHelp: 'Напиши своё имя',
+    consent: 'Хочу оставаться на связи с RAJUNA и получать письма с практиками, новыми материалами и приглашениями на ретриты и встречи.',
+    consentHelp: 'По желанию. Материал будет доступен тебе и без подписки.',
     button: 'Получить материал',
     sending: 'Отправляю…',
-    ok: 'Благодарю тебя! Проверь свою почту — там тебя ждёт письмо с подтверждением. Нажми на кнопку внутри, и материал откроется для тебя.',
-    invalid: 'Пожалуйста, проверь правильность заполнения. Буду благодарен, если попробуешь ещё раз.',
-    error: 'Что-то пошло не так. Попробуй, пожалуйста, ещё раз чуть позже.',
+    ok: 'Благодарю тебя. Проверь почту — там письмо с подтверждением. Нажми на кнопку внутри, и материал откроется для тебя.',
+    invalid: 'Пожалуйста, проверь имя и адрес электронной почты.',
+    error: 'Что-то пошло не так. Попробуй ещё раз чуть позже.',
   },
   en: {
-    label: 'Free guide',
-    title: 'Sharing This With You, With Love',
+    label: 'A free resource',
+    title: 'Begin with a simple step',
     email: 'Your email address',
     emailHelp: 'For example: name@mail.com',
     name: 'Your name',
-    nameHelp: "I'd love to know your name",
-    consent: "I'd love to stay connected with RAJUNA and receive emails with practices, new resources and invitations to retreats and gatherings.",
-    consentHelp: "This is entirely up to you. You'll receive the material either way.",
+    nameHelp: 'First name',
+    consent: "I'd like to stay connected with RAJUNA and receive emails with practices, new resources and invitations to retreats and gatherings.",
+    consentHelp: "Optional. You'll receive the guide even if you leave this unchecked.",
     button: 'Receive the Guide',
     sending: 'Sending…',
-    ok: 'Thank you! Please check your inbox for a confirmation email. Click the button inside, and your guide will be ready for you.',
-    invalid: 'Please check your details and try again. Thank you.',
+    ok: 'Thank you. Please check your inbox for a confirmation email. Click the button inside, and your guide will be ready for you.',
+    invalid: 'Please check your name and email address.',
     error: 'Something went wrong. Please try again in a little while.',
   },
 }[lang];
@@ -46,7 +45,7 @@ const T = {
 {material && (
   <form class="lead-form" id="lead-form" novalidate data-lang={lang} data-slug={slug}
         data-ok={T.ok} data-invalid={T.invalid} data-error={T.error} data-sending={T.sending}>
-    <span class="t-label t-label--warm">{T.label}</span>
+    <span class="lead-form__eyebrow">{T.label}</span>
     <h2 class="lead-form__title">{T.title}</h2>
 
     <label class="lead-form__field">
@@ -61,7 +60,6 @@ const T = {
       <small>{T.emailHelp}</small>
     </label>
 
-    <!-- Ловушка для ботов, человек не видит -->
     <div class="lead-form__trap" aria-hidden="true">
       <input type="text" name="website" tabindex="-1" autocomplete="off" />
     </div>
@@ -71,7 +69,7 @@ const T = {
       <span>{T.consent}<small>{T.consentHelp}</small></span>
     </label>
 
-    <button type="submit" class="btn btn--warm" data-label={T.button}>{T.button}</button>
+    <button type="submit" class="btn btn--warm" data-label={T.button}>{T.button}<span aria-hidden="true">↗</span></button>
     <p class="lead-form__msg t-body" role="status" aria-live="polite"></p>
   </form>
 )}
@@ -130,17 +128,30 @@ const T = {
 </script>
 
 <style>
-  .lead-form { max-width: 520px; margin: 0 auto; display: grid; gap: var(--s-5); }
-  .lead-form__title { font-family: var(--display); font-weight: 300; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--fg); margin: 0; }
-  .lead-form__field { display: grid; gap: var(--s-2); font-family: var(--sans); color: var(--fg-soft); }
+  .lead-form { width:100%; max-width:none; margin:0; display:grid; gap:15px; }
+  .lead-form__eyebrow { font-family:'DM Sans',Arial,sans-serif; font-size:8px; font-weight:700; letter-spacing:.19em; text-transform:uppercase; color:#9b7548; }
+  .lead-form__title { font-family:'Fraunces',Georgia,serif; font-weight:500; font-size:clamp(29px,3vw,38px);
+    line-height:1.08; letter-spacing:-.035em; color:#392c20; margin:-7px 0 4px; text-wrap:balance; }
+  .lead-form__field { display:grid; gap:7px; font-family:'DM Sans',Arial,sans-serif; color:#665747; font-size:11px; font-weight:600; }
   .lead-form__field input[type="text"], .lead-form__field input[type="email"] {
-    font: inherit; padding: var(--s-3) var(--s-4); background: transparent; color: var(--fg);
-    border: 1px solid var(--rule); border-radius: var(--r-1);
+    width:100%; min-width:0; min-height:48px; box-sizing:border-box; font:400 14px 'DM Sans',Arial,sans-serif;
+    padding:0 16px; background:rgba(255,255,255,.72); color:#30271e;
+    border:1px solid rgba(128,96,57,.19); border-radius:3px; transition:border-color 200ms ease,background 200ms ease;
   }
-  .lead-form__field input:focus { outline: 1px solid var(--honey); border-color: var(--honey); }
-  .lead-form small { display: block; color: var(--fg-mute); font-size: 0.85em; margin-top: var(--s-1); }
-  .lead-form__consent { display: flex; gap: var(--s-3); align-items: flex-start; font-family: var(--sans); color: var(--fg-soft); }
-  .lead-form__consent input { margin-top: 5px; accent-color: var(--honey); }
-  .lead-form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  .lead-form__msg { min-height: 1.5em; margin: 0; }
+  .lead-form__field input:focus { outline:none; border-color:#a67c4d; background:#fffdf8; box-shadow:0 0 0 3px rgba(166,124,77,.10); }
+  .lead-form__field small { display:block; color:#9a8b78; font-size:9px; line-height:1.45; font-weight:400; margin-top:0; }
+  .lead-form__consent { display:flex; gap:10px; align-items:flex-start; font-family:'DM Sans',Arial,sans-serif;
+    color:#746553; font-size:10px; line-height:1.55; font-weight:400; }
+  .lead-form__consent input { flex:0 0 auto; width:14px; height:14px; margin:2px 0 0; accent-color:#987044; }
+  .lead-form__consent small { display:block; font-size:9px; color:#9a8b78; margin-top:4px; }
+  .lead-form__trap { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  .lead-form .btn { display:flex; align-items:center; justify-content:space-between; width:100%; min-height:52px; margin-top:3px;
+    border:0; border-radius:3px; background:linear-gradient(105deg,#9a7140,#b58a52); color:#fffaf0;
+    font-family:'DM Sans',Arial,sans-serif; font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    padding:15px 19px; box-shadow:0 8px 18px rgba(122,83,37,.16); transition:transform 180ms ease,filter 180ms ease; }
+  .lead-form .btn:hover { transform:translateY(-1px); filter:brightness(1.05); }
+  .lead-form .btn span { font-size:18px; line-height:1; }
+  .lead-form .btn:disabled { opacity:.55; cursor:wait; transform:none; }
+  .lead-form__msg { min-height:1.5em; margin:0; color:#69563e; font-family:'DM Sans',Arial,sans-serif; font-size:11px; line-height:1.55; }
+  @media(max-width:560px) { .lead-form { gap:14px; } .lead-form__title { font-size:30px; } }
 </style>
