@@ -1,0 +1,8 @@
+---
+// Short link to share: /en/free opens the first material in src/data/materials.json
+import FreePage from '../../../components/FreePage.astro';
+import materials from '../../../data/materials.json';
+const slug = materials.materials[0].slug;
+---
+
+<FreePage lang="en" slug={slug} />
