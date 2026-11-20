@@ -12,32 +12,32 @@ const material = materials.materials.find((m) => m.slug === slug);
 const T = {
   ru: {
     label: 'Бесплатный материал',
-    title: 'С теплом делюсь с тобой',
+    title: 'Начни с простого',
     email: 'Твой email',
     emailHelp: 'Например: name@mail.com',
-    name: 'Твоё имя',
-    nameHelp: 'Буду рад знать, как тебя зовут',
-    consent: 'Я хочу оставаться на связи с RAJUNA и получать письма с практиками, новыми материалами и приглашениями на ретриты и встречи.',
-    consentHelp: 'Это только по твоему желанию. Материал будет доступен тебе в любом случае.',
+    name: 'Как к тебе обращаться',
+    nameHelp: 'Напиши своё имя',
+    consent: 'Хочу оставаться на связи с RAJUNA и получать письма с практиками, новыми материалами и приглашениями на ретриты и встречи.',
+    consentHelp: 'По желанию. Материал будет доступен тебе и без подписки.',
     button: 'Получить материал',
     sending: 'Отправляю…',
-    ok: 'Благодарю тебя! Проверь свою почту — там тебя ждёт письмо с подтверждением. Нажми на кнопку внутри, и материал откроется для тебя.',
-    invalid: 'Пожалуйста, проверь правильность заполнения. Буду благодарен, если попробуешь ещё раз.',
-    error: 'Что-то пошло не так. Попробуй, пожалуйста, ещё раз чуть позже.',
+    ok: 'Благодарю тебя. Проверь почту — там письмо с подтверждением. Нажми на кнопку внутри, и материал откроется для тебя.',
+    invalid: 'Пожалуйста, проверь имя и адрес электронной почты.',
+    error: 'Что-то пошло не так. Попробуй ещё раз чуть позже.',
   },
   en: {
-    label: 'Free guide',
-    title: 'Sharing This With You, With Love',
+    label: 'A free resource',
+    title: 'Begin with a simple step',
     email: 'Your email address',
     emailHelp: 'For example: name@mail.com',
-    name: 'Your name',
-    nameHelp: "I'd love to know your name",
-    consent: "I'd love to stay connected with RAJUNA and receive emails with practices, new resources and invitations to retreats and gatherings.",
-    consentHelp: "This is entirely up to you. You'll receive the material either way.",
+    name: 'How should I address you?',
+    nameHelp: 'Your first name',
+    consent: "I'd like to stay connected with RAJUNA and receive emails with practices, new resources and invitations to retreats and gatherings.",
+    consentHelp: "Optional. You'll receive the guide even if you leave this unchecked.",
     button: 'Receive the Guide',
     sending: 'Sending…',
-    ok: 'Thank you! Please check your inbox for a confirmation email. Click the button inside, and your guide will be ready for you.',
-    invalid: 'Please check your details and try again. Thank you.',
+    ok: 'Thank you. Please check your inbox for a confirmation email. Click the button inside, and your guide will be ready for you.',
+    invalid: 'Please check your name and email address.',
     error: 'Something went wrong. Please try again in a little while.',
   },
 }[lang];
@@ -130,17 +130,28 @@ const T = {
 </script>
 
 <style>
-  .lead-form { max-width: 520px; margin: 0 auto; display: grid; gap: var(--s-5); }
-  .lead-form__title { font-family: var(--display); font-weight: 300; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--fg); margin: 0; }
-  .lead-form__field { display: grid; gap: var(--s-2); font-family: var(--sans); color: var(--fg-soft); }
+  .lead-form { width:100%; max-width:none; margin:0; display:grid; gap:20px; }
+  .lead-form > .t-label { font-size:8px; letter-spacing:.2em; color:#9b7548; }
+  .lead-form__title { font-family:var(--display); font-weight:400; font-size:clamp(27px,3vw,35px);
+    line-height:1.12; letter-spacing:-.02em; color:#33291f; margin:-10px 0 4px; }
+  .lead-form__field { display:grid; gap:7px; font-family:var(--sans); color:#665747; font-size:12px; }
   .lead-form__field input[type="text"], .lead-form__field input[type="email"] {
-    font: inherit; padding: var(--s-3) var(--s-4); background: transparent; color: var(--fg);
-    border: 1px solid var(--rule); border-radius: var(--r-1);
+    width:100%; min-width:0; font:400 15px var(--sans); padding:13px 0;
+    background:transparent; color:#30271e; border:0; border-bottom:1px solid rgba(105,78,48,.27);
+    border-radius:0; transition:border-color 250ms ease;
   }
-  .lead-form__field input:focus { outline: 1px solid var(--honey); border-color: var(--honey); }
-  .lead-form small { display: block; color: var(--fg-mute); font-size: 0.85em; margin-top: var(--s-1); }
-  .lead-form__consent { display: flex; gap: var(--s-3); align-items: flex-start; font-family: var(--sans); color: var(--fg-soft); }
-  .lead-form__consent input { margin-top: 5px; accent-color: var(--honey); }
-  .lead-form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  .lead-form__msg { min-height: 1.5em; margin: 0; }
+  .lead-form__field input:focus { outline:none; border-color:#a67c4d; box-shadow:0 1px 0 #a67c4d; }
+  .lead-form__field input::placeholder { color:#a99b89; }
+  .lead-form small { display:block; color:#9a8b78; font-size:10px; line-height:1.55; margin-top:2px; }
+  .lead-form__consent { display:flex; gap:11px; align-items:flex-start; font-family:var(--sans);
+    color:#746553; font-size:11px; line-height:1.65; }
+  .lead-form__consent input { flex:0 0 auto; width:14px; height:14px; margin:3px 0 0;
+    accent-color:#987044; }
+  .lead-form__consent small { font-size:10px; color:#9a8b78; margin-top:5px; }
+  .lead-form__trap { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  .lead-form .btn { justify-content:center; width:100%; min-height:50px; margin-top:2px;
+    border-radius:2px; font-size:9px; letter-spacing:.18em; }
+  .lead-form .btn:disabled { opacity:.55; cursor:wait; transform:none; }
+  .lead-form__msg { min-height:1.5em; margin:0; color:#69563e; font-size:12px; line-height:1.6; }
+  @media(max-width:560px) { .lead-form { gap:17px; } .lead-form__title { font-size:29px; } }
 </style>
