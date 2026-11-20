@@ -40,7 +40,7 @@ import SpeedInsights from '@vercel/speed-insights/astro';
       /* Рабочая версия сайта: вне продакшен-хостов показываем пометку «в разработке» */
       (function () {
         var h = location.hostname;
-        if (/^(theopensky|the-open-sky|annapurna2027|annapurna-pilgrimage-2027|the-open-sky-rajuna|the-open-sky-git-main-rajuna)\.vercel\.app$/.test(h)) return;
+        if (/^(theopensky|the-open-sky|annapurna2027|annapurna-pilgrimage-2027|rajuna|the-open-sky-rajuna|the-open-sky-git-main-rajuna)\.vercel\.app$/.test(h)) return;
         var b = document.createElement('div');
         b.setAttribute('role', 'note');
         b.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:9999;max-width:calc(100vw - 24px);padding:9px 14px;border-radius:10px;background:rgba(20,16,12,.88);color:#e9dfcc;font:12px/1.4 system-ui,sans-serif;letter-spacing:.02em;box-shadow:0 4px 18px rgba(0,0,0,.3);pointer-events:auto';
