@@ -1,0 +1,15 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import LeadForm from './LeadForm.astro';
+import materials from '../data/materials.json';
+
+export interface Props { lang: 'ru' | 'en'; slug: string; }
+const { lang, slug } = Astro.props;
+const m = materials.materials.find((x) => x.slug === slug)!;
+---
+
+<PageLayout title={`${m.title[lang]} — The Open Sky`}>
+  <section class="frame" style="padding: var(--s-10) 0;">
+    <LeadForm lang={lang} slug={slug} />
+  </section>
+</PageLayout>

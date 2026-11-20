@@ -1,0 +1,146 @@
+---
+// Форма бесплатного материала. Язык берётся из страницы, не из выбора посетителя.
+import materials from '../data/materials.json';
+
+export interface Props {
+  lang: 'ru' | 'en';
+  slug: string;
+}
+const { lang, slug } = Astro.props;
+const material = materials.materials.find((m) => m.slug === slug);
+
+const T = {
+  ru: {
+    label: 'Бесплатный материал',
+    title: 'С теплом делюсь с тобой',
+    email: 'Твой email',
+    emailHelp: 'Например: name@mail.com',
+    name: 'Твоё имя',
+    nameHelp: 'Буду рад знать, как тебя зовут',
+    consent: 'Я хочу оставаться на связи с RAJUNA и получать письма с практиками, новыми материалами и приглашениями на ретриты и встречи.',
+    consentHelp: 'Это только по твоему желанию. Материал будет доступен тебе в любом случае.',
+    button: 'Получить материал',
+    sending: 'Отправляю…',
+    ok: 'Благодарю тебя! Проверь свою почту — там тебя ждёт письмо с подтверждением. Нажми на кнопку внутри, и материал откроется для тебя.',
+    invalid: 'Пожалуйста, проверь правильность заполнения. Буду благодарен, если попробуешь ещё раз.',
+    error: 'Что-то пошло не так. Попробуй, пожалуйста, ещё раз чуть позже.',
+  },
+  en: {
+    label: 'Free guide',
+    title: 'Sharing This With You, With Love',
+    email: 'Your email address',
+    emailHelp: 'For example: name@mail.com',
+    name: 'Your name',
+    nameHelp: "I'd love to know your name",
+    consent: "I'd love to stay connected with RAJUNA and receive emails with practices, new resources and invitations to retreats and gatherings.",
+    consentHelp: "This is entirely up to you. You'll receive the material either way.",
+    button: 'Receive the Guide',
+    sending: 'Sending…',
+    ok: 'Thank you! Please check your inbox for a confirmation email. Click the button inside, and your guide will be ready for you.',
+    invalid: 'Please check your details and try again. Thank you.',
+    error: 'Something went wrong. Please try again in a little while.',
+  },
+}[lang];
+---
+
+{material && (
+  <form class="lead-form" id="lead-form" novalidate data-lang={lang} data-slug={slug}
+        data-ok={T.ok} data-invalid={T.invalid} data-error={T.error} data-sending={T.sending}>
+    <span class="t-label t-label--warm">{T.label}</span>
+    <h2 class="lead-form__title">{T.title}</h2>
+
+    <label class="lead-form__field">
+      <span>{T.name}</span>
+      <input type="text" name="firstName" autocomplete="given-name" required maxlength="80" />
+      <small>{T.nameHelp}</small>
+    </label>
+
+    <label class="lead-form__field">
+      <span>{T.email}</span>
+      <input type="email" name="email" autocomplete="email" required maxlength="200" />
+      <small>{T.emailHelp}</small>
+    </label>
+
+    <!-- Ловушка для ботов, человек не видит -->
+    <div class="lead-form__trap" aria-hidden="true">
+      <input type="text" name="website" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <label class="lead-form__consent">
+      <input type="checkbox" name="consent" />
+      <span>{T.consent}<small>{T.consentHelp}</small></span>
+    </label>
+
+    <button type="submit" class="btn btn--warm" data-label={T.button}>{T.button}</button>
+    <p class="lead-form__msg t-body" role="status" aria-live="polite"></p>
+  </form>
+)}
+
+<script>
+  const form = document.getElementById('lead-form') as HTMLFormElement | null;
+  if (form) {
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const msg = form.querySelector('.lead-form__msg') as HTMLElement;
+    const source = () => {
+      const p = new URLSearchParams(location.search).get('utm_source');
+      if (p) return p;
+      try { return document.referrer ? new URL(document.referrer).hostname : 'direct'; } catch { return 'direct'; }
+    };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const email = String(fd.get('email') || '').trim();
+      const firstName = String(fd.get('firstName') || '').trim();
+      if (!firstName || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        msg.textContent = form.dataset.invalid || '';
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = form.dataset.sending || '';
+      msg.textContent = '';
+      try {
+        const r = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            firstName, email,
+            consent: fd.get('consent') === 'on',
+            website: fd.get('website') || '',
+            slug: form.dataset.slug,
+            lang: form.dataset.lang,
+            source: source(),
+          }),
+        });
+        if (r.ok) {
+          form.reset();
+          msg.textContent = form.dataset.ok || '';
+          btn.style.display = 'none';
+        } else {
+          msg.textContent = r.status === 400 ? (form.dataset.invalid || '') : (form.dataset.error || '');
+          btn.disabled = false;
+          btn.textContent = btn.dataset.label || '';
+        }
+      } catch {
+        msg.textContent = form.dataset.error || '';
+        btn.disabled = false;
+        btn.textContent = btn.dataset.label || '';
+      }
+    });
+  }
+</script>
+
+<style>
+  .lead-form { max-width: 520px; margin: 0 auto; display: grid; gap: var(--s-5); }
+  .lead-form__title { font-family: var(--display); font-weight: 300; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--fg); margin: 0; }
+  .lead-form__field { display: grid; gap: var(--s-2); font-family: var(--sans); color: var(--fg-soft); }
+  .lead-form__field input[type="text"], .lead-form__field input[type="email"] {
+    font: inherit; padding: var(--s-3) var(--s-4); background: transparent; color: var(--fg);
+    border: 1px solid var(--rule); border-radius: var(--r-1);
+  }
+  .lead-form__field input:focus { outline: 1px solid var(--honey); border-color: var(--honey); }
+  .lead-form small { display: block; color: var(--fg-mute); font-size: 0.85em; margin-top: var(--s-1); }
+  .lead-form__consent { display: flex; gap: var(--s-3); align-items: flex-start; font-family: var(--sans); color: var(--fg-soft); }
+  .lead-form__consent input { margin-top: 5px; accent-color: var(--honey); }
+  .lead-form__trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .lead-form__msg { min-height: 1.5em; margin: 0; }
+</style>

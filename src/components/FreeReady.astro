@@ -1,0 +1,25 @@
+---
+// Страница после подтверждения email. Здесь выдаётся материал.
+import PageLayout from '../layouts/PageLayout.astro';
+import materials from '../data/materials.json';
+
+export interface Props { lang: 'ru' | 'en'; slug: string; }
+const { lang, slug } = Astro.props;
+const m = materials.materials.find((x) => x.slug === slug)!;
+const url = m.url[lang];
+const T = {
+  ru: { title: 'Рад нашей встрече.', open: 'Открыть материал', soon: 'Ссылка на материал появится здесь.', keep: 'Сохрани эту страницу, чтобы вернуться к материалу позже.' },
+  en: { title: 'Grateful Our Paths Have Crossed.', open: 'Open the material', soon: 'The link to the material will appear here.', keep: 'Bookmark this page to come back to the material later.' },
+}[lang];
+---
+
+<PageLayout title={`${T.title} — The Open Sky`}>
+  <section class="frame" style="padding: var(--s-10) 0; text-align: center;">
+    <h1 style="font-family: var(--display); font-weight: 300; font-size: clamp(2rem, 5vw, 3.4rem); color: var(--fg);">{T.title}</h1>
+    <p class="t-body" style="margin: var(--s-5) auto; max-width: 44ch;">{m.title[lang]}</p>
+    {url
+      ? <a href={url} class="btn btn--warm">{T.open}</a>
+      : <p class="t-body">{T.soon}</p>}
+    <p class="t-body" style="margin-top: var(--s-6); color: var(--fg-mute);">{T.keep}</p>
+  </section>
+</PageLayout>
