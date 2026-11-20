@@ -1,0 +1,7 @@
+---
+// Короткая страница выдачи для первого материала: /free/ok?t=...
+import FreeReady from '../../components/FreeReady.astro';
+import materials from '../../data/materials.json';
+---
+
+<FreeReady lang="ru" slug={materials.materials[0].slug} />

@@ -1,0 +1,396 @@
+---
+import Base from '../layouts/Base.astro';
+import materials from '../data/materials.json';
+
+export interface Props { lang: 'ru' | 'en'; slug: string; }
+const { lang, slug } = Astro.props;
+const m = materials.materials.find((x) => x.slug === slug)!;
+const T = {
+  ru: {
+    eyebrow: 'THE OPEN SKY · ТВОЙ МАТЕРИАЛ',
+    title: 'Письмо подтверждено.',
+    accent: 'Материал уже здесь.',
+    lead: 'Спасибо за доверие. Теперь можно перейти к практике.',
+    body: 'Твой адрес подтверждён. Материал доступен по кнопке справа. Сохрани эту страницу, чтобы вернуться к нему позже.',
+    cardKicker: 'ТВОЙ МАТЕРИАЛ ГОТОВ',
+    loading: 'Готовим доступ…',
+    open: 'Открыть материал',
+    soon: 'Ссылка на материал появится здесь.',
+    keep: 'Можешь сохранить эту страницу в закладки.',
+    locked: 'Для доступа сначала подтверди email по ссылке из письма.',
+    form: 'Вернуться к форме',
+    error: 'Не получилось загрузить материал. Попробуй ещё раз чуть позже.',
+    features: ['Доступ после подтверждения email', 'Открой материал в удобное время', 'Сохрани страницу для возвращения'],
+    footer: 'Yakov Rajuna',
+  },
+  en: {
+    eyebrow: 'THE OPEN SKY · YOUR RESOURCE',
+    title: 'Email confirmed.',
+    accent: 'Your guide is ready.',
+    lead: 'Thank you for being here. You can now move into the practice.',
+    body: 'Your email address has been confirmed. Your resource is available through the button on the right. Bookmark this page to return to it later.',
+    cardKicker: 'YOUR RESOURCE IS READY',
+    loading: 'Preparing your access…',
+    open: 'Open the guide',
+    soon: 'The link to the material will appear here.',
+    keep: 'You can bookmark this page for later.',
+    locked: 'To access the guide, please confirm your email using the link we sent you.',
+    form: 'Back to the form',
+    error: 'We could not load the material. Please try again a little later.',
+    features: ['Access after email confirmation', 'Open the guide whenever it suits you', 'Bookmark this page for later'],
+    footer: 'Yakov Rajuna',
+  },
+}[lang];
+const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
+---
+
+<Base title={`${m.title[lang]} — The Open Sky`} description={T.lead}>
+  <main class="ready-page" lang={lang}>
+    <section class="ready-hero" id="ready" data-slug={slug} data-lang={lang} data-open={T.open} data-soon={T.soon} data-error={T.error}>
+      <img class="ready-hero__photo" src="https://himshiva.com/assets/hero-himalaya-C9X-BYvk.jpg" alt={lang === 'ru' ? 'Гималайские вершины и храм на рассвете' : 'Himalayan peaks and a temple at sunrise'} fetchpriority="high" />
+      <div class="ready-hero__veil"></div>
+      <header class="ready-top frame">
+        <a class="ready-wordmark" href="/" aria-label="The Open Sky home">THE OPEN SKY</a>
+        <span class="ready-top__by">BY YAKOV RAJUNA</span>
+      </header>
+
+      <div class="ready-content frame">
+        <div class="ready-copy">
+          <p class="ready-eyebrow"><span></span>{T.eyebrow}</p>
+          <h1>{T.title}<span>{T.accent}</span></h1>
+          <p class="ready-lead">{T.lead}</p>
+          <div class="ready-rule"></div>
+          <p class="ready-body">{T.body}</p>
+          <p class="ready-signature">{T.footer}</p>
+        </div>
+
+        <aside class="ready-card" aria-live="polite">
+          <p class="ready-card__kicker">{T.cardKicker}</p>
+          <div class="ready-card__symbol" aria-hidden="true">
+            <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="27" stroke="currentColor" stroke-width="1.2"/><path d="m19 32 9 9 18-19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h2 id="ready-title" hidden></h2>
+          <p class="ready-card__status" id="ready-status">{T.loading}</p>
+          <div class="ready-card__action" id="ready-action"></div>
+          <p class="ready-card__keep" id="ready-keep" hidden>{T.keep}</p>
+          <div class="ready-card__locked" id="ready-locked" hidden>
+            <p>{T.locked}</p>
+            <a href={formHref} class="ready-button">{T.form}<span aria-hidden="true">↗</span></a>
+          </div>
+        </aside>
+      </div>
+
+      <div class="ready-features frame">
+        {T.features.map((feature, i) => (
+          <div class="ready-feature">
+            <span class="ready-feature__number">0{i + 1}</span>
+            <span>{feature}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+</Base>
+
+<script>
+  const box = document.getElementById('ready') as HTMLElement;
+  const status = document.getElementById('ready-status') as HTMLElement;
+  const showLocked = () => {
+    status.hidden = true;
+    (document.getElementById('ready-locked') as HTMLElement).hidden = false;
+  };
+  (async () => {
+    const t = new URLSearchParams(location.search).get('t');
+    if (!t) return showLocked();
+    try {
+      const q = new URLSearchParams({ slug: box.dataset.slug || '', lang: box.dataset.lang || 'ru', t });
+      const r = await fetch('/api/material?' + q.toString());
+      if (r.status === 403) return showLocked();
+      if (!r.ok) throw new Error('Unable to load resource');
+      const d = await r.json();
+      status.hidden = true;
+      const title = document.getElementById('ready-title') as HTMLElement;
+      title.textContent = d.title || '';
+      title.hidden = !d.title;
+      const act = document.getElementById('ready-action') as HTMLElement;
+      if (d.url) {
+        const a = document.createElement('a');
+        a.href = d.url;
+        a.className = 'ready-button';
+        a.textContent = box.dataset.open || '';
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        const arrow = document.createElement('span');
+        arrow.setAttribute('aria-hidden', 'true');
+        arrow.textContent = '↗';
+        a.appendChild(arrow);
+        act.appendChild(a);
+      } else {
+        const p = document.createElement('p');
+        p.className = 'ready-card__status';
+        p.textContent = box.dataset.soon || '';
+        act.appendChild(p);
+      }
+      (document.getElementById('ready-keep') as HTMLElement).hidden = false;
+    } catch {
+      status.textContent = box.dataset.error || '';
+    }
+  })();
+</script>
+
+<style>
+  .ready-page {
+    --ready-serif: "Fraunces", Georgia, serif;
+    --ready-sans: "DM Sans", Arial, sans-serif;
+    color: #34291d;
+    background: #f5efe4;
+  }
+  .ready-hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 100svh;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #e8d7b9;
+  }
+  .ready-hero__photo {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 48%;
+  }
+  .ready-hero__veil {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(248,239,220,.91) 0%, rgba(248,239,220,.84) 32%, rgba(248,239,220,.46) 57%, rgba(248,239,220,.10) 100%),
+      linear-gradient(0deg, rgba(73,48,23,.25), transparent 24%, transparent 78%, rgba(255,248,233,.18));
+  }
+  .ready-top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 29px;
+  }
+  .ready-wordmark {
+    font-family: var(--ready-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    color: #47351f;
+  }
+  .ready-top__by {
+    font-family: var(--ready-sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    color: rgba(71,53,31,.72);
+  }
+  .ready-content {
+    flex: 1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0,1.08fr) minmax(340px,.72fr);
+    align-items: center;
+    gap: clamp(44px,7vw,108px);
+    padding-top: 54px;
+    padding-bottom: 48px;
+  }
+  .ready-copy { max-width: 680px; }
+  .ready-eyebrow, .ready-card__kicker {
+    font-family: var(--ready-sans);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+  }
+  .ready-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin: 0 0 27px;
+    color: #927044;
+  }
+  .ready-eyebrow span { width: 32px; height: 1px; background: #a9834f; }
+  .ready-copy h1 {
+    max-width: 720px;
+    margin: 0;
+    color: #3c2d1e;
+    font-family: var(--ready-serif);
+    font-size: clamp(62px,6.5vw,98px);
+    line-height: .99;
+    font-weight: 500;
+    letter-spacing: -.045em;
+    text-wrap: balance;
+  }
+  .ready-copy h1 span { display: block; color: #987348; }
+  .ready-lead {
+    max-width: 510px;
+    margin: 25px 0 0;
+    color: #57432d;
+    font-family: var(--ready-sans);
+    font-size: clamp(17px,1.55vw,22px);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .ready-rule { width: 52px; height: 1px; margin: 25px 0 17px; background: #a9834f; }
+  .ready-body {
+    max-width: 470px;
+    margin: 0;
+    color: rgba(63,48,31,.84);
+    font-family: var(--ready-sans);
+    font-size: 13px;
+    line-height: 1.85;
+    font-weight: 400;
+  }
+  .ready-signature {
+    margin: 24px 0 0;
+    color: rgba(63,48,31,.72);
+    font-family: var(--ready-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .ready-card {
+    width: 100%;
+    max-width: 430px;
+    justify-self: end;
+    box-sizing: border-box;
+    padding: clamp(28px,3.4vw,42px);
+    text-align: center;
+    background: rgba(250,247,239,.92);
+    border: 1px solid rgba(255,255,255,.84);
+    border-radius: 3px;
+    box-shadow: 0 24px 75px rgba(65,43,19,.16);
+    backdrop-filter: blur(12px);
+  }
+  .ready-card__kicker { margin: 0 0 24px; color: #987348; }
+  .ready-card__symbol {
+    display: grid;
+    place-items: center;
+    width: 66px;
+    height: 66px;
+    margin: 0 auto 21px;
+    color: #9d794b;
+    border: 1px solid rgba(157,121,75,.38);
+    border-radius: 50%;
+  }
+  .ready-card__symbol svg { width: 42px; height: 42px; }
+  .ready-card h2 {
+    margin: 0 auto 14px;
+    color: #392c20;
+    font-family: var(--ready-serif);
+    font-size: clamp(26px,2.7vw,34px);
+    line-height: 1.12;
+    font-weight: 500;
+    letter-spacing: -.025em;
+  }
+  .ready-card__status {
+    margin: 0 auto 20px;
+    color: #75634d;
+    font-family: var(--ready-sans);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .ready-card__action { width: 100%; }
+  .ready-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 54px;
+    box-sizing: border-box;
+    padding: 16px 20px;
+    color: #fffaf0;
+    background: linear-gradient(105deg,#9a7140,#b58a52);
+    border: 0;
+    border-radius: 3px;
+    box-shadow: 0 8px 18px rgba(122,83,37,.16);
+    font-family: var(--ready-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    transition: transform 180ms ease,filter 180ms ease;
+  }
+  .ready-button:hover { transform: translateY(-1px); filter: brightness(1.05); }
+  .ready-button span { font-size: 18px; line-height: 1; }
+  .ready-card__keep {
+    margin: 17px 0 0;
+    color: #8b7a64;
+    font-family: var(--ready-sans);
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .ready-card__locked p {
+    margin: 0 0 18px;
+    color: #75634d;
+    font-family: var(--ready-sans);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .ready-features {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 24px;
+    padding-top: 18px;
+    padding-bottom: 23px;
+    border-top: 1px solid rgba(91,67,39,.23);
+  }
+  .ready-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(67,50,30,.78);
+    font-family: var(--ready-sans);
+    font-size: 10px;
+    line-height: 1.45;
+    font-weight: 600;
+  }
+  .ready-feature__number {
+    color: #a07b4d;
+    font-family: var(--ready-serif);
+    font-size: 19px;
+    line-height: 1;
+  }
+  @media(max-width:900px) {
+    .ready-hero { min-height: 100svh; }
+    .ready-hero__veil {
+      background: linear-gradient(90deg,rgba(248,239,220,.91),rgba(248,239,220,.75) 66%,rgba(248,239,220,.36)),
+                  linear-gradient(0deg,rgba(73,48,23,.18),transparent 45%);
+    }
+    .ready-content { grid-template-columns: 1fr; gap: 34px; padding-top: 58px; padding-bottom: 42px; }
+    .ready-copy { max-width: 700px; }
+    .ready-card { justify-self: start; max-width: 560px; }
+    .ready-features { margin-top: auto; }
+  }
+  @media(max-width:560px) {
+    .ready-hero__photo { object-position: 62% center; }
+    .ready-hero__veil {
+      background: linear-gradient(90deg,rgba(248,239,220,.94),rgba(248,239,220,.83) 72%,rgba(248,239,220,.58)),
+                  linear-gradient(0deg,rgba(73,48,23,.22),transparent 45%);
+    }
+    .ready-top { padding-top: 21px; }
+    .ready-wordmark { font-size: 10px; }
+    .ready-top__by { font-size: 7px; letter-spacing: .12em; }
+    .ready-content { padding-top: 52px; gap: 30px; }
+    .ready-eyebrow { font-size: 8px; letter-spacing: .15em; margin-bottom: 21px; }
+    .ready-copy h1 { font-size: clamp(50px,12vw,70px); line-height: 1; }
+    .ready-lead { margin-top: 18px; font-size: 16px; }
+    .ready-body { font-size: 12px; line-height: 1.78; }
+    .ready-card { padding: 26px 20px; }
+    .ready-features { grid-template-columns: 1fr; gap: 11px; padding-top: 16px; padding-bottom: 19px; }
+    .ready-feature { font-size: 9px; }
+    .ready-feature__number { font-size: 16px; }
+  }
+  @media(prefers-reduced-motion:reduce) { .ready-page * { transition-duration:.01ms!important; } }
+</style>

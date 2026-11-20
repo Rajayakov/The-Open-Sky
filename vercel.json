@@ -5,6 +5,33 @@
       "has": [
         {
           "type": "host",
+          "value": "^rajuna\\.vercel\\.app$"
+        },
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "^(?!ru|uk|be|kk|ky|tg).+"
+        }
+      ],
+      "destination": "/en/free",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "^rajuna\\.vercel\\.app$"
+        }
+      ],
+      "destination": "/free",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
           "value": "^(theopensky|the-open-sky|the-open-sky-rajuna|annapurna2027|annapurna-pilgrimage-2027)\\.vercel\\.app$|^the-open-sky-git-main-rajuna\\.vercel\\.app$"
         },
         {
@@ -13,7 +40,7 @@
           "value": "^ja"
         }
       ],
-      "destination": "https://theopensky.vercel.app/mountains/annapurna-2027-ja",
+      "destination": "https://annapurna-pilgrimage-2027.vercel.app/mountains/annapurna-2027-ja",
       "permanent": false
     },
     {
@@ -29,30 +56,8 @@
           "value": "^(?!ru|uk|be|kk|ky|tg).+"
         }
       ],
-      "destination": "https://theopensky.vercel.app/mountains/annapurna-2027-en",
+      "destination": "https://annapurna-pilgrimage-2027.vercel.app/mountains/annapurna-2027-en",
       "permanent": false
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "annapurna-pilgrimage-2027.vercel.app"
-        }
-      ],
-      "destination": "https://theopensky.vercel.app/mountains/annapurna-2027",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "annapurna-pilgrimage-2027.vercel.app"
-        }
-      ],
-      "destination": "https://theopensky.vercel.app/:path*",
-      "permanent": true
     },
     {
       "source": "/",
@@ -62,7 +67,7 @@
           "value": "annapurna2027.vercel.app"
         }
       ],
-      "destination": "https://theopensky.vercel.app/mountains/annapurna-2027",
+      "destination": "https://annapurna-pilgrimage-2027.vercel.app/mountains/annapurna-2027",
       "permanent": false
     },
     {
@@ -73,7 +78,25 @@
           "value": "annapurna2027.vercel.app"
         }
       ],
-      "destination": "https://theopensky.vercel.app/:path*",
+      "destination": "https://annapurna-pilgrimage-2027.vercel.app/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/free",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "^(?!ru|uk|be|kk|ky|tg).+"
+        }
+      ],
+      "missing": [
+        {
+          "type": "query",
+          "key": "lang"
+        }
+      ],
+      "destination": "/en/free",
       "permanent": false
     },
     {
@@ -82,6 +105,17 @@
         {
           "type": "host",
           "value": "^(theopensky|the-open-sky|the-open-sky-rajuna|annapurna2027|annapurna-pilgrimage-2027)\\.vercel\\.app$|^the-open-sky-git-main-rajuna\\.vercel\\.app$"
+        }
+      ],
+      "destination": "/mountains/annapurna-2027",
+      "permanent": false
+    },
+    {
+      "source": "/((?!free|en/free|api/|_vercel/|_astro/|favicon|annapurna-2027/|mountains/annapurna-2027).*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "^rajuna\\.vercel\\.app$"
         }
       ],
       "destination": "/mountains/annapurna-2027",

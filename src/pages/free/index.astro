@@ -1,0 +1,8 @@
+---
+// Короткая ссылка для раздачи: /free открывает первый материал из src/data/materials.json
+import FreePage from '../../components/FreePage.astro';
+import materials from '../../data/materials.json';
+const slug = materials.materials[0].slug;
+---
+
+<FreePage lang="ru" slug={slug} />

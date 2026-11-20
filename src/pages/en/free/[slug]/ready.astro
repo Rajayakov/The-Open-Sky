@@ -1,0 +1,10 @@
+---
+import FreeReady from '../../../../components/FreeReady.astro';
+import materials from '../../../../data/materials.json';
+export function getStaticPaths() {
+  return materials.materials.map((m) => ({ params: { slug: m.slug } }));
+}
+const { slug } = Astro.params;
+---
+
+<FreeReady lang="en" slug={slug!} />

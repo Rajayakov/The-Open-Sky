@@ -15,7 +15,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '../..'))
 PG = os.path.join(ROOT, 'src/pages/mountains')
 PATH = {'ru': 'annapurna-2027.html', 'en': 'annapurna-2027-en.html', 'ja': 'annapurna-2027-ja.html'}
 URL = {'ru': '/mountains/annapurna-2027', 'en': '/mountains/annapurna-2027-en', 'ja': '/mountains/annapurna-2027-ja'}
-BASE = 'https://theopensky.vercel.app'
+BASE = 'https://annapurna-pilgrimage-2027.vercel.app'
 PREFIX = {'HERO': 'hero', 'LETTER': 'letter', 'TRAIL': 'trail', 'ROUTE': 'route', 'DAYS': 'days', 'IMMERSION': 'immersion',
           'GUIDES': 'guides', 'SAFETY': 'safety', 'PRICE': 'price', 'NOTINC': 'not-included', 'JOIN': 'join', 'CLOSING': 'closing'}
 
