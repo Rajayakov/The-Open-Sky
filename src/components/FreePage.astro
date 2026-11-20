@@ -1,5 +1,5 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import Base from '../layouts/Base.astro';
 import LeadForm from './LeadForm.astro';
 import materials from '../data/materials.json';
 
@@ -9,7 +9,8 @@ const m = materials.materials.find((x) => x.slug === slug)!;
 const copy = {
   ru: {
     eyebrow: 'THE OPEN SKY · БЕСПЛАТНЫЙ МАТЕРИАЛ',
-    title: 'Путь <em>к Себе</em>',
+    title: 'Путь к Себе',
+    accent: 'начинается здесь',
     lead: 'Практики для ясности, энергии и внутренней опоры.',
     body: 'Я собрал этот материал, чтобы поделиться практиками, которые помогают замедлиться, вернуться в присутствие и восстановить контакт с собой. Без спешки. В своём ритме.',
     note: 'Начни с малого. Дай себе пространство.',
@@ -18,11 +19,12 @@ const copy = {
     switch: 'English',
     imageTitle: 'Пространство для внутренней тишины',
     imageText: 'Иногда достаточно остановиться, чтобы снова почувствовать направление.',
-    photoCredit: 'Фотографии: Lakshmi Raj и Roman Saienko / Pexels',
+    photoCredit: 'Фотографии: Quanxin Zhu / Pexels · Roman Saienko / Pexels',
   },
   en: {
     eyebrow: 'THE OPEN SKY · COMPLIMENTARY GUIDE',
-    title: 'The Path Back <em>to Yourself</em>',
+    title: 'The Path Back',
+    accent: 'to Yourself',
     lead: 'Simple practices for clarity, energy and inner grounding.',
     body: 'I’ve put together this guide to share practices that can help you slow down, return to the present moment and reconnect with yourself. No rush. At your own pace.',
     note: 'Begin simply. Make room for yourself.',
@@ -31,24 +33,24 @@ const copy = {
     switch: 'Русский',
     imageTitle: 'A space for inner stillness',
     imageText: 'Sometimes it is enough to pause to feel your direction again.',
-    photoCredit: 'Photography: Lakshmi Raj and Roman Saienko / Pexels',
+    photoCredit: 'Photography: Quanxin Zhu / Pexels · Roman Saienko / Pexels',
   },
 }[lang];
 ---
-<PageLayout title={`${m.title[lang]} — The Open Sky`} description={copy.lead}>
+<Base title={`${m.title[lang]} — The Open Sky`} description={copy.lead}>
   <main class="guide-page" lang={lang}>
     <section class="guide-hero">
-      <img class="guide-hero__photo" src="https://images.pexels.com/photos/38816731/pexels-photo-38816731/free-photo-of-scenic-view-of-himalayan-mountains-in-mist.jpeg?auto=compress&cs=tinysrgb&w=2200" alt={lang === 'ru' ? 'Гималайские горы в утреннем тумане' : 'Himalayan mountains wrapped in morning mist'} fetchpriority="high" />
+      <img class="guide-hero__photo" src="https://images.pexels.com/photos/34744875/pexels-photo-34744875.jpeg?auto=compress&cs=tinysrgb&w=2400" alt={lang === 'ru' ? 'Чёткие заснеженные вершины Гималаев на рассвете' : 'Clear snow-covered Himalayan peaks at sunrise'} fetchpriority="high" />
       <div class="guide-hero__shade"></div>
-      <div class="guide-top frame">
+      <header class="guide-top frame">
         <a class="guide-wordmark" href="/" aria-label="The Open Sky home">THE OPEN SKY</a>
         <a class="guide-language" href={lang === 'ru' ? '/en/free/free-guide' : '/free/free-guide'}>{copy.switch}</a>
-      </div>
+      </header>
 
       <div class="guide-hero__content frame">
         <div class="guide-copy">
           <p class="guide-eyebrow"><span></span>{copy.eyebrow}</p>
-          <h1 set:html={copy.title} />
+          <h1>{copy.title}<span>{copy.accent}</span></h1>
           <p class="guide-lead">{copy.lead}</p>
           <div class="guide-rule"></div>
           <p class="guide-body">{copy.body}</p>
@@ -63,11 +65,16 @@ const copy = {
         </aside>
       </div>
       <div class="guide-scroll" aria-hidden="true"><span></span></div>
+      <div class="guide-bottom frame">
+        <span>THE OPEN SKY</span>
+        <span>BY YAKOV RAJUNA</span>
+        <a href={lang === 'ru' ? '/en/free/free-guide' : '/free/free-guide'}>{copy.switch}</a>
+      </div>
     </section>
 
     <section class="guide-after frame">
       <div class="guide-after__image">
-        <img src="https://images.pexels.com/photos/35978670/pexels-photo-35978670/free-photo-of-historic-indian-temple-architecture-in-daylight.jpeg?auto=compress&cs=tinysrgb&w=1200" alt={lang === 'ru' ? 'Древняя индийская храмовая архитектура' : 'Ancient Indian temple architecture'} loading="lazy" />
+        <img src="https://images.pexels.com/photos/35978670/pexels-photo-35978670/free-photo-of-historic-indian-temple-architecture-in-daylight.jpeg?auto=compress&cs=tinysrgb&w=1600" alt={lang === 'ru' ? 'Древняя индийская храмовая архитектура' : 'Ancient Indian temple architecture'} loading="lazy" />
       </div>
       <div class="guide-after__copy">
         <p class="guide-after__eyebrow">A MOMENT TO RETURN</p>
@@ -77,75 +84,71 @@ const copy = {
         <span>{copy.photoCredit}</span>
       </div>
     </section>
-    <footer class="guide-bottom frame">
-      <span>THE OPEN SKY</span>
-      <span>BY YAKOV RAJUNA</span>
-      <a href={lang === 'ru' ? '/en/free/free-guide' : '/free/free-guide'}>{copy.switch}</a>
-    </footer>
   </main>
-</PageLayout>
+</Base>
 
 <style>
-  .guide-page { color:#30271e; background:#f5efe4; }
-  .guide-hero { position:relative; isolation:isolate; min-height:min(850px,calc(100svh - 80px)); overflow:hidden; display:flex; flex-direction:column; }
-  .guide-hero__photo { position:absolute; z-index:-2; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 53%; }
-  .guide-hero__shade { position:absolute; z-index:-1; inset:0; background:
-    linear-gradient(90deg,rgba(246,239,225,.94) 0%,rgba(246,239,225,.84) 35%,rgba(246,239,225,.42) 62%,rgba(29,22,15,.12) 100%),
-    linear-gradient(0deg,rgba(27,21,15,.48) 0%,transparent 24%,transparent 75%,rgba(27,21,15,.14) 100%); }
-  .guide-top { width:100%; display:flex; align-items:center; justify-content:space-between; padding-top:26px; }
-  .guide-wordmark { font-family:var(--serif); font-size:15px; letter-spacing:.24em; color:#493522; }
-  .guide-language { font-family:var(--mark); font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:#493522; border-bottom:1px solid rgba(73,53,34,.4); padding-bottom:5px; }
-  .guide-hero__content { flex:1; width:100%; display:grid; grid-template-columns:minmax(0,1.08fr) minmax(330px,.72fr); align-items:center; gap:clamp(50px,8vw,120px); padding-top:72px; padding-bottom:100px; }
-  .guide-copy { max-width:650px; }
-  .guide-eyebrow,.guide-form-kicker,.guide-after__eyebrow,.guide-bottom { font-family:var(--mark); font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; }
-  .guide-eyebrow { display:flex; align-items:center; gap:13px; margin:0 0 30px; color:#8b6338; }
-  .guide-eyebrow span { width:28px; height:1px; background:#a77b45; }
-  .guide-copy h1 { max-width:690px; margin:0; color:#33271c; font-family:var(--serif); font-size:clamp(62px,7.1vw,104px); line-height:.94; font-weight:400; letter-spacing:-.045em; text-wrap:balance; }
-  .guide-copy h1 em { display:block; color:#986d40; font-style:italic; font-weight:400; }
-  .guide-lead { max-width:500px; margin:27px 0 0; color:#514335; font-family:var(--serif); font-size:clamp(22px,2.1vw,29px); line-height:1.32; font-weight:400; }
-  .guide-rule { width:52px; height:1px; margin:28px 0 20px; background:#b18a58; }
-  .guide-body { max-width:470px; margin:0; color:#5f5244; font-family:var(--sans); font-size:14px; line-height:1.85; font-weight:400; }
-  .guide-note { margin:25px 0 0; color:#8b6a46; font-family:var(--serif); font-size:18px; font-style:italic; }
-  .guide-signature { margin:34px 0 0; color:#75624d; font-family:var(--serif); font-size:16px; font-style:italic; }
-  .guide-form-wrap { width:100%; max-width:430px; justify-self:end; padding:clamp(28px,3.5vw,42px); background:rgba(249,245,236,.91); border:1px solid rgba(255,255,255,.72); box-shadow:0 24px 80px rgba(30,22,14,.20); backdrop-filter:blur(18px); }
-  .guide-form-kicker { margin:0 0 25px; color:#967047; }
-  .guide-privacy { margin:18px 0 0; color:#83735f; font-family:var(--sans); font-size:10px; line-height:1.65; }
-  .guide-scroll { position:absolute; bottom:24px; left:50%; width:1px; height:38px; background:rgba(255,255,255,.35); }
-  .guide-scroll span { display:block; width:1px; height:18px; background:#fff; }
-  .guide-after { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr); gap:clamp(40px,8vw,120px); align-items:center; padding-top:clamp(80px,11vw,145px); padding-bottom:clamp(80px,11vw,145px); }
-  .guide-after__image { position:relative; overflow:hidden; aspect-ratio:16/10; background:#c7b69b; }
+  .guide-page { --guide-serif:"DM Serif Display",Georgia,serif; --guide-sans:"Manrope",Arial,sans-serif; color:#f6f0e6; background:#17130f; }
+  .guide-hero { position:relative; isolation:isolate; min-height:100svh; min-height:100vh; overflow:hidden; display:flex; flex-direction:column; }
+  .guide-hero__photo { position:absolute; z-index:-2; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 48%; }
+  .guide-hero__shade { position:absolute; z-index:-1; inset:0; background:linear-gradient(90deg,rgba(18,15,12,.82) 0%,rgba(18,15,12,.67) 34%,rgba(18,15,12,.28) 62%,rgba(18,15,12,.10) 100%),linear-gradient(0deg,rgba(18,15,12,.58) 0%,transparent 23%,transparent 78%,rgba(18,15,12,.24) 100%); }
+  .guide-top { width:100%; display:flex; align-items:center; justify-content:space-between; padding-top:27px; }
+  .guide-wordmark { font-family:var(--guide-serif); font-size:19px; letter-spacing:.12em; color:#fff8ed; }
+  .guide-language { font-family:var(--guide-sans); font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#fff8ed; border-bottom:1px solid rgba(255,248,237,.55); padding-bottom:6px; }
+  .guide-hero__content { flex:1; width:100%; display:grid; grid-template-columns:minmax(0,1.1fr) minmax(340px,.72fr); align-items:center; gap:clamp(48px,8vw,120px); padding-top:50px; padding-bottom:76px; }
+  .guide-copy { max-width:660px; }
+  .guide-eyebrow,.guide-form-kicker,.guide-after__eyebrow { font-family:var(--guide-sans); font-size:9px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; }
+  .guide-eyebrow { display:flex; align-items:center; gap:13px; margin:0 0 28px; color:#e4bd7f; }
+  .guide-eyebrow span { width:30px; height:1px; background:#e4bd7f; }
+  .guide-copy h1 { max-width:680px; margin:0; color:#fff9ef; font-family:var(--guide-serif); font-size:clamp(66px,7.2vw,108px); line-height:.98; font-weight:400; letter-spacing:-.025em; text-wrap:balance; }
+  .guide-copy h1 span { display:block; color:#e7c28d; }
+  .guide-lead { max-width:510px; margin:26px 0 0; color:rgba(255,249,239,.94); font-family:var(--guide-sans); font-size:clamp(18px,1.7vw,23px); line-height:1.5; font-weight:500; }
+  .guide-rule { width:54px; height:1px; margin:27px 0 19px; background:#d5aa6c; }
+  .guide-body { max-width:475px; margin:0; color:rgba(255,249,239,.82); font-family:var(--guide-sans); font-size:13px; line-height:1.9; font-weight:400; }
+  .guide-note { margin:23px 0 0; color:#e8c994; font-family:var(--guide-sans); font-size:13px; line-height:1.6; font-weight:600; }
+  .guide-signature { margin:27px 0 0; color:rgba(255,249,239,.75); font-family:var(--guide-sans); font-size:12px; font-weight:500; }
+  .guide-form-wrap { width:100%; max-width:430px; justify-self:end; padding:clamp(28px,3.4vw,42px); background:rgba(249,246,239,.96); border:1px solid rgba(255,255,255,.75); box-shadow:0 22px 70px rgba(12,9,6,.24); }
+  .guide-form-kicker { margin:0 0 24px; color:#987044; }
+  .guide-privacy { margin:17px 0 0; color:#81725f; font-family:var(--guide-sans); font-size:10px; line-height:1.7; }
+  .guide-scroll { position:absolute; bottom:54px; left:50%; width:1px; height:35px; background:rgba(255,255,255,.3); }
+  .guide-scroll span { display:block; width:1px; height:17px; background:#fff; }
+  .guide-bottom { position:absolute; left:0; right:0; bottom:0; display:flex; justify-content:space-between; gap:20px; padding-top:17px; padding-bottom:20px; border-top:1px solid rgba(255,255,255,.18); color:rgba(255,249,239,.62); font-family:var(--guide-sans); font-size:8px; font-weight:600; letter-spacing:.18em; }
+  .guide-bottom a { border-bottom:1px solid rgba(255,255,255,.35); }
+  .guide-after { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr); gap:clamp(40px,8vw,120px); align-items:center; padding-top:clamp(80px,11vw,145px); padding-bottom:clamp(80px,11vw,145px); color:#342a20; }
+  .guide-after__image { overflow:hidden; aspect-ratio:16/10; background:#c7b69b; }
   .guide-after__image img { width:100%; height:100%; object-fit:cover; object-position:center 48%; transition:transform 1.2s ease; }
   .guide-after__image:hover img { transform:scale(1.025); }
   .guide-after__copy { max-width:420px; }
   .guide-after__eyebrow { color:#9a754c; font-size:8px; margin:0 0 24px; }
-  .guide-after__copy h2 { font-family:var(--serif); font-weight:400; font-size:clamp(34px,4vw,54px); line-height:1.04; letter-spacing:-.035em; color:#352a20; margin:0; }
-  .guide-after__copy p { margin:22px 0 0; color:#716251; font-family:var(--sans); font-size:14px; line-height:1.85; }
+  .guide-after__copy h2 { font-family:var(--guide-serif); font-weight:400; font-size:clamp(36px,4vw,56px); line-height:1.06; letter-spacing:-.02em; color:#352a20; margin:0; }
+  .guide-after__copy p { margin:22px 0 0; color:#716251; font-family:var(--guide-sans); font-size:13px; line-height:1.9; }
   .guide-after__line { width:44px; height:1px; background:#b18a58; margin:28px 0 16px; }
-  .guide-after__copy span { color:#9b8b78; font-family:var(--sans); font-size:9px; letter-spacing:.03em; }
-  .guide-bottom { display:flex; justify-content:space-between; gap:20px; padding-top:20px; padding-bottom:26px; border-top:1px solid rgba(91,69,44,.16); color:rgba(91,69,44,.62); font-size:8px; letter-spacing:.18em; }
-  .guide-bottom a { border-bottom:1px solid rgba(91,69,44,.28); }
+  .guide-after__copy span { color:#9b8b78; font-family:var(--guide-sans); font-size:9px; letter-spacing:.02em; }
   @media(max-width:900px) {
-    .guide-hero { min-height:auto; }
-    .guide-hero__shade { background:linear-gradient(90deg,rgba(246,239,225,.94),rgba(246,239,225,.78) 62%,rgba(246,239,225,.42)),linear-gradient(0deg,rgba(27,21,15,.35),transparent 30%); }
-    .guide-hero__content { grid-template-columns:1fr; gap:48px; padding-top:80px; padding-bottom:100px; }
+    .guide-hero { min-height:100svh; }
+    .guide-hero__shade { background:linear-gradient(90deg,rgba(18,15,12,.78),rgba(18,15,12,.58) 68%,rgba(18,15,12,.25)),linear-gradient(0deg,rgba(18,15,12,.62),transparent 36%); }
+    .guide-hero__content { grid-template-columns:1fr; gap:38px; padding-top:64px; padding-bottom:100px; }
     .guide-copy { max-width:700px; }
     .guide-form-wrap { justify-self:start; max-width:560px; }
+    .guide-scroll { display:none; }
+    .guide-bottom { position:relative; margin-top:auto; }
     .guide-after { grid-template-columns:1fr; gap:34px; }
     .guide-after__image { max-height:480px; }
     .guide-after__copy { max-width:600px; }
   }
   @media(max-width:560px) {
-    .guide-hero__photo { object-position:58% center; }
-    .guide-hero__shade { background:linear-gradient(90deg,rgba(246,239,225,.94),rgba(246,239,225,.78)),linear-gradient(0deg,rgba(27,21,15,.32),transparent 35%); }
+    .guide-hero__photo { object-position:56% center; }
+    .guide-hero__shade { background:linear-gradient(90deg,rgba(18,15,12,.78),rgba(18,15,12,.62)),linear-gradient(0deg,rgba(18,15,12,.72),transparent 50%); }
     .guide-top { padding-top:22px; }
-    .guide-wordmark { font-size:12px; }
-    .guide-hero__content { padding-top:75px; gap:38px; }
-    .guide-eyebrow { font-size:8px; letter-spacing:.16em; margin-bottom:24px; }
-    .guide-copy h1 { font-size:clamp(54px,13.5vw,76px); line-height:.98; }
-    .guide-lead { margin-top:22px; font-size:23px; }
-    .guide-body { font-size:13px; }
-    .guide-form-wrap { padding:26px 21px; }
-    .guide-after { padding-top:72px; padding-bottom:72px; }
+    .guide-wordmark { font-size:16px; }
+    .guide-hero__content { padding-top:56px; gap:32px; }
+    .guide-eyebrow { font-size:8px; letter-spacing:.14em; margin-bottom:22px; }
+    .guide-copy h1 { font-size:clamp(54px,13vw,76px); line-height:1; }
+    .guide-lead { margin-top:20px; font-size:17px; }
+    .guide-body { font-size:12px; line-height:1.8; }
+    .guide-note { font-size:12px; }
+    .guide-form-wrap { padding:25px 20px; }
+    .guide-after { padding-top:70px; padding-bottom:70px; }
     .guide-bottom { font-size:7px; flex-wrap:wrap; }
   }
   @media(prefers-reduced-motion:reduce) { .guide-page * { transition-duration:.01ms!important; } }
