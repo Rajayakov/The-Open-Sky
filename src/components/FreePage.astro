@@ -11,5 +11,8 @@ const m = materials.materials.find((x) => x.slug === slug)!;
 <PageLayout title={`${m.title[lang]} — The Open Sky`}>
   <section class="frame" style="padding: var(--s-10) 0;">
     <LeadForm lang={lang} slug={slug} />
+    <p class="t-label" style="text-align:center; margin-top: var(--s-6); opacity:.6;">
+      {lang === 'ru' ? <a href="/en/free">English</a> : <a href="/free?lang=ru">Русский</a>}
+    </p>
   </section>
 </PageLayout>

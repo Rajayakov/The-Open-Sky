@@ -55,6 +55,24 @@
       "permanent": false
     },
     {
+      "source": "/free",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "^(?!ru|uk|be|kk|ky|tg).+"
+        }
+      ],
+      "missing": [
+        {
+          "type": "query",
+          "key": "lang"
+        }
+      ],
+      "destination": "/en/free",
+      "permanent": false
+    },
+    {
       "source": "/((?!mountains/annapurna-2027|annapurna-2027/|_vercel/|_astro/|favicon).*)",
       "has": [
         {
