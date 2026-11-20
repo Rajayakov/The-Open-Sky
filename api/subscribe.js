@@ -1,6 +1,7 @@
 // Серверная функция Vercel: принимает форму и запускает Double Opt-in в Brevo.
 // Ключ BREVO_API_KEY живёт только в переменных окружения, в клиент и в Git не попадает.
 import materials from '../src/data/materials.json' with { type: 'json' };
+import { makeToken } from './_token.js';
 
 const LIST_ID = 3; // RAJUNA — Leads
 const TEMPLATE_ID = Number(process.env.BREVO_DOI_TEMPLATE_ID || 1); // шаблон подтверждения
@@ -72,7 +73,8 @@ export default async function handler(req, res) {
 
   const proto = /^localhost/.test(host) ? 'http' : 'https';
   const prefix = lang === 'en' ? '/en' : '';
-  const redirectionUrl = `${proto}://${host}${prefix}/free/${material.slug}/ready`;
+  // Адрес со знаком доступа знает только Brevo: человек увидит его после клика по ссылке подтверждения.
+  const redirectionUrl = `${proto}://${host}${prefix}/free/${material.slug}/ready?t=${makeToken(material.slug, lang)}`;
 
   try {
     const r = await fetch(BREVO_URL, {

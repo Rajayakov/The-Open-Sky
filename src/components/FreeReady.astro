@@ -1,25 +1,74 @@
 ---
-// Страница после подтверждения email. Здесь выдаётся материал.
+// Страница после подтверждения email. Материал виден только по ссылке из подтверждения:
+// адрес материала в страницу не вшит, его отдаёт /api/material после проверки знака доступа.
 import PageLayout from '../layouts/PageLayout.astro';
 import materials from '../data/materials.json';
 
 export interface Props { lang: 'ru' | 'en'; slug: string; }
 const { lang, slug } = Astro.props;
 const m = materials.materials.find((x) => x.slug === slug)!;
-const url = m.url[lang];
 const T = {
-  ru: { title: 'Рад нашей встрече.', open: 'Открыть материал', soon: 'Ссылка на материал появится здесь.', keep: 'Сохрани эту страницу, чтобы вернуться к материалу позже.' },
-  en: { title: 'Grateful Our Paths Have Crossed.', open: 'Open the material', soon: 'The link to the material will appear here.', keep: 'Bookmark this page to come back to the material later.' },
+  ru: {
+    title: 'Рад нашей встрече.', open: 'Открыть материал', soon: 'Ссылка на материал появится здесь.',
+    keep: 'Сохрани эту страницу, чтобы вернуться к материалу позже.',
+    locked: 'Эта страница открывается по ссылке из письма с подтверждением email.',
+    form: 'Получить материал', error: 'Не получилось загрузить материал. Попробуй ещё раз чуть позже.',
+  },
+  en: {
+    title: 'Grateful Our Paths Have Crossed.', open: 'Open the material', soon: 'The link to the material will appear here.',
+    keep: 'Bookmark this page to come back to the material later.',
+    locked: 'This page opens from the link in the email confirmation message.',
+    form: 'Receive the Guide', error: 'We could not load the material. Please try again a little later.',
+  },
 }[lang];
+const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
 ---
 
 <PageLayout title={`${T.title} — The Open Sky`}>
-  <section class="frame" style="padding: var(--s-10) 0; text-align: center;">
-    <h1 style="font-family: var(--display); font-weight: 300; font-size: clamp(2rem, 5vw, 3.4rem); color: var(--fg);">{T.title}</h1>
-    <p class="t-body" style="margin: var(--s-5) auto; max-width: 44ch;">{m.title[lang]}</p>
-    {url
-      ? <a href={url} class="btn btn--warm">{T.open}</a>
-      : <p class="t-body">{T.soon}</p>}
-    <p class="t-body" style="margin-top: var(--s-6); color: var(--fg-mute);">{T.keep}</p>
+  <section class="frame" style="padding: var(--s-10) 0; text-align: center;"
+           id="ready" data-slug={slug} data-lang={lang} data-open={T.open} data-soon={T.soon} data-error={T.error}>
+    <h1 style="font-family: var(--display); font-weight: 300; font-size: clamp(2rem, 5vw, 3.4rem); color: var(--fg);" id="ready-title" hidden>{T.title}</h1>
+    <p class="t-body" id="ready-name" style="margin: var(--s-5) auto; max-width: 44ch;" hidden></p>
+    <div id="ready-action"></div>
+    <p class="t-body" id="ready-keep" style="margin-top: var(--s-6); color: var(--fg-mute);" hidden>{T.keep}</p>
+    <div id="ready-locked" hidden>
+      <p class="t-body" style="max-width: 44ch; margin: 0 auto var(--s-5);">{T.locked}</p>
+      <a href={formHref} class="btn btn--warm">{T.form}</a>
+    </div>
   </section>
 </PageLayout>
+
+<script>
+  const box = document.getElementById('ready') as HTMLElement;
+  const show = (id: string) => ((document.getElementById(id) as HTMLElement).hidden = false);
+  (async () => {
+    const t = new URLSearchParams(location.search).get('t');
+    if (!t) return show('ready-locked');
+    try {
+      const q = new URLSearchParams({ slug: box.dataset.slug || '', lang: box.dataset.lang || 'ru', t });
+      const r = await fetch('/api/material?' + q.toString());
+      if (r.status === 403) return show('ready-locked');
+      if (!r.ok) throw new Error('x');
+      const d = await r.json();
+      show('ready-title');
+      const name = document.getElementById('ready-name') as HTMLElement;
+      name.textContent = d.title;
+      name.hidden = false;
+      const act = document.getElementById('ready-action') as HTMLElement;
+      if (d.url) {
+        const a = document.createElement('a');
+        a.href = d.url; a.className = 'btn btn--warm'; a.textContent = box.dataset.open || '';
+        act.appendChild(a);
+      } else {
+        const p = document.createElement('p');
+        p.className = 't-body'; p.textContent = box.dataset.soon || '';
+        act.appendChild(p);
+      }
+      show('ready-keep');
+    } catch {
+      const p = document.createElement('p');
+      p.className = 't-body'; p.textContent = box.dataset.error || '';
+      (document.getElementById('ready-action') as HTMLElement).appendChild(p);
+    }
+  })();
+</script>
