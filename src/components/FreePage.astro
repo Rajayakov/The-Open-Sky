@@ -8,7 +8,7 @@ const { lang, slug } = Astro.props;
 const m = materials.materials.find((x) => x.slug === slug)!;
 const copy = {
   ru: {
-    eyebrow: 'THE OPEN SKY · ПУТЬ К СЕБЕ',
+    eyebrow: 'THE OPEN SKY · ЖИВОЕ ПОЛЕ ТРАНСФОРМАЦИИ',
     title: 'Путь к Себе',
     accent: 'начинается здесь',
     lead: 'Пространство для ясности, энергии и внутренней опоры.',
@@ -20,7 +20,7 @@ const copy = {
     privacy: 'Твои данные останутся конфиденциальными. Подписка на письма — только по желанию.',
   },
   en: {
-    eyebrow: 'THE OPEN SKY · A RETURN TO YOURSELF',
+    eyebrow: 'THE OPEN SKY · THE LIVING FIELD OF TRANSFORMATION',
     title: 'The Path Back',
     accent: 'to Yourself',
     lead: 'A space for clarity, energy and inner grounding.',
@@ -121,24 +121,20 @@ const copy = {
     justify-content: space-between;
     padding-top: 29px;
   }
-  /* Logo on its own light plate so it never reads darkened against the
-     photo hero, with a soft gold glow */
+  /* Transparent logo, no plate — a soft shadow + warm glow keep it
+     standing out against the photo hero */
   .guide-logo {
     display: flex;
     align-items: center;
-    padding: 7px 14px;
-    border-radius: 999px;
-    background: rgba(253, 250, 244, 0.97);
-    border: 1px solid rgba(214, 180, 106, 0.4);
-    box-shadow: 0 2px 16px rgba(46, 42, 36, 0.14), 0 0 22px rgba(214, 180, 106, 0.35);
-    transition: box-shadow 300ms ease;
   }
-  .guide-logo:hover { box-shadow: 0 2px 16px rgba(46, 42, 36, 0.14), 0 0 30px rgba(214, 180, 106, 0.55); }
   .guide-wordmark {
     display: block;
-    height: 26px;
+    height: 34px;
     width: auto;
+    filter: drop-shadow(0 2px 10px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 16px rgba(255, 205, 110, 0.45));
+    transition: filter 300ms ease;
   }
+  .guide-logo:hover .guide-wordmark { filter: drop-shadow(0 2px 10px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 22px rgba(255, 205, 110, 0.65)); }
   .guide-top__by {
     font-family: var(--guide-sans);
     font-size: 9px;
@@ -282,7 +278,7 @@ const copy = {
                   linear-gradient(0deg,rgba(73,48,23,.22),transparent 45%);
     }
     .guide-top { padding-top: 21px; }
-    .guide-wordmark { height: 20px; }
+    .guide-wordmark { height: 26px; }
     .guide-top__by { font-size: 7px; letter-spacing: .12em; }
     .guide-hero__content { padding-top: 52px; gap: 30px; }
     .guide-eyebrow { font-size: 8px; letter-spacing: .15em; margin-bottom: 21px; }

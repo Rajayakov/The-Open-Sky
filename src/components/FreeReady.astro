@@ -7,7 +7,7 @@ const { lang, slug } = Astro.props;
 const m = materials.materials.find((x) => x.slug === slug)!;
 const T = {
   ru: {
-    eyebrow: 'THE OPEN SKY · ТВОЙ МАТЕРИАЛ',
+    eyebrow: 'THE OPEN SKY · ЖИВОЕ ПОЛЕ ТРАНСФОРМАЦИИ',
     title: 'Письмо подтверждено.',
     accent: 'Материал уже здесь.',
     lead: 'Спасибо за доверие. Теперь можно перейти к практике.',
@@ -24,7 +24,7 @@ const T = {
     footer: 'Yakov Rajuna',
   },
   en: {
-    eyebrow: 'THE OPEN SKY · YOUR RESOURCE',
+    eyebrow: 'THE OPEN SKY · THE LIVING FIELD OF TRANSFORMATION',
     title: 'Email confirmed.',
     accent: 'Your guide is ready.',
     lead: 'Thank you for being here. You can now move into the practice.',
@@ -181,24 +181,20 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
     justify-content: space-between;
     padding-top: 29px;
   }
-  /* Logo on its own light plate so it never reads darkened against the
-     photo hero, with a soft gold glow */
+  /* Transparent logo, no plate — a soft shadow + warm glow keep it
+     standing out against the photo hero */
   .ready-logo {
     display: flex;
     align-items: center;
-    padding: 7px 14px;
-    border-radius: 999px;
-    background: rgba(253, 250, 244, 0.97);
-    border: 1px solid rgba(214, 180, 106, 0.4);
-    box-shadow: 0 2px 16px rgba(46, 42, 36, 0.14), 0 0 22px rgba(214, 180, 106, 0.35);
-    transition: box-shadow 300ms ease;
   }
-  .ready-logo:hover { box-shadow: 0 2px 16px rgba(46, 42, 36, 0.14), 0 0 30px rgba(214, 180, 106, 0.55); }
   .ready-wordmark {
     display: block;
-    height: 26px;
+    height: 34px;
     width: auto;
+    filter: drop-shadow(0 2px 10px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 16px rgba(255, 205, 110, 0.45));
+    transition: filter 300ms ease;
   }
+  .ready-logo:hover .ready-wordmark { filter: drop-shadow(0 2px 10px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 22px rgba(255, 205, 110, 0.65)); }
   .ready-top__by {
     font-family: var(--ready-sans);
     font-size: 9px;
@@ -393,7 +389,7 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
                   linear-gradient(0deg,rgba(73,48,23,.22),transparent 45%);
     }
     .ready-top { padding-top: 21px; }
-    .ready-wordmark { height: 20px; }
+    .ready-wordmark { height: 26px; }
     .ready-top__by { font-size: 7px; letter-spacing: .12em; }
     .ready-content { padding-top: 52px; gap: 30px; }
     .ready-eyebrow { font-size: 8px; letter-spacing: .15em; margin-bottom: 21px; }

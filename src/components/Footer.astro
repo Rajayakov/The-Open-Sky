@@ -99,24 +99,22 @@ const year = new Date().getFullYear();
     padding-bottom: clamp(48px, 8svh, 80px);
   }
 
-  /* Wordmark — logo image on its own light plate, so it stays fully lit
-     against the dark footer instead of fading into it */
+  /* Wordmark — transparent logo image, no plate; a warm glow keeps it
+     lit against the dark footer instead of fading into it */
   .footer__wordmark {
     display: inline-flex;
     align-items: center;
-    padding: 10px 18px;
-    border-radius: 999px;
-    background: rgba(253, 250, 244, 0.97);
-    border: 1px solid rgba(214, 180, 106, 0.4);
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2), 0 0 28px rgba(214, 180, 106, 0.4);
     margin-bottom: var(--s-6);
-    transition: box-shadow 280ms ease;
   }
-  .footer__wordmark:hover { box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2), 0 0 38px rgba(214, 180, 106, 0.6); }
   .footer__wordmark img {
     display: block;
-    height: clamp(28px, 3.6vw, 44px);
+    height: clamp(32px, 4.2vw, 50px);
     width: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 205, 110, 0.5)) drop-shadow(0 0 40px rgba(255, 205, 110, 0.25));
+    transition: filter 280ms ease;
+  }
+  .footer__wordmark:hover img {
+    filter: drop-shadow(0 0 24px rgba(255, 205, 110, 0.7)) drop-shadow(0 0 48px rgba(255, 205, 110, 0.4));
   }
 
   .footer__tagline {
