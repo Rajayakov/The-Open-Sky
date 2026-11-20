@@ -4,7 +4,8 @@ import materials from '../src/data/materials.json' with { type: 'json' };
 import { makeToken } from './_token.js';
 
 const LIST_ID = 3; // RAJUNA — Leads
-const TEMPLATE_ID = Number(process.env.BREVO_DOI_TEMPLATE_ID || 1); // шаблон подтверждения
+// Шаблоны подтверждения в Brevo: 1 — русский, 5 — английский (каждое письмо на одном языке)
+const TEMPLATE_IDS = { ru: 1, en: 5 };
 const BREVO_URL = 'https://api.brevo.com/v3/contacts/doubleOptinConfirmation';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -86,7 +87,7 @@ export default async function handler(req, res) {
         email,
         attributes,
         includeListIds: [LIST_ID],
-        templateId: TEMPLATE_ID,
+        templateId: TEMPLATE_IDS[lang],
         redirectionUrl,
       }),
     });
