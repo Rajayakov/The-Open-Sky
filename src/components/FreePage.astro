@@ -8,117 +8,145 @@ const { lang, slug } = Astro.props;
 const m = materials.materials.find((x) => x.slug === slug)!;
 const copy = {
   ru: {
-    eyebrow: 'THE OPEN SKY · ПЕРВОЕ ПРИКОСНОВЕНИЕ',
+    eyebrow: 'THE OPEN SKY · БЕСПЛАТНЫЙ МАТЕРИАЛ',
     title: 'Путь <em>к Себе</em>',
-    lead: 'Пространство для тишины, ясности и возвращения к главному.',
+    lead: 'Практики для ясности, энергии и внутренней опоры.',
     body: 'Я собрал этот материал, чтобы поделиться практиками, которые помогают замедлиться, вернуться в присутствие и восстановить контакт с собой. Без спешки. В своём ритме.',
-    note: 'Небольшой шаг. Иногда именно с него начинается путь.',
-    formLabel: 'ТВОЙ МАТЕРИАЛ',
-    privacy: 'Твои данные останутся конфиденциальными. Никакого шума — только то, на что ты сам согласишься.',
+    note: 'Начни с малого. Дай себе пространство.',
+    formLabel: 'ПОЛУЧИТЬ МАТЕРИАЛ',
     footer: 'С теплом, Yakov Rajuna',
     switch: 'English',
+    imageTitle: 'Пространство для внутренней тишины',
+    imageText: 'Иногда достаточно остановиться, чтобы снова почувствовать направление.',
+    photoCredit: 'Фотографии: Lakshmi Raj и Roman Saienko / Pexels',
   },
   en: {
-    eyebrow: 'THE OPEN SKY · A FIRST ENCOUNTER',
-    title: 'The Path <em>Back to Yourself</em>',
-    lead: 'A space for stillness, clarity and a return to what matters.',
+    eyebrow: 'THE OPEN SKY · COMPLIMENTARY GUIDE',
+    title: 'The Path Back <em>to Yourself</em>',
+    lead: 'Simple practices for clarity, energy and inner grounding.',
     body: 'I’ve put together this guide to share practices that can help you slow down, return to the present moment and reconnect with yourself. No rush. At your own pace.',
-    note: 'A small step. Sometimes that is where the journey begins.',
-    formLabel: 'YOUR GUIDE',
-    privacy: 'Your details stay private. No noise — only what you choose to receive.',
+    note: 'Begin simply. Make room for yourself.',
+    formLabel: 'RECEIVE THE GUIDE',
     footer: 'With warmth, Yakov Rajuna',
     switch: 'Русский',
+    imageTitle: 'A space for inner stillness',
+    imageText: 'Sometimes it is enough to pause to feel your direction again.',
+    photoCredit: 'Photography: Lakshmi Raj and Roman Saienko / Pexels',
   },
 }[lang];
 ---
 <PageLayout title={`${m.title[lang]} — The Open Sky`} description={copy.lead}>
   <main class="guide-page" lang={lang}>
-    <div class="guide-atmosphere" aria-hidden="true">
-      <div class="guide-sun"></div>
-      <div class="guide-arch guide-arch--outer"></div>
-      <div class="guide-arch guide-arch--inner"></div>
-      <div class="guide-horizon"></div>
-    </div>
-
-    <section class="guide-hero frame">
-      <div class="guide-copy">
-        <p class="guide-eyebrow"><span></span>{copy.eyebrow}</p>
-        <h1 set:html={copy.title} />
-        <p class="guide-lead">{copy.lead}</p>
-        <div class="guide-rule"></div>
-        <p class="guide-body">{copy.body}</p>
-        <p class="guide-note">{copy.note}</p>
-        <p class="guide-signature">{copy.footer}</p>
+    <section class="guide-hero">
+      <img class="guide-hero__photo" src="https://images.pexels.com/photos/38816731/pexels-photo-38816731/free-photo-of-scenic-view-of-himalayan-mountains-in-mist.jpeg?auto=compress&cs=tinysrgb&w=2200" alt={lang === 'ru' ? 'Гималайские горы в утреннем тумане' : 'Himalayan mountains wrapped in morning mist'} fetchpriority="high" />
+      <div class="guide-hero__shade"></div>
+      <div class="guide-top frame">
+        <a class="guide-wordmark" href="/" aria-label="The Open Sky home">THE OPEN SKY</a>
+        <a class="guide-language" href={lang === 'ru' ? '/en/free/free-guide' : '/free/free-guide'}>{copy.switch}</a>
       </div>
 
-      <aside class="guide-form-wrap" aria-label={copy.formLabel}>
-        <p class="guide-form-kicker">{copy.formLabel}</p>
-        <LeadForm lang={lang} slug={slug} />
-        <p class="guide-privacy">{copy.privacy}</p>
-      </aside>
+      <div class="guide-hero__content frame">
+        <div class="guide-copy">
+          <p class="guide-eyebrow"><span></span>{copy.eyebrow}</p>
+          <h1 set:html={copy.title} />
+          <p class="guide-lead">{copy.lead}</p>
+          <div class="guide-rule"></div>
+          <p class="guide-body">{copy.body}</p>
+          <p class="guide-note">{copy.note}</p>
+          <p class="guide-signature">{copy.footer}</p>
+        </div>
+
+        <aside class="guide-form-wrap" aria-label={copy.formLabel}>
+          <p class="guide-form-kicker">{copy.formLabel}</p>
+          <LeadForm lang={lang} slug={slug} />
+          <p class="guide-privacy">{lang === 'ru' ? 'Твои данные останутся конфиденциальными. Маркетинговая подписка — только по желанию.' : 'Your details stay private. Marketing emails are entirely optional.'}</p>
+        </aside>
+      </div>
+      <div class="guide-scroll" aria-hidden="true"><span></span></div>
     </section>
 
-    <div class="guide-bottom frame">
+    <section class="guide-after frame">
+      <div class="guide-after__image">
+        <img src="https://images.pexels.com/photos/35978670/pexels-photo-35978670/free-photo-of-historic-indian-temple-architecture-in-daylight.jpeg?auto=compress&cs=tinysrgb&w=1200" alt={lang === 'ru' ? 'Древняя индийская храмовая архитектура' : 'Ancient Indian temple architecture'} loading="lazy" />
+      </div>
+      <div class="guide-after__copy">
+        <p class="guide-after__eyebrow">A MOMENT TO RETURN</p>
+        <h2>{copy.imageTitle}</h2>
+        <p>{copy.imageText}</p>
+        <div class="guide-after__line"></div>
+        <span>{copy.photoCredit}</span>
+      </div>
+    </section>
+    <footer class="guide-bottom frame">
       <span>THE OPEN SKY</span>
-      <a href={lang === 'ru' ? '/en/free/free-guide' : '/free/free-guide'}>{copy.switch}</a>
       <span>BY YAKOV RAJUNA</span>
-    </div>
+      <a href={lang === 'ru' ? '/en/free/free-guide' : '/free/free-guide'}>{copy.switch}</a>
+    </footer>
   </main>
 </PageLayout>
 
 <style>
-  .guide-page {
-    position: relative; isolation: isolate; min-height: min(900px, calc(100svh - 80px));
-    overflow: hidden; color: #30271e;
-    background: radial-gradient(ellipse 52% 70% at 83% 20%, rgba(229,190,119,.42), transparent 72%),
-      radial-gradient(ellipse 36% 48% at 12% 78%, rgba(205,173,126,.20), transparent 76%),
-      linear-gradient(118deg, #f8f4eb 0%, #f2e8d5 54%, #e8d6b8 100%);
-  }
-  .guide-atmosphere { position:absolute; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
-  .guide-sun { position:absolute; width:min(42vw,590px); aspect-ratio:1; border-radius:50%; right:7%; top:3%;
-    background:radial-gradient(circle,rgba(255,246,218,.92) 0%,rgba(233,193,122,.44) 43%,rgba(190,137,72,0) 72%); filter:blur(2px); }
-  .guide-arch { position:absolute; right:8%; bottom:-22%; width:min(38vw,500px); height:78%;
-    border:1px solid rgba(112,78,43,.15); border-bottom:0; border-radius:48% 48% 0 0 / 34% 34% 0 0; transform:rotate(-5deg); }
-  .guide-arch--inner { right:13%; bottom:-24%; width:min(28vw,365px); height:70%; border-color:rgba(112,78,43,.10); }
-  .guide-horizon { position:absolute; left:0; right:0; bottom:0; height:24%; background:linear-gradient(180deg,transparent,rgba(139,104,65,.10));
-    clip-path:polygon(0 55%,18% 26%,35% 62%,52% 18%,70% 58%,86% 30%,100% 54%,100% 100%,0 100%); }
-  .guide-hero { min-height:min(790px,calc(100svh - 130px)); display:grid;
-    grid-template-columns:minmax(0,1.08fr) minmax(350px,.72fr); align-items:center;
-    gap:clamp(64px,10vw,150px); padding-top:clamp(100px,13vh,150px); padding-bottom:clamp(72px,10vh,120px); }
-  .guide-copy { max-width:650px; padding-bottom:18px; }
-  .guide-eyebrow,.guide-form-kicker,.guide-bottom { font-family:var(--mark); font-size:9px; font-weight:600;
-    letter-spacing:.23em; text-transform:uppercase; color:#8d6b43; }
-  .guide-eyebrow { display:flex; align-items:center; gap:13px; margin:0 0 35px; }
+  .guide-page { color:#30271e; background:#f5efe4; }
+  .guide-hero { position:relative; isolation:isolate; min-height:min(850px,calc(100svh - 80px)); overflow:hidden; display:flex; flex-direction:column; }
+  .guide-hero__photo { position:absolute; z-index:-2; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 53%; }
+  .guide-hero__shade { position:absolute; z-index:-1; inset:0; background:
+    linear-gradient(90deg,rgba(246,239,225,.94) 0%,rgba(246,239,225,.84) 35%,rgba(246,239,225,.42) 62%,rgba(29,22,15,.12) 100%),
+    linear-gradient(0deg,rgba(27,21,15,.48) 0%,transparent 24%,transparent 75%,rgba(27,21,15,.14) 100%); }
+  .guide-top { width:100%; display:flex; align-items:center; justify-content:space-between; padding-top:26px; }
+  .guide-wordmark { font-family:var(--serif); font-size:15px; letter-spacing:.24em; color:#493522; }
+  .guide-language { font-family:var(--mark); font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:#493522; border-bottom:1px solid rgba(73,53,34,.4); padding-bottom:5px; }
+  .guide-hero__content { flex:1; width:100%; display:grid; grid-template-columns:minmax(0,1.08fr) minmax(330px,.72fr); align-items:center; gap:clamp(50px,8vw,120px); padding-top:72px; padding-bottom:100px; }
+  .guide-copy { max-width:650px; }
+  .guide-eyebrow,.guide-form-kicker,.guide-after__eyebrow,.guide-bottom { font-family:var(--mark); font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; }
+  .guide-eyebrow { display:flex; align-items:center; gap:13px; margin:0 0 30px; color:#8b6338; }
   .guide-eyebrow span { width:28px; height:1px; background:#a77b45; }
-  .guide-copy h1 { max-width:700px; margin:0; color:#2b241c; font-family:var(--serif);
-    font-size:clamp(64px,8.2vw,118px); line-height:.92; font-weight:400; letter-spacing:-.045em; }
-  .guide-copy h1 em { color:#9c7040; font-weight:400; }
-  .guide-lead { max-width:480px; margin:34px 0 0; color:#54483a; font-family:var(--display);
-    font-size:clamp(22px,2.15vw,30px); line-height:1.35; font-weight:400; }
-  .guide-rule { width:52px; height:1px; margin:34px 0 24px; background:#b18a58; }
-  .guide-body { max-width:455px; margin:0; color:#625747; font-size:15px; line-height:1.9; font-weight:300; }
-  .guide-note { margin:30px 0 0; color:#94764f; font-family:var(--serif); font-size:18px; font-style:italic; }
-  .guide-signature { margin:48px 0 0; color:#8a7964; font-family:var(--serif); font-size:17px; font-style:italic; }
-  .guide-form-wrap { position:relative; width:100%; max-width:440px; justify-self:end; padding:clamp(30px,4vw,48px);
-    background:rgba(250,247,240,.62); border:1px solid rgba(125,91,53,.18);
-    box-shadow:0 28px 80px rgba(87,61,33,.08); backdrop-filter:blur(14px); }
-  .guide-form-kicker { margin:0 0 28px; color:#a17b4d; }
-  .guide-privacy { margin:22px 0 0; color:#8a7b68; font-size:11px; line-height:1.7; }
-  .guide-bottom { display:flex; justify-content:space-between; gap:20px; padding-top:18px; padding-bottom:26px;
-    border-top:1px solid rgba(91,69,44,.13); color:rgba(91,69,44,.58); font-size:8px; letter-spacing:.2em; }
-  .guide-bottom a { color:inherit; border-bottom:1px solid rgba(91,69,44,.25); }
+  .guide-copy h1 { max-width:690px; margin:0; color:#33271c; font-family:var(--serif); font-size:clamp(62px,7.1vw,104px); line-height:.94; font-weight:400; letter-spacing:-.045em; text-wrap:balance; }
+  .guide-copy h1 em { display:block; color:#986d40; font-style:italic; font-weight:400; }
+  .guide-lead { max-width:500px; margin:27px 0 0; color:#514335; font-family:var(--serif); font-size:clamp(22px,2.1vw,29px); line-height:1.32; font-weight:400; }
+  .guide-rule { width:52px; height:1px; margin:28px 0 20px; background:#b18a58; }
+  .guide-body { max-width:470px; margin:0; color:#5f5244; font-family:var(--sans); font-size:14px; line-height:1.85; font-weight:400; }
+  .guide-note { margin:25px 0 0; color:#8b6a46; font-family:var(--serif); font-size:18px; font-style:italic; }
+  .guide-signature { margin:34px 0 0; color:#75624d; font-family:var(--serif); font-size:16px; font-style:italic; }
+  .guide-form-wrap { width:100%; max-width:430px; justify-self:end; padding:clamp(28px,3.5vw,42px); background:rgba(249,245,236,.91); border:1px solid rgba(255,255,255,.72); box-shadow:0 24px 80px rgba(30,22,14,.20); backdrop-filter:blur(18px); }
+  .guide-form-kicker { margin:0 0 25px; color:#967047; }
+  .guide-privacy { margin:18px 0 0; color:#83735f; font-family:var(--sans); font-size:10px; line-height:1.65; }
+  .guide-scroll { position:absolute; bottom:24px; left:50%; width:1px; height:38px; background:rgba(255,255,255,.35); }
+  .guide-scroll span { display:block; width:1px; height:18px; background:#fff; }
+  .guide-after { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr); gap:clamp(40px,8vw,120px); align-items:center; padding-top:clamp(80px,11vw,145px); padding-bottom:clamp(80px,11vw,145px); }
+  .guide-after__image { position:relative; overflow:hidden; aspect-ratio:16/10; background:#c7b69b; }
+  .guide-after__image img { width:100%; height:100%; object-fit:cover; object-position:center 48%; transition:transform 1.2s ease; }
+  .guide-after__image:hover img { transform:scale(1.025); }
+  .guide-after__copy { max-width:420px; }
+  .guide-after__eyebrow { color:#9a754c; font-size:8px; margin:0 0 24px; }
+  .guide-after__copy h2 { font-family:var(--serif); font-weight:400; font-size:clamp(34px,4vw,54px); line-height:1.04; letter-spacing:-.035em; color:#352a20; margin:0; }
+  .guide-after__copy p { margin:22px 0 0; color:#716251; font-family:var(--sans); font-size:14px; line-height:1.85; }
+  .guide-after__line { width:44px; height:1px; background:#b18a58; margin:28px 0 16px; }
+  .guide-after__copy span { color:#9b8b78; font-family:var(--sans); font-size:9px; letter-spacing:.03em; }
+  .guide-bottom { display:flex; justify-content:space-between; gap:20px; padding-top:20px; padding-bottom:26px; border-top:1px solid rgba(91,69,44,.16); color:rgba(91,69,44,.62); font-size:8px; letter-spacing:.18em; }
+  .guide-bottom a { border-bottom:1px solid rgba(91,69,44,.28); }
   @media(max-width:900px) {
-    .guide-hero { grid-template-columns:1fr; gap:56px; min-height:auto; }
-    .guide-copy { max-width:700px; } .guide-form-wrap { justify-self:start; max-width:560px; }
-    .guide-sun { width:75vw; right:-18%; top:5%; } .guide-arch { width:70vw; right:-10%; }
+    .guide-hero { min-height:auto; }
+    .guide-hero__shade { background:linear-gradient(90deg,rgba(246,239,225,.94),rgba(246,239,225,.78) 62%,rgba(246,239,225,.42)),linear-gradient(0deg,rgba(27,21,15,.35),transparent 30%); }
+    .guide-hero__content { grid-template-columns:1fr; gap:48px; padding-top:80px; padding-bottom:100px; }
+    .guide-copy { max-width:700px; }
+    .guide-form-wrap { justify-self:start; max-width:560px; }
+    .guide-after { grid-template-columns:1fr; gap:34px; }
+    .guide-after__image { max-height:480px; }
+    .guide-after__copy { max-width:600px; }
   }
   @media(max-width:560px) {
-    .guide-hero { padding-top:94px; gap:44px; }
-    .guide-eyebrow { font-size:8px; letter-spacing:.16em; margin-bottom:26px; }
-    .guide-copy h1 { font-size:clamp(58px,15vw,82px); }
-    .guide-lead { margin-top:25px; font-size:23px; }
-    .guide-body { font-size:14px; } .guide-form-wrap { padding:27px 22px; }
-    .guide-bottom { font-size:7px; }
+    .guide-hero__photo { object-position:58% center; }
+    .guide-hero__shade { background:linear-gradient(90deg,rgba(246,239,225,.94),rgba(246,239,225,.78)),linear-gradient(0deg,rgba(27,21,15,.32),transparent 35%); }
+    .guide-top { padding-top:22px; }
+    .guide-wordmark { font-size:12px; }
+    .guide-hero__content { padding-top:75px; gap:38px; }
+    .guide-eyebrow { font-size:8px; letter-spacing:.16em; margin-bottom:24px; }
+    .guide-copy h1 { font-size:clamp(54px,13.5vw,76px); line-height:.98; }
+    .guide-lead { margin-top:22px; font-size:23px; }
+    .guide-body { font-size:13px; }
+    .guide-form-wrap { padding:26px 21px; }
+    .guide-after { padding-top:72px; padding-bottom:72px; }
+    .guide-bottom { font-size:7px; flex-wrap:wrap; }
   }
-  @media(prefers-reduced-motion:reduce) { .guide-page * { scroll-behavior:auto!important; transition-duration:.01ms!important; } }
+  @media(prefers-reduced-motion:reduce) { .guide-page * { transition-duration:.01ms!important; } }
 </style>
