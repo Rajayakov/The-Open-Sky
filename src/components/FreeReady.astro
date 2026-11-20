@@ -50,7 +50,9 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
       <img class="ready-hero__photo" src="https://himshiva.com/assets/hero-himalaya-C9X-BYvk.jpg" alt={lang === 'ru' ? 'Гималайские вершины и храм на рассвете' : 'Himalayan peaks and a temple at sunrise'} fetchpriority="high" />
       <div class="ready-hero__veil"></div>
       <header class="ready-top frame">
-        <a class="ready-wordmark" href="/" aria-label="The Open Sky home">THE OPEN SKY</a>
+        <a class="ready-logo" href="/" aria-label="The Open Sky home">
+          <img class="ready-wordmark" src="/brand/open-sky-logo.webp" width="420" height="187" alt="The Open Sky" decoding="async" />
+        </a>
         <span class="ready-top__by">BY YAKOV RAJUNA</span>
       </header>
 
@@ -179,12 +181,23 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
     justify-content: space-between;
     padding-top: 29px;
   }
+  /* Logo on its own light plate so it never reads darkened against the
+     photo hero, with a soft gold glow */
+  .ready-logo {
+    display: flex;
+    align-items: center;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: rgba(253, 250, 244, 0.97);
+    border: 1px solid rgba(214, 180, 106, 0.4);
+    box-shadow: 0 2px 16px rgba(46, 42, 36, 0.14), 0 0 22px rgba(214, 180, 106, 0.35);
+    transition: box-shadow 300ms ease;
+  }
+  .ready-logo:hover { box-shadow: 0 2px 16px rgba(46, 42, 36, 0.14), 0 0 30px rgba(214, 180, 106, 0.55); }
   .ready-wordmark {
-    font-family: var(--ready-sans);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .2em;
-    color: #47351f;
+    display: block;
+    height: 26px;
+    width: auto;
   }
   .ready-top__by {
     font-family: var(--ready-sans);
@@ -380,7 +393,7 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
                   linear-gradient(0deg,rgba(73,48,23,.22),transparent 45%);
     }
     .ready-top { padding-top: 21px; }
-    .ready-wordmark { font-size: 10px; }
+    .ready-wordmark { height: 20px; }
     .ready-top__by { font-size: 7px; letter-spacing: .12em; }
     .ready-content { padding-top: 52px; gap: 30px; }
     .ready-eyebrow { font-size: 8px; letter-spacing: .15em; margin-bottom: 21px; }
