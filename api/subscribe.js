@@ -74,7 +74,9 @@ export default async function handler(req, res) {
   const proto = /^localhost/.test(host) ? 'http' : 'https';
   const prefix = lang === 'en' ? '/en' : '';
   // Адрес со знаком доступа знает только Brevo: человек увидит его после клика по ссылке подтверждения.
-  const redirectionUrl = `${proto}://${host}${prefix}/free/${material.slug}/ready?t=${makeToken(material.slug, lang)}`;
+  const isFirst = materials.materials[0].slug === material.slug;
+  const path = isFirst ? '/free/ok' : `/free/${material.slug}/ready`;
+  const redirectionUrl = `${proto}://${host}${prefix}${path}?t=${makeToken(material.slug, lang)}`;
 
   try {
     const r = await fetch(BREVO_URL, {
