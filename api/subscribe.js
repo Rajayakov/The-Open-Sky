@@ -54,7 +54,7 @@ export default async function handler(req, res) {
   const firstName = String(b.firstName || '').trim().slice(0, 80);
   const lang = b.lang === 'en' ? 'en' : 'ru';
   const material = materials.materials.find((m) => m.slug === b.slug);
-  if (!EMAIL_RE.test(email) || email.length > 200 || !firstName || !material) {
+  if (!EMAIL_RE.test(email) || email.length > 200 || !firstName || !material || b.consent !== true) {
     return json(res, 400, { ok: false, error: 'invalid' });
   }
   const source = String(b.source || 'direct').replace(/[^\w.\-:/]/g, '').slice(0, 100) || 'direct';
