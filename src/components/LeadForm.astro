@@ -153,5 +153,23 @@ const T = {
   .lead-form .btn span { font-size:18px; line-height:1; }
   .lead-form .btn:disabled { opacity:.55; cursor:wait; transform:none; }
   .lead-form__msg { min-height:1.5em; margin:0; color:#69563e; font-family:'DM Sans',Arial,sans-serif; font-size:11px; line-height:1.55; }
-  @media(max-width:560px) { .lead-form { gap:14px; } .lead-form__title { font-size:30px; } }
+  @media(max-width:560px) {
+    .lead-form { gap:10px; }
+    .lead-form__eyebrow { font-size:7px; letter-spacing:.16em; }
+    .lead-form__title { font-size:25px; line-height:1.05; margin:-4px 0 2px; }
+    .lead-form__field { gap:5px; font-size:10px; }
+    .lead-form__field input[type="text"], .lead-form__field input[type="email"] {
+      min-height:43px;
+      padding:0 13px;
+      font-size:14px;
+      border-radius:5px;
+    }
+    .lead-form__field small { font-size:8px; line-height:1.35; }
+    .lead-form__consent { gap:8px; font-size:9px; line-height:1.45; }
+    .lead-form__consent input { width:15px; height:15px; margin-top:1px; }
+    .lead-form__consent small { font-size:8px; line-height:1.4; margin-top:3px; }
+    .lead-form .btn { min-height:46px; margin-top:1px; padding:12px 15px; border-radius:5px; font-size:9px; letter-spacing:.1em; }
+    .lead-form .btn span { font-size:16px; }
+    .lead-form__msg { min-height:1.2em; font-size:10px; line-height:1.45; }
+  }
 </style>
