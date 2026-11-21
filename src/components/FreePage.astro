@@ -12,11 +12,11 @@ const copy = {
     brandName: 'Открытое небо',
     by: 'ЯКОВ РАДЖУНА',
     tagline: 'ЖИВОЕ ПОЛЕ ТРАНСФОРМАЦИИ',
-    signature: 'С любовью, Яков',
+    signature: 'С уважением, Яков',
     title: 'Путь к Себе',
     accent: 'начинается здесь',
     lead: 'Пространство ясности, энергии и внутренней опоры.',
-    body: 'Я собрал этот материал, чтобы поделиться с тобой практиками, которые помогают замедлиться, вернуться в присутствие и восстановить контакт с собой. Без спешки. В своём ритме.',
+    body: 'Здравствуй, делюсь с тобой практиками, которые помогут замедлиться, вернуться в присутствие и восстановить контакт с собой. Без спешки. В своём ритме. Во Благо.',
     formLabel: 'ТВОЙ ПЕРВЫЙ ШАГ',
     privacy: 'Твои данные останутся конфиденциальными.',
   },
@@ -24,11 +24,11 @@ const copy = {
     brandName: 'The Open Sky',
     by: 'BY YAKOV RAJUNA',
     tagline: 'THE LIVING FIELD OF TRANSFORMATION',
-    signature: 'With love, Yakov',
+    signature: 'With respect, Yakov',
     title: 'The Path Back',
     accent: 'to Yourself',
     lead: 'A space of clarity, energy and inner grounding.',
-    body: 'I’ve put together this guide to share with you practices that can help you slow down, return to the present moment and reconnect with yourself. No rush. At your own pace.',
+    body: 'Hello. I’m sharing practices with you that will help you slow down, return to the present moment and reconnect with yourself. No rush. At your own pace. For the good of all.',
     formLabel: 'YOUR FIRST STEP',
     privacy: 'Your details stay private.',
   },
@@ -173,16 +173,17 @@ const copy = {
     color: #927044;
   }
   .guide-eyebrow span { width: 32px; height: 1px; background: #a9834f; }
+  .guide-copy { container-type: inline-size; }
   .guide-copy h1 {
     max-width: 720px;
     margin: 0;
     color: #3c2d1e;
     font-family: var(--guide-serif);
-    font-size: clamp(64px,7.1vw,106px);
+    font-size: min(100px, calc(100cqi / 7));
     line-height: .99;
+    white-space: nowrap;
     font-weight: 500;
     letter-spacing: -.045em;
-    text-wrap: balance;
   }
   .guide-copy h1 span { display: block; color: #987348; }
   .guide-lead {
@@ -287,7 +288,7 @@ const copy = {
     .guide-top__by { font-size: 7px; letter-spacing: .12em; }
     .guide-hero__content { padding-top: 52px; gap: 30px; }
     .guide-eyebrow { font-size: 8px; letter-spacing: .15em; margin-bottom: 21px; }
-    .guide-copy h1 { font-size: clamp(53px,13vw,75px); line-height: 1; }
+    .guide-copy h1 { line-height: 1; }
     .guide-lead { margin-top: 18px; font-size: 16px; }
     .guide-body { font-size: 12px; line-height: 1.78; }
     .guide-note { font-size: 12px; }
