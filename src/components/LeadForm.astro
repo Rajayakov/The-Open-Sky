@@ -10,13 +10,12 @@ const material = materials.materials.find((m) => m.slug === slug);
 
 const T = {
   ru: {
-    label: 'Бесплатный материал',
     title: 'Начни с простого',
     email: 'Твой email',
     emailHelp: 'Например: name@mail.com',
     name: 'Как к тебе обращаться',
     nameHelp: 'Напиши своё имя',
-    consent: 'Хочу оставаться на связи с RAJUNA и получать письма с практиками, новыми материалами и приглашениями на ретриты и встречи.',
+    consent: 'Хочу оставаться на связи с Яковом и получать письма с практиками, новыми материалами и приглашениями на ретриты и встречи.',
     consentHelp: 'По желанию. Материал будет доступен тебе и без подписки.',
     button: 'Получить материал',
     sending: 'Отправляю…',
@@ -25,13 +24,12 @@ const T = {
     error: 'Что-то пошло не так. Попробуй ещё раз чуть позже.',
   },
   en: {
-    label: 'A free resource',
     title: 'Begin with a simple step',
     email: 'Your email address',
     emailHelp: 'For example: name@mail.com',
     name: 'Your name',
     nameHelp: 'First name',
-    consent: "I'd like to stay connected with RAJUNA and receive emails with practices, new resources and invitations to retreats and gatherings.",
+    consent: "I'd like to stay connected with Yakov and receive emails with practices, new resources and invitations to retreats and gatherings.",
     consentHelp: "Optional. You'll receive the guide even if you leave this unchecked.",
     button: 'Receive the Guide',
     sending: 'Sending…',
@@ -45,7 +43,6 @@ const T = {
 {material && (
   <form class="lead-form" id="lead-form" novalidate data-lang={lang} data-slug={slug}
         data-ok={T.ok} data-invalid={T.invalid} data-error={T.error} data-sending={T.sending}>
-    <span class="lead-form__eyebrow">{T.label}</span>
     <h2 class="lead-form__title">{T.title}</h2>
 
     <label class="lead-form__field">

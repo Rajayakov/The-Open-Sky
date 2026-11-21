@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import '../styles/global.css';
 import materials from '../data/materials.json';
 
 export interface Props { lang: 'ru' | 'en'; slug: string; }
@@ -8,11 +9,13 @@ const m = materials.materials.find((x) => x.slug === slug)!;
 const T = {
   ru: {
     brandName: 'Открытое небо',
-    eyebrow: 'THE OPEN SKY · ЖИВОЕ ПОЛЕ ТРАНСФОРМАЦИИ',
+    by: 'ЯКОВ РАДЖУНА',
+    tagline: 'ЖИВОЕ ПОЛЕ ТРАНСФОРМАЦИИ',
+    signature: 'С любовью, Яков',
     title: 'Письмо подтверждено.',
     accent: 'Материал уже здесь.',
     lead: 'Спасибо за доверие. Теперь можно перейти к практике.',
-    body: 'Твой адрес подтверждён. Материал доступен по кнопке справа. Сохрани эту страницу, чтобы вернуться к нему позже.',
+    body: 'Твой адрес подтверждён. Материал доступен по кнопке. Сохрани эту страницу, чтобы вернуться к нему позже.',
     cardKicker: 'ТВОЙ МАТЕРИАЛ ГОТОВ',
     loading: 'Готовим доступ…',
     open: 'Открыть материал',
@@ -21,16 +24,16 @@ const T = {
     locked: 'Для доступа сначала подтверди email по ссылке из письма.',
     form: 'Вернуться к форме',
     error: 'Не получилось загрузить материал. Попробуй ещё раз чуть позже.',
-    features: ['Доступ после подтверждения email', 'Открой материал в удобное время', 'Сохрани страницу для возвращения'],
-    footer: 'Yakov Rajuna',
   },
   en: {
     brandName: 'The Open Sky',
-    eyebrow: 'THE OPEN SKY · THE LIVING FIELD OF TRANSFORMATION',
+    by: 'BY YAKOV RAJUNA',
+    tagline: 'THE LIVING FIELD OF TRANSFORMATION',
+    signature: 'With love, Yakov',
     title: 'Email confirmed.',
     accent: 'Your guide is ready.',
     lead: 'Thank you for being here. You can now move into the practice.',
-    body: 'Your email address has been confirmed. Your resource is available through the button on the right. Bookmark this page to return to it later.',
+    body: 'Your email address has been confirmed. Your resource is available through the button. Bookmark this page to return to it later.',
     cardKicker: 'YOUR RESOURCE IS READY',
     loading: 'Preparing your access…',
     open: 'Open the guide',
@@ -39,8 +42,6 @@ const T = {
     locked: 'To access the guide, please confirm your email using the link we sent you.',
     form: 'Back to the form',
     error: 'We could not load the material. Please try again a little later.',
-    features: ['Access after email confirmation', 'Open the guide whenever it suits you', 'Bookmark this page for later'],
-    footer: 'Yakov Rajuna',
   },
 }[lang];
 const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
@@ -54,19 +55,17 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
       <header class="ready-top frame">
         <a class="ready-logo" href="/" aria-label="The Open Sky home">
           <img class="ready-logo-icon" src="/brand/logo-icon.webp" width="498" height="300" alt="" decoding="async" />
-          <span class="ready-wordmark">{T.brandName}</span>
+          <span class="ready-brand"><span class="ready-wordmark">{T.brandName}</span><span class="ready-brand__sub">{T.by}</span><span class="ready-brand__sub">{T.tagline}</span></span>
         </a>
-        <span class="ready-top__by">BY YAKOV RAJUNA</span>
       </header>
 
       <div class="ready-content frame">
         <div class="ready-copy">
-          <p class="ready-eyebrow"><span></span>{T.eyebrow}</p>
           <h1>{T.title}<span>{T.accent}</span></h1>
           <p class="ready-lead">{T.lead}</p>
           <div class="ready-rule"></div>
           <p class="ready-body">{T.body}</p>
-          <p class="ready-signature">{T.footer}</p>
+          <p class="ready-signature">{T.signature}</p>
         </div>
 
         <aside class="ready-card" aria-live="polite">
@@ -85,14 +84,6 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
         </aside>
       </div>
 
-      <div class="ready-features frame">
-        {T.features.map((feature, i) => (
-          <div class="ready-feature">
-            <span class="ready-feature__number">0{i + 1}</span>
-            <span>{feature}</span>
-          </div>
-        ))}
-      </div>
     </section>
   </main>
 </Base>
@@ -208,6 +199,15 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
     text-shadow: 0 1px 6px rgba(20, 16, 12, 0.55), 0 0 14px rgba(20, 16, 12, 0.35);
   }
   .ready-logo:hover .ready-logo-icon { filter: drop-shadow(0 2px 8px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 20px rgba(255, 205, 110, 0.65)); }
+  .ready-brand { display: grid; gap: 4px; }
+  .ready-brand__sub {
+    font-family: var(--ready-sans);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    color: rgba(247, 242, 232, .86);
+    text-shadow: 0 1px 6px rgba(20, 16, 12, .6);
+  }
   .ready-top__by {
     font-family: var(--ready-sans);
     font-size: 9px;

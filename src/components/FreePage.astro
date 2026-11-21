@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import '../styles/global.css';
 import LeadForm from './LeadForm.astro';
 import materials from '../data/materials.json';
 
@@ -9,28 +10,26 @@ const m = materials.materials.find((x) => x.slug === slug)!;
 const copy = {
   ru: {
     brandName: 'Открытое небо',
-    eyebrow: 'THE OPEN SKY · ЖИВОЕ ПОЛЕ ТРАНСФОРМАЦИИ',
+    by: 'ЯКОВ РАДЖУНА',
+    tagline: 'ЖИВОЕ ПОЛЕ ТРАНСФОРМАЦИИ',
+    signature: 'С любовью, Яков',
     title: 'Путь к Себе',
     accent: 'начинается здесь',
-    lead: 'Пространство для ясности, энергии и внутренней опоры.',
-    body: 'Я собрал этот материал, чтобы поделиться практиками, которые помогают замедлиться, вернуться в присутствие и восстановить контакт с собой. Без спешки. В своём ритме.',
-    note: 'Начни с малого. Дай себе пространство.',
+    lead: 'Пространство ясности, энергии и внутренней опоры.',
+    body: 'Я собрал этот материал, чтобы поделиться с тобой практиками, которые помогают замедлиться, вернуться в присутствие и восстановить контакт с собой. Без спешки. В своём ритме.',
     formLabel: 'ТВОЙ ПЕРВЫЙ ШАГ',
-    footer: 'Yakov Rajuna',
-    features: ['Практики для повседневной жизни', 'В своём ритме, без спешки', 'Доступ к материалу на почте'],
     privacy: 'Твои данные останутся конфиденциальными. Подписка на письма — только по желанию.',
   },
   en: {
     brandName: 'The Open Sky',
-    eyebrow: 'THE OPEN SKY · THE LIVING FIELD OF TRANSFORMATION',
+    by: 'BY YAKOV RAJUNA',
+    tagline: 'THE LIVING FIELD OF TRANSFORMATION',
+    signature: 'With love, Yakov',
     title: 'The Path Back',
     accent: 'to Yourself',
-    lead: 'A space for clarity, energy and inner grounding.',
-    body: 'I’ve put together this guide to share practices that can help you slow down, return to the present moment and reconnect with yourself. No rush. At your own pace.',
-    note: 'Begin simply. Make room for yourself.',
+    lead: 'A space of clarity, energy and inner grounding.',
+    body: 'I’ve put together this guide to share with you practices that can help you slow down, return to the present moment and reconnect with yourself. No rush. At your own pace.',
     formLabel: 'YOUR FIRST STEP',
-    footer: 'Yakov Rajuna',
-    features: ['Practices for everyday life', 'At your own pace, without rush', 'Your guide delivered by email'],
     privacy: 'Your details stay private. Marketing emails are entirely optional.',
   },
 }[lang];
@@ -43,42 +42,28 @@ const copy = {
       <header class="guide-top frame">
         <a class="guide-logo" href="/" aria-label="The Open Sky home">
           <img class="guide-logo-icon" src="/brand/logo-icon.webp" width="498" height="300" alt="" decoding="async" />
-          <span class="guide-wordmark">{copy.brandName}</span>
+          <span class="guide-brand"><span class="guide-wordmark">{copy.brandName}</span><span class="guide-brand__sub">{copy.by}</span><span class="guide-brand__sub">{copy.tagline}</span></span>
         </a>
-        <span style="display:flex; gap: 18px; align-items:center;">
-          <span class="guide-top__by">BY YAKOV RAJUNA</span>
           {lang === 'ru'
             ? <a class="guide-top__by" href="/en/free" style="padding:10px 12px; margin-right:-12px; text-decoration:none;">EN</a>
             : <a class="guide-top__by" href="/free?lang=ru" style="padding:10px 12px; margin-right:-12px; text-decoration:none;">RU</a>}
-        </span>
       </header>
 
       <div class="guide-hero__content frame">
         <div class="guide-copy">
-          <p class="guide-eyebrow"><span></span>{copy.eyebrow}</p>
           <h1>{copy.title}<span>{copy.accent}</span></h1>
           <p class="guide-lead">{copy.lead}</p>
           <div class="guide-rule"></div>
           <p class="guide-body">{copy.body}</p>
-          <p class="guide-note">{copy.note}</p>
-          <p class="guide-signature">{copy.footer}</p>
+          <p class="guide-signature">{copy.signature}</p>
         </div>
 
         <aside class="guide-form-wrap" aria-label={copy.formLabel}>
-          <p class="guide-form-kicker">{copy.formLabel}</p>
           <LeadForm lang={lang} slug={slug} />
           <p class="guide-privacy">{copy.privacy}</p>
         </aside>
       </div>
 
-      <div class="guide-features frame">
-        {copy.features.map((feature, i) => (
-          <div class="guide-feature">
-            <span class="guide-feature__number">0{i + 1}</span>
-            <span>{feature}</span>
-          </div>
-        ))}
-      </div>
     </section>
   </main>
 </Base>
@@ -148,6 +133,15 @@ const copy = {
     text-shadow: 0 1px 6px rgba(20, 16, 12, 0.55), 0 0 14px rgba(20, 16, 12, 0.35);
   }
   .guide-logo:hover .guide-logo-icon { filter: drop-shadow(0 2px 8px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 20px rgba(255, 205, 110, 0.65)); }
+  .guide-brand { display: grid; gap: 4px; }
+  .guide-brand__sub {
+    font-family: var(--guide-sans);
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: .2em;
+    color: rgba(247, 242, 232, .86);
+    text-shadow: 0 1px 6px rgba(20, 16, 12, .6);
+  }
   .guide-top__by {
     font-family: var(--guide-sans);
     font-size: 9px;
