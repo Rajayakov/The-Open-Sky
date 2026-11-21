@@ -15,8 +15,6 @@ const T = {
     emailHelp: 'Например: name@mail.com',
     name: 'Как к тебе обращаться',
     nameHelp: 'Напиши своё имя',
-    consent: 'Хочу оставаться на связи с Яковом и получать письма с практиками, новыми материалами и приглашениями на ретриты и встречи.',
-    needConsent: 'Отметь галочку, чтобы получить материал.',
     button: 'Получить материал',
     sending: 'Отправляю…',
     ok: 'Благодарю тебя. Проверь почту — там письмо с подтверждением. Нажми на кнопку внутри, и материал откроется для тебя.',
@@ -29,8 +27,6 @@ const T = {
     emailHelp: 'For example: name@mail.com',
     name: 'Your name',
     nameHelp: 'First name',
-    consent: "I'd like to stay connected with Yakov and receive emails with practices, new resources and invitations to retreats and gatherings.",
-    needConsent: 'Please tick the box to receive the guide.',
     button: 'Receive the Guide',
     sending: 'Sending…',
     ok: 'Thank you. Please check your inbox for a confirmation email. Click the button inside, and your guide will be ready for you.',
@@ -42,7 +38,7 @@ const T = {
 
 {material && (
   <form class="lead-form" id="lead-form" novalidate data-lang={lang} data-slug={slug}
-        data-ok={T.ok} data-invalid={T.invalid} data-need-consent={T.needConsent} data-error={T.error} data-sending={T.sending}>
+        data-ok={T.ok} data-invalid={T.invalid} data-error={T.error} data-sending={T.sending}>
     <h2 class="lead-form__title">{T.title}</h2>
 
     <label class="lead-form__field">
@@ -61,10 +57,6 @@ const T = {
       <input type="text" name="website" tabindex="-1" autocomplete="off" />
     </div>
 
-    <label class="lead-form__consent">
-      <input type="checkbox" name="consent" required />
-      <span>{T.consent}</span>
-    </label>
 
     <button type="submit" class="btn btn--warm" data-label={T.button}>{T.button}<span aria-hidden="true">↗</span></button>
     <p class="lead-form__msg t-body" role="status" aria-live="polite"></p>
@@ -86,10 +78,6 @@ const T = {
       const fd = new FormData(form);
       const email = String(fd.get('email') || '').trim();
       const firstName = String(fd.get('firstName') || '').trim();
-      if (fd.get('consent') !== 'on') {
-        msg.textContent = form.dataset.needConsent || '';
-        return;
-      }
       if (!firstName || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
         msg.textContent = form.dataset.invalid || '';
         return;
@@ -103,7 +91,6 @@ const T = {
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({
             firstName, email,
-            consent: fd.get('consent') === 'on',
             website: fd.get('website') || '',
             slug: form.dataset.slug,
             lang: form.dataset.lang,
