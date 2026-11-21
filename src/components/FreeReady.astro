@@ -244,10 +244,10 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
     margin: 0;
     color: #3c2d1e;
     font-family: var(--ready-serif);
-    font-size: clamp(62px,6.5vw,98px);
-    line-height: .99;
+    font-size: clamp(48px,5.15vw,74px);
+    line-height: 1.04;
     font-weight: 500;
-    letter-spacing: -.045em;
+    letter-spacing: -.04em;
     text-wrap: balance;
   }
   .ready-copy h1 span { display: block; color: #987348; }
@@ -404,7 +404,17 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
     .ready-top__by { font-size: 7px; letter-spacing: .12em; }
     .ready-content { padding-top: 52px; gap: 30px; }
     .ready-eyebrow { font-size: 8px; letter-spacing: .15em; margin-bottom: 21px; }
-    .ready-copy h1 { font-size: clamp(50px,12vw,70px); line-height: 1; }
+    .ready-content { padding-top: 42px; gap: 25px; }
+    .ready-copy h1 {
+      max-width: 520px;
+      font-size: clamp(37px,9.4vw,48px);
+      line-height: 1.06;
+      letter-spacing: -.038em;
+    }
+    .ready-lead { margin-top: 16px; font-size: 15px; line-height: 1.48; }
+    .ready-rule { margin: 20px 0 14px; }
+    .ready-body { font-size: 11px; line-height: 1.7; }
+    .ready-signature { margin-top: 18px; font-size: 9px; }
     .ready-lead { margin-top: 18px; font-size: 16px; }
     .ready-body { font-size: 12px; line-height: 1.78; }
     .ready-card { padding: 26px 20px; }
