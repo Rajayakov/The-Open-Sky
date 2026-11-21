@@ -76,7 +76,7 @@ li::marker{color:var(--gold-ink)}
 .hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;isolation:isolate}
 .hero>picture{position:absolute;inset:0;z-index:-2}.hero>picture>img{width:100%;height:100%;object-fit:cover;object-position:50% 15%;display:block}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to bottom,rgba(11,26,51,.45) 0%,rgba(11,26,51,0) 24%,rgba(11,26,51,.6) 55%,var(--navy) 95%)}
-.nav{display:flex;flex-wrap:wrap;gap:.5rem 1.3rem;padding-top:3.3rem;font-size:1.05rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-shadow:0 1px 3px rgba(11,26,51,.5)}
+.nav{display:flex;flex-wrap:wrap;gap:.5rem 1.3rem;padding-top:5.4rem;font-size:1.05rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-shadow:0 1px 3px rgba(11,26,51,.5)}
 .nav a{text-decoration:none;padding:.2rem 0;border-bottom:1px solid transparent}
 .nav a:hover{border-color:var(--gold)}
 .hero-body{padding-top:clamp(7rem,26vw,18rem);padding-bottom:clamp(2.5rem,6vw,4rem)}
@@ -301,10 +301,10 @@ li::marker{color:var(--gold-ink)}
 
 /* Language switch */
 @view-transition{navigation:auto}
-.brand{view-transition-name:brand;position:fixed;top:max(.75rem,env(safe-area-inset-top));left:max(.75rem,env(safe-area-inset-left));z-index:60;display:flex;align-items:center;gap:9px;text-decoration:none}
-.brand img{display:block;height:30px;width:auto;filter:drop-shadow(0 2px 8px rgba(11,26,51,.4)) drop-shadow(0 0 14px rgba(255,205,110,.5))}
-.brand span{font:600 15px/1 var(--serif);letter-spacing:.08em;text-transform:uppercase;color:#f7f2e8;text-shadow:0 1px 6px rgba(11,26,51,.55),0 0 14px rgba(11,26,51,.35)}
-@media (max-width:520px){.brand img{height:24px}.brand span{font-size:12px}}
+.brand{view-transition-name:brand;position:fixed;top:max(.5rem,env(safe-area-inset-top));left:max(.75rem,env(safe-area-inset-left));z-index:60;display:block;text-decoration:none}
+.brand img{display:block;width:140px;height:auto}
+
+@media (max-width:520px){.brand img{width:112px}}
 .lang{view-transition-name:lang;position:fixed;top:max(.75rem,env(safe-area-inset-top));right:max(.75rem,env(safe-area-inset-right));z-index:60;display:flex;gap:2px;padding:3px;border-radius:999px;background:rgba(11,26,51,.66);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(214,180,106,.4);font:700 .85rem/1 var(--sans);letter-spacing:.14em;box-shadow:0 2px 14px rgba(11,26,51,.25)}
 .lang a{color:var(--pale);text-decoration:none;padding:.8rem .95rem;border-radius:999px;min-width:2.9rem;text-align:center;transition:background .25s,color .25s}
 .lang a:hover{color:#fff}
@@ -334,7 +334,7 @@ html:lang(ja) .who .with{margin-right:0;margin-left:.28em;font-size:.6em}
 @media (max-width:360px){html:lang(ja) .gal-head{gap:.5rem}html:lang(ja) .gal-btn{width:2.6rem;height:2.6rem}html:lang(ja) .gal-nav{gap:.4rem}}
 </style>
 
-<a href="/" class="brand" aria-label="ジ・オープン・スカイ — ホーム"><img src="/annapurna-2027/img/logo-icon.webp" width="498" height="300" alt="" decoding="async"><span>The Open Sky</span></a>
+<a href="/" class="brand" aria-label="ジ・オープン・スカイ — ホーム"><img src="/annapurna-2027/img/logo-en.webp" width="900" height="434" alt="The Open Sky" decoding="async"></a>
 <div class="lang" role="group" aria-label="ページの言語"><a href="/mountains/annapurna-2027" hreflang="ru" lang="ru" data-lang="ru">RU</a><a href="/mountains/annapurna-2027-en" hreflang="en" lang="en" data-lang="en">EN</a><a href="/mountains/annapurna-2027-ja" hreflang="ja" lang="ja" data-lang="ja" aria-current="page">日本語</a></div>
 <header class="hero">
   <picture><source media="(max-width:700px)" srcset="/annapurna-2027/en/img/hero-m.webp"><img src="/annapurna-2027/en/img/hero.webp" alt="朝日が照らすアンナプルナ山群の雪峰" width="2000" height="965" fetchpriority="high" decoding="async"></picture>

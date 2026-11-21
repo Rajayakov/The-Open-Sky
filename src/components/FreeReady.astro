@@ -54,8 +54,7 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
       <div class="ready-hero__veil"></div>
       <header class="ready-top frame">
         <a class="ready-logo" href="/" aria-label="The Open Sky home">
-          <img class="ready-logo-icon" src="/brand/logo-icon.webp" width="498" height="300" alt="" decoding="async" />
-          <span class="ready-brand"><span class="ready-wordmark">{T.brandName}</span><span class="ready-brand__sub">{T.by}</span><span class="ready-brand__sub">{T.tagline}</span></span>
+          <img class={`ready-logo-img`} src={lang === 'ru' ? '/brand/logo-ru.webp' : '/brand/logo-en.webp'} width="900" height={lang === 'ru' ? 423 : 434} alt={T.brandName} decoding="async" />
         </a>
       </header>
 
@@ -182,30 +181,7 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
     gap: 9px;
     text-decoration: none;
   }
-  .ready-logo-icon {
-    display: block;
-    height: 30px;
-    width: auto;
-    filter: drop-shadow(0 2px 8px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 14px rgba(255, 205, 110, 0.45));
-    transition: filter 300ms ease;
-  }
-  .ready-wordmark {
-    font-family: var(--ready-serif, var(--serif));
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #47351f;
-  }
-  .ready-logo:hover .ready-logo-icon { filter: drop-shadow(0 2px 8px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 20px rgba(255, 205, 110, 0.65)); }
-  .ready-brand { display: grid; gap: 4px; }
-  .ready-brand__sub {
-    font-family: var(--ready-sans);
-    font-size: 8px;
-    font-weight: 600;
-    letter-spacing: .2em;
-    color: rgba(71, 53, 31, .82);
-  }
+  .ready-logo-img { display: block; width: 200px; height: auto; }
   .ready-top__by {
     font-family: var(--ready-sans);
     font-size: 9px;
@@ -400,7 +376,7 @@ const formHref = (lang === 'en' ? '/en' : '') + `/free/${slug}`;
                   linear-gradient(0deg,rgba(73,48,23,.22),transparent 45%);
     }
     .ready-top { padding-top: 21px; }
-    .ready-logo-icon { height: 24px; } .ready-wordmark { font-size: 12px; }
+    .ready-logo-img { width: 150px; }
     .ready-top__by { font-size: 7px; letter-spacing: .12em; }
     .ready-content { padding-top: 52px; gap: 30px; }
     .ready-eyebrow { font-size: 8px; letter-spacing: .15em; margin-bottom: 21px; }

@@ -41,8 +41,7 @@ const copy = {
       <div class="guide-hero__veil"></div>
       <header class="guide-top frame">
         <a class="guide-logo" href="/" aria-label="The Open Sky home">
-          <img class="guide-logo-icon" src="/brand/logo-icon.webp" width="498" height="300" alt="" decoding="async" />
-          <span class="guide-brand"><span class="guide-wordmark">{copy.brandName}</span><span class="guide-brand__sub">{copy.by}</span><span class="guide-brand__sub">{copy.tagline}</span></span>
+          <img class={`guide-logo-img`} src={lang === 'ru' ? '/brand/logo-ru.webp' : '/brand/logo-en.webp'} width="900" height={lang === 'ru' ? 423 : 434} alt={copy.brandName} decoding="async" />
         </a>
           {lang === 'ru'
             ? <a class="guide-top__by" href="/en/free" style="padding:10px 12px; margin-right:-12px; text-decoration:none;">EN</a>
@@ -116,30 +115,7 @@ const copy = {
     gap: 9px;
     text-decoration: none;
   }
-  .guide-logo-icon {
-    display: block;
-    height: 30px;
-    width: auto;
-    filter: drop-shadow(0 2px 8px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 14px rgba(255, 205, 110, 0.45));
-    transition: filter 300ms ease;
-  }
-  .guide-wordmark {
-    font-family: var(--guide-serif, var(--serif));
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #47351f;
-  }
-  .guide-logo:hover .guide-logo-icon { filter: drop-shadow(0 2px 8px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 20px rgba(255, 205, 110, 0.65)); }
-  .guide-brand { display: grid; gap: 4px; }
-  .guide-brand__sub {
-    font-family: var(--guide-sans);
-    font-size: 8px;
-    font-weight: 600;
-    letter-spacing: .2em;
-    color: rgba(71, 53, 31, .82);
-  }
+  .guide-logo-img { display: block; width: 200px; height: auto; }
   .guide-top__by {
     font-family: var(--guide-sans);
     font-size: 9px;
@@ -284,7 +260,7 @@ const copy = {
                   linear-gradient(0deg,rgba(73,48,23,.22),transparent 45%);
     }
     .guide-top { padding-top: 21px; }
-    .guide-logo-icon { height: 24px; } .guide-wordmark { font-size: 12px; }
+    .guide-logo-img { width: 150px; }
     .guide-top__by { font-size: 7px; letter-spacing: .12em; }
     .guide-hero__content { padding-top: 52px; gap: 30px; }
     .guide-eyebrow { font-size: 8px; letter-spacing: .15em; margin-bottom: 21px; }

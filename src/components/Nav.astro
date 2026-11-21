@@ -5,8 +5,7 @@
   <div class="nav__inner frame">
 
     <a href="/" class="nav__logo" aria-label="The Open Sky — home">
-      <img class="nav__logo-icon" src="/brand/logo-icon.webp" width="498" height="300" alt="" decoding="async" />
-      <span class="nav__wordmark">The Open Sky</span>
+      <img class="nav__logo-img" src="/brand/logo-en.webp" width="900" height="434" alt="The Open Sky" decoding="async" />
     </a>
 
     <nav class="nav__links" aria-label="Primary">
@@ -161,24 +160,11 @@
     gap: 9px;
     text-decoration: none;
   }
-  .nav__logo-icon {
+  .nav__logo-img {
     display: block;
-    height: 30px;
-    width: auto;
-    filter: drop-shadow(0 2px 8px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 14px rgba(255, 205, 110, 0.45));
-    transition: filter 300ms ease;
+    width: clamp(120px, 11vw, 156px);
+    height: auto;
   }
-  .nav__wordmark {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 15px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--bone);
-    text-shadow: 0 1px 6px rgba(20, 16, 12, 0.55), 0 0 14px rgba(20, 16, 12, 0.35);
-    transition: text-shadow 300ms ease;
-  }
-  .nav__logo:hover .nav__logo-icon { filter: drop-shadow(0 2px 8px rgba(20, 16, 12, 0.4)) drop-shadow(0 0 20px rgba(255, 205, 110, 0.65)); }
 
   /* Nav links */
   .nav__links {

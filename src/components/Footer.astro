@@ -12,8 +12,7 @@ const year = new Date().getFullYear();
     <!-- Brand column -->
     <div class="footer__brand">
       <a href="/" class="footer__wordmark" aria-label="The Open Sky — home">
-        <img class="footer__logo-icon" src="/brand/logo-icon.webp" width="498" height="300" alt="" decoding="async" />
-        <span class="footer__logo-text">The Open Sky</span>
+        <img class="footer__logo-img" src="/brand/logo-en.webp" width="900" height="434" alt="The Open Sky" decoding="async" />
       </a>
       <p class="footer__tagline">
         For those who take<br />
@@ -109,23 +108,10 @@ const year = new Date().getFullYear();
     margin-bottom: var(--s-6);
     text-decoration: none;
   }
-  .footer__logo-icon {
+  .footer__logo-img {
     display: block;
-    height: clamp(32px, 4.2vw, 50px);
-    width: auto;
-    filter: drop-shadow(0 0 20px rgba(255, 205, 110, 0.5)) drop-shadow(0 0 40px rgba(255, 205, 110, 0.25));
-    transition: filter 280ms ease;
-  }
-  .footer__logo-text {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(18px, 2.2vw, 26px);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--bone);
-  }
-  .footer__wordmark:hover .footer__logo-icon {
-    filter: drop-shadow(0 0 24px rgba(255, 205, 110, 0.7)) drop-shadow(0 0 48px rgba(255, 205, 110, 0.4));
+    width: clamp(150px, 16vw, 220px);
+    height: auto;
   }
 
   .footer__tagline {
